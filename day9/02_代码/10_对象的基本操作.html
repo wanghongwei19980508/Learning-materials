@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            对象的基本操作,类似于数组的操作
+
+            通过 对象.键名  或者  对象[键名] 来操作对象的单元
+                注意问题:
+                    1, 如果键名是字符串,使用 点语法调用,不要加 引号
+                                       使用 []语法调用,必须要给键名加引号
+                                    
+                    2, 对象支持所有的数据类型作为键名,如果是数值作为键名
+                       只能使用[]语法调用数据
+
+                    3, 在 console.log 中看到的显示顺序,是浏览器的执行顺序
+                       与 我们JavaScript程序中定义的单元的顺序无关
+
+                    4, 如果你需要通过变量,存储键名来调用数据
+                       必须使用 [] 语法 才能正确解析变量中存储的键名
+                       如果是变量,必要加引号
+
+            新增: 对象.键名 = 键值   对象[键名] = 键值 
+                  对不存在的键名进制赋值操作,就是新增对象的单元
+
+            修改: 对象.键名 = 键值   对象[键名] = 键值 
+                  对已经存在的键名进制赋值操作,就是修改对象的单元
+
+            删除: delete( 对象.键名 )   /  delete( 对象[键名] )   
+                  delete 对象.键名     /  delete 对象[键名] 
+        
+            console.log() 
+                1,浏览器规定,有自己的显示顺序,按照数值,字母,顺序显示
+                2,会显示 数组,对象等引用数据类型,最终的执行效果
+                  先输出,后修改数组对象,也会显示修改的最终结果
+        */  
+
+        var obj1 = {
+            name:'张三',
+            age:18,
+            sex:'男',
+            1:100,
+        } ; 
+        // 当前位置 对象,并没有改变
+        // 只是浏览器的console.log(),把结果提前输出了
+        console.log(obj1);
+
+        // 调用 对象中,单元的具体数据:
+        // 对象.键名  或者 对象[键名]
+
+        // console.log(obj1.name);
+        // console.log(obj1['name']);
+
+        // console.log(obj1[1]);
+        // console.log(obj1.1);
+
+        // 变量 a 中存储键名 name
+        // var a = 'name';
+        // 只是简单粗暴的在 obj1 中 找 a 这个键名
+        // 直接结果就是 undefined
+        // console.log( obj1.a );
+        // 解析变量a中存储的 字符串 name 用 name这个存储的键名在 obj1 中调用数据
+        // 实际调用的是 obj1['name']
+        // console.log( obj1[a] );
+
+        // 新增单元
+        obj1.addr = '北京';
+        obj1['phone'] = 123456789;
+
+        // 修改单元
+        obj1.name = '李四';
+        obj1['sex'] = '女';
+
+        // 删除对象的单元
+        delete( obj1.name );
+        delete obj1['sex'];
+
+
+        /*
+            总结:对象中数据的调用
+                1, 一般情况下推荐使用 点 语法
+                2, 如果键名是 数值 必须使用 []语法
+                3, 如果 是 变量 必须使用 [] 语法 变量不要加引号
+        
+        
+        */ 
+    </script>
+</body>
+</html>

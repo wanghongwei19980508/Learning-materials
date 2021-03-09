@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            输入年月日,返回给我们是第几天
+            计算方法: 1, 利用年份判断 是否是闰年,如年是29天,平年是28天
+                      2, 累加之前月份的天数
+                      3, 在累加当月是第几天的天数 
+
+            方法1:  switch() 穿透
+                从当前月的前一个月开始累加
+                如果是闰年,累加 29天
+                最后再累加当月的天数
+
+            方法2:  数组和for循环
+                定义一个数组,有每个月的天数
+                从当前月份的前一个月开始循环,累加所有的天数
+                再累加当前月的天数
+
+        */
+
+        console.log( getDay1(2020,9,29) );
+        console.log( getDay2(2020,9,29) );
+
+        // switch 穿透方法
+        function getDay1(year, month, day) {
+            // 定义变量,存储结果
+            var res = 0;
+            // 从定位的,当前月份-1,开始穿透累加之前所有的月份的天数
+            switch (month - 1) {
+                case 12:
+                    res += 31;
+                case 11:
+                    res += 30;
+                case 10:
+                    res += 31;
+                case 9:
+                    res += 30;
+                case 8:
+                    res += 31;
+                case 7:
+                    res += 31;
+                case 6:
+                    res += 30;
+                case 5:
+                    res += 31;
+                case 4:
+                    res += 30;
+                case 3:
+                    res += 31;
+                case 2:
+                    // 闰年累加29天,平年是28天
+                    if( ( (year % 4 === 0) && (year % 100 !== 0) ) || (year % 400 === 0) ){
+                        res += 29;
+                    }else{
+                        res += 28;
+                    }
+                case 1:
+                    res += 31;
+                default:
+                    res += 0;
+            }
+
+            // 最后再累加 当月的天数
+            res += day;
+            // 最后返回这个结果
+            return res;
+        }
+
+
+        // 数组方法
+        function getDay2(year, month, day){
+            var res = 0;
+            // 定义一个有所有月份天数的数组
+            // 1月对应的索引是 0  月份对应的索引是 月份-1
+            var arr = [31,28,31,30,31,30,31,31,30,31,30,31];
+
+            // 如果是闰年,数组的第二个单元存储的数值也就是2月的天数,应该是29天
+            if( ( (year % 4 === 0) && (year % 100 !== 0) ) || (year % 400 === 0) ){
+                // 给数组的第二个单元,也就是索引是1的单元,赋值29,也就是存储29天
+                arr[1] = 29;
+            }
+
+            // 从当前月前一个月的索引开始累加 
+            // 当前月的索引是 当前月-1 前一个月的索引是 当前月-2
+            for(var i = 0 ; i <= month-2 ; i++){
+                // i 是月份对应的索引,从数组中获取天数,累加
+                res += arr[i];
+            }
+            // 在累加当月天数
+            res += day;
+            // 返回执行结果
+            return res;
+        }
+
+    </script>
+</body>
+
+</html>

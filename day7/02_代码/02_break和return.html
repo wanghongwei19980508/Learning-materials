@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            break 只能终止循环,对循环之外的程序,没有作用的
+            return 是终止一切,只要触发,之后的所有程序都不执行
+        
+        */
+
+
+        function fun(){
+            for(var i = 1 ; i <= 5 ; i++){
+                if(i === 3){
+                    // 只对循环中的程序起作用
+                    // 只终止 console.log(i); 和 之后,4,5循环的执行
+                    // break;
+
+                    // 可以终止函数中的一切
+                    // 终止 console.log(i); 和 之后,4,5循环的执行
+                    // 终止 循环之外 console.log('循环结束了输出'); 执行
+                    return ;
+                }
+
+                console.log(i);
+            }
+
+            console.log('循环结束了输出');
+        }
+
+        fun();
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 1, while和for循环 的 break 和 continue
+        // 2, 记录循环次数 666 demo
+        // 3, 判断 60-90 之间的  质数
+
+        // var a = 0;
+        // for (var w = 0; a !== 666; w++) {
+        //     a = parseInt(Math.random() * (999 + 1 - 100) + 100);         
+        // }
+        // console.log(`循环了${w},值是${a}`);
+        for(var a=60; a<=90;a++){
+            var res=`质数`
+            for(var j=2;j<=a-1; j++){
+                if(a%j===0){
+                    res = `合数`;
+                    break;
+                }
+            }if(res===`合数`){
+                console.log(`${a}是合数`)
+            }else{
+                console.log(`${a}是质数`)
+            }
+        }
+    </script>
+</body>
+
+</html>

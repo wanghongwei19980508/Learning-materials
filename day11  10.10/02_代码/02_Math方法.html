@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            Math 内置对象
+                是 JavaScript 定义的一个对象,这个对象中有很多对于数字的操作方法
+                我们可以直接使用
+
+            1,随机数:
+                Math.random()  0 - 1 的随机小数 可以是 0  永远不会是 1
+                如果需要生成 a - b 范围内的随机整数,包括 a , b 
+                parseInt( Math.random()*(b+1-a) + a ); 
+
+            2,小数取整:
+                四舍五入  Math.round()
+
+                进一取整 / 向上取整  Math.ceil()
+                    小数部分一定要有一个非零的数值,才会进一
+
+                舍去取整 / 向下取整  Math.floor()
+                    如果只是针对小数,执行效果与 parseInt() 效果相同
+
+                保留指定位数的小数 变量.toFixed(保留小数位数)
+                    不会直接改变 变量 中存储的数据,需要使用新的变量来存储 执行结果
+                    执行结果是 字符串类型 需要通过 -0 *1 /1  操作 再转化为数值
+                    保留小数的方法是 四舍五入 保留
+
+                保留指定位数的小数 直接保留,不四舍五入
+                    如果需要保留2位小数
+                    先 乘以 100 , 向下取整/parseInt()  
+                    结果 再 除以 100
+
+            3, 最大值,最小值
+                Math.max()
+                Math.min()
+
+            3, 幂运算 / 乘方运算  Math.pow()
+                执行效果 与 ** 相同
+
+            4, 绝对值  Math.abs()
+                
+
+            5, 平方根  Math.sqrt()
+                平方根应该是 +/- 两个数值 
+                JavaScript中只获取正数的结果
+
+            6, 圆周率  Math.PI
+                这是Math的一个属性,没有()的
+                PI 两个字母都必须要大写
+        */
+
+        // 1, 随机数
+        //    Math.random()
+
+        // 2, 小数取整
+
+        //    四舍五入取整  Math.round()
+        // console.log( Math.round(123.756) );
+
+        //    进一取整 / 向上取整 Math.ceil()
+        // console.log( Math.ceil(123.00000001) );
+
+        //    舍弃取整 / 向下取整 Mat.floor()
+        // console.log( Math.floor(123.99999999) );
+
+        //    保留指定位数的小数  toFixed()
+        // var int = 123.456789;
+        // var res = int.toFixed(2)-0;
+        // console.log( res );
+
+        //    不四舍五入,直接保留指定位数的小数
+
+        // var int = 123.456789;
+        // var res = Math.floor(int*100) / 100 ;
+        // console.log( res );
+
+        // 最大值,最小值
+        // console.log( Math.min(1,2,3,4,5,6) );
+        // console.log( Math.max(1,2,3,4,5,6) );
+ 
+        
+        // 幂运算
+        // console.log( Math.pow(2,3) );
+
+        // 绝对值
+        // console.log( Math.abs(3) );
+        // console.log( Math.abs(-3) );
+
+
+        // 平方根
+        // console.log( Math.sqrt(9) );
+
+        // 圆周率
+        // console.log( Math.PI );
+
+        // 累加求和函数
+
+        function add(a,b){
+            var min = Math.min(a,b);
+            var max = Math.max(a,b);
+
+            var res = 0;
+            for(var i = min ; i <= max ; i++){
+                res += i;
+            }
+            return res;
+        }
+
+
+    </script>
+</body>
+</html>

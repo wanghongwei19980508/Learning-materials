@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>地址</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        // 当前这个数组,应该是从数据库获取的数据结果
+        // 当前定义一个本地的数组模拟一下
+
+        // 实际项目中 如果需要修改,不是修改页面中的代码
+        // 是 后端 程序员 修改 数据库数据,我们只要刷新页面就可以了
+
+        // 数组中的的每一个行(组)数据,实际就对应表格中的一个tr 行内容
+        // 每一个对象的单元,对应的就是一个td的单元格
+        var arr = [
+            {id:1,name:'张三',age:18,sex:'男',addr:'北京'},
+            {id:2,name:'李四',age:19,sex:'女',addr:'上海'},
+            {id:3,name:'王呜呜呜',age:20,sex:'保密',addr:'广州'},
+            {id:4,name:'赵六',age:21,sex:'不详',addr:'重庆'},
+            {id:5,name:'刘七',age:22,sex:'不确定',addr:'天津'},
+            {id:5,name:'刘七',age:22,sex:'不确定',addr:'天津'},
+        ];
+
+        var oTbody = document.querySelector('tbody');
+        
+        oTbody.innerHTML = setTab(arr);
+
+
+
+        // 根据数组生成table表格
+        // 定义一个函数,你给我一个数组,我返回给你一个表格
+        // 参数: 数据数组
+
+        // 执行本质是 拼接生成 字符串 
+        // 字符串的内容,是标签以及标签内容
+        // 字符串,通过浏览器,解析执行,就会编译成标签的效果来执行
+        
+        // 
+
+        function setTab(array){
+            // 定义一个空字符串,存储最终的返回结果
+            var str = '';
+
+            // 循环遍历数组
+            // val 变量 存储的是 数组中 每一个单元的数据 ,也就是 对象
+            // key 变量 存储的是 数组中 每一个单元的索引 ,
+            //     第一次循环 key 存储 0    val 存储的是 {id:1,name:'张三',age:18,sex:'男',addr:'北京'}
+            //     第二次循环 key 存储 1    val 存储的是 {id:2,name:'李四',age:19,sex:'女',addr:'上海'}
+            //     第三次循环 key 存储 2    val 存储的是 {id:3,name:'王五',age:20,sex:'保密',addr:'广州'}
+            //     第四次循环 key 存储 3    val 存储的是 {id:4,name:'赵六',age:21,sex:'不详',addr:'重庆'}
+            //     第五次循环 key 存储 4    val 存储的是 {id:5,name:'刘七',age:22,sex:'不确定',addr:'天津'}
+            array.forEach(function(val,key){
+                // 每次循环,给 str 拼接的内容
+                // 以 tr 标签起始  以 tr标签 结束
+                str += '<tr>';
+                // for...in 循环生成的都是拼接在 tr标签中的内容
+                // k 存储的是 val 对象中 每个单元的键名
+                // forEach 第一次循环 val 存储的是 {id:1,name:'张三',age:18,sex:'男',addr:'北京'} 
+                //                       for...in 的第一次循环 k 存储 id   
+                //                       for...in 的第二次循环 k 存储 name  
+                //                       for...in 的第三次循环 k 存储 age  
+                //                       for...in 的第四次循环 k 存储 sex  
+                //                       for...in 的第五次循环 k 存储 addr 
+                // forEach 第二次循环 val 存储的是 {id:2,name:'李四',age:19,sex:'女',addr:'上海'}
+                //                       for...in 的第一次循环 k 存储 id   
+                //                       for...in 的第二次循环 k 存储 name  
+                //                       for...in 的第三次循环 k 存储 age  
+                //                       for...in 的第四次循环 k 存储 sex  
+                //                       for...in 的第五次循环 k 存储 addr 
+                for(var k in val){
+                    // 每次都是在 tr 标签中 拼接新的内容
+                    // 拼接的内容是 td 标签
+                    // td标签的内容是 从 val 中存储的对象中,获取具体的数据数值
+                    // val 是 对象 其中 有 {id:1,name:'张三',age:18,sex:'男',addr:'北京'}
+                    // id name age  sex  addr 键名 
+                    // 通过 循环 键名存储在 for..in循环的 自定义变量 k 中
+                    str += `<td>${val[k]}</td>`;
+                }
+                // tr标签的结束
+                str += '</tr>';
+
+
+                // 语法方式2
+
+                // str += `
+                //     <tr>
+                //         <td>${val.id}</td>    
+                //         <td>${val.name}</td>    
+                //         <td>${val.age}</td>    
+                //         <td>${val.sex}</td>    
+                //         <td>${val.addr}</td>    
+                //     </tr>
+                // `;
+            })
+
+            // 最终返回这个字符串
+            console.log(str);
+            return str;
+        }
+
+    </script>
+</body>
+</html>

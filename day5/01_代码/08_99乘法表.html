@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span{
+            display: inline-block;
+            width: 150px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            border:1px solid #000;
+            font-size: 20px;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        /*
+            99乘法表
+        */
+        // 外层循环  9行 i 循环9次
+
+
+        for(var i = 9 ; i >=1 ; i-- ){
+            document.write('<div>'); 
+            // 内层循环  循环次数等于 当前的行数 也就是 j <= i
+            for(var j = 1 ; j <= i ; j++){
+                 
+                    document.write('<span>');
+                    document.write( `${j} * ${i} = ${j*i} ` );
+                    document.write('</span>');
+
+                 
+
+            }
+            document.write('</div>'); 
+
+        }
+
+        /*
+            1, 外层循环,生成行数
+               内层循环,生成每行内容
+
+            2, 内层循环,循环次数,往往与外层循环变量 相关
+
+            3, 内层循环执行时,外层循环变量,保持不变
+        
+        */ 
+
+    </script>
+</body>
+</html>

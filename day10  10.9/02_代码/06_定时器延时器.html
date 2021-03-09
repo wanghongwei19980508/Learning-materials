@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button name="btn1">清除1</button>
+    <button name="btn2">清除2</button>
+    <button name="btn3">清除3</button>
+    <button name="btn4">清除4</button>
+
+    <script>
+        /*
+            定时器 : setInterval()
+                根据设定的时间间隔 , 每间隔一段时间 , 执行一次程序
+                设定的时间间隔单位是 毫秒  1秒 = 1000 毫秒
+
+                语法形式:
+                
+                    setInterval( function(){ 执行程序 } , 时间间隔 )
+
+                    setInterval() 有两个参数 
+                        参数1 : 每次要执行的程序
+                                可以是 一个匿名函数 在 匿名函数中 定要执行的程序
+                                可以是 一个已经定义好的 函数的 名称
+
+                                作用都是执行调用一个函数中的程序
+                                这里 赋值的 匿名函数 或者 函数名称 称为 回调函数
+                                在一个函数程序中 执行调用 另一个函数 称为 回调函数
+                                只要是 回调函数,一定可以赋值 匿名函数 或者 函数名称
+
+                        参数2 : 设定的时间间隔
+                                单位是 毫秒
+
+                    循环和定时器的区别:
+                        都是循环往复执行相同的程序内容
+                        区别: 1,循环是    瞬间完成
+                                定时器是  按照时间间隔执行程序
+                              2,循环有 判断进入循环条件, 不满足 停止循环
+                                定时器是  只要不清除定时器,就会一直执行
+                         
+
+            延时器 : setTimeout()
+                    根据设定的时间间隔,延迟程序的执行
+                    只能执行一次程序
+
+
+            清除定时器,延时器
+                1, 必须使用变量等 存储 定时器 / 延时器 函数程序的 执行结果返回值
+                   变量中 存储的是 数值数字
+                          表示 当前定时器 是 整个 程序中的 第几个 定时器/延时器
+                          也就是 当前定时器/延时器 的 顺序编号
+
+                2, 使用 JavaScript 指定的方法来清除定时器
+                    clearInterval( 要清除的定时器的序号/编号 )
+                    一般是 写 存储 定时器序号编号的变量
+                    如果你 非常确定一定以及肯定 定时器的编号顺序,可以直接写数值
+
+                3, clearInterval()  clearTimeout() 
+                   都可以 清除 定时器 延时器 
+                   清除时输入的都是 定时器 延时器 的序号编号
+                   定时器,延时器,在一个程序中,使用同一个序号编号数列
+        
+        
+        */
+
+        // 回调函数位置 赋值 函数名称
+        // 第一个定时器 变量中 存储数值 1
+        var time1 = setInterval( fun1 , 1000 )
+
+        function fun1(){
+            console.log('我是第一个定时器输出的内容');
+        }
+
+        // 回调函数位置 赋值 匿名函数
+        // 第二个定时器 变量中 存储数值 2
+        var time2 =  setInterval( function(){ console.log('我是第二个定时器输出的内容') } , 1000 );
+
+
+        // 延时器
+
+        // 匿名函数形式
+        var time3 = setTimeout( function(){ console.log( '我是延时器1输出的程序' ) } , 3000 );
+
+        // 函数名称形式
+        var time4 = setTimeout( fun2 , 4000 );
+
+        function fun2(){
+            console.log( '我是延时器2输出的程序' );
+        }
+
+        console.log( time1 );
+        console.log( time2 );
+        console.log( time3 );
+        console.log( time4 );
+
+        
+        var oBtn1 = document.querySelector('[name="btn1"]');
+        var oBtn2 = document.querySelector('[name="btn2"]');
+        var oBtn3 = document.querySelector('[name="btn3"]');
+        var oBtn4 = document.querySelector('[name="btn4"]');
+
+        oBtn1.onclick = function(){
+            clearInterval(time1);
+        }
+
+        oBtn2.onclick = function(){
+            clearInterval(time2);
+        }
+
+        oBtn3.onclick = function(){
+            clearTimeout(time3);
+        }
+
+        oBtn4.onclick = function(){
+            clearInterval(time4);
+        }
+    </script>
+</body>
+</html>

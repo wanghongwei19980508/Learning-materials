@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div name='div1'></div>
+    <div name='div2'></div>
+    <script src="./tools.js">
+    </script>
+    <script>
+        var odiv1 = document.querySelector('[name="div1"]');
+        var obj1 = getCountDown('2020,11,11 0:0:0');
+        odiv1.style.color = setColor();
+        odiv1.innerHTML = `距离双十一还有${obj1.d}天,${obj1.h}小时,${obj1.m}分钟,${obj1.s}秒`;
+
+        setInterval( function(){
+            var obj1 = getCountDown('2020-11-11 0:0:0');
+            odiv1.style.color = setColor();
+            odiv1.innerHTML = `当前距离双十一秒杀开始还有${obj1.d}天,${obj1.h}小时,${obj1.m}分钟,${obj1.s}秒`;
+        } , 1000 );
+
+        function getCountDown(end){
+            var nowtime = new Date();
+            var endtime = new Date(end);
+            var time = parseInt((endtime.getTime()-nowtime.getTime())/1000);
+            var d = parseInt(time/(24*60*60));
+            var h = parseInt((time % (24*3600))/(60*60));
+            var m = parseInt((time % 3600)/60);
+            var s = time % 60;
+
+            h = h<10 ? '0'+h :h;
+            m = m<10 ? '0'+m :m;
+            s = s<10 ? '0'+s :s;
+            return{d,h,m,s}
+        }
+    </script>
+</body>
+</html>

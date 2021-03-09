@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            数组:  arr / array
+                存储数据的集合
+                一个变量中,只能存储 一个单元的数据
+                再赋值新的数据,会覆盖之前的数据
+
+                数组中,可以存储多个单元的数据
+                每一个数据单元,JavaScript程序都会给这个数据单元一个编号,称为 索引下标
+                可以通过索引下标,获取到具体的某一个单元中,存储的数据
+        
+        */
+
+        /*
+            定义一个数组: 在 [ ] 中 定义数组 存储的数据单元
+                         每个单元之间,使用逗号间隔
+                         JavaScript程序 会自动给 这些数据单元,添加编号
+                         编号是从 0 开始的 整数 --- 索引下标
+                         每一个数组,都有 length 属性 存储的数据是 数组的单元个数 / 数组的长度
+
+                         调用数据,是通过索引下标,获取对应的数据
+                            数组变量[索引下标]
+
+                特别说明:
+                    数组都有 length 属性 , 存储的是 数组的单元个数
+                    数组的索引下标是从 0 开始 最后一个单元的索引下标是 length-1 
+
+                    调用 length 属性的方法是 arr.length
+                    点 可以理解为中文 "的" 点是 JavaScript 语法,专用的运算符
+                    作用就是 获取 arr 的 length 属性 存储的属性值
+
+                var 变量 = [单元1 , 单元2 , 单元3 ....];
+        */ 
+
+        var arr = ['北京','上海','广州','重庆','天津'];
+        console.log(arr);
+        // 获取索引下标是 0 的单元 存储的数据,北京
+        console.log(arr[0]);  
+        console.log(arr[1]);  
+        console.log(arr[2]);  
+        console.log(arr[3]);  
+        console.log(arr[4]);  
+
+
+    </script>
+</body>
+</html>

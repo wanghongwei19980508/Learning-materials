@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div name="div1"></div>
+
+    <div name="div2"></div>
+
+    <script>
+        var oDiv1 = document.querySelector('[name="div1"]');
+
+        var obj1 = getCountDown('2020-11-11 0:0:0');
+        oDiv1.innerHTML = `当前距离双十一秒杀开始还有${obj1.d}天,${obj1.h}小时,${obj1.m}分钟,${obj1.s}秒`;
+
+        setInterval( function(){
+            var obj1 = getCountDown('2020-11-11 0:0:0');
+            oDiv1.innerHTML = `当前距离双十一秒杀开始还有${obj1.d}天,${obj1.h}小时,${obj1.m}分钟,${obj1.s}秒`;
+        } , 1000 );
+
+        var oDiv2 = document.querySelector('[name="div2"]');
+        
+
+        var obj2 = getCountDown('2021-2-11 0:0:0');
+        oDiv2.innerHTML = `当前距离春节放假还有${obj2.d}天,${obj2.h}小时,${obj2.m}分钟,${obj2.s}秒`;
+
+        setInterval( function(){
+            var obj2 = getCountDown('2021-2-11 0:0:0');
+            oDiv2.innerHTML = `当前距离春节放假还有${obj2.d}天,${obj2.h}小时,${obj2.m}分钟,${obj2.s}秒`;
+        } , 1000 );
+
+
+        /*
+            定义一个函数,输入一个终止时间/结束时间
+            返回给你,距离倒计时结束,还有几天,几小时,几分钟,几秒钟
+        */
+
+        function getCountDown(end){
+            // 1, 获取 时间差 单位 秒
+            // 终止时间戳(秒) - 当前时间戳(秒)
+
+            // 当前时间对象
+            var nowTime = new Date();
+
+            // 终止时间对象
+            var endTime = new Date(end);
+
+            // 获取时间差
+            var time = parseInt( (endTime.getTime() - nowTime.getTime() )/1000 ) ;
+
+            // 2, 将时间差总秒数,转化为 天 小时 分钟 秒
+            var d = parseInt( time / (24*60*60) );
+            var h = parseInt( ( time % (24*60*60) ) / (60*60) ) ;
+            var m = parseInt( ( time % (60*60) ) / 60 ) ; 
+            var s =time % 60 ; 
+
+            // 前导补零处理
+            h = h < 10 ? '0' + h : h;
+            m = m < 10 ? '0' + m : m;
+            s = s < 10 ? '0' + s : s;
+
+            // 3, 创建一个对象,对象的属性是 天 时 分 秒 , 属性值是我们计算的数值
+            // 如果对象的属性和属性值,名称都相同,可以就写一个
+            // 自定创建对象的属性,属性名称就是变量的名称,属性的数值就是变量中存储的数值
+            return {d,h,m,s};
+        }
+
+        
+    </script>
+</body>
+</html>

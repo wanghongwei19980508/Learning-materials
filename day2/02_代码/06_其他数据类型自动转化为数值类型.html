@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            其他数据类型自动转化为数值类型
+                1, 什么时候:
+                    执行算术运算时,其他数据类型会自动转化为数值类型
+                    +  -  *  /  
+
+                2, 什么原则:
+                    布尔类型:
+                        true  : 数值1
+                        false : 数值0
+
+                    null : 0
+
+                    undefined : NaN
+                    数组: NaN
+                    对象: NaN
+                    函数: NaN
+
+                    字符串:
+                        如果有字符串参与加法运算,执行的是字符串拼接运算,不是加法运算
+
+                        从左起,转化符合数字规范的内容
+                        如果左侧第一个字符,就不符合数字规范,转化为 NaN
+                        如果之后有不符合数字规范的部分,也转化为NaN
+                        特殊情况是 字符串起始有空格,不考虑空格,看去除空格之后的内容,是否符合数值规范
+
+
+                注意:所有,有 NaN 参与的运算,运算结果,也是NaN
+        */
+
+        // 布尔类型
+        // console.log( 100 - true );    // 1
+
+        // console.log( 100 - false );   // 0
+        // console.log( 100 - null );    // 0
+
+
+        // console.log( 100 - undefined );   // NaN
+
+        // console.log( 100 - [1,2,3,4,5] );
+        // console.log( 100 - {name:'张三'} );
+        // console.log( 100 - function(){} );
+
+        // 字符串:
+        //   从左起,转化符合数字规范的内容
+        //   如果左侧第一个字符,就不符合数字规范,转化为 NaN
+
+        // 字符串1:   纯数字的字符串 --- 直接转化为数字
+        console.log( 100 - '100' );
+        console.log( 100 - '100.123' );
+        console.log( 100 - '2e3' );   // 符合科学计数法的字符串,也会转化科学计数法表示的数字
+
+        // 特例: 之前带有空格字符串,转化为数值时,会不考虑空格
+        //      按照没有空格的内容,进行转化
+        console.log( 100 - '           100' );   
+
+
+
+        // 字符串2:   起始就不符合数字规范的字符串
+        console.log( 100 - 'a100' );   // 字符串 a100 转化为  NaN 运算结果是 NaN
+        console.log( 100 - '!100' );   
+        console.log( 100 - '~~~100' );  
+
+        // 字符串3:   起始符合数值规范,之后不符合数值规范
+        console.log( 100 - '100abc' );   // NaN
+        console.log( 100 - '2e3abc' );   // NaN
+
+
+
+
+
+    </script>
+</body>
+</html>

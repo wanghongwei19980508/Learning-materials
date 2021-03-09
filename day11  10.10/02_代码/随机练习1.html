@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    // 冒泡排序
+    // var a=[5,1,4,3,2];
+    // for(var i=0;i <=a.length-1-1; i++){
+    //     for(var j=0;j <=a.length-1-1-i; j++){
+    //         if(a[j]>a[j+1]){
+    //             var tmp = a[j];
+    //             a[j]=a[j+1];
+    //             a[j+1]=tmp;
+    //         }
+    //     }
+    // }
+    // console.log(a)
+
+    // 选择排序
+    // for(var i=0; i<=a.length-2; i++){
+    //     var index = i;
+    //     for(var j=i+1; j<=a.length-1; j++){
+    //         if(a[index]>a[j]){
+    //             index=j;
+    //         }
+    //     }
+    //     if(i!==index){
+    //         var tmp=a[i];
+    //         a[i]=a[index];
+    //         a[index]=tmp;
+    //     }
+    // }
+    // console.log(a)
+    <script src="./tools.js"></script>
+        var oDiv = document.querySelector('div');
+        oDiv.innerHTML = getNowTimeStr();
+        oDiv.style.color = setColor();
+        setInterval( function(){
+            oDiv.innerHTML = getNowTimeStr();
+            oDiv.style.color = setColor();
+        } , 1000 )
+
+    function getNowTimeStr(){
+        var time = new Date();
+        var year = time.getFullYear();
+        var month = time.getMonth() + 1;
+        var date = time.getDate();
+
+        var weekArr = ['日','一','二','三','四','五','六'];
+        var week = `星期${weekArr[time.getDay()]}`;
+
+        var hours = time.getHours() < 10 ? '0'+time.getHours() : time.getHours();
+        var minutes = time.getMinutes() < 10 ? '0'+time.getMinutes() : time.getMinutes();
+        var seconds = time.getSeconds() < 10 ? '0'+time.getSeconds() : time.getSeconds() ;
+
+        return `当前时间是${year}年,${month}月,${date}日,${week},${hours}时,${minutes}分,${seconds}秒`;
+    }
+    </script>
+</body>
+</html>

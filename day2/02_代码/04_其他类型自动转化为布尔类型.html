@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            什么时候,其他数据类型会自动转化为布尔类型
+                if判断语句()中的表达式,会自动转化为布尔类型
+
+            自动转化为布尔类型的原则
+                有5种情况,会转化为 false ,其他情况都转化为true
+                    false:  0(包括 0.000)   ''空字符串    NaN   undefined    null
+        */
+
+        /*
+            if判断语句,是 JavaScript 中定义的一种语法形式
+
+            if(){}else{}
+
+            if(表达式){
+
+                程序1
+
+            }else{
+
+                程序2
+
+            }
+        
+        */
+
+        // if(true){
+        //     console.log('小括号里,输入的是true,执行我这个程序');
+        // }else{
+        //     console.log('小括号里,输入的是false,执行我这个程序');
+        // }
+
+
+        // 转化为false的情况
+        
+        // 数据值 0 
+        // if(0){
+        //     console.log('转化为true了');
+        // }else{
+        //     console.log('转化为false了');
+        // }
+
+        // if(0.0000){
+        //     console.log('转化为true了');
+        // }else{
+        //     console.log('转化为false了');
+        // }
+
+        // 空字符串
+        // if(''){
+        //     console.log('转化为true了');
+        // }else{
+        //     console.log('转化为false了');
+        // }
+
+        // NaN
+        // if(NaN){
+        //     console.log('转化为true了');
+        // }else{
+        //     console.log('转化为false了');
+        // }
+
+        // undefined
+        // if(undefined){
+        //     console.log('转化为true了');
+        // }else{
+        //     console.log('转化为false了');
+        // }
+
+        // null
+        // if(null){
+        //     console.log('转化为true了');
+        // }else{
+        //     console.log('转化为false了');
+        // }
+
+
+        // 转化为 true 的情况
+
+        // 字符串空格
+        if(' '){
+            console.log('转化为true了');
+        }else{
+            console.log('转化为false了');
+        }
+        
+        if('NaN'){
+            console.log('转化为true了');
+        }else{
+            console.log('转化为false了');
+        }
+
+        if('false'){
+            console.log('转化为true了');
+        }else{
+            console.log('转化为false了');
+        }
+
+        if([]){
+            console.log('转化为true了');
+        }else{
+            console.log('转化为false了');
+        }
+
+        if({}){
+            console.log('转化为true了');
+        }else{
+            console.log('转化为false了');
+        }
+
+
+        /*
+            总结:
+                1, 什么时候
+                    if() 里面 表达式 会 自动转化为布尔类型
+
+                2, 什么原则
+                    false:5种  其他都是true
+                    false: 0 包括 0.0  0.000  0.000000
+                           ''  ""  ``  空字符串   
+                           NaN
+                           undefined
+                           null
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            map()  数组的映射方法
+                   简单理解映射: 将 数组中的数据,按照一定方法操作,生成一个新的数组
+                   映射 一定是 一一对应的
+                   在 原始数据基础上 做操作,生成新的数组映射
+                
+                   语法:
+                        形参1:存储数组单元的数据
+                        形参2:存储数组单元的碎银
+                        形参3:存储原始数组
+
+                       数组.map( function(形参1,形参3,形参3){
+                            return 对形参1,也就是原始数组数据的操作
+                       } )
+
+            filter()   数组的过滤方法
+                    根据设定的条件,将数组的单元过滤,生成新的数组
+                    语法:
+                        形参1:存储数组单元的数据
+                        形参2:存储数组单元的碎银
+                        形参3:存储原始数组
+
+                       数组.map( function(形参1,形参3,形参3){
+                            return 对形参1,也就是原始数组数据的筛选 条件判断
+                       } )
+
+            some()  如果数组中 有 符合条件的数据,some()的执行结果就是 true
+                    只要有一个单元符合,执行结果就是 true
+                    执行结果 不是 新的数组 就是一个 true 或者 false
+                    有一个单元存储的数据,符合条件,返回结果就是 true
+                    所有单元存储的数据,都不符合条件,返回结果才是 false
+
+            every() 数组中,所有的单元,必须都符合条件,执行结果才是 true
+                    有一个不符合就是false
+        */
+
+        var arr = [1,2,3,4,5];
+
+        // 映射 --- 一定是 一一对象
+        // 将 原始数组 arr 中 每一个单元 存储的数据, 经过操作
+        // 作为 新的数组的数据 返回 
+        // newArr变量中 存储的是 新数组
+        // 原始数组 arr 会保持不变
+        var newArr1 = arr.map( function(v,k,arr){
+            // 数组单元数据的操作
+            return v*2;
+        } )
+
+        // 筛选
+        var newArr2 = arr.filter( function(v,k,arr){
+            // 按照条件 选择筛选 数组单元数据
+            return v > 2;
+        } ) 
+
+        // some
+        var newArr3 = arr.some( function(v,k,arr){
+            // 有符合条件的单元,但是不是所有单元都符合
+            return v > 2;
+        } ) 
+
+        // every
+        var newArr4 = arr.every( function(v,k,arr){
+            // 有符合条件的单元,但是不是所有单元都符合
+            return v > 2;
+        } ) 
+
+        console.log(arr);
+        console.log(newArr1);
+        console.log(newArr2);
+        console.log(newArr3);
+        console.log(newArr4);
+    </script>
+</body>
+</html>

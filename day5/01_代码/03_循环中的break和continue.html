@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            循环中的break
+                可以终止循环中的一切程序的执行
+                    包括 当前循环,之后的程序,以及,之后的循环
+
+            循环中的continue
+                跳出当天循环,继续之后的循环
+                    当前这次循环中,之后的程序会被终止
+                    但是,之后的循环次数会继续
+        
+        */
+
+        for(var i = 1 ; i <= 5 ; i++){
+            // 1,终止当前i是3,这次循环中,之后程序的执行
+            //   就是 console.log(i); 不会执行
+            // 2,终止整个循环,之后应该有的循环次数的执行
+            //   i是4,i是5的循环,被终止了
+            if(i === 3){
+                break;
+            }        
+            console.log(i);
+        }
+
+        for(var i = 1 ; i <= 5 ; i++){
+            // 1,终止当前i是3,这次循环中,之后程序的执行
+            //   就是 console.log(i); 不会执行
+            // 2,之后的循环,也就是 i是4 i是5的循环,会继续
+            if(i === 3){
+                continue;
+            }        
+            console.log(i);
+        }
+
+
+        // 死循环
+        //   一直不停执行的循环
+
+        // 起始状态,i是0 判断条件 i > -1 为 true
+        // 之后执行 i++  i会是 1,2,3,4,5,6,7.... 永远大于-1
+        // 判断进入循环的条件,永远是 true 循环就会一直执行
+        // 这样的循环,称为死循环
+
+        // 死循环,可以使用 break 来终止
+        
+        // 求利息 超过 100 时 ,存钱多少年
+
+        // 定义变量存储利息的钱数
+        var money = 0;
+        // 定义循环变量,记录循环执行的次数
+        var i = 0 ;
+        // 定义一个永远为true的条件,循环会一直执行,是个死循环
+        while( i > -1){
+            // 每次循环i++ 累加记录循环次数
+            // i++ 一定写在 break 之前,否则也会被终止
+            // while循环,可以把步长写在循环体之前
+            i++;
+            // 累加利息3元
+            money += 3;
+            // 当 利息大于 100 时 ,终止循环
+            if(money > 100){
+                break;
+            }
+        }
+
+        console.log(i);
+
+
+        // for循环,执行顺序,一定是 先 执行循环体,再执行步长
+        // 如果也使用相同的思路,就会出问题
+        // break 会 终止 步长的执行 i会少累加1次
+        // for循环,不适合写成 死循环的语法形式
+
+        var money = 0;
+        
+        for(var i = 0 ; i > -1 ; i++){
+            money += 3;
+            if(money > 100){
+                break;
+            }
+        }
+        console.log(i);
+
+    </script>
+</body>
+</html>

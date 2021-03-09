@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            思路1 新建数组,将原始数组中的数据,写入新数组
+                  新数组中,没有的数据,在写入
+        
+        */ 
+        /*
+            复习数组新增单元操作方法
+                1, 数组[索引] = 数值   不推荐,不知道索引该是几了
+                2, 数组.unshift()     首位新增,不推荐
+                   原始数组[1,2,3] 首位新增的结果是 [3,2,1] 正好相反
+                3, 数组.push()        末位新增,推荐,顺序相同
+        */
+
+        console.log( setNewArr([1,2,3,1,2,3,4,1,2,3,4,5,1,2,3,4,5,6,]) );
+
+        // 封装成一个函数的形式
+        // 你给我一个数组,我给你一个不重复的新数组
+        function setNewArr(array){
+            // 先定义一个空数组
+            var newArr = [];
+
+            // 循环遍历 原始数组中的所有单元
+            // v 就是 每次循环 原始数组array 获取对应单元存储的数据
+            // v 一次是 1,2,3,1,2,3,4....
+            array.forEach(function(v){
+                // 将原始数组的数组,v,写入到新的数组中
+                // 需要添加判断, 判断 新数组 newArr 中 没有 v 再执行写入
+                // indexOf() 可以 在数组中 查询存储的数据
+                // 如果没有这个数据,返回结果是 -1
+                // 也就是 在 newArr 中 使用 indexOf() 查询 v
+                // 如果结果是 -1 证明 newArr 中 没有 v 
+                // 可以执行写入操作
+                if( newArr.indexOf( v ) === -1 ){
+                    newArr.push(v);
+                }
+            })
+
+            // 函数的执行结果,返回值,是新的数组
+            return newArr;
+        }
+
+
+        /*
+            总结: 封装一个函数
+                参数是你需要执行去重的数组
+
+                先创建一个空数组
+
+                循环遍历原始数组,获取每一个单元存储的数据
+
+                使用 indexOf() 在 新数组中 查询这个 数据
+
+                如果 indexOf() 的结果是 -1 证明 新数组中,还没有这个数据
+
+                使用 push() 方法, 向 新数组中 写入 获取到的原始数组中的数据
+
+                最后 return 新数组
+        
+        
+        */
+
+    </script>
+</body>
+</html>

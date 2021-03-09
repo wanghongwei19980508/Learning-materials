@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+
+    <script>
+        /*
+            字符串是 一个 特殊的数据类型,称为 包装数据类型
+            字符串本身本质上不是一个数组,但是也支持length属性
+            也支持 []语法 操作
+            当使用类似于 数组的方法来操作字符串时,字符串会把自己包装成一个数组类型
+            但是字符串算不上是伪数组,只能算是,包装成数组
+
+            length 属性就是字符串的字符个数
+            字符串[索引下标] 可以获取对应的一个字符
+        
+        */ 
+
+        // var str = 'abcdefg';
+        // console.log( str.length );
+        // console.log( str[0] );
+        // console.log( str[1] );
+        // console.log( str[2] );
+        // console.log( str[3] );
+        // console.log( str[4] );
+        // console.log( str[5] );
+        // console.log( str[6] );
+
+        // 将验证码写入div,点击div可以切换验证码
+        // 之后我们会讲,先看效果
+
+        var oDiv = document.querySelector('div');
+
+        oDiv.innerHTML = setVc();
+
+        oDiv.onclick = function(){
+            oDiv.innerHTML = setVc();
+        }
+
+
+        // 随机验证码
+        // 简单定义一个 6位的 数字字母的 随机验证码
+        // 核心原理:
+        //     先定义一个有所有 数字字母的 字符串
+        //     通过随机数,生成 所有索引下标 的随机数
+        //     每次就可以通过 随机的索引下标 获取 随机的 字符
+        //     将随机字符,拼接为 字符串
+
+        // console.log( setVc() );
+        
+        // 以函数的形式来定义
+        function setVc(){
+            // 定义一个变量,存储随机验证码结果
+            var str = '';
+
+            // 定义一个字符串,存储所有的字符,数字
+            var all = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+            // 需要6位的验证码,需要循环执行6次
+            for(var i = 1 ; i <= 6 ; i++){
+                // 随机数,范围是 0 - all字符串,最后一个字符的索引下标 all.length-1
+                var index = parseInt( Math.random()* all.length );
+                // 使用 随机数 生成的 随机索引下标 , 从 all 字符串中 获取一个随机的字母
+                str += all[index];                
+            }
+
+            return str;
+        }
+
+
+
+    </script>
+</body>
+</html>

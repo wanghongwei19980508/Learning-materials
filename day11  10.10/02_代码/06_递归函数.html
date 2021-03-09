@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            递归函数:
+                是 函数 的一种 特殊语法形式
+                在 一个函数中 调用这个函数本身,这样的函数就称为递归函数
+
+            function fun(){
+                在 函数 fun 中 调用 函数fun 自己本身
+                fun()
+            }
+
+            必须要记住,写递归,先写停止
+            必须要记住,递归本质上就是函数执行的嵌套
+                      多层的函数,先进,后出
+            实际项目中,一般不是用console.log() 使用 return 返回值
+
+            递归使用时,一定是非常简单的函数程序,并且执行次数不能过多
+            
+
+        */
+
+        // 倒叙输出 5,4,3,2,1
+        // for(var i = 5 ; i >= 1 ; i-- ){
+        //     console.log(i);
+        // }
+
+        // 递归函数
+        /*
+            第一次执行 :
+                num是5   console.log(5)   num--  num是4   if判断 结果是 true  调用函数本身  fun(4)
+            第二次执行 :
+                num是4   console.log(4)   num--  num是3   if判断 结果是 true  调用函数本身  fun(3)
+            第三次执行 :
+                num是3   console.log(3)   num--  num是2   if判断 结果是 true  调用函数本身  fun(2)  
+            第四次执行 :
+                num是2   console.log(2)   num--  num是1   if判断 结果是 true  调用函数本身  fun(1)    
+            第五次执行 :
+                num是1   console.log(1)   num--  num是0   if判断 结果是 false 整个递归执行结束     
+        
+        */
+        // function fun( num ){
+        //     console.log(num);
+        //     num--;
+        //     if(num >= 1){
+        //         fun(num);
+        //     }
+        // }
+
+        // fun(5);
+
+        function fun1( num ){
+            num--;
+            if(num >= 1){
+                fun1(num);
+            }
+            // 输出是在递归之后执行的输出,会先进后输出
+            // 输出是 num是1时输出0 num是2时输出1  num是3时输出2   num是4时输出3   num是5时输出4    
+            console.log(num);
+        }
+
+        fun1(5);
+
+        /*
+            fun(5)   num--;   4  if(){ fun(4) 
+                fun(4)    num--;  3   if(){ fun(3) 
+                    fun(3)   num--;  2  if(){ fun(2) 
+                        fun(2)  num--;  1   if(){ fun(1) 
+                            fun(1)  num--  0   if是false 执行 console.log(0)
+
+                            console.log( fun2的输出 1 )
+                        }
+
+
+                        console.log( fun3的输出 2 )
+                    }
+
+                    console.log( fun4的输出 3 )
+
+                }
+
+
+                console.log( fun5的输出 4 )
+            }
+                
+                    
+        
+        
+    递归总结:
+        1, 递归函数就是函数本身,调用函数自己
+        2, 写递归一定先 写 停止
+        3, 执行: 先进 后出  倒着往回推结果
+        4, 过于复杂,执行次数过多的程序,不推荐写成递归
+
+        
+        */
+
+    </script>
+</body>
+</html>

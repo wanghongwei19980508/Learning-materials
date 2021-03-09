@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+	</head>
+
+	<body>
+		<script>
+			/*
+			            1,搞定昨天的作业
+
+			            2,求 1-100 所有奇数的和
+			                while,for,判断,改步长,4种方法,都要写
+
+			            3,求 1 - 1/2 + 1/3 - 1/4 + 1/5 ... 1/100
+			            
+			            4,输出 100 - 999 所有的水仙花数
+			                使用循环,生成 100 - 999 的数值 
+			                一个三位数,如果每一位上的数值的立方和,等于这个数值本身,就是水仙花数
+			                123 -- 每一位是 1 2 3
+			                1的立方+2的立方+3的立方 1 + 8 + 27 --- 36 
+			                36 不等于 123 本身 , 不是水仙花数
+			            5,在页面  输出1000-9999年之间的所有闰年
+			                每5个一行换
+			        */
+
+			//     三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三三
+			//		var o = 0;
+			//		for(var i = 1; i<=100;i++){
+			//			if(i%2===0){
+			//				o-=1/i;
+			//			}else{
+			//				o+=1/i;
+			//			}
+			//		}
+			//		console.log(o);
+
+			var u = 0;
+			var y = 1;
+			while(y <= 100) {
+				u += (-1) ** (y + 1) * (1 / y);
+			}
+			console.log(u);
+
+			//			四四四四四四四四四四四四四四四四四四四四四四四四四四四四四四
+			//			for(var i = 100; i<=999; i++){
+			//				var i1 = parseInt(i/100);
+			//				var i2 = parseInt((i%100)/10);
+			//				var i3 = i%10;
+			//				if(i1*i1*i1+i2*i2*i2+i3*i3*i3===i){
+			//					console.log(i)
+			//				}
+			//			}
+		</script>
+	</body>
+
+</html>

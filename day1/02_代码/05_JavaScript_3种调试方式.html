@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>123</div>
+
+    <script>
+        /*
+            JavaScript 3种 调试 方式
+                1, alert     警告框
+                2, console   控制台输出
+                3, write     页面输出
+
+
+            1, alert  警告框 
+                window.alert()   /   alert()   执行效果等等没有任何区别
+                    ()中,可以写,数值,变量,文字
+                    文字必须要 加 引号  单引号 ''  双引号 ""   反引号 ``
+                    
+            2, console    控制台输出   
+                最常用的调试方式
+                console.log()   输入内容
+                console.dir()   查看内容属性
+                输出 数值等内容时 基本没有区别
+                输出 对象,数组等  有明显区别
+
+            3, write     页面输出
+                document.write
+
+            总结:
+                (1) , 单引号,双引号,反引号, 不能嵌套本身
+                例如 单引号中不能嵌套 单引号
+                (2) , 每行程序,最好以分号结束
+                (3) , 字符串,文本内容,非数字内容
+                      都要使用 引号 包裹 
+                      ''    ""    ``  
+
+        */
+
+        // 警告框
+        // alert(100);
+        // alert('千锋北科');
+
+        // console
+        var int = 100;
+
+        // 获取页面中div这个标签对象
+        var oDiv = document.querySelector('div');
+
+        console.log(oDiv);
+        console.dir(oDiv);
+
+
+        // write
+
+        // 数值数据
+        document.write(100);
+
+        // 标签 
+        document.write('<a href="https://www.baidu.com">我是超链接</a>');
+
+    </script>
+</body>
+</html>

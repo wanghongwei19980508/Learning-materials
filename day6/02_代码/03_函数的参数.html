@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            函数的参数:
+                1,定义在函数的()中,声明式,赋值式都可以有参数
+                    参数实际就是一个定义在函数内部的变量
+                    参数的名称,可以任意定义,只要符合变量的命名规范就可以
+                    实际项目中,参数名称一般表示这个数据的作用
+
+                2,参数定义在 函数的() 中, 称为形参
+                    形参是没有实际数据的,只是一个变量,没有被赋值,存储数据
+
+                3,在执行调用时,给形参赋值实际的数据
+                  当前函数的执行,会依据执行时的数据,来执行程序
+        
+        */
+
+        // 当前的两个函数,输出的内容是固定的
+        function fun1(){
+            console.log(111);
+        }
+
+        var fun2 = function (){
+            console.log(222);
+        }
+
+        // 带有参数的形式
+        // 也就是 int 参数中 存储什么数据, 执行时,就输出什么数据
+
+
+        function fun3(int,str,bool){
+            console.log(int);
+
+            console.log(str);
+
+            console.log(bool);
+        }
+
+        fun3(100,'北京',true);
+        
+        fun3(123,'上海',false);
+
+
+        var fun4 = function (int){
+            console.log(int);
+        }
+
+
+
+    </script>
+</body>
+</html>

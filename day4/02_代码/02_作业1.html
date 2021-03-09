@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*计算标准体重*/
+
+        // throw '自动以的错误提示内容'
+        // 如果触发,会终止之后所有的JavaScript程序的执行
+        // 并且在 控制台 console 中 输出 设定的报错信息
+
+
+        // 1, 创建 3个 输入框 输入并且存储 性别,身高,体重
+
+        // 输入性别的输入框
+        // 如果没有输入内容,获取的结果是 空字符串 ''
+        // 如果 输入有内容 不是空字符串 一定会转化为 true
+        // 转化为 true 逻辑或 的 第二个 表达式 男,不会执行
+        // sex 存储的就是 输入的数据
+        // 如果 输入没有内容 是 空字符串 会转化为 false
+        // 转化为 false 逻辑或 第二个 表达式会执行 变量中 存储 男 
+        var sex = window.prompt('请您输入性别:男/女') || '男';
+
+        var height = window.prompt('请您输入身高:单位CM')*1 || 170;
+
+        var weight = window.prompt('请您输入体重:单位KG')/1 || 60;
+
+
+        console.log(sex);
+        console.log(height);
+        console.log(weight);
+
+        // 应该做一个判断,确保输入的数据是正取的数据
+        // 性别: 正确的数据是 男 , 女
+        // 如果不是 男 女 , 是 错误数据,要终止程序的执行
+
+        // 正确的结果是 性别是男,女 取反 就是 错误的情况 
+        if( !( sex == '男' || sex == '女')  ){
+            throw 'sex 错误';
+        }
+
+        // 应该还有 身高 体重的判断,我们之后使用 正则完成
+
+        // 根据输入的性别,使用公式,计算出,输入的性别和身高,对应的标准体重
+
+        // 设定一个变量,存储标准体重
+        var sw = 0;
+
+        // 性别 男 和 性别 女 是有不同的计算公式
+        if(sex === '男'){
+            // 如果,输入的性别是男,执行男性的计算公式
+            sw = (height - 80 )*0.7;
+        }else{
+            // 如果,输入的性别不是男,一定是女,执行女性的计算公式
+            sw = (height - 70 )*0.6;
+        }
+
+        // 执行 if判断 之后 sw 会 存储按照性别,身高,计算的标准体重
+        // console.log(sw);
+
+        // 根据标准体重,以及,输入的体重,判断输入的体重在标准体重哪个范围区间之内
+        // 就是什么样的体重标准
+
+        // 标准范围 : 标准体重 + / - 10%   1.1 - 0.9 
+        if( weight >= sw*0.9 && weight <= sw*1.1 ){
+            document.write( '<span style="color:green" >恭喜您,是标准体重</span>' );
+        
+        // 过轻 : 标准体重 0.8 - 0.9 之间 
+        }else if( weight >= sw*0.8 && weight < sw*0.9 ){
+            document.write( '<span style="color:orange" >请注意,您的体重过轻了,多吃点</span>' );
+        
+        // 过重 : 标准体重 1.1 - 1.2 之间 
+        }else if( weight > sw*1.1 && weight <= sw*1.2 ){
+            document.write( '<span style="color:orange" >请注意,您的体重过重了,少吃点</span>' );
+        
+        // 不足 : 标准体重 小于 0.8
+        }else if( weight < sw*0.8 ){
+            document.write( '<span style="color:red" >请注意,您的体重严重不足,刮风时候别出门了,可以下面哪个</span>' );
+        
+        // 不足 : 标准体重 大于 1.2
+        }else if( weight > sw*1.2 ){
+            document.write( '<span style="color:red" >请注意,您的体重严重超标,刮风时,可以抱着上面哪个出门</span>' );
+        }
+
+    </script> 
+</body>
+</html>

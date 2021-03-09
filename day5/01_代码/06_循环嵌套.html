@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            所谓的循环嵌套,就是在循环体中,再嵌套一个新的循环
+
+            外层循环
+            for(){ 
+                for(){
+                    内层循环
+                }
+            }
+
+            钟表,时钟,就是典型的循环嵌套
+                分钟 和 秒 
+                    分钟 外层循环
+                    秒   内层循环
+
+                1,内层循环每次要执行完所有的循环,外层循环才会执行一次循环
+                    秒针 走一圈 分针走一格
+                    分针执行一次循环,秒针要执行60次,所有的循环
+
+                2,内层循环执行时,外层循环没有执行下一次循环,数值,保持不变的
+                    1:01 --- 1:02 --- 1:03
+
+                3,内层循环变量的设定,就是初始化以及判断进入循环的条件
+                  往往与外层循环变量相关
+        
+        */
+
+        // 外层循环1次,内层循环所有
+        // 内层循环,外层数值不变
+        // 内层循环与外层循环有关
+        for(var i = 1 ; i <= 5 ; i++){
+            for(var j = 1 ; j <= 5 ;  j++){
+                document.write(`当前i是${i},当前j是${j}`);
+                document.write('<br>');
+            }
+
+            document.write('<br>');
+            document.write('<br>');
+        }
+
+        // 外层 i循环  内层 j循环
+        // 外层 i循环  从 1 循环至 2 
+        // 内层 j循环  要执行所有的循环 是 1-5 循环
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            if语句的语法形式
+
+            if(表达式){执行程序}
+
+                当 表达式的结果是 true ,执行{} 中 定义的程序
+                当 表达式的结果是 false ,没有对应的执行程序
+
+
+            if(表达式){程序1}else{程序2}
+
+                当 表达式的结果是 true , 执行 程序1
+                当 表达式的结果是 false ,执行 程序2
+
+            if(表达式1){程序1}else if(表达式2){程序2}else if(表达式3){程序3}......else{else程序}
+        */
+
+        // 随机 工资 1W 至 10W 
+        var money = parseInt( Math.random()*( 10+1-1 )+1 ) * 10000;
+        // console.log(money);
+
+        // 如果月薪超过 5万
+        // 如果 没有超过 5万 也就是  money >= 50000 为 false
+        // 没有执行内容的
+        // if(money >= 50000){
+        //     console.log( '这个月,月薪超过5万,可以有100块零花钱' );
+        // }
+
+        // if(money >= 50000){
+        //     console.log( `这个月,月薪${money},月薪超过5万,可以有100块零花钱` );
+        // }else{
+        //     console.log( `这个月,月薪${money},月薪没有超过5万,可以有10块零花钱` );
+        // }
+
+        // 执行过程
+        // 从 一个 () 中的 表达式 开始 判断 
+        //    如果 表达式 是 true 就 执行对应的程序
+        //    同时 之后的判断 不会再 执行
+        // 虽然有多个判断,多个条件,最终只会有一个条件满足,被执行
+        // 不会同时执行多个条件
+
+        // 加入当前随机数值是 30000
+        // 第一个条件 不满足 结果是 false 继续判断 第二个条件
+        // 第二个条件 不满足 结果是 false 继续判断 第三个条件
+        // 第三个条件 满足 执行对应的程序 
+        // 之后的所有的条件都不再判断 
+        // if语句执行结束
+
+        if(money >= 10000 && money < 20000){
+            console.log(`这个月,月薪${money},可以有10块零花钱`);
+        }else if(money >= 20000 && money < 30000){
+            console.log(`这个月,月薪${money},可以有20块零花钱`);
+        }else if(money >= 30000 && money < 40000){
+            console.log(`这个月,月薪${money},可以有30块零花钱`);
+        }else if(money >= 40000 && money < 50000){
+            console.log(`这个月,月薪${money},可以有40块零花钱`);
+        }else{
+            // 超过5万的情况
+            console.log(`这个月,月薪${money},可以有50块零花钱`);
+        }
+
+
+    </script>
+</body>
+</html>

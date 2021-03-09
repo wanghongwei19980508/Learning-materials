@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            查看变量或者表达式,存储数据的数据类型
+                typeof(变量)  
+                typeof()的执行结果是 字符串类型
+                如果是  typeof( typeof() )  ---- string
+                不管变量是什么类型  typeof( typeof(变量) ) 结果一定是 string 
+
+            不靠谱的 typeof() 语法
+                typeof 变量 
+                如果变量之后,有其他程序,其他内容,容易造成冲突
+                推荐使用 typeof() 语法
+
+        */
+
+
+        // var int = true;
+        // 向控制台输出,变量int 中存储的数据100
+        // console.log( int );
+        // 向控制台输出,变量int 中存储的数据100 的数据类型
+        // console.log( typeof(int) );
+
+        // typeof(int) 查看的是 int 存储数据的数据类型,结果是 number 字符串
+        // typeof( typeof(int) ) 看的是 number 这个字符串的类型 执行结果是 string
+        // console.log( typeof( typeof(int) ) );
+
+        // 不靠谱的语法形式
+        // console.log( typeof int );
+
+
+        // 数据类型,typeof()的执行结果
+        console.log( typeof(true) );      // boolean
+        console.log( typeof(100) );       // number
+        console.log( typeof(100.1233) );  // number
+        console.log( typeof(2e3) );       // number
+        console.log( typeof(NaN) );       // number
+        console.log( typeof('北京') );    // string
+        console.log( typeof(undefined) ); // undefined
+
+        console.log( typeof( function(){} ) )   // function
+
+        // 对象,数组,null,使用 typeof() 执行结果都是 object
+        // 本质上,存储时,都是以对象的形式存储的,typeof的执行结果都是 object
+        // 之后我们会讲  数据类型的 准确判断方式
+        // 对象,数组,null 就不再都是 object
+        console.log( typeof( {name:'张三'} ) );  // object
+        console.log( typeof([1,2,3,4,5]) );      // object
+        console.log( typeof(null) );             // object
+        
+
+    </script>
+</body>
+</html>

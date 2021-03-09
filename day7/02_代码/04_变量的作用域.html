@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            变量的作用域:
+                1, 变量的作用域:
+                    变量的有效范围,可执行,可调用的范围
+
+                2, 按照作用域,变量分为两类
+                    (1) 全局作用域变量
+                        定义在函数之外的变量称为,全局作用域变量
+                        可以在函数的内部,外部都可以被直接使用
+
+                    (2) 局部作用域变量 / 私有变量
+                        定义在函数内部的变量
+                            包括: 定义的变量,定义的形参
+                        只能在函数的内部被调用使用
+                        在函数外部默认不能直接使用
+        
+        */
+
+        // 定义在函数外部的全局作用域变量
+        var int1 = 100;
+
+        function fun1(){
+            // 企图使用全局作用域变量
+            // 可以操作的
+            var num1 = int1*2;
+
+            return num1;
+        }
+
+        console.log( fun1() );
+
+
+        function fun2() {
+            var num2 = 300;
+        }
+
+        // 企图调用函数中,定义的局部作用域变量
+        // 企图失败,执行结果是报错
+        console.log(num2);
+
+
+    </script>
+</body>
+</html>

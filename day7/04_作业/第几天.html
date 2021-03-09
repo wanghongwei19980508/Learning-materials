@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 输入 年 月 日 返回 是 第几天
+        function getDay( year , month , day ){
+            // 定义变量 存储最终的结果
+            var result = 0;
+
+            // 每个月的日期的数组 1月31天 2月28天 3月31天 .... 
+            var dayArr = [31 , 28 , 31 , 30 , 31 , 30 , 31 , 31 , 30 , 31 , 30 , 31 ];
+
+            // 月份的数值,对应的索引下标,是月份数值-1
+            var monthIndex = month-1;
+
+            // 如果是闰年,2月是29天,设定 数组第二个单元的数值为 29
+            if(  ( (year % 100 === 0) && (year % 100 !== 0) ) || (year % 400 === 0) ){
+                dayArr[1] = 29;
+            }
+
+            // 累加输入月份之前,所有月的天数 
+            // 例如 输入的是 9月 就是累加 1-8 月的索引下标
+            for(var i = 0 ; i <= monthIndex-1 ; i++ ){
+                result += dayArr[i];
+            }
+
+            // 再累加 最后的 日期
+            result += day;
+
+            // 返回最终的结果
+            return result;
+        }
+
+        var a = getDay(2020,1,20);
+        console.log(a);
+    </script>
+</body>
+</html>

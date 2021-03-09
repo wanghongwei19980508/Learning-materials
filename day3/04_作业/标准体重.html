@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过 window.prompt() 获取 输入的数据
+        // 使用 短路赋值 如果 没有数据数据, 逻辑或 会赋值 默认值
+        // 其中 身高体重 是 数值类型 需要 从字符串类型,转化为数值类型
+        var sex = window.prompt('请您输入性别:男/女') || '男'; 
+        var height = window.prompt('请您输入身高CM')-0 || 170; 
+        var weight = window.prompt('请您输入体重KG')-0 || 60; 
+
+        console.log(sex);
+        console.log(height);
+        console.log(weight);
+
+        // 定义变量,存储标准体重数据
+        var sw = 0;
+
+        // 如果性别是男,根据男性公式和输入的身高,计算标准体重,赋值给sw变量存储
+        if( sex === '男' ){
+            sw = ( height - 80 ) * 0.7;
+
+        // 如果性别是不是男,根据女性公式和输入的身高,计算标准体重,赋值给sw变量存储
+        }else{
+            sw = ( height - 70 ) * 0.6;
+        }
+
+        // 根据 输入体重 所在 的 标准 体重的范围,输出对应的结果
+
+        // +/- 10% 也就是  0.9 - 1.1 之间 为 标准体重 
+        if( weight >= sw*0.9 && weight <= sw*1.1 ){
+            console.log('恭喜您,您的体重在标准体重范围之内');
+
+        // +/- 10% - 20%  也就是 0.8-0.9 或者 1.1-1.2 为过重 或者 过轻
+        }else if( weight > sw*1.1 && weight <= sw*1.2 ){
+            console.log('您的体重过重');
+        }else if( weight >= sw*0.8 && weight < sw*0.9 ){
+            console.log('您的体重过轻');
+
+        // +/- 20%以上  也就是  小于 0.8 或者 大于 1.2 为 验证不足 或者 严重超标
+        }else if( weight < sw*0.8 ){
+            console.log('您的体重严重不足');
+        }else if( weight > sw*1.2 ){
+            console.log('您的体重严重超标');
+        }
+
+
+    </script>
+</body>
+</html>

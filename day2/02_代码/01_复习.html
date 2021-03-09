@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1, JavaScript 的基本概念
+                (1) JavaScript 组成
+                    ECMAScript      JavaScript的语法规范 
+
+                    DOM             文档对象模型,操作html文件的方法
+                                    document.write()
+
+                    BOM             浏览器对象模型,操作浏览器的方法
+                                    window.alert()
+        
+                (2) JavaScript 是 解释型 弱类型 脚本语言
+
+            2, JavaScript 的基本语法形式
+                (1) 行内式/内嵌式  
+                    实际项目中不使用
+                    直接在标签中,定义JavaScript代码
+                (2) 内部式
+                    在script标签中,定义JavaScript代码
+                    script标签,理论上可以写在任意位置
+                    实际中,推荐写在 body 的最下方
+                (3) 外部式        
+                    通过 script标签的 src 属性 导入外部js文件
+                    定义了 src属性的 script标签,不执行定义在标签内容中的JavaScript程序
+                特别注意: 超链接a标签,href属性值必须写成 JavaScript:;
+
+            3, 变量
+                定义在 内存中的 带有名称的数据信息,其中存储的数据,在程序执行过程中,是可以改变的
+                简单理解:变量就是一个容器,存储数据的容器,并且有名称,存储的数据还可以改变
+                        数据是临时存储在容器中,等待使用或者操作
+
+                内存:是计算机电脑中的一个硬件设备
+                     特点是,存储在内存中的数据,都是临时存储
+                     一旦断电,程序执行完毕,关机,数据就会丢失
+                硬盘:永久存储数据
+
+            4, 数据类型:
+                基本数据类型
+                    布尔类型  boolean / bool
+                        true   真
+                        false  假
+                    数值类型
+                        整数类型    integer / int
+                            有安全范围
+                            其他进制整数的存储
+                                二进制  0b   0B
+                                八进制  0
+                                十六进制 0x  0X
+                            输出:
+                                变量.toString(进制)
+                                进制范围 2-36
+
+                        浮点数类型  float
+                            17位有效数字(左起,非0的数值)
+                            误差:近似存储,误差永远存在,特殊情况体现
+                                 精度丢失
+                            科学计数法: 
+                                2e3   2000
+                                2e-3  0.002
+
+                        NaN
+                            not a number
+                            类型是数据类型 但是不是一个具体的数值
+                            有非数字参与运算的结果
+                            两个 NaN 永远不相等
+
+
+                    字符串类型
+                        必须使用 引号包裹
+                            ''  ""   ``
+                            ''  ""  没有区别,不能解析变量,不能换行
+                            ``      可以换行,${}包裹变量,可以解析变量
+                        字符串拼接 + 加号
+                            都是数值,执行加法
+                            有字符串,执行字符串拼接
+                            '' "" 可以通过字符串拼接解析变量
+                                字符串 + 变量 + 字符串
+
+                    undefined
+                        没有被正确赋值的变量,JavaScript程序,默认存储数值undefined
+                    null
+                        正确赋值,但是赋值的数据是 null 空数据
+                        
+                引用数据类型/复杂数据类型
+                    本质都是对象
+                        数组
+                        对象
+                        函数
+
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是测试随机颜色的div</div>
+
+    <script>
+        // 提前介绍知识点 : 随机数
+        // Math.random()  可以随机生成 0 - 1 的 小数 小数 可以是 0 永远不会是 1 最多就是 0.999999.....
+        // 如果需要生成  a - b 范围的整数 包括a 和 包括b 可以使用公式
+        // parseInt( Math.random()*( b+1-a ) + a )
+        // 例如需要生成 5 - 10 的整数 
+        // Math.random()*( 10+1-5 ) + 5
+
+        // console.log(parseInt( Math.random()*( 10+1-5 ) + 5 ) );
+
+        // 随机颜色:
+        // 颜色的设定方式:
+        //    单词
+        //    #十六进制
+        //    rgb(0-255 , 0-255 , 0-255)
+
+        // var oDiv = document.querySelector('div');
+
+        // var color1 = parseInt( Math.random()*( 255+1-0 ) + 0 ); 
+        // var color2 = parseInt( Math.random()*( 255+1-0 ) + 0 ); 
+        // var color3 = parseInt( Math.random()*( 255+1-0 ) + 0 ); 
+
+        // console.log(color1);
+        // console.log(color2);
+        // console.log(color3);
+
+        // oDiv.style.color = `rgb( ${color1} , ${color2} , ${color3} )`;
+
+
+        // 简单的判断
+
+        // 随机生成 1-100 的数值 
+        // 需要判断 数值 是否在 40-60 之间
+
+        // 1- 100 范围的数值  a 是 1  b 是 100
+        // parseInt( Math.random()*(b + 1 - a) + a );
+        // var num = parseInt( Math.random()*(100+1-1) + 1 );
+        // console.log(num);
+
+        // // 40-60之间 是 大于 40 并且 小于60  两个条件都要满足
+        // if(num > 40 && num < 60){
+        //     console.log(`${num}是在 40-60之间`);
+        // }else{
+        //     console.log(`${num}是不在 40-60之间`);
+        // }
+
+        // 随机生成数值 18 - 109 之期间
+        var num2 = parseInt( Math.random()*(109 + 1 - 18) + 18 );
+
+        // 判断 数值 是否是 偶数
+        // 被 2 除 余数是 0 也就是 可以被 2整除 的数值,称为 偶数
+        
+        // 模2 余数 是 0 ,就是整除
+        if(num2 % 2 === 0){
+            console.log( `${num2}是偶数` );
+        }else{
+            console.log( `${num2}是奇数` );
+        }
+
+        // 被2除 余数 只能是 0  1  两种情况
+        // 如果是 0  是 偶数
+        // 如果是 1  是 奇数
+        if(num2 % 2 === 1){
+            console.log( `${num2}是奇数` );
+        }else{
+            console.log( `${num2}是偶数` );
+        }
+
+
+        if(num2 % 2 !== 0){
+            console.log( `${num2}是奇数` );
+        }else{
+            console.log( `${num2}是偶数` );
+        }
+
+        if(  !(num2 % 2 === 0) ){
+            console.log( `${num2}是奇数` );
+        }else{
+            console.log( `${num2}是偶数` );
+        }
+
+
+        // 判断 是否可以被 2和3 整除
+        // 可以被2整除 并且 可以被3整除,都要满足
+        // 逻辑与
+        if( num2 % 2 === 0 && num2 % 3 === 0 ){
+            console.log( `${num2}可以被2和3同时整除` );
+        }else{
+            console.log( `${num2}不能被2和3同时整除` );
+        }
+
+        // 被2和3同时整除,也就是被最小公倍数6整除
+        if( num2 % 6 === 0 ){
+            console.log( `${num2}可以被2和3同时整除` );
+        }else{
+            console.log( `${num2}不能被2和3同时整除` );
+        }
+
+        // 被2或者3,整除
+        if( num2 % 2 === 0 || num2 % 3 === 0){
+            console.log( `${num2}可以被2或者3整除` );
+        }else{
+            console.log( `${num2}不能被2或者3整除` );
+        }
+
+
+
+
+
+    </script>
+</body>
+</html>

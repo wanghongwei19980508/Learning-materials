@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 封装一个函数,判断输入的数据,是否是质数
+
+        // 1,通过程序实现效果
+        // 2,将程序封装在函数的{}中
+        // 3,定义函数的参数
+        // 4,定义 return 返回值
+
+        function isPrime(num){
+
+            var bool = true;
+            
+            for(var i = 2 ; i <= num - 1 ; i++){    
+                if(num % i === 0){
+                    bool = false;
+                    break;
+                }
+            }
+
+            return bool;
+        }
+
+
+
+    </script>
+</body>
+</html>

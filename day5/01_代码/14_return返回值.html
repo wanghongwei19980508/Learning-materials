@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            函数的返回值 return
+                return 有2个作用:
+                    1, 返回值, 定义函数的返回值
+                    2, 终止, 会终止函数中,之后所有程序的执行
+
+                函数是一个封装的程序,封装在函数中的数据,默认不能在函数外部使用
+
+                如果一个函数,没有定义 return ,执行结果,返回值就是 undefined
+        
+        */
+
+        function fun(){
+            var int = 100;
+            // 函数自己可以使用这些变量，执行程序效果
+            // 实际项目中,无法确定,int,使用位置
+            // console.log(int);
+            // document.write(int);
+
+            // 通过 return  定义函数的返回值,也就是函数的执行结果
+            // 调用函数时,return 的内容,会被抛出函数 外部 
+            // 在函数之外,可以使用变量存储,或者操作返回值
+
+            // 特别注意:返回的是数值
+            //         是 int 中存储的变量的数值,不是int这个变量
+            //         可以获取 int 中存储的数值数据,还是不能调用int 这个变量
+
+            return int;
+
+            // 定义在函数内部的操作,只是函数本身在操作这个变量
+            // 没有返回这个变量中存储的数值,在函数外部也不能操作这个数值
+            // console.log(int);
+
+            console.log('我是在return之后的程序');
+        }
+
+        // 如果函数没有定义 return ,只是操作变量
+        // 调用函数,只是操作 int 输出到控制台
+        // fun();
+        // 输出函数的执行结果,返回值,是 undefined
+        // console.log( fun() );
+
+        // 函数内部定义的数据,函数外部不能直接使用
+        // console.log( int );
+
+        // 执行函数时,函数会通过 return 抛出 返回值
+        // 可以存储,操作,这个返回值
+        // var res = fun();
+        // console.log( res );
+
+        console.log( fun() );
+
+    </script>
+</body>
+</html>

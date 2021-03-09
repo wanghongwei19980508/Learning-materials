@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1, 什么时候:
+                字符串拼接时,其他数据类型会自动转化为字符串类型
+
+            2, 什么原则:
+                布尔类型:
+                    true  : 转化为 字符串 true
+                    false : 转化为 字符串 false
+                数值类型:
+                    自动转化为纯数字的字符串
+
+                undefined,null 
+                    本身就直接 转化为 字符串 拼接
+
+                数组:
+                    形式结果是:将数组外的[]去掉,拼接在字符串后
+                    本质原则是:将数组转化为字符串,再与字符串拼接
+                    数组转化为字符串的默认原则:
+                        获取数组中每一个数据单元,以逗号间隔,拼接为字符串
+
+                对象:
+                    在JavaScript中,对象转化为字符串,是固定的结果 [object Object]
+                    不管是什么样子的对象,转化的结果都是 [object Object]
+                    [] 必须有,大小写要区别
+                    不管写什么,都拼 [object Object]
+
+                函数:
+                    将 整个函数程序 所有的代码 转化为字符串,进行拼接
+                    写什么,拼什么
+
+        */
+
+        // 布尔类型 true
+        console.log( '北京' + true );
+
+        // 布尔类型 false
+        console.log( '北京' + false );
+
+        // 数值类型
+        console.log( '北京' + 100 );
+        console.log( '北京' + 100.123 );
+        console.log( '北京' + 2e3 );   // 将科学计数法,解析为数值,拼接数值
+        console.log( '北京' + NaN );   // NaN直接拼接NaN 
+
+        // undefined  null
+        console.log( '北京' + undefined );   // NaN直接拼接NaN 
+        console.log( '北京' + null );   // NaN直接拼接NaN 
+
+
+        // 数组 
+        console.log( '北京' + [1,2,'北京',4,5] );
+
+        // 对象
+        console.log( '北京' + {} );
+
+
+        // 函数
+        console.log( '北京' + function(){} );
+
+
+    </script>
+</body>
+</html>

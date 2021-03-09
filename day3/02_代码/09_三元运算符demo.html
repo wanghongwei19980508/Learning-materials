@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1, 赋值操作
+                var 变量 = 表达式 ? true情况赋值的数据 : false情况赋值的数据
+
+            2, 执行程序操作
+                表达式 ? true执行的操作 : false执行的操作
+
+            3, 在字符串中,在内容中,输出不同的结果
+               一般是配合模板字符串使用
+               可以用作内容的输出,或者标签属性,属性值的输出
+
+               `字符串内容${表达式 ? true时字符串写入的内容 : false时字符串写入的内容}`
+
+
+        
+        */
+
+        // 10 -100 的 随机整数
+        var int = parseInt( Math.random()*( 100+1-10 ) +10 );
+
+        // 给变量 str 赋值 
+        // 如果 int 随机是 奇数 ,给 str 赋值 '奇数' 字符串
+        // 如果 int 随机是 偶数 ,给 str 赋值 '偶数' 字符串
+        
+        // 先定义 str 变量 默认赋值空字符串,坐等赋值
+        var str = '';
+
+        if(int % 2 === 0){
+            // 偶数情况,给str 赋值 '偶数'字符串
+            str = '偶数';
+        }else{
+            // 奇数情况,给str 赋值 '奇数'字符串
+            str = '奇数';
+        }
+
+        // 赋值操作
+        // str = int % 2 === 0 ? '偶数' : '奇数';
+
+        // 执行程序操作
+        // int % 2 === 0 ? console.log( '偶数' ) : console.log( '奇数' ); 
+
+        // int % 2 === 0 ? document.write( '偶数' ) : document.write( '奇数' ); 
+
+        // 在字符串中输出不同的结果
+
+        document.write( `${int}随机数值是一个 ${ str = int % 2 === 0 ? '偶数' : '奇数' }` )
+
+        // 给标签定义 checked 选中属性
+        // 当 item.buy 是 true  时 添加 checked 属性有默认效果
+        // 当 item.buy 是 false 时 添加 '' 空字符串 没有选中效果
+        // <input name="box" type="checkbox" ${ item.buy ? 'checked' : '' } >
+
+    </script>
+</body>
+</html>

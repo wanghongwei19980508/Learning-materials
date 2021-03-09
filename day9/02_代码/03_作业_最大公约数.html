@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            最大公约数:
+                最大公约数 两个数,可以整除的约数的,相同的最大的数值,就是最大公约数
+
+                如果 较大数 可以被 较小数 整除 较小数就是 最大公约数
+
+                最大公约数 范围是
+                    最大是  较小数    最小是 1
+                    循环范围是 从 较小数 开始  到 1 循环 每次给较小数 -1
+                    如果能整除两个数值,就是最大公约数
+
+                方法2:
+                    辗转相除法
+                        较大数 % 较小数 整除  较小数就是 最大公约数
+                        不能整除
+                        较小数 % 余数  如果可以整除 余数就是 最大公约数
+                        第一次,max是24 min是16
+                        24 16  
+                        24 % 16 商1 余数 8 
+                        第二次,max是上一次的min16  min 是上一次 24%16的余数 8
+                        16 % 8  可以整除 最大公约数就是 8
+        
+        */
+
+        // console.log( getGCD1( 50 , 24 ) );
+        // console.log( getGCD1( 12 , 6 ) );
+        // console.log( getGCD1( 16 , 24 ) );
+
+
+        console.log( getGCD2( 16 , 24 ) );
+
+
+        // 方法1
+        function getGCD1(num1,num2){
+            // 1,容错处理,确定两个数值大小顺序
+            if(num1 >= num2){
+                var min = num2;
+                var max = num1;
+            }else{
+                var min = num1;
+                var max = num2;
+            }
+
+            // 2,循环获取,最大公约数
+            for(var i = min ; i >= 1 ; i--){
+                if( min % i === 0 && max % i === 0 ){
+                    return i;
+                }
+            }
+        }
+
+
+        // 方法2:  
+        //   如果 较大值 % 较小值 不能整除 就使用 较小值 % 余数
+        //   再不能整除 余数 % 第二次的余数 
+
+        function getGCD2(num1,num2){
+            // 1,容错处理,确定两个数值大小顺序
+            if(num1 >= num2){
+                var min = num2;
+                var max = num1;
+            }else{
+                var min = num1;
+                var max = num2;
+            }
+
+            // 2,定义一个死循环,发生整除是,才会终止循环
+            while(true){
+                if( max % min === 0 ){
+                    return min;
+                }else{
+                    // 给 max 和 min  赋值新的数值
+                    // max 应该是  上一次的 min 
+                    // min 应该是  上一次的 max%min 的余数 
+                    // 定义临时变量 存储数值
+
+                    // num 中 存储原始max
+                    var num = max;
+                    // 下一次max 赋值 上一次的min
+                    max = min;
+                    // min 是 上一次max,就是当前num中的数值 % min本身
+                    min = num % min;
+                }
+            }
+        }
+    </script>
+</body>
+</html>

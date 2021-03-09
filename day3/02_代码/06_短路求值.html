@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            短路求值:
+                在 逻辑运算符 中 , 执行过程中,出现的一种执行原理
+                逻辑运算符,一般是由多个表达式,来决定逻辑运算符最终的执行结果
+                如果当前的表达式可以决定逻辑运算符的最终结果,之后表达式,不会被执行
+                目的是为了提高程序的执行效率
+        
+            短路求值,发生的条件
+                逻辑与 第一个表达式 结果是 false 整个逻辑与是 false 第二个表达式不执行
+                逻辑或 第一个表达式 结果是 true  整个逻辑或是 true  第二个表达式不执行
+
+
+        */
+
+        var int = 100;
+        // 逻辑与 必须两个表达式都是 true 最终结果才是true
+        // 第一个表达式 已经是 false ,不管第二个表达式 结果是 true 还是 false
+        // 不会影响 逻辑与 的最终结果 
+        // 第二个表达式 执行 对 结果没有任何影响, 就不会再执行了
+        // console.log( int > 200 && int < 500 ) ;
+
+
+        // 第一个表达式 是 true 不能决定 逻辑与的最终结果
+        // 第二个表达式 需要执行 int++ 也会执行 int会执行自增操作
+        // int < 200 && int++ < 500  ;
+
+
+        // 第一个表达式是 false  已经 决定了 逻辑与 的最终结果是 false
+        // 第二个表达式不会执行  int++ 不会执行
+        int > 200 && int++ < 500  ;
+        console.log(int);
+
+
+
+    </script>
+</body>
+</html>

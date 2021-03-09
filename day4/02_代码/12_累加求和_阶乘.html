@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 累加求和
+        // 1-100,所有整数累加,结果是 5050
+        // 1+2+3+4.....+100 结果是 5050
+
+        // 如果是 a - b 范围 所有整数的累加
+        // 就 i = a  i <= b
+        // 假如是 50-60 范围内的整数,累加求和
+        // res 从 50 开始 循环至 60
+        // i = 50   i <= 60  
+
+        // 定义给一个变量,来存储累加的执行结果
+        // var res = 0;
+
+        // // 通过循环,生成1-100的所有整数
+        // var i = 50;
+        // while(i <= 60){
+        //     // i 是 循环生成的 1-100 的数值
+        //     // res 要 累加 i 生成的所有数值
+        //     // res 要 += i 生成的 存储的数值
+        //     res += i;
+        //     i++;
+        // }
+
+        // console.log(res);
+
+        // 阶乘
+        // 5!   5的阶乘  1*2*3*4*5
+        // 从 1 累乘 至 5
+        // 如果是 n 任意数值的 累乘
+        // i = 1  i <= n表示的数值 
+        
+        // 累加从 0 开始 累乘 从 1 开始
+        // var res = 1;
+        // // 累乘的起始数值,是1
+        // var i = 1;
+        // // i的终止数值是 5
+        // while( i <= 5 ){
+        //     // 累乘,使用 *=
+        //     res *= i;
+        //     // i每次改变1
+        //     i++;
+        // }
+
+        // console.log(res);
+
+
+        // 累乘的升级版本,随机数值的累乘 
+
+        // 定义一个随机数 范围是 5-10 之间
+        var num = parseInt( Math.random()*(10+1-5)+5 );
+        
+        // 定义变量,存储最终的累乘结果
+        var res = 1;
+
+        // i是从 1 开始  循环至 num 表示的数值
+        var i = 1;
+        // i的范围是从1,开始到num结束
+        while( i <= num ){
+            res *= i;
+            i++;
+        }
+        console.log( `当前数值是${num},这个数值的阶乘,${num}!,结果是${res}` );
+
+
+    </script>
+</body>
+</html>

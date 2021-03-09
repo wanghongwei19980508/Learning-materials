@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            其他数据类型强制转化为数值类型
+                1, Number(变量/数据) 
+                    转化原则与自动转化原则完全相同
+                    不会改变,变量中存储的原始数据
+
+                2, parseInt(变量/数据)
+                    获取表达式的整数部分
+
+                3, parseFloat(变量/数据)
+                    获取表达式的小数部分   
+
+        */
+
+
+        // 方法1 Number()
+        // 布尔类型
+        // console.log( Number(true) );   // 1
+        // console.log( Number(false) );  // 0
+
+        // null
+        // console.log( Number(null) );   // 0
+
+        // 数组,对象,函数,undefined
+        // console.log( Number([1,2,3,4,5]) );                    // NaN
+        // console.log( Number({name:'张三'}) );                  // NaN
+        // console.log( Number(function(){console.log(123)}) );   // NaN
+        // console.log( Number(undefined) );                      // NaN
+
+        // 字符串: 只转化符合数字规范的字符串,其他都是NaN
+        // console.log( Number( '100' ) )      // 100
+        // console.log( Number( '100.123' ) )  // 100.123
+        // console.log( Number( '2e3' ) )      // 2000
+        // console.log( Number( '    2e3' ) )  // 2000
+
+        // console.log( Number( 'a100' ) )     // NaN
+        // console.log( Number( '100abc' ) )   // NaN
+        // console.log( Number( '2e3abc' ) )   // NaN
+
+
+        // 方法2 parseInt()
+
+        // 布尔类型
+        // console.log( parseInt(true) );   // NaN
+        // console.log( parseInt(false) );  // NaN
+        
+        // // null
+        // console.log( parseInt(null) );  // NaN
+
+        // // 对象,函数,undefined
+        // console.log( parseInt({name:'张三'}) );                  // NaN
+        // console.log( parseInt(function(){console.log(123)}) );   // NaN
+        // console.log( parseInt(undefined) );                      // NaN
+
+        // 数组 : 获取第一个单元存储数据的整数部分
+        // 第一个单元存储的数据,通过parseInt()获取整数部分,结果是什么,整个数组的结果就是什么
+        // console.log( parseInt( [1,2,3,4,5] ) );             // 1
+        // console.log( parseInt( [100,2,3,4,5] ) );           // 100
+        // console.log( parseInt( ['abc',2,3,4,5] ) );         // NaN
+        // // 二维数组,也看第一个单元
+        // console.log( parseInt( [[1,2,3,4,5],2,3,4,5] ) );   // 1
+
+
+        // 字符串 : 从左起,获取整数部分
+        // console.log( parseInt( '100' ) );        // 100
+        // console.log( parseInt( '100.123' ) );    // 100
+        // console.log( parseInt( '2e3' ) );        // 2
+
+        console.log( parseInt( '100.123.456.789' ) );        // 100
+
+
+        // console.log( parseInt( '100abc' ) );     // 100
+        // console.log( parseInt( 'abc100' ) );     // NaN
+
+
+        // 3, parseFloat()
+
+        // 布尔类型
+        console.log( parseFloat(true) );   // NaN
+        console.log( parseFloat(false) );  // NaN
+
+        // null
+        console.log( parseFloat(null) );  // NaN 
+
+
+        // 对象,函数,undefined
+        console.log( parseFloat({name:'张三'}) );                  // NaN
+        console.log( parseFloat(function(){console.log(123)}) );   // NaN
+        console.log( parseFloat(undefined) );                      // NaN
+
+
+        // 数组  获取第一个单元,获取浮点数的结果
+        console.log( parseFloat( [1,2,3,4,5] ) );   // 1
+
+        // 字符串
+        console.log( parseFloat( '100' ) );        // 100
+        console.log( parseFloat( '100.123' ) );    // 100.123
+        console.log( parseFloat( '2e3' ) );        // 2000
+        console.log( parseFloat( '100.123.456.789' ) );        // 100.123
+
+        /* 总结:
+           Number()      与自动转化原则完全相同
+           parseInt()    获取整数部分
+           parserFloat() 获取浮点数部分
+           区别:
+              布尔类型:  
+                Number() 和 自动转化 
+                    true --- 1   false --- 0
+
+                parseInt()  parserFloat() 
+                    NaN
+
+              null     
+                Number() 和 自动转化 
+                    null --- 0
+
+                parseInt()  parserFloat() 
+                    NaN
+
+              数组:
+                Number() 和 自动转化 
+                    NaN
+
+                parseInt()  parserFloat() 
+                    获取第一个单元的数据
+
+              字符串:
+                Number() 和 自动转化 
+                    100.123.456.789 --- NaN
+                    100abc --- NaN
+
+                parseInt()  parserFloat() 
+                    100.123.456.789 --- 100 / 100.123
+                    100abc --- 100
+                     
+                    2e3  parseInt() 是  2
+                    2e3  parserFloat()  自动转化 是  2000
+
+        */
+
+    </script>
+</body>
+</html>

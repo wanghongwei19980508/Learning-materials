@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+
+    <script>
+        // 100000000秒 转化
+        var time = 100000000;
+
+        // 1,转化为 天
+        // 秒数 / 一天的秒数 取整
+        var day = parseInt( time / ( 24*60*60 ) );
+
+        // 2,转化为 小时
+        // 转化为天的剩余秒数,转化为小时
+        // 方法1 总秒数 - 天的秒数 除以 一小时的秒数 取整
+        // 方法2 总秒数 % 天的秒数 除以 一小时的秒数 取整
+        var h = parseInt( time%(24*60*60) / (60*60)  );
+
+        // 3,转化为分钟
+        // 转化为天的剩余秒数,转化为小时剩余的秒数 转化为分钟
+        // 方法1 总秒数 - 天的秒数 - 小时的秒数 除以 一分钟的秒数 取整
+        // 方法2 总秒数 % 小时的秒数 除以 一分钟的秒数 取整
+        var m = parseInt( time%(60*60) / 60 );
+
+        //  4,转化为分钟
+        // 转化为天的剩余秒数,转化为小时剩余的秒数,转化为分钟剩余的秒数 就是最后的秒数
+        // 方法1 总秒数 - 天的秒数 - 小时的秒数 - 分钟的秒数
+        // 方法2 总秒数 % 一分钟的秒数
+        var s = time%60;
+
+        // console.log(day);
+        // console.log(h);
+        // console.log(m);
+        // console.log(s);
+
+        // 实际应用是 秒杀倒计时 等应用
+
+        var oDiv = document.querySelector('div');
+        oDiv.innerHTML = setTime('2020-9-24 12:00:03');
+        oDiv.style.color = `rgb(${parseInt(Math.random()*256)},${parseInt(Math.random()*256)},${parseInt(Math.random()*256)})`;
+   
+
+        setInterval(function(){
+            oDiv.innerHTML = setTime('2020-9-24 12:00:03');
+            oDiv.style.color = `rgb(${parseInt(Math.random()*256)},${parseInt(Math.random()*256)},${parseInt(Math.random()*256)})`;
+
+        },1000)
+        
+
+        function setTime(endTime){
+            var startT = new Date();
+            var endT = new Date(endTime);
+            var time = parseInt( (endT.getTime() - startT.getTime())/1000 );
+            
+            var d = parseInt( time / ( 24*60*60 ) );
+            var h = parseInt( time%(24*60*60) / (60*60)  );
+            var m = parseInt( time%(60*60) / 60 );
+            var s = time%60;
+
+            return `距离秒杀结束还有:${d}天,${h}小时,${m}分钟,${s}秒`;
+        }
+
+    </script>
+</body>
+</html>

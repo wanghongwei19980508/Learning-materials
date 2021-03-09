@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // isNaN()
+        // 判断 不是 数值 : 如果执行结果是 false , 证明是一个数值,或者,是纯数字的字符串
+
+        // console.log( isNaN(100) );
+        // console.log( isNaN(100.123) );
+        // console.log( isNaN( 2e3 ) );
+        // console.log( isNaN( '1000' ) );
+
+        // console.log( isNaN( '1000abc' ) );
+        // console.log( isNaN( 'abc' ) );
+
+
+
+
+
+        // 偶数 的判断
+        // 参数是你输入的整数
+
+        /*
+            判断偶数函数
+
+            @param integer integer 输入需要判断的整数
+            @return boolean 判断的结果
+
+            输入需要判断的整数,返回判断结果
+                如果是 偶数,返回 布尔值true
+                如果是 奇数,返回 布尔值false
+        
+        */
+
+        function isEven(integer){
+            if( isNaN(integer) ){
+                return '输入年份内容错误';
+            }
+
+            // 如果被2整除,余数是0,证明是 偶数,返回值 true
+            if(integer % 2 === 0){
+                return true;
+            // 如果被2整除,余数不是0,证明是 奇数,返回值 false
+            }else{
+                return false;
+            }
+        }
+
+        // 判断闰年
+
+        function isLeapYear(year){
+            // 添加验证判断
+            // isNaN() 如果是 true ,证明,不是数,不是纯数字的字符串
+            // 不能执行 算术运算 没有必须要执行下面的程序
+            // 可以 throw 抛出错误 中断程序
+            // 可以 return 终止函数的执行
+
+            if( isNaN(year) ){
+                return '输入年份内容错误';
+            }
+
+            // 满足闰年条件,返回true
+            if( ( (year % 4 === 0 ) && ( year % 100 !== 0 ) )||( year % 400 ===0 ) ){
+                return true;
+            // 不满足闰年条件,返回true
+            }else{
+                return false;
+            }
+        }
+
+        console.log( isLeapYear(2000) );
+        console.log( isLeapYear('1234') );
+        console.log( isLeapYear('北京欢迎你,来了就别出去了') );
+
+    </script>
+</body>
+</html>

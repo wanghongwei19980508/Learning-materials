@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是随机字体颜色演示效果</div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            使用随机字体颜色函数,生成随机字体颜色属性值,赋值给div,设定随机字体颜色
+
+            通过 定时器 设定一个时间间隔,重复执行 调用 随机颜色函数 再次给 div设定 随机颜色
+        */
+
+        var oDiv1 = document.querySelector('div');
+        oDiv1.style.color = setColor();
+
+
+        setInterval( function(){
+            oDiv1.style.color = setColor();
+        } , 5000 )
+
+        /*
+            总结说明:
+                定时器,延时器,第一次执行程序,是间隔设定的时间之后,才会第一次执行
+                不会 一上来就 立即执行程序 除非设定的时间间隔是 0 毫秒
+
+                如果需要一开始 字体 就有 随机颜色,必须要单独执行一次 定时器中的程序
+                才会 一开始 就有一个随机颜色
+                不会 一开始 执行默认颜色,时间间隔之后,才执行随机颜色
+        
+        
+        */ 
+    </script>
+</body>
+</html>

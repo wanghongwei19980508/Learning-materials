@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body> 
+    <script>
+        /*
+            循环嵌套删除:
+                数组排序删除重复的单元,会造成数组中党员顺序的改变
+
+                可以使用循环嵌套方法,避免
+
+                思路:
+                    从第一个单元开始,跟之后所有的单元比较
+                        如果存储相同的数据,删除之后的数据
+                        删除单元会触发数组的坍塌,要注意消除数组坍塌的影响
+        
+        */
+
+        console.log( getNewArr([ 1,2,3,4,3,2,1,1,2,3,4,5]) );
+
+
+        function getNewArr(array){
+            // 外层循环,生成 第一个到 倒数第二个单元 的 索引下标
+
+            for(var i = 0 ; i <= array.length-1-1 ; i++){
+                // 内层循环,生成 i 之后的 所有 单元的索引下标
+                for(var j = i+1 ; j <= array.length-1 ; j++){
+                    // array[i] 是当前的单元 
+                    // array[j] 是当前的单元,之后的所有单元 
+                    // 如果相等,删除 之后 j 单元
+                    if(array[i] === array[j]){
+                        array.splice( j , 1 );
+                        j--;
+                    } 
+                }
+            }
+
+            return array;
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    账号 : <input type="text"><br>
+    密码 : <input type="password"><br>
+    年龄 : <input type="number"><br>
+    <button>注册</button>
+
+    <script>
+        // 特别注意:
+        // input 输入框,获取的输入的数据,不管输入的是个啥,获取到的都是字符串类型
+        // 如果是 数值 必须要转化为 数值类型,才能进行正确的计算
+        // 简便转化方式 -0   *1   /1
+        // '100' -0    
+        // 会自动将 '100' 字符串 转化为  数值100 参与计算
+        // 100-0 还是 100 
+        // 结果就是 将 字符串100 转化为 数值100
+        // 执行一个 非加法的 不改变数值大小的运算
+
+        var oBtn = document.querySelector('button');
+        var oAge = document.querySelector('[type="number"]');
+
+        // 点击 button 按钮 输出,age,input输入的数据
+        oBtn.onclick = function(){
+            console.log( oAge.value-0 );
+        }
+
+
+
+    </script>
+</body>
+</html>

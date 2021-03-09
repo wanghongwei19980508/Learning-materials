@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 封装一个累加求和函数
+        // 作用是 给定 任意两个 数值 返回 这两个数值之间,所有整数累加的和
+
+        // 有两个数值 1 - 100 ,累加求和
+        // var res = 0;
+        // for(var i = 1 ; i <= 100 ; i++){
+        //     res += i;
+        // }
+        // console.log(res);
+
+        // 函数封装的基本步骤
+        // 1,先通过程序,来实现,功能需求
+        // 2,使用 声明式 定义一个函数,将程序写在函数的{}大括号中
+        // 3,在函数的()中 定义函数的参数
+        // 4,定义函数的 返回值  return
+
+
+        // 2,声明式,定义一个函数,将程序放在{}中
+        // 也就是将程序,封装在函数中
+        // 此时就可以,通过 函数名称() 来调用封装的程序
+        // 封装函数,只是定义函数,没有执行函数
+
+        // 定义两个形参,一个是累加求和的起始数值,一个是累加求和的结束数值
+        function add(start,end){
+            // 1,通过程序,实现累加求和
+            var res = 0;
+            for(var i = start ; i <= end ; i++){
+                res += i;
+            }
+
+            // 4, 通过 return 返回 累加的执行结果
+            // 在函数外部,这个执行结果,可以被存储,可以被输出,可以被赋值,可以被操作
+            return res;           
+        }
+
+        add(1,10);
+        document.write( add(1,10) );
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            this 是 JavaScript 设定一个 关键词
+            只有在 函数中 存在 
+            this 的作用是 指向/替代 某一个 内容/对象
+        */
+
+
+        // 1, 写在 对象中的 函数的this
+        // 调用 对象中的 属性 可以使用 对象.属性/键名  调用存储的 属性值/键值
+
+        var objobjobjobjobjobjobjobjobjobjobj = {
+            name:'张三',
+            age:18,
+            sex:'男',
+            // 在对象中创建一个属性,fun,属性值存储的是一个函数
+            fun:function(){
+                console.log('我是存储在对象中的函数');
+                // 要调用对象中属性存储的属性值,可以使用 对象.属性 来调用
+                console.log( this.name );
+                console.log( this.age );
+                console.log( this.sex );
+                // 这里的 this 就是 objobjobjobjobjobjobjobjobjobjobj 这个对象
+                // 调用属性 应该是 objobjobjobjobjobjobjobjobjobjobj.属性
+                // 现在 this 就是 objobjobjobjobjobjobjobjobjobjobj
+                // 可以写成 this.属性 优化代码
+                console.log( this );
+            }
+        }
+
+
+        // 调用 存储在对象中的函数 使用 对象.属性() 的语法
+        // 函数之外,没有this,只能老老实实的写 objobjobjobjobjobjobjobjobjobjobj
+        // objobjobjobjobjobjobjobjobjobjobj.fun();
+
+
+        // 2, 声明式 赋值式 函数的this
+        // 统一指向 顶级对象 window
+        // window 是 JavaScript 的 一个 顶级对象
+        // window 中 包含很多 JavaScript 定义的函数方法
+        // 例如  window.alert()  window.confirm()  window.prompt() 等等
+        // 调用时 可以    window.alert()  或者  alert()  都可以调用
+
+        // 定义的声明式 赋值式 函数 都会存储在 window 这个顶级对象中
+        // 调用时 原则上 应该写 window.fun1()   window.fun2()
+        // 也可以 直接写 fun1()  fun2() 
+        
+        // this 指向的window
+
+        function fun1(){
+            console.log(this);
+        }
+
+        var fun2 = function(){
+            console.log(this);
+        }
+
+        // window.fun1();
+        // window.fun2();
+
+
+
+
+
+        // 3, forEach()   定时器 延时器 中的 this
+        // this 指向的都是 window
+
+        var arr = [1,2,3,4,5];
+        arr.forEach( function(v,k,arr){
+            console.log(this);
+        } )
+
+        setInterval( function(){console.log(this)} , 1000);
+        setTimeout( function(){console.log(this)} , 1000);
+
+
+        /*
+            定义在对象中的函数:
+                this 指向的 替换的 代表的 是 对象本身
+                执行 操作 应该是 对象.属性 都可以使用 this.属性 来操作
+                可以 简化优化程序的执行
+
+            声明式,赋值式定义的函数
+                函数定义在 顶级对象 window 中 
+                调用时 应该是 window.函数名称()  window.变量名称()
+                函数中的this,指向的是 window
+                
+            定时器,延时器,forEach  
+                定义的回调函数,this指向,都是window
+
+            总结:
+                普通函数 , 除了箭头函数,其他的函数都称为普通函数
+                普通函数的this指向, 指向的是 调用执行函数时,点之前的内容
+
+                    声明式 赋值式调用函数 this 指向点之前的 window
+                        window.fun1()  window.fun2()
+
+                    对象中的函数 this指向的是 点之前的 对象
+                        对象.函数()
+
+                    特殊的, 定时器 延时器 forEach
+                        this指向window顶级对象
+        
+        */
+
+    </script>
+</body>
+</html>

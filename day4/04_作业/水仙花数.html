@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 100 - 999 循环
+        for(var i = 100 ; i <= 999 ; i++){
+            // 获取百位
+            var a = parseInt( i / 100 );
+            // 获取十位
+            var b = parseInt( (i % 100) / 10 );
+            // 获取个位
+            var c = i % 10;
+            // 每一位的数值的立方和 等于 这个数值 本身
+            if( a*a*a + b*b*b + c*c*c === i ){
+                // 输出这个数值
+                console.log( i )
+            }
+        }
+
+    </script>
+</body>
+</html>

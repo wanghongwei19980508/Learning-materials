@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            NaN 
+                not a number
+                有非数字参与计算的结果
+                表示类型是 数值类型 但是 不是一个具体的数值
+
+            任意 两个 NaN 永远不会 相等
+                执行等于判断 结果 永远是 false
+        
+        */
+
+        // 将 100 - 50 的计算结果,存储在变量 result1中
+        var result1 = 100 - 50;
+        console.log(result1);
+
+        // 将 100 - 字符串'北京' 的计算结果,存储在变量 result2中
+        // JavaScript会认为 执行结果 仍然是一个数值类型
+        // 但是 不是 具体的某一个数值 就使用 NaN 表示
+        var result2 = 100 - '北京';
+        console.log(result2);
+
+        // 两个 NaN 比较相等,结果永远是 false
+        console.log( NaN === NaN );
+
+
+    </script>
+</body>
+</html>

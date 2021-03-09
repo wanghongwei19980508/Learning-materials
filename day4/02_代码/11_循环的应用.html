@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+     
+        // 循环输出 1 - 100 的所有整数 
+
+
+        // 循环变量从 1 开始  到 100 结束 每次+1
+        // 初始 i 赋值 1
+        // var i = 1;
+        // // 判断进入循环的条件 i <= 100 为 true
+        // while( i <= 100 ){
+        //     // 输出 i 
+        //     console.log(i);
+        //     // i 累加1
+        //     i++;
+        // }
+        // 之后每次循环 i 都是 累加 1  直到  i 为 101 
+        // i <= 100 判断为 false , 终止整个循环
+
+        // 输出 1 - 100 所有的 偶数
+        // 先通过 i 生成 1-100 的所有整数
+        // 添加判断,i是偶数时,执行输出程序
+
+        // var i = 1;
+        // while( i<= 100 ){
+        //     // 添加判断 i 是偶数时, 再执行console 输出程序  
+        //     if(i%2 === 0){
+        //         console.log(i);
+        //     }
+        //     i++;
+        // }
+        // 1-100循环100次,if判断执行100次,输出50次
+
+        // 简便方法,效率更高
+        // 循环变量的初始值 是 2 也就是 1-100的第一个偶数
+        var i = 2 ;
+        while( i <= 100){
+            console.log(i);
+            // 两个相邻的偶数,相差2,
+            // 改变步长,让每次累加的数值是 2
+            i += 2;
+        }
+        // 循环50次,没有判断,输出50次,效率更高
+    </script>
+</body>
+</html>

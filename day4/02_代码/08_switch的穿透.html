@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            switch的穿透:
+                如果没有 break 终止语句
+                switch会从定位的程序开始,一直执行到最后一行程序
+        
+        */
+
+        // 输入 月份 显示 当月有多少天
+
+        // 随机数 1-12 
+        var month = parseInt( Math.random()*(15+1-1)+1 );
+
+        // 1,3,5,7,8,10,12月有31天 逻辑或 关系
+        if( month === 1 || month === 3 || month === 5 || month === 7 || month === 8 || month === 10 || month === 12 ){
+            console.log( `当前是${month}月,有31天` );
+
+        // 4,6,9,11月有30天, 逻辑或 关系
+        }else if ( month === 4 || month === 6 || month === 9 || month === 11 ){
+            console.log( `当前是${month}月,有30天` );
+        }else if (month === 2) {
+            console.log( `当前是${month}月,平年28天,闰年29天` );
+        }else{
+            console.log( `当前是${month}月,您输入的月份有误,您过的是火星的日子吧!` );
+        }
+
+
+        // switch可以利用穿透,让代码更简单
+
+        switch(month){
+            // 将执行程序相同的情况,都定义在一起
+            // 利用 穿透原理 最终一个输出程序就可以了
+            // 最后加上一个break就可以了
+
+            // 等于 1,3,5,7,8,10,12,
+            // 都会执行 穿透原理 执行相同的 输出程序
+            // 最后被一个 break 终止
+            case 1:
+            case 3:
+            case 5:
+            case 7:
+            case 8:
+            case 10:
+            case 12:
+                console.log( `当前是${month}月,有31天` );
+                break;
+
+            case 4:
+            case 6:
+            case 9:
+            case 11:
+                console.log( `当前是${month}月,有30天` );
+                break;
+
+            case 2:
+                console.log( `当前是${month}月,平年28天,闰年29天` );
+                break;
+
+            default:
+                console.log( `当前是${month}月,您输入的月份有误,您过的是火星的日子吧!` );
+                break;
+                
+        }
+
+        /*
+            总结:
+                等于 不同的数值 但是 执行相同的程序
+                
+                可以利用 switch的穿透原理,执行相同的程序,最终使用以个break终止
+        
+        
+        */ 
+
+    </script>
+</body>
+</html>

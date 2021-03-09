@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            函数的返回值:
+                return 返回值
+
+                1,函数内部的数据,必须要通过 return 抛出函数之外,才能在函数外部操作
+
+                2,函数抛出的是 return 变量的中 从的数值,不是这个变量本身
+
+                3,没有定义 return 的函数,执行结果返回值,一定是undefined
+
+                4,一个函数只会执行一个 return 
+                  执行的 return 会终止之后所有程序的执行
+        
+        */ 
+
+        function fun(){
+            var int = 100;
+        }
+
+        
+
+        fun();
+        // 企图调用函数内部定义的变量,企图失败
+        // 会报错
+        // console.log(int);
+
+        // 没有 return 的函数 ,执行结果返回值,一定是 undefined
+        console.log( fun() );
+
+
+        function fun2(){
+            var int = 100;
+            return int;
+        }
+
+        // 定义了 return ,仍然不能使用int这个变量
+        // console.log(int);
+
+        // 只能是 操作 函数执行后 通过 return 抛出的 int变量中 存储的数值 100
+        console.log( fun2() );
+
+        function fun3(){
+            return 100; // 第一个return 执行了,之后的都被终止了
+            return 200;
+            return 300;
+            return 400;
+        }
+
+        console.log( fun3() );
+    </script>
+</body>
+</html>

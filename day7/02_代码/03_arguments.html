@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            arguments 
+                是 JavaScript 程序定义的,每一个函数都具有的特定的关键词/属性
+                其中以 伪数组 的形式 , 存储所有输入的实参
+
+                可以通过 操作 数组的方式来操作所有的实参
+
+                参数不固定的函数,没有办法定义具体的形参
+                ()中就不写形参
+
+                目前,只要知道:
+                    1, arguments 是 每一个函数都自带的属性
+                    2, arguments 会自动的将所有的实参存储其中
+                    3, 以伪数组的形式来存储
+                    4, 不确定参数个数的函数,在()中要不定义形参
+
+        */ 
+
+        function addFun(){
+            console.log(arguments);
+            var res = 0;
+
+            // 通过for循环,获取 arguments 伪数组中 每个单元 存储数据
+            // 执行累加效果
+
+            // 使用 for 循环 ,遍历 伪数组 arguments 
+            // 使用 生成 从 0 开始 arguments 所有的索引下标
+            // for(var i = 0 ; i <= arguments.length-1 ; i++){
+            //     // arguments[i] 
+            //     // i 就是索引下标
+            //     // arguments[i]  索引下标 对应的 存储的数据
+            //     // 将数组中,存储的所有的单元的数据,逐一获取,执行累加
+            //     res += arguments[i];
+            // }
+
+            // 使用 for...in 循环遍历 arguments 伪数组
+            // 自定义变量 index 中 自动存储 arguments 的每一个索引下标
+            // arguments[index]; 就是 获取 每一个索引下标 对应单元存储的 数据数值
+            for(var index in arguments){
+                res += arguments[index];
+            }
+
+            return res;
+        }
+
+        console.log( addFun(1,2,3,4,5) );
+        console.log( addFun(1,2,3,4,5,6,7) );
+        console.log( addFun(6,7) );
+    </script>
+</body>
+</html>

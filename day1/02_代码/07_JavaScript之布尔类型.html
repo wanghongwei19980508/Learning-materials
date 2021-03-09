@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+     <!-- html中 有些属性 属性值就是属性本身  
+          这样的属性,称为 布尔属性
+          在 html5 中 不推荐写 属性值 只写顺序本身
+    -->
+    <input type="text" disabled>
+    <input type="text" readonly>
+    <input type="checkbox" checked>
+
+    <ol reversed>
+        <li>第一个</li>
+        <li>第二个</li>
+        <li>第三个</li>
+        <li>第四个</li>
+    </ol>
+
+    <script>
+        /*
+            JavaScript 之 布尔类型  boolean / bool 表示
+                往往是 比较判断的结果
+                布尔类型 只有 两个数据:
+                    true   表示 真  正确
+                    false  表示 假  错误
+                true 和 false 可以作为 数值 直接赋值给变量
+                    注意: 1, true 和 false 必须要小写
+                          2, true 和 false 作为 数据数值,不要加 引号
+                             true 和 false 不加引号是 布尔类型   
+                                  表示 真 / 假
+                             true 和 false 加了引号是 字符串类型
+                                  表示 就是一个英文单词
+
+            为什么 叫 布尔属性
+                因为 JavaScript 中 获取布尔属性的属性值 结果是 true 或者 false
+        */
+
+        // bool 变中 存储的是 100 大于 200 这个比较判断的结果
+        // 100 大于 200 判断结果是 错误 也就是 false
+        var bool1 = 100 > 200;
+        var bool2 = 100 < 200;
+
+        // 直接将 true 这个 布尔数值 赋值给 变量 bool3 存储
+        var bool3 = 'true'; 
+
+        // console.log(bool1);
+        // console.log(bool2);
+        // console.log(bool3);
+
+        // JavaScript中 获取布尔属性的属性值
+        var oIpt3 = document.querySelector('[type="checkbox"]');
+        console.log( oIpt3.checked );
+
+        var oIpt1 = document.querySelector('[type="text"]');
+        console.log( oIpt1.disabled );
+
+        /*
+            总结:
+                1, 布尔类型就两个数值 true false
+                   true   真  正确 
+                   false  假  错误
+
+                2, true / false  可以作为数据数值,直接赋值给变量,或者直接使用
+                   必须小写
+                   没有引号是 布尔类型  
+                   有引引是   字符串
+                   
+                3, 标签的布尔属性,通过JavaScript操作
+                   获取的属性值 是 布尔类型 的数值 也就是  true / false
+                   有属性  执行效果 就是 true
+                   没有属性不执行效果 就是 false
+        
+        
+        
+        */
+
+
+
+    </script>
+</body>
+</html>

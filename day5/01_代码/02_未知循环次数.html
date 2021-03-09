@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            例如 在 银行存款 100元 每年利息 3元
+            多少年之后 利息会 超过 100元本身
+        */ 
+
+
+
+        // 定义变量存储利息,起始状态,利息是0元
+        var money = 0 ;
+
+        // 可以利用循环变量 i 来记录循环次数
+        // 起始是,是循环0次,也就是存钱存了0年
+
+        // 判断进入循环的条件,是 利息小于 100 就执行 循环
+        // 利息大于 100 终止循环
+        // 判断进入循环的条件 与 循环变量 i 无关
+        // 与 money 变量的数值 有关
+
+        for(var i = 0 ;  money <= 100 ; i++){
+            // 每年 money 累加 3元 利息
+            money += 3;
+        }
+
+        // 当 循环终止 money > 100 的时候
+        // 看 i 的数值 就是 累加的次数 就是 年份
+
+        console.log(i);
+
+
+        // while循环
+
+        var money1 = 0;
+        var i = 0;
+        while(money1 <= 100){
+            money1 += 3;
+            i++;
+        }
+        console.log(i);
+
+        /*
+            总结:
+                有些循环,循环终止的条件,也就是进入循环的条件,与循环变量无关
+                并不能明确的知道循环的次数
+                甚至多求的就是循环的次数   
+                这样的循环称为 未知循环次数的循环
+        
+        */ 
+
+    </script>
+</body>
+</html>

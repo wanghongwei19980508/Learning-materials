@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            两个数值的最大公约数
+                8 4   较大数可以被较小数整除,最大公约数就是较大数
+                12 8  如果不能整除 小 % ( 大%小的余数 )
+        
+        
+        */
+
+        function getGCD(num1 , num2){
+            // 1,判断num1,num2的大小
+            var min = Math.min( num1 , num2 );
+            var max = Math.max( num1 , num2 );
+
+            // 如果 大 % 小 可以整除 ,最大公约数就是 小
+            if(max % min === 0){
+                return min;
+            }
+
+            // 小 % (大%小的余数)
+            return getGCD( min , (max % min) ) ;
+        }
+
+
+        console.log( getGCD( 123456789 , 1234567891 ) );
+    </script>
+</body>
+</html>

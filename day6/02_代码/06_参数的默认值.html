@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            参数的默认值:
+                在定义形参时,就给形参进行赋值操作
+        
+        */
+
+        // 在定义形参时,同时给形参赋值
+        // 形参的本质就是定义在函数中的变量
+        // 给形参赋值,等于就是在给一个变量赋值
+        function fun(str='北京'){
+            console.log( str );
+        }
+
+        // 调用 fun() 函数时, 没有赋值 实参
+        // str 中 存储的 仍然是 定义时 赋值的数据北京
+        fun();
+
+        // 等于在给一个变量,进行重复赋值
+        // 结果是,后赋值的数据,覆盖之前赋值的数据
+        // 后赋值的上海,覆盖之前赋值的北京
+        // 执行程序时,str存储的是上海
+        fun('上海');
+
+
+    </script>
+</body>
+</html>

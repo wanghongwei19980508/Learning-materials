@@ -1,0 +1,121 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" style="border:1px solid black">123</div>
+    <!-- 直接定义在标签中的js程序 实际项目中 不会使用  -->
+    <!-- <p onclick="window.alert('我是js程序弹出的内容')" >我是p标签</p> -->
+
+    <!-- 先定义的 script 标签 程序会先执行 -->
+    <!-- <script src="./tools.js"></script> -->
+
+    <!-- 后定义的 script 标签 程序会后执行 -->
+    <script src="">
+        // window.alert('我是JavaScript内部式的程序');
+    
+        // 对于 div 的操作
+        // div 在 18行 被 html 程序 定义
+        // 因此 JavaScript 程序 必须要写在 18行,定义了div之后
+        // 有了div,才能正确的操作div
+        var oDiv = document.querySelector('div');
+    
+        oDiv.onclick = function(){
+            window.alert('我是点击div弹出的内容');
+        }
+    
+    </script>
+
+
+    <script>
+        /*
+            JavaScript历史:
+                自己百度
+
+            JavaScript组成:
+                ECMAScript
+                    ECMA : 欧洲计算机制造商协会
+                           负责设定,JavaScript语法规范
+                DOM : 文档对象模型    操作 html文件的方法
+                BOM : 浏览器对象模型  操作 浏览器的方法
+
+            JavaScript基本语法规范:
+                JavaScript 是 一门 解释型 弱类型 脚本语言
+                    解释型: 是计算机语言的一种,一般分为 解释型 和 编译型两种
+                        JavaScript 是 典型的 解释型语言
+                        java,php 是 编译型语言
+                        具体的内容,到第三周会讲
+
+                    弱类型: 指的是,语法规范,不严谨,代码编写规范,执行比较宽松 
+
+                    脚本语言: 是计算机语言分类的一种方式
+                             html 是 标记语言
+                             脚本语言 有 专门的 执行程序的 内核 
+                             JavaScript的内核 在 浏览器中
+                             不能脱离内核 执行 JavaScript代码
+                             另外 脚本语言 有 严格 的执行逻辑和执行顺序
+
+                    JavaScript语法形式: 与 css 语法形式 类似
+                        行内式/内嵌式 : 直接定义在 标签中的 JavaScript 代码
+                                       实际项目中,千万不要用
+
+                        内部式: 定义在 script 标签中的JavaScript 代码
+                                课上写 demo 用的 
+
+
+                        外部式: 定义在 外部 js 文件中 通过 script标签 src属性导入的程序 
+                                实际项目中使用的
+                                通过 script 标签的 src 属性 定义 要导入的外部文件的路径
+                                    路径可以是 相对路径 也可以是 绝对路径
+                                内部和外部 , 根据 script 标签的 顺序, 就是程序执行的顺序
+                                定义在 前 的script标签,其中的程序会先执行
+
+                    说明: 写在 内部式 和 外部式 中的 JavaScript程序,你一打开浏览器,就会被执行
+                          而且有些程序会执行在 html 程序之前
+                          注意,不是所有的程序都执行在 HTML 程序之前 , 只有一些特殊的程序会执行在 HTML 之前
+                          例如 window.alert()  警告窗 会执行在 html 程序之前
+                        
+                          script标签理论上可以定义在任意位置上
+                          但是 一般 规定规范 写在 body 的最下方
+                          因为 大部分的 JavaScript程序 需要 操作 html标签内容
+                          必须定义在 html 标签代码之下
+
+                          如果 script 标签 定义了 src 属性
+                          JavaScript语法规范规定,script标签中,定义的JavaScript程序,就不会执行
+                          带有 scr属性的标签 只会执行 src 导入的外部js文件的程序
+                          不会再执行 写在 script 标签 中的 内部程序
+
+        */
+
+
+        /*
+            1, 内嵌式/行内式    不要用,不要写
+
+            2, 内部式:
+                定义在script标签中的JavaScript程序
+                一般定义在body的最后
+                先定义的会先执行,后定义的后执行
+
+            3, 外部式:
+                通过 script 标签 的 src 属性 导入外部的js文件,执行其中的js程序
+                先定义的会先执行,后定义的后执行
+                如果 script 标签 定义了 src 属性 , 内部式定义的JavaScript程序,不会执行
+        
+        */
+
+    </script>
+</body>
+</html> 
+

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            border:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>地址</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        var arr = [
+            {id:1,name:'张三',age:18,sex:'男',addr:'北京'},
+            {id:2,name:'李四',age:19,sex:'女',addr:'上海'},
+            {id:3,name:'王五',age:20,sex:'保密',addr:'广州'},
+            {id:4,name:'赵六',age:21,sex:'不详',addr:'重庆'},
+            {id:5,name:'刘七',age:22,sex:'不确定',addr:'天津'},
+            {id:6,name:'王二麻子',age:23,sex:'不知道',addr:'重庆'},
+        ];
+
+        var oTbody = document.querySelector('tbody');
+
+        var str = '';
+        // arr 中有几个单元,forEach 就会循环几次
+        // 就会生成 几个 str 标签 拼接到 str 中
+
+        // val 存储的是 arr 数组中 每一个单元的数据,也就是 对象
+        // key 存储的是 arr 数组中 每一个单元的索引下标
+        //     第一次循环 key 存储 0    val 存储的是 {id:1,name:'张三',age:18,sex:'男',addr:'北京'}
+        //     第二次循环 key 存储 1    val 存储的是 {id:2,name:'李四',age:19,sex:'女',addr:'上海'}
+        //     第三次循环 key 存储 2    val 存储的是 {id:3,name:'王五',age:20,sex:'保密',addr:'广州'}
+        //     第四次循环 key 存储 3    val 存储的是 {id:4,name:'赵六',age:21,sex:'不详',addr:'重庆'}
+        //     第五次循环 key 存储 4    val 存储的是 {id:5,name:'刘七',age:22,sex:'不确定',addr:'天津'}
+        //     第六次循环 key 存储 5    val 存储的是 {id:6,name:'王二麻子',age:23,sex:'不知道',addr:'重庆'},
+        arr.forEach(function(val,key){
+            // 可以通过 []语法 或者 点语法 , 从对象 val 中 获取对应的数据
+            // 每一次val存储的数据不同,对应键名获取的属性值也会不同
+            // str += `
+            //     <tr>
+            //         <td>${val.id}</td>
+            //         <td>${val.name}</td>
+            //         <td>${val.age}</td>
+            //         <td>${val.sex}</td>
+            //         <td>${val.addr}</td>
+            //     </tr>`;  
+            
+            str += '<tr>';
+            for(var k in val){
+                str += `<td>${val[k]}</td>`;
+            }
+            str += '</tr>';
+        })
+
+
+        oTbody.innerHTML = str;
+
+    </script>
+</body>
+</html>

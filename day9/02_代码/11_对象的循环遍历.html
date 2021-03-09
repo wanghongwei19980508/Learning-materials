@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            对象的循环遍历
+                对象只能使用 for...in 来循环遍历
+                    for(自定义变量 in 对象){
+                        执行程序
+                    }
+                自定义变量,每次会存储 对象单元的键名
+                调用具体数据时,使用的是 自定义变量 来获取对应的数据
+                必须使用 [] 语法
+
+            实际项目中获取到的数据结果,基本上都是 
+                数组中,存储对象
+                [
+                    {},
+                    {},
+                    {},
+                    {},
+                ];
+        
+        */
+
+        var obj = {
+            name:'张三',
+            age:18,
+            sex:'男',
+        }
+
+        for(var key in obj){
+            // key 存储的是 每一个单元的键名
+            // 第一次是 name 第二次是 age  第三次是 sex
+            console.log( key );
+            // 使用点语法,不会解析 key  只会使用 字符串 key 作为键名去 对象中获取数据
+            // 执行结果是 undefined
+            console.log( obj.key );
+            // 使用[]语法 会解析key 中存储的变量数据 使用 name age sex 去对象中获取数据
+            // 执行结果,就是对象的数值数据
+            console.log( obj[key] );
+        }
+
+
+    </script>
+</body>
+</html>

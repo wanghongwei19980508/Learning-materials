@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            冒泡排序:
+                核心:
+                    相邻的两个单元进行数据比较
+                    之后按照 排序 要求 交换 单元 存储数据
+                    多次执行排序,最终完成效果
+                优化: 循环比较 最后一个单元,没有下一个单元进行比较,只需要循环至 倒数第二个单元
+                      一次循环排序出一个最大值, n 个单元 需要循环 n-1 次 完成整个数组的排序 最后一个单元没有排序比较的对象了
+                      之前循环比较出的最大值,不再参与之后的循环比较
+                          第一次 少比较 0 个单元
+                          第二次 少比较 1 个单元
+                          第三次 少比较 2 个单元
+                          ....
+                          第n次  少比较 n-1 个单元
+        */ 
+
+
+        var arr = [];
+
+        // 第一次,从第一个单元开始,与下一个单元进行比较
+        // 前一个单元 大于 后一个 单元 就 交换两个单元 存储的数据内容
+        // 最后一个单元,是没有下一个单元进行比较的,只需要循环到 倒数第二个单元就可以了
+        // arr.length-1    是最后一个单元的索引下标 
+        // arr.length-1-1  是倒数第二个单元的索引下标
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+        // for(var i = 0 ; i <= arr.length-1 -1 ; i++){
+        //     // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+        //     if(arr[i] > arr[i+1]){
+        //         // 数据交换操作
+        //         var tmp = arr[i];
+        //         arr[i] = arr[i+1];
+        //         arr[i+1] = tmp;
+        //     }
+        // }
+
+
+
+        // 第一次执行,排序出第一个最大值 --- 9
+        // 第二次执行,排序出第二个最大值 --- 8
+        // ...... 
+        // 将 循环排序 再 循环 执行 length-1 次
+        // 1 - length-1   是  循环执行  length-1 次 
+        // 0 - length-1-1 是  循环执行  length-1 次 
+
+        // 0 - arr.length-1-1  是 length-1 次
+        // 使用 外层 循环变量  j 生成 从 0 开始的数值 也就是 每次比较,少比较的单元个数
+        // 
+        for(var j = 0 ; j <= arr.length-1-1 ; j++){
+            var bool = true;
+            // 这个循环 循环 执行 length-1 次
+
+            // 第一次外层循环,也就是第一次排序比较, j 是 0 , 少循环 0 次 少比较 0 个单元
+            // 第二次外层循环,也就是第二次排序比较, j 是 1 , 少循环 1 次 少比较 1 个单元
+            for(var i = 0 ; i <= arr.length-1 -1 - j ; i++){
+                // 当前单元是 arr[i]   下一个单元是 arr[i+1];
+                if(arr[i] > arr[i+1]){
+                    bool = false;
+                    // 数据交换操作
+                    var tmp = arr[i];
+                    arr[i] = arr[i+1];
+                    arr[i+1] = tmp;
+                }
+            }
+
+            if( bool === true ){
+                break;
+            }
+        }
+        
+
+
+
+        console.log(arr);
+
+    </script>
+</body>
+</html>

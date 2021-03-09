@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 定义一个变量 存储行数
+        var line = 6;
+
+        // 
+        for(var i = 1 ; i <= line ; i++){
+            // 星号之前的空格,这里的空格,必须要用字符实体&nbsp;来定义
+            for(var k = 1 ; k <= line - i ; k++ ){
+                document.write('&nbsp;');
+            }
+
+            // 生成 星星和空格 每行的数量,与,行数相同
+            for(var j = 1 ; j <= i ; j++){
+                document.write('* ');
+            }
+
+            // 每行结束有一个换行
+            document.write('<br>');
+        }
+
+
+        // 梯形就是少一块儿的金字塔
+        // 还是生成 金字塔 的代码 只是 起始行数不是1
+        // 一共是 8 行 从第五行开始输出
+
+        var line = 8;
+        for(var i = 5 ; i <= line ; i++){
+            // 星号之前的空格,这里的空格,必须要用字符实体&nbsp;来定义
+            for(var k = 1 ; k <= line - i ; k++ ){
+                document.write('&nbsp;');
+            }
+
+            // 生成 星星和空格 每行的数量,与,行数相同
+            for(var j = 1 ; j <= i ; j++){
+                document.write('* ');
+            }
+
+            // 每行结束有一个换行
+            document.write('<br>');
+        }
+
+
+        // for(var i = line-1 ; i >= 0 ; i--){
+        //     console.log(i);
+        // }
+
+        // 总行数 - 当前行数 是 最终循环的次数
+        // for(var j = 1 ; j <= line-i ; j++){
+            
+        // }
+
+
+    </script>
+</body>
+</html>

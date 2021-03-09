@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div></div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            思路:
+                通过 date() 内置对象 获取当前时间
+                解析 时间对象中 存储的 时间信息 
+                转化为对应的内容,渲染到页面中
+
+                通过定时器,实现 上述的程序,每一秒执行一次
+        
+        */ 
+
+        var oDiv = document.querySelector('div');
+        // 因为定时器,第一次执行是在时间间隔之后,为了初始状态下,有一个内容显示
+        // 需要一上来先执行一次函数,获取时间,生成时间字符串,写入 div 标签
+        oDiv.innerHTML = getNowTimeStr();
+        oDiv.style.color = setColor();
+
+        // 通过定时器,每间隔一秒,再次执行函数,再次获取时间,再次生成新的字符串
+        // 写入div标签
+        setInterval( function(){
+            oDiv.innerHTML = getNowTimeStr();
+            oDiv.style.color = setColor();
+        } , 1000 )
+
+
+        // 设定获取时间的函数
+    function getNowTimeStr(){
+        var time = new Date();
+        var year = time.getFullYear();
+        var month = time.getMonth() + 1;
+        var date = time.getDate();
+
+        var weekArr = ['日','一','二','三','四','五','六'];
+        var week = `星期${weekArr[time.getDay()]}`;
+
+        // 时分秒,做 前导补零 处理
+        // 当数值小于 10 , 在数值前 拼接 '0'
+        // 当获取的时间数值 小于 10  赋值的 是 字符串0 拼接上 当前时间    
+        // 当获取的时间数值 大于等于 10  直接赋值当前时间
+        var hours = time.getHours() < 10 ? '0'+time.getHours() : time.getHours();
+        var minutes = time.getMinutes() < 10 ? '0'+time.getMinutes() : time.getMinutes();
+        var seconds = time.getSeconds() < 10 ? '0'+time.getSeconds() : time.getSeconds() ;
+
+        return `当前时间是${year}年,${month}月,${date}日,${week},${hours}时,${minutes}分,${seconds}秒`;
+    }
+
+    </script>
+</body>
+</html>

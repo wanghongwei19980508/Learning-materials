@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 500px;
+            height: 50px;
+            border:1px solid #000;
+            text-align: center;
+            line-height: 50px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    输入编号 : <input type="text"><br>
+    <button>查询</button>
+
+    结果: <div></div>
+
+    <script>
+        /*
+            switch 和 if 判断 类似,都是执行的分支语句
+            只是 ,应用场景,应用环境 不同
+
+            if: 有嵌套时,使用if判断更方便
+                判断范围时 >  <  >=   <=   时 使用 if更合理
+
+                if判断中,尤其是 if..else if ...else
+                else 一般用作容错处理
+
+
+            switch : 判断 等于 某个数值时 , 使用 switch 效率更高
+                     ===  switch 执行的是 全等判断
+
+            if语句,执行判断,会从第一个判断开始,逐一进行判断,只有结果为true,执行对应的程序
+
+            switch语句,会根据变量存储的数值,直接定位到,匹配的数据,执行对应的程序,执行效率会略高于if判断
+        
+            switch语句的基本语法
+                1, 执行原理:
+                    根据 switch ()小括号 中 输入的变量,存储的数值,来执行不同的程序
+                2, 执行判断的依据是 === 全等判断
+                    要求 变量中存储的数据 和 判断的数据 数据类型 必须相同
+                3, 变量 与 判断依据的数值 全等 就会执行对应的程序
+                    如果有匹配的数据,就执行对应的程序
+                4, break的作用: 终止程序执行
+                    如果没有 break , switch() 默认会从 定位的程序开始 
+                    一直执行到 最后一行程序代码
+
+                    switch 会从 匹配的程序开始,一直执行到最后的程序
+                           这种效果,称为 switch 的 穿透效果
+
+                    if 只会执行 匹配的程序其他的程序不会执行
+
+                5, 强调: switch() 只适用于 做 ===全等判断的 分支语句
+                    其他情况,要使用if语句来执行
+                    能用 switch() 的一定可以使用 if来执行
+                    但是 使用if执行的,不一定能使用 switch 来写
+
+
+
+
+                switch(变量){
+                    case 数值1:
+                        执行的程序;
+                        break;
+
+                    case 数值2:
+                        执行的程序;
+                        break;
+
+                    case 数值3:
+                        执行的程序;
+                        break;
+
+                    default :
+                        都不匹配执行的程序
+                        break;
+                }
+
+
+
+        */ 
+
+        // 输入 订单编号 输出一个 订单详情
+        // 目前只是简单的模拟一下效果
+
+        var oIpt = document.querySelector('input');
+        var oDiv = document.querySelector('div');
+        var oBtn = document.querySelector('button');
+
+        oBtn.onclick = function(){
+            // 1, 获取 input 标签中输入的数据
+            // 标签对象.value 获取结果,可以存储在变量中
+            // 获取结果是字符串类型,需要转化为数值类型
+            var num = oIpt.value-0;
+
+            // 根据获取到,input输入的数据,在div中,写入对应的商品信息
+
+            // 如果 输入的数据是 1 , 返回 1 对应的订单信息
+            // 订单信息,应该是 数据库查询的结果 , 目前我们先编一条信息模拟
+            // if(num === 1){
+            //     oDiv.innerHTML = '订单1,您买的是 iPhone11 手机';
+            // }else if(num === 2){
+            //     oDiv.innerHTML = '订单2,您买的是 iPhone12 手机';
+            // }else if(num === 3){
+            //     oDiv.innerHTML = '订单3,您买的是 iPhone13 手机';
+            // }else if(num === 4){
+            //     oDiv.innerHTML = '订单4,您买的是 iPhone14 手机';
+            // }else{
+            //     oDiv.innerHTML = '您的订单编号输入有误,请检查之后,重新输入';
+            // }
+
+
+            switch(num){
+                // num 等于 1时, 执行的程序
+                case 1:
+                    oDiv.innerHTML = '订单1,您买的是 iPhone11 手机';
+                    console.log(1);
+                    break;
+         
+                // num 等于 2时, 执行的程序
+                case 2:
+                    oDiv.innerHTML = '订单2,您买的是 iPhone12 手机';
+                    console.log(2);
+                    break;
+           
+                // num 等于 3时, 执行的程序
+                case 3:
+                    oDiv.innerHTML = '订单3,您买的是 iPhone13 手机';
+                    console.log(3);
+                    break;
+            
+                // num 等于 4时, 执行的程序
+                case 4:
+                    oDiv.innerHTML = '订单4,您买的是 iPhone14 手机';
+                    console.log(4);
+                    break;
+           
+                // 都不匹配,执行的程序
+                default:
+                    oDiv.innerHTML = '您的订单编号输入有误,请检查之后,重新输入';
+                    console.log(5);
+                    break;
+            }
+        }
+
+    </script>
+</body>
+</html>

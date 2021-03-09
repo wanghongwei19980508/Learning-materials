@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var int = 100000000;
+			var int1 = parseInt(int/86400);
+			var int2 = parseInt((int-int1*86400)/3600);
+			var int3 = parseInt((int-int1*86400-int2*3600)/60);
+			var int4 = parseInt(int-int1*86400-int2*3600-int3*60);
+			console.log(`${int1}天` + `${int2}小时` + `${int3}分钟` + `${int4}秒`);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>
+
+    <script>
+        /*
+            伪数组,并不是真的数组,只是具有数组的部分特性
+
+            伪数组,也有length属性,也支持[]语法操作伪数组
+
+            也可以使用 for...in 或者 通过 for循环 遍历 
+            forEach一般不可以
+
+            有一些数组专门的操作方法,伪数组不支持
+
+            只要看到 length ,就可以 []语法操作 就可以 for...in for循环变量
+            只要有 length 至少是一个伪数组
+
+            数组的 __proto__ 点开之后,是 很多支持的操作方法,就是数组
+                                        少的是 伪数组
+        */
+
+        // 正经的数组
+        var arr = ['北京','上海','广州','重庆','天津','成都','桂林','香港','澳门','台湾'];
+        
+        arr.splice(4,1);
+
+        console.log(arr);
+
+        // 不正经的伪数组  获取所有的li标签对象的伪数组
+        var arrLi = document.getElementsByTagName('li');
+
+        // arrLi.splice(0,1);
+
+        console.log(arrLi);
+        // console.log(arrLi[0]);
+
+
+
+    </script>
+</body>
+</html>

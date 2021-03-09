@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            width: 400px;
+            height: 400px;
+            background: pink;
+            position: fixed;
+            right: 100px;
+            bottom:100px
+        }
+
+        .div2{
+            width: 100px;
+            height: 100px;
+            font-size: 100px;
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <div class="div1">
+        <div class="div2">X</div>
+    </div>
+
+    <script>
+        /*
+            流氓广告效果
+                有一个 广告窗口 可以关闭,但是过一会儿又会出来
+
+            思路:
+                1, 让 广告div 消失
+                    点击 X , 实际是 点击 内层div标签 , 点击时要给 外层div , display:none 
+        
+                2, 再次出现,是设定一个延时器,间隔一段事件,让 外层div display:block 
+        
+        */
+
+        var oDiv1 = document.querySelector('.div1');
+        var oDiv2 = document.querySelector('.div2');
+
+        // 点击内层div 
+        oDiv2.onclick = function(){
+            // 设定 外层div css样式 display 的属性值 为 none 消失
+            oDiv1.style.display = 'none';
+
+            // 设定一个延时器,延迟一段时间,让 外层div css样式 display 的属性值 为 block 显示
+            setTimeout( function(){
+                oDiv1.style.display = 'block';
+            } , 5000 )
+        }
+
+    </script>
+</body>
+</html>

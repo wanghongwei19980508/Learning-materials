@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            封装一个完成的累加求函数
+                1, 通过代码,来实现程序效果
+                2, 将 代码 封装在 函数的{} 中
+                3, 定义函数的参数
+                4, 定义函数的返回值
+
+                对于函数的完善
+                5, 函数的容错处理
+                6, 形参是否需要设定默认值
+                   不是所有的函数都需要默认值
+                7, 定义函数的说明
+                   任何一个自定义函数,都必须要写函数说明
+                   函数说明的格式,要根据实际公司的要求来定
+                   基本上是从几个方面来定义函数的说明
+                   函数的作用
+                   函数的参数,参数中的数据类型,名称,作用
+                   函数的返回值,类型,名称,作用
+                   函数执行步骤的说明
+
+                
+        */ 
+
+        /*
+            累加求和函数
+
+            @param num1 integer 累加求和的数值1
+            @param num2 integer 累加求和的数值2,有默认值1
+
+            @return res integer 累加求和的结果 
+        
+            累加求和函数,默认应该输入两个参数,累加的起始数值和终止数值
+            如果输入一个参数,累加求和默认从1开始
+
+            输入数值的大小顺序,可以任意
+
+            终止函数返回的是累加求和的结果
+        */
+
+        function add(num1 , num2=1){
+            var res = 0;
+
+            // 容错处理
+            // 如果 num1 <= num2 , start 就是 num1 end 就是 num2
+            // 如果 num1 > num2 , start 就是 num2 end 就是 num1
+
+            if(num1 <= num2){
+                start = num1;
+                end = num2;
+            }else{
+                start = num2;
+                end = num1;
+            }
+
+            // 默认给 start 赋值 num1 给 end 赋值 num2
+            // 如果 num1 > num2
+            // 给 start 和 num 交换存储数值
+            // start = num1;
+            // end = num2;
+
+            // if(num1 > num2){
+            //     // 定义一个中间变量,来做过渡
+            //     var int = num1;   // int 中先 存储num1的数值
+            //     num1 = num2;      // num1中赋值num2存储的数值,此时num1,num2,存储的都是num2的数值
+            //     num2 = int;       // 将 int 中存储的 num1的数值,赋值给num2存储
+            //                       // 此时 num1存储的是原始num2的数值 num2存储的是原始num1的数值    
+            // }
+
+
+            for(var i = start ; i <= end ; i++){
+                res += i;
+            }
+
+            return res;
+        }
+
+
+        console.log( add(100,1) );
+
+        // 输入一个参数,默认累加,是从1开始
+        // 只输入了一个参数,赋值给第一个形参
+        // 也就是 num1 有了数值 100
+        console.log( add(100) );
+
+
+
+
+    </script>
+</body>
+</html>

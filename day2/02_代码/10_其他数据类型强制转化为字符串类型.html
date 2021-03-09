@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            其他数据类型,强制转化为字符串类型
+
+            String(变量/数据)     
+                转化原则与自动转化原则完全相同
+                不会改变,变量中存储的原始数值
+
+            变量.toString(可以写进制)
+                默认的转化原则与自动转化原则完全相同
+                纯数字字符串时,可以写进制,按照进制转化
+                .toString() 之前,必须是一个变量,不能直接写数值数据
+        */
+
+        // 1, String(变量)
+        var arr = [1,2,3,4,5];
+
+        console.log( String(arr) );
+
+        console.log( arr );
+
+
+        // 2 变量.toString()
+        console.log( arr.toString(2) );
+        var int = 100;
+        console.log( int.toString(2) );
+
+
+
+
+
+    </script>
+</body>
+</html>

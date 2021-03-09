@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            思路2  数组排序删除
+                先将数组中的数值,进行排序
+                执行之后,存储相同数据的单元就会相邻
+                从第一个单元开始,当前单元和下一个单元比较
+                如果数值相同就删除后一个单元
+                如果数值不同,下一个单元和下下个单元比较
+
+                如果 是带有字符串的数组  sort() 中 写 function(a,b){ return a-b} 不能正确排序
+                     需要 将 sort() 中 function(){} 删除 按照 首位数值大小排序
+
+                最大问题是: 数组的数值顺序,一定会有所改变
+        
+        */ 
+        console.log(setNewArr( [1,2,3,'北京',1,2,3,'北京','上海',1,2,3,'北京','上海','广州'] ) );
+ 
+        function setNewArr(array){
+            // 将数组排序 
+            array = array.sort( );
+
+            // 数组去重
+            // 从第一个单元开始,当前单元 和 下一个单元 进行比较,如果存储的数值相同
+            // 就删除之后的单元
+
+            // 当前单元是 i  下一个单元是 i+1
+            // 当前单元存储的数据 array[i]   下一个单元的数据是 array[i+1]
+
+            // array.length-1   是 最后一个单元的索引下标
+            // array.length-1-1 是 倒数第二个单元的索引下标
+            // 最后一个单元 i+1 没有比较的对象了
+            // 倒数第二个单元 i+1 就是最后一个单元的比较了
+            for(var i = 0 ; i <= array.length-1-1 ; i++){
+                // 定义是全等
+                if(array[i] === array[i+1]){
+                    // 如果相同,就删除后一个单元
+                    // 从 i+1 开始 删除 1个单元
+                    array.splice( i+1 , 1 );
+                    // 为了 防止  数组坍塌 造成的影响
+                    // 就是对 反正 数组删除的单元 再次循环 再次操作
+                    // 也就是对 坍塌过来的新的数组,再次执行比较判断操作
+                    i--;
+                }
+            }
+
+            return array;
+        }
+
+    </script>
+</body>
+</html>

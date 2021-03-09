@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            累加求和
+            递归函数的思路:
+                1-100的累加求和 是 1-99的累加求和 再 加上 100
+                1-99 的累加求和 是 1-98的累加求和 再 加上 99
+                1-98 的累加求和 是 1-97的累加求和 再 加上 98
+                1-n 的累加求和 是 1-n-1的累加求和 再 加上 n 
+                1-1 的累加求和 就是 1 本身
+
+        */
+        // 普通函数的执行结果
+        function add1(num1,num2) {
+            var min = Math.min(num1,num2);
+            var max = Math.max(num1,num2);
+
+            var res = 0;
+            for(var i = min ; i <= max ; i++){
+                res += i;
+            }
+
+            return res;
+        }
+
+
+        // 递归
+/*
+第一次:
+add2(5)  判断是 false 执行 return add2(num-1) + num;  就是  return add2(4) + 5;  add2(5)  的结果是 add2(4)+5
+    第二次:
+    add2(4)  判断是 false 执行 return add2(num-1) + num;  就是  return add2(3) + 4;   add3(4)  的结果是 add2(3)+4
+         第三次
+         add2(3)  判断是 false 执行 return add2(num-1) + num;  就是  return add2(2) + 3;   add3(3)  的结果是 add2(2)+3
+              第四次
+              add2(2)  判断是 false 执行 return add2(num-1) + num;  就是  return add2(1) + 2;   add3(2)  的结果是 add2(1)+2
+                  第五次
+                  add2(1)  判断是 true   执行 return  1  就是  add2(1)  的结果是 1
+
+
+第一次:
+    num是5, 判断是false 执行 return add2(4) + 5;
+    此时 add2(4) 的结果是多少,不知道,要执行 函数
+        第二次:
+        num是4, 判断是false 执行 return add2(3) + 4;
+        此时 add2(3) 的结果是多少,不知道,要执行 函数
+            第三次:
+            num是3, 判断是false 执行 return add2(2) + 3;
+            此时 add2(2) 的结果是多少,不知道,要执行 函数
+                第四次:
+                num是2, 判断是false 执行 return add2(1) + 2;
+                此时 add2(1) 的结果是多少,不知道,要执行 函数
+                    第五次 
+                    num是1, 判断是true 执行 return 1 
+                    add2(1) 的结果 就是 1
+                第四次 add2(2) 的结果是 add2(1) + 2 现在 add2(1) 是 1
+                等于 add2(2) 结果是  add2(1) + 2 就是  1+2
+
+            第三次 add(3) 的结果是 add2(2) + 3;
+            等于 add(3) 的结果是 1+2 +3
+
+        第二次 add(4) 的结果是 add(3) + 4;
+        等于 add(4) 的结果是 1+2+3 +4
+
+    第一次 add(5) 的结果是 add(4) + 5;
+    等于 add(4) 的结果是 1+2+3+4 +5
+
+1+2+3+4 +5    add(5) ---> add(4) + 5
+            1+2+3 +4    add(4) ---> add(3) + 4
+                        1+2+3    add(3) ---> add(2) + 3 
+                                    1+2    add(2) ---> add(1) + 2  
+                                                1    add(1) ---> 1
+return add(4) + 5
+    return return add(3) + 4 + 5
+        return return return add(2) +3 + 4 + 5
+            return return return return add(1) +2 +3 + 4 + 5
+                return return return return  return 1+2 +3 + 4 + 5
+*/
+        function add2(num){
+            // num如果是1,返回的就是1本身
+            if (num === 1) {
+                return 1;
+            }
+            // 如果num不是1, 累加求和的结果,就是 前一个数值的累加,再加上当期数值本身
+            return add2(num-1) + num;
+        }
+
+        console.log( add2(5) );
+
+
+        // 阶乘
+        //    5! 是 4的阶乘 再 乘以 5
+        //    4! 是 3的阶乘 再 乘以 4
+        //    .... 
+        //    n! 是 n-1的阶乘 再乘以 n
+        //    1 的阶乘 就是 1
+
+        function getFactorial(num){
+            if(num === 1){
+                return 1;
+            }
+            return getFactorial(num-1) * num;
+        }
+
+        console.log( getFactorial(5) );
+
+    </script>
+</body>
+</html>

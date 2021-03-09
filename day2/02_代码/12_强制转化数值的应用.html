@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button name="big">放大</button> <button name="small">缩小</button>
+
+    <div style="font-size: 20px;">北京</div>
+
+
+    <script>
+        var oDiv = document.querySelector('div');
+
+        var oBig = document.querySelector('[name="big"]');
+        var oSmall = document.querySelector('[name="small"]');
+
+
+
+        oBig.onclick = function(){
+            // 获取的标签,样式属性值,有 px 单位
+            // 不能直接参与运算,必须要获取整数部分,使用parseInt() 获取
+            console.log( oDiv.style.fontSize );
+            console.log( parseInt( oDiv.style.fontSize )  );
+
+            // 获取当前字体大小,数值数据
+            var size = parseInt( oDiv.style.fontSize );
+            // 在这个数值的基础上,再加上一个自己定的数值
+            size  = size + 10;
+            // 将新的数据,作为 属性值, 设定给标签的css属性
+            // 当前 size 只是数值,需要在拼接上px单位
+
+            // 添加判断 限制最大值是 300
+
+            // 加入 size 是 310 大于 300 
+            // 判断 size > 300 结果是 true 会执行 {} 中的程序
+            if( size > 300 ){
+                // 给 size  赋值 300 ,覆盖之前超过300的数值310
+                // 最终size 中 存储数值 300
+                size = 300;
+            }
+
+            oDiv.style.fontSize = size + 'px';
+            // oDiv.style.fontSize = `${size}px`;
+        }
+
+        oSmall.onclick = function(){
+            var size = parseInt( oDiv.style.fontSize );
+            
+            // 设定最小值 10
+
+            // 如果size 是 30 size-10 是 20 判断结果是 true
+            // 执行第一个{}中的程序
+            if(size - 10 >= 10 ){
+                // 将 size - 10 为 20的结果,赋值给size 本身
+                // size 中存储20
+                size = size - 10;
+            }else{
+                // size - 10 小于 10 的情况
+                // 直接给 size 赋值 10
+                size = 10;
+            }
+
+            // 方法2
+            // size = size - 10;
+            // if(size < 10){
+            //     size = 10;
+            // }
+
+            oDiv.style.fontSize = size + 'px';
+        }
+
+    </script>
+</body>
+</html>

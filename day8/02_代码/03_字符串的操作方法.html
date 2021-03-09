@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            字符串的操作方法
+                1 , 字符串.indexOf(参数1,参数2)   
+                    参数1: 要查询的内容
+                    参数2: 查询起始位置的索引下标
+                    在字符串中,查询是否有匹配的内容,
+                    如果有返回索引下标,如果没有返回 -1
+                    如果有多个匹配内容,返回值是第一个匹配内容的索引下标
+
+                2 , 字符串.lastIndexOf()
+                    如果有多个匹配内容,返回值是最后一个匹配内容的索引下标
+
+                3 , 字符串.toLowerCase()   字符串所有字符小写
+                    字符串.toUpperCase()   字符串所有字符大写
+                    不会改变字符串的原始内容,如果需要改变,必须要将函数执行结果,赋值给原始字符串
+                    验证字符串内容时 往往需要 先统一大小写再验证
+                    有些严格区分大小写的验证,例如密码验证,就不用统一,直接验证
+
+                4 , 字符串.charAt()        获取指定索引下标位置的字符 
+                                           作用和 字符串[索引] 所用相同
+                    字符串.charCodeAt()    获取指定索引下标位置的字符的ASCII码 
+
+                5 , 字符串.replace(参数1,参数2)      
+                        参数1: 原始字符串中,需要被替换的内容
+                        参数2: 写入的新内容
+
+                        字符串替换函数
+                        不会改变字符串的原始内容,如果需要改变,必须要赋值
+                        默认执行 懒惰模式 只替换第一个符合的标签
+                        如果需要完全替换,要么写while循环,要么写正则表达式
+
+                6 , 字符串.substr(参数1,参数2)     字符串截取
+                        参数1 : 截取字符,起始位置的设定
+                                0,正数:是起始位置的索引下标
+                                负数  :从倒数第几个字符开始截取
+
+                        参数2 : 如果不写,效果是截取至字符串最后一个字符
+                                正数:是截取的字符个数
+                                0,负数:结果是空字符串
+                        不会改变原始字符串内容
+
+
+                    字符串.substring(参数1,参数2)  字符串截取
+                        参数1: 截取字符的起始下标
+                               如果是负数,没有效果
+                        参数2: 如果不写,是截取至字符串末位
+                               是 截取结束位置的索引下标 截取的结果,不包含结束位置的字符串
+                               是 负数,负几都一样,效果是 向字符串起始方向截取
+                                  不包含 截取起始位置的字符
+
+                        substring() 截取字符串 包括 起始位置的字符,不包括结束位置的字符
+                        不会改变原始字符串内容
+
+        */ 
+
+        // 1,indexOf()
+        // var str1 = 'abcdefgabcdefgabcdefg';
+        // console.log( str1.indexOf('a') );
+
+        // 2,indexOf()
+        // var str2 = 'abcdefgabcdefgabcdefg';
+        // console.log( str2.lastIndexOf('a') );
+
+        // 3,toLowerCase()
+        // var str3 = 'ABCDEF';
+        // str3 = str3.toLowerCase();
+        // console.log( str3 );
+
+        // 4,toUpperCase()
+        // var str4 = 'abcdef';
+        // str4 = str4.toUpperCase();
+        // console.log( str4 );
+
+        // 5,charAt()   charCodeAt()
+        // var str5 = 'abcdefg';
+
+        // console.log( str5.charAt(0) );
+        // console.log( str5.charCodeAt(0) );
+
+
+        // 6,replace() 字符串替换
+        // var str6 = 'abcdabcdabcd';
+        // str6 = str6.replace( 'a' , '北');    // 懒惰模式替换一次
+
+        // str6 = str6.replace( /a/g , '北');   // 正则方式,替换所有
+
+        // 使用循环完成替换
+
+        // 只要 indexOf 查询关键词,结果是 不是 -1 证明就有没有替换的关键词
+        // 就执行循环,完成对关键词的替换
+        // while( str6.indexOf('a') !== -1 ){
+        //     str6 = str6.replace( 'a' , '北');
+        // }
+
+        // console.log(str6);
+
+
+        // 7, substr()   字符串截取
+        // var str7 = 'abcdefghijklmn';
+
+        // var newStr1 = str7.substr(1);   // 从索引是1的第二个字符开始截取
+        // var newStr2 = str7.substr(-7);  // 从倒数第7个字符开始截取
+
+        // var newStr3 = str7.substr(4,3);    // 从索引是4的第五个字符开始截取,一共截取3个字符
+        // var newStr4 = str7.substr(4,-3);   // 负数和0,结果是空字符串
+        
+
+        // console.log(str7);
+        // console.log(newStr1);
+        // console.log(newStr2);
+        // console.log(newStr3);
+        // console.log(newStr4);
+
+
+        // 8,substring()   字符串截取
+        // var str8 = 'abcdefghijklmn';
+
+        // var newStr1 = str8.substring( 1 );
+        // var newStr2 = str8.substring( -1 );
+
+        // var newStr3 = str8.substring( 4 , 5 );  // 从索引是4的第五个字符开始截取,包括索引是4的字符
+        //                                         // 截取至索引是5的第六个字符结束,不包括索引是5的字符
+
+        // var newStr4 = str8.substring( 4 , -1 ); // 从索引是4的第五个字符开始.向前截取,不包含索引是4的字符   
+        // console.log(str8);
+        // console.log(newStr1);
+        // console.log(newStr2);
+        // console.log(newStr3);
+        // console.log(newStr4);
+
+        
+        // 获取文件名称的扩展名  
+        // 扩展名是几位的字符串,我们不能确定
+        // 只能确定是 最后一个点 之后的 内容
+
+        var filename = '123.456.789.html';
+
+        // 1,先找最后一个点的索引下标,截取的起始位置是,最后一个点的下一位
+        // 也就是最后有一个点,索引+1的位置开始截取
+        var num = filename.lastIndexOf('.') + 1;
+        var res = filename.substr( num );
+        console.log(num);
+        console.log(res);
+
+        // 2,可以根据点,将字符串,转化为数组
+        // 删除数组的最后一个单元,返回的结果是最后一个单元存储内容,就是扩展名
+        var arr =  filename.split('.');
+        var res2 = arr.pop();
+        console.log(arr);
+        console.log(res2);
+
+        // 封装成一个函数的形式
+        // 你给我一个文件名,我还你一个扩展名
+        function getExt(string){
+            return string.substr( string.lastIndexOf('.') + 1 );
+        }
+
+
+
+    </script>
+</body>
+</html>

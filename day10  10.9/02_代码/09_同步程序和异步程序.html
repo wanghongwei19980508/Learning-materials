@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            同步程序和异步程序
+                是 计算机 程序中 两种程序执行的方式
+                普通程序的执行方式 是 同步程序 
+                特殊程序的执行方式 是 异步程序
+                    特殊的程序: 定时器 , 延时器 , ajax请求 , 事件绑定
+                    
+            同步程序和异步程序的执行原理
+                1, 先执行所有的同步程序 
+                   只有所有的同步程序都执行完毕之后,才会执行异步程序
+
+                2, JavaScript程序,默认是从上至下,从左至右执行
+                   遇到同步程序,就会立即执行
+                   遇到异步程序,会暂时存储在 异步池 中
+                      异步池 : JavaScript程序执行 预解析/预解释/预编译 
+                               如果发现有异步程序,会开辟一个独立的内存空间,准备存储异步程序
+                               这个内存空间,称为 异步池
+                   当所有的同步程序执行结束之后,同时执行所有的异步程序
+                   时间间隔短的,先执行,时间间隔相同的,按照顺序执行
+        
+
+        总结: 异步同步执行顺序
+            1, 先执行 同步程序
+            2, 所有同步程序执行结束,再执行异步程序
+            3, 异步程序是 同时开始执行
+            4, 时间间隔短的,先执行
+            5, 时间间隔相同的,按照顺序执行
+
+        异步程序的执行影响,多数体现在 数据交互( ajax请求 ),动态渲染生成页面
+        */
+
+        console.log(111);
+        console.log(222);
+
+        // 即使时间间隔是0毫秒,即使是第三程序
+        // 执行也会在所有同步程序执行完毕之后,才会执行
+        setInterval(function(){ console.log('aaa') } , 1000);
+        setInterval(function(){ console.log('bbb') } , 1000);
+        setInterval(function(){ console.log('ccc') } , 2000);
+        setInterval(function(){ console.log('ddd') } , 500);
+
+        console.log(333);
+        console.log(444);
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // 定义一个随机数 100 - 999 的随机数
+        // 需要随机生成 666 这个数值 
+        // 要记录 随机多少次 生成的 666
+
+        // 变量存储随机数值,起始状态是0,只要不是 666 就可以
+        var res = 0;
+        // 变量记录循环次数
+        var i = 0;
+        // 永远执行的条件,写成死循环
+        while(i > -1){
+            // 每次循环,循环次数先累加1
+            i++;
+            // 给 res 赋值一个 随机数值 
+            res = parseInt(Math.random()*(999+1-100)+100);
+            // 当随机数值 是 666 时 使用 break 终止循环
+            if (res === 666) {
+                break;
+            }
+        }
+        console.log( `当前随机数值是${res},一共循环了${i}次` );
+
+
+        // for循环语法
+        // res 不是 666 进入循环 如果 res 是 666 终止循环
+        var res = 0;
+        // res 不是 666 进入循环
+        for(var i = 0 ; res !== 666  ; i++){
+            // 给res赋值一个随机数
+            res = parseInt(Math.random()*(999+1-100)+100);
+        }
+
+        console.log( `当前随机数值是${res},一共循环了${i}次` );
+        
+
+        /*
+            总结:
+                如果判断终止循环的条件,比较简单
+                    未知循环次数的程序,使用for循环可能更简单
+                
+                如果判断终止循环的条件,比较复杂
+                    推荐使用 while 循环会更加简单
+        
+        */ 
+
+    </script>
+</body>
+</html>

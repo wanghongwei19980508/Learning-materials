@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            预解释  预编译  预解析
+
+            JavaScript是 解释型 弱类型 脚本语言
+                解释型:
+                    在 JavaScript程序正式执行之前,先将整个JavaScript 预先 解释 编译 解析一遍
+
+                    针对 var  关键词  和 function 关键词 定义的变量和函数,执行 预解释/预编译/预解析
+
+                    实际项目中,所有的变量,要使用var关键词来声明
+
+                预解释的无底线
+                    即时在最终不会执行的程序中,定义的变量,也会被执行预解释
+                    提前调用,执行结果也是 undefined
+
+            总结:
+                变量,函数,实际项目中,必须要使用 var function 关键词 来声明定义
+                var 定义的变量,可以被提前调用,执行结果是undefined
+                function 定义的函数,可以被提前调用,执行结果是 正确调用执行函数
+        */ 
+
+        // 针对var声明的变量
+        // JavaScript会执行 预解析/预解释/预编译
+        // 如果提前调用这个变量,JavaScript程序会提前告诉程序
+        // 有 这个变量 ,变量是存在的,只是现在还没有赋值 
+        // 调用执行结果是 undefined
+        // 没有使用var声明的变量,执行结果是会是 报错,无法执行
+
+        // 虽然没有赋值,但是是可以执行的程序
+        // 可以进行操作,比如 逻辑赋值
+        // console.log( int1 || 10000 );
+
+        // var int1 = 100;
+
+        // 没有使用var声明的变量,执行直接报错
+        // 不能做任何的操作
+        // console.log(int2 || 10000);
+
+        // // 本质上是一个赋值语句
+        // // 但是当前程序中,没有定义 int2变量
+        // // 赋值语句会升级为 声明语句,会声明一个全局作用域变量
+        // int2 = 200;
+
+
+        // 函数的 预解释/预编译/预解析
+        // 是 告诉 JavaScript程序 之后有一个定义好的函数,这个函数你可以调用
+        // 使用 function 声明的函数 可以被提前调用
+        // 其他方式 声明的函数 不能被提前调用
+
+        console.log(int);
+
+        if(false){
+            // 即时最终不会被执行的程序中,var定义的变量,也会被预解释
+            // 如果提前调用执行,结果也是undefined
+            var int = 100;
+            console.log(1234);
+        }
+
+    </script>
+</body>
+</html>

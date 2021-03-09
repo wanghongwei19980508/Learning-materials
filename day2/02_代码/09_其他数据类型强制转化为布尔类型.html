@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            其他数据类型强制转化为布尔类型
+            
+            Boolean(变量/数据)
+
+            转化原则与 自动转化为布尔类型完全相同
+            不会改变,变量中存储的原始数据内容
+            如果需要改变,要做赋值操作
+                变量 = Boolean(变量)
+        
+        */
+
+        // 变量中存储原始数据 100
+        var int = 100;
+        // 使用 Boolean() 强制将 int 存储的数据,转化为布尔类型
+        // 再 存储在 变量int 中 覆盖之前 存储的数据
+        int = Boolean(int);
+
+        // console.log( Boolean(int) );
+        console.log( int );
+
+    </script>
+</body>
+</html>

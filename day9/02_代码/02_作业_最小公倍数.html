@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            最小公倍数: 
+                可以同时被两个数整除的数值,最小的那个,就称为最小公倍数
+                最小公倍数 最大 就是 两个数值的乘积
+
+                8  4  最小公倍数 8
+                12 8  最小公倍数 24
+                7 11  最小公倍数 77
+
+            思路: 
+                如果 较大数 可以 被 较小数 整除 最小公倍数就是较大数值
+                如果不能整除,求最小公倍数的范围 :
+                    从 较大值 开始  到  两个数值的乘积 结束
+                    通过循环 生成 较大数 至 两个数值乘积之间的所有数值
+                    第一个可以被 两个数值 同时整数的数值 就是最小公倍数
+        
+        */ 
+
+        // 调用函数:
+        console.log( getLCM(8,4) );
+        console.log( getLCM(8,12) );
+        console.log( getLCM(7,12) );
+
+
+        // 封装成一个函数形式
+        // 你给我两个数值,我给你一个最小公倍数
+        function getLCM(num1 , num2){
+            // 1,容错处理,确定两个数值大小顺序
+            if(num1 >= num2){
+                var min = num2;
+                var max = num1;
+            }else{
+                var min = num1;
+                var max = num2;
+            }
+
+            // 2,求最小公倍数
+            // 循环从 较大值 开始 至 两个数值的 乘积
+            // 可以优化循环 , 累加的步长是 较大值
+            for(var i = max ; i <= min * max ; i += max){
+                // 如果 i 可以同时整除两个数值 , i 就是 最小公倍数
+                if( i % min === 0 && i % max === 0 ){
+                    // 如果发生整除,就返回i 
+                    // return 可以同时 终止循环的执行
+                    return i;
+                } 
+            }
+        }
+
+
+    </script>
+</body>
+</html>

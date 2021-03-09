@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            输出 20-180 的所有质数
+            
+            分析方式1:
+                先实现 某一个数值的 判断质数
+
+                在,外层,使用for循环,生成20-180的所有数值
+                每次使用 判断质数的程序,来判断当前数值,是否是质数
+
+            分析方式2:
+                先定义外层循环变量,生成所有需要的数值
+                在定义判断,判断数值是否是质数
+
+        */
+        // for (var j = 20; j <= 180; j++) {
+        //     // 之前判断的是变量int中存储的数值,现在需要判断的是外层循环变量j存储的数值
+        //     // 所有int的地方,都替换成j
+        //     // var int = 18;
+        //     var bool = '初始值';
+        //     for (var i = 2; i <= j - 1; i++) {
+        //         if (j % i === 0) {
+        //             bool = '其他数值';
+        //             break;
+        //         }
+        //     }
+        //     // 如果 bool 存储是原始数值,证明j是质数,输出
+        //     if (bool === '初始值') {
+        //         console.log(`${j},是一个质数`);
+        //     } 
+        // }
+
+
+        // 思路2:
+
+        for(var i = 20 ; i <= 180 ; i++){
+            // 每次i是 20-180 的整数
+            // 判断当前i存储的整数,是否是质数
+
+            var bool = true;
+            // 循环生成 2 至 i-1 的所有数值
+            for(var j = 2 ; j <= i-1 ; j++){
+                if( i % j === 0 ){
+                    bool = false;
+                    break;
+                }
+            }
+
+            if(bool){
+                console.log(`${i}是质数`);
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

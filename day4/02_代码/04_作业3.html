@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 随机6位整数 / 输入整数 ,获取每一位上的数值
+
+        var int = parseInt( Math.random()*(999999+1-100000)+100000 );
+
+        console.log(int);
+
+        // 获取:
+
+        // 获取,第一位的数值
+        // int / 100000 , 取整
+        var a = parseInt( int / 100000 );
+
+        // 获取,第二位的数值
+        // 方法1: ( int - a*100000 ) / 10000 取整
+        // var b = parseInt( ( int - a*100000 ) / 10000 );
+
+        // 方法2: int % 100000 余数 是 剩余的5位数值
+        // (int % 100000)剩余的5位数 / 10000 取整
+        var b = parseInt( ( int % 100000 ) / 10000 );
+
+        // 获取,第三位的数值
+        // 方法1: ( int - a*100000 - b*10000 ) / 1000 取整
+        // var c = parseInt( ( int - a*100000 - b*10000 ) / 1000 );
+
+        // 方法2: int % 10000 余数 是 剩余的4位数值
+        // (int % 10000)剩余的4位数 / 1000 取整
+        var c = parseInt( ( int % 10000 ) / 1000 );
+
+        // 获取,第四位的数值
+        // 方法1: ( int - a*100000 - b*10000 - c*1000 ) / 100 取整
+        // var d = parseInt( ( int - a*100000 - b*10000 -c*1000 ) / 100 );
+
+        // 方法2: int % 1000 余数 是 剩余的3位数值
+        // (int % 1000)剩余的3位数 / 100 取整
+        var d = parseInt( ( int % 1000) / 100 );
+
+        // 获取,第五位的数值
+        // 方法1: ( int - a*100000 - b*10000 - c*1000 - d*100 ) / 10 取整
+        // var e = parseInt( ( int - a*100000 - b*10000 -c*1000 - d*100 ) / 10 );
+
+        // 方法2: int % 100 余数 是 剩余的2位数值
+        // (int % 100)剩余的2位数 / 10 取整
+        var e = parseInt( ( int % 100) / 10 );
+
+
+        // 获取,第六位的数值
+        // 方法1: int - a*100000 - b*10000 - c*1000 - d*100 - e*10
+        // var f = int - a*100000 - b*10000 -c*1000 - d*100 - e*10;
+
+        // 方法2: int % 10 余数 是 剩余的1位数值
+        // int % 10 就是剩余的最后一位了
+        var f = int % 10;
+
+        console.log(a);
+        console.log(b);
+        console.log(c);
+        console.log(d);
+        console.log(e);
+        console.log(f);
+
+    </script>
+</body>
+</html>
