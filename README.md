@@ -1,10 +1,10 @@
 # Learning-materials
 js/jq/node/git   学习资料
 
-http://jiuaibuni.top/study/video/phpStudy2016.exe
-http://jiuaibuni.top/study/video/VC11-32位.zip
-http://jiuaibuni.top/study/video/VC14-32位.zip
-http://jiuaibuni.top/study/video/VC9-32位.zip
+http://jiuaibuni.top/study/video/phpStudy2016.exe  phpStudy2016下载地址
+http://jiuaibuni.top/study/video/VC11-32位.zip  VC11-32位下载地址
+http://jiuaibuni.top/study/video/VC14-32位.zip  VC14-32位下载地址
+http://jiuaibuni.top/study/video/VC9-32位.zip  VC9-32位下载地址
 
 http://jiuaibuni.top/study/video/day30_video.zip   day30配套适配下载地址
 http://jiuaibuni.top/study/video/day31_video.zip   day31配套适配下载地址
