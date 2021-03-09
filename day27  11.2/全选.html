@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label for="">
+        <input type="checkbox" name="all">全选
+    </label>
+    <button name="not">反选</button>
+    <br>
+    <input type="checkbox" name="other"><br>
+    <input type="checkbox" name="other"><br>
+    <input type="checkbox" name="other"><br>
+    <input type="checkbox" name="other"><br>
+    <input type="checkbox" name="other"><br>
+
+    <script src="../day27  11.2/02_代码/jquery.min.js"></script>
+    <script>
+        // 全选
+        $('[name="all"]').click(function(){
+            $('[name="other"]').prop('checked',this.checked);
+        });
+
+        // 反选
+        $('[name="not"]').click(function(){
+            $('[name="other"]').each( (k,v)=>{
+                $(v).prop('checked',!$(v).prop('checked'))
+            })
+        })
+
+
+
+        $('[name="other"]').click( ()=>{
+            let bool = true;
+            $('[name="other"]').each( (k,v)=>{
+                if( $(v).prop('checked')===false){
+                    bool = false;
+                }
+            })
+            $('[name="all"]').prop('checked',bool);
+        })
+    </script>
+</body>
+</html>

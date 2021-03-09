@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            padding:50px;
+            margin: 30px;
+            border: 10px solid red;
+            
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            获取结果是没有px单位的
+
+            原生js中获取标签占位:
+                offsetWidth    offsetHeight
+                    内容 + padding + border
+
+                clientWidth    clientHeight
+                    内容 + padding
+
+                clientTop      clientLeft
+                    border
+
+                offsetTop      offsetLeft
+                    定位父级的间距
+                
+            jQuery中获取标签的占位
+                $().width()    $().height()
+                    获取 内容 
+
+                $().innerWidth()    $().innerHeight()
+                    获取 内容 + padding  
+
+                $().outerWidth()    $().outerHeight()
+                    获取 内容 + padding + border 
+
+                $().outerWidth(true)    $().outerHeight(true)
+                    获取 内容 + padding + border + margin
+        
+        */
+
+        console.log( $('div').height() );
+        console.log( $('div').innerHeight() );
+        console.log( $('div').outerHeight() );
+        console.log( $('div').outerHeight(true) );
+    </script>  
+</body>
+</html>

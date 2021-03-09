@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        我是div的内容
+        <p>我是p标签的内容</p>
+        <span>我是span的内容</span>
+    </div>
+
+    <input type="text">
+    <button>点击</button>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*  
+
+        原生js中,操作标签对象的方法
+
+            标签对象.innerHTML 
+            标签对象.innerText
+
+            标签对象.value  
+
+        在jQuery中,操作标签对象,本质上也是这两个方法
+
+            $().html()
+            $().text()
+
+            $().val()
+
+        
+        
+        */
+
+        // 获取
+        console.log( $('div').html() );
+        console.log( $('div').text() );
+
+        // 设定
+        // $('div').html('<a href="https://www.baidu.com">我是超链接</a>');
+        $('div').text('<a href="https://www.baidu.com">我是超链接</a>');
+
+        $('button').click( ()=>{
+            console.log( $('input').val() )
+        } )
+    </script>
+</body>
+</html>

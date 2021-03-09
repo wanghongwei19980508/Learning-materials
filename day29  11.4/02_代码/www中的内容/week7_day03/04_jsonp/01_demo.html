@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- <script>
+        function fun(res){
+            console.log(JSON.parse(res));
+        }
+
+    </script>
+    <script src="http://localhost/bk_2003/week7_day03/04_jsonp/demo.php?cb=fun&name=张三&age=18"></script> -->
+
+
+    <script src="../jquery.min.js"></script>
+    <script>
+        /*
+            jQuery完成jsonp的请求
+                使用jQuery完成jsonp请求时,不需要我们自己定义函数
+                我们 success 中 定义的回调函数,就会作为我们提前定义好的那个函数使用
+
+                type / method 必须是 get方式
+
+                dataType属性,必须要写成 jsonp这样才能完成 jsonp请求
+                    因为 dataType属性 设定为 jsonp 完成了跨区请求
+                    不会自动解析返回的 json串
+                    只能我们自己手动解析返回的 json串
+
+                新增一个 jsonp 属性 属性值是你传参函数名称的键名 cb
+
+        */
+
+        $.ajax({
+            url:'http://localhost/bk_2003/week7_day03/04_jsonp/demo.php',
+            type:'get',
+            data:{name:'李四',age:100},
+            dataType: 'jsonp',
+            jsonp:'cb',
+            success: res =>{
+                console.log(JSON.parse(res));
+            },
+        })
+
+        console.log(123)
+    </script>
+</body>
+</html>

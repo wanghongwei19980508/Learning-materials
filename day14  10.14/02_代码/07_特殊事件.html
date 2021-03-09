@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            transition: all 2s;
+        }
+        div:hover{
+            width: 400px;
+            height: 400px;
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+
+
+    <script>
+        /*
+            过渡的开始/结束
+                transitionstart()
+                transitionend()
+
+            动画的开始/结束
+                animationstart()
+                animationend()
+        
+        */
+
+        var oDiv = document.querySelector('div');
+
+        // oDiv.ontransitionstart = function(){
+        //     console.log('过渡开始了')
+        // }
+        
+        // 过渡开始,使用on语法绑定,支持性不好,最好使用 事件监听语法
+        oDiv.addEventListener( 'transitionstart' , function(){
+            console.log('过渡开始了');
+        } )
+
+
+        // 每一个属性的过渡,都会触发一个过渡结束了
+        oDiv.ontransitionend = function(){
+            console.log('过渡结束了')
+        }
+
+    </script>
+</body>
+</html>

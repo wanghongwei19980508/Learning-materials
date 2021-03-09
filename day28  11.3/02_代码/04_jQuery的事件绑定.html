@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        我是div
+        <p>我是p标签</p>
+        <span name="1">我是span</span>
+    </div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            事件绑定的基本语法
+                1, 最简单的事件绑定语法
+                    标签对象.事件类型( 事件处理函数 )
+
+                2, 绑定事件同时,给事件处理函数传参
+                    标签对象.事件类型( {键名:键值...} , 事件处理函数 )
+
+                    第一个参数,输入的对象,jQuery执行时,会自动存储在 事件对象 e 中
+                    会在 事件对象e 中 新增一个属性 data 将 对象,存储在 data 中
+                    通过 e.data 来调用数据
+
+                要注意: 你能直接绑定的事件类型,必须是,jQuery支持的事件类型
+                        直接绑定事件类型的语法,不能写事件委托
+
+                3, 不支持直接绑定的事件类型,通过 on 语法 来绑定
+                   on语法实际上可以支持所有事件类型的绑定
+
+                    基本语法
+                        标签对象.on( '事件类型' , 事件处理函数 );
+
+                    绑定事件的同时,可以给事件对象e中新增一个 e.data 存储参数
+                        标签对象.on( '事件类型' , {传参的对象} , 事件处理函数 );
+
+                    事件委托语法形式
+                        标签对象.on( '事件类型' , '判断条件' , 事件处理函数 );
+
+                    事件委托语法+传参形式
+                        标签对象.on( '事件类型' , '判断条件' , {参数} , 事件处理函数 );
+                        
+                        注意: 事件委托语法,可以支持所有符合html,css的判断条件
+                              但是 jQuery的事件委托,与 JavaScript的事件委托有区别
+                                区别1: JavaScript事件委托,可以判断点击的是父级标签内容
+                                       jQuery只能判断点击的是 子级标签对象
+
+                                区别2: JavaScript事件委托,可以在父级标签的事件处理函数中,定义多个事件委托对象
+
+                                       jQuery一次只能委托一个事件对象,不能同时委托多个
+
+                            总结: 如果父级对象中,有多个对象要写事件委托,使用JavaScript语法形式最佳
+                                  如果父级对象中,只有一个对象要写事件委托,使用jQuery语法形式最佳
+                                  
+        */ 
+
+        // 1, 最简单的语法形式
+        // $('div').click( ()=>console.log(123) )
+
+        // 2, 绑定事件的同时,给事件处理函数,传参
+        // 参数1的对象,存储在事件对象e中 通过 e.data 来调用
+        // $('div').click( {name:'张三',age:18} , e => console.log(e.data) );
+
+        // console.log($('div'));
+
+        // 3, 不支持的类型可以使用on语法
+        // on语法支持所有的事件类型
+
+        // 基本语法
+        // $('div').on( 'click' , ()=>{console.log(123)} );
+
+        // 可以传参的语法
+        // $('div').on( 'click' , {name:'张三',age:18} , e => console.log(e) );
+
+        // $('div').on( 'click' , '.box' , () => console.log('点击div标签触发的程序') );
+
+        $('div').on( 'click' , 'p' , () => console.log('点击p标签触发的程序') );
+
+        $('div').on( 'click' ,  '[name="1"]' , {name:'张三'}  , e => console.log(e) );
+
+
+        const oDiv = document.querySelector('div');
+
+        oDiv.addEventListener('click' , e=>{
+            if(e.target.tagName === 'DIV'){
+                console.log('我是点击div触发的')
+            }
+
+            if(e.target.tagName === 'SPAN'){
+                console.log('我是点击span触发的')
+            }
+
+            if(e.target.tagName === 'P'){
+                console.log('我是点击P触发的')
+            }
+
+        })
+
+    </script>
+</body>
+</html>

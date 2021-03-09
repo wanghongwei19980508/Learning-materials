@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 5000px;
+            height: 5000px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        window.onload = function(){
+            // 这个代码虽然是写在 html 代码之前
+            // 但是 会在 所有的html代码执行都结束之后,才会执行
+            var oDiv = document.querySelector('div');
+            console.log(oDiv);            
+        }
+            
+
+    </script>
+    <button name="open">开新窗</button>
+    <button name="close">关闭窗口</button>
+    <div>我是div123</div>
+    <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3466902910,2801551742&fm=26&gp=0.jpg">
+
+    <script>
+        // 要获取标签对象,必须要先让标签生成
+        // 一般的JavaScript程序,都写下 html 代码的下方
+        // 确保 html代码 执行完毕之后,再执行 JavaScript 程序
+
+
+        /*
+            浏览器的三大弹窗事件
+                window.alert()
+                window.prompt()
+                window.confirm()
+
+            浏览器的特殊事件
+                1, window.onload      浏览器加载事件
+                    当浏览器中,所有的标签,所有的标签内容,都加载完毕之后,才会执行其中定义的JavaScript程序
+                    如果有一些内容,需要通过请求加载,需要时间,没有加载完毕,JavaScript程序不会执行
+        
+                2, window.onscroll    浏览器滚动事件 / 浏览器滚动条监听事件
+                    浏览器页面,上下/左右滚动,都会触发这个事件
+
+                3, window.onresize    浏览器视窗窗口大小改变事件
+                    只要浏览器是窗口,高度,宽度,发生变化,都会触发
+
+                4, window.open()      新串口打开页面事件
+                    之前有 window.location.href 是 当前窗口打开页面
+                    在 () 中定义 要打开的网址
+
+                5, window.close()     关闭当前窗口
+        */
+
+
+        window.onscroll = function(){
+            console.log('浏览器滚了');
+        }
+
+        window.onresize = function(){
+            console.log('浏览器变了');
+        }
+
+        var oBtn1 = document.querySelector('[name="open"]');
+        oBtn1.onclick = function(){
+            window.open('https://www.baidu.com');
+        }
+
+
+        var oBtn2 = document.querySelector('[name="close"]');
+        oBtn2.onclick = function(){
+            window.close();
+        }
+
+    </script>
+</body>
+</html>

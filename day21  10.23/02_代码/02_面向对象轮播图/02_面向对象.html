@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li,
+        ol {
+            list-style: none;
+        }
+
+        a,
+        a:active,
+        a:hover {
+            text-decoration: none;
+            color: #fff;
+
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 960px;
+            height: 250px;
+            border: 3px solid #000;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box>ul {
+            width: 960px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box>ul::after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .box>ul>li {
+            width: 960px;
+            height: 250px;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box>ol {
+            height: 20px;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 5px;
+        }
+
+        .box>ol>li {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 10px;
+        }
+
+        .box>ol>li.active {
+            background: red;
+        }
+
+        .box>div {
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .box>div>a {
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 25px;
+            background: rgba(0, 0, 0, .5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box" name="banner1">
+        <ul></ul>
+        <ol></ol>
+        <div>
+            <a name="l" href="JavaScript:;">&lt;</a>
+            <a name="r" href="JavaScript:;">&gt;</a>
+        </div>
+    </div>
+
+    <div class="box"  name="banner2" >
+        <ul></ul>
+        <ol></ol>
+        <div>
+            <a name="l" href="JavaScript:;">&lt;</a>
+            <a name="r" href="JavaScript:;">&gt;</a>
+        </div>
+    </div>
+
+    <script src="./tools.js"></script>
+    <script src="./banner.js"></script>
+    <script>
+
+        // 1, 定义 图片数组 获取标签对象 定义参数变量
+
+        // 图片数组
+        const imgArr1 = [
+            { path: '1.jpg', width: 1920, height: 500, size: 127 },
+            { path: '2.jpg', width: 1920, height: 500, size: 128 },
+            { path: '3.jpg', width: 1920, height: 500, size: 129 },
+            { path: '4.jpg', width: 1920, height: 500, size: 130 },
+            { path: '5.jpg', width: 1920, height: 500, size: 131 },
+            { path: '6.jpg', width: 1920, height: 500, size: 123 },
+        ];
+
+        const imgArr2 = [
+            { path: '1.jpg', width: 1920, height: 500, size: 127 },
+            { path: '2.jpg', width: 1920, height: 500, size: 128 },
+        ];
+
+        // 获取标签对象,定义变量存储参数数据
+
+        // 轮播图div标签对象
+        const oBox1 = document.querySelector('[name="banner1"]');
+
+        const oBox2 = document.querySelector('[name="banner2"]');
+
+
+
+        // 通过面向对象的编程方式,生成轮播图
+
+        
+        // 创建轮播图,对象
+        const bannerObj1 = new Banner( oBox1 , imgArr1 );
+        // 只需要调用实例化对象中的入口函数
+        bannerObj1.init();
+
+
+
+        const bannerObj2 = new Banner( oBox2 , imgArr2 );
+        // 只需要调用实例化对象中的入口函数
+        bannerObj2.init();
+
+        /* 改造面向对象:
+            1, 在 构造器 中 的定义属性和属性值 也就是 之前 程序执行之前获取的标签对象和设定的数据等
+                构造器中,定义的内容,一定会直接定在实例化对象上
+                必须写成 this.属性 = 属性值
+
+                在 下面的函数方法中使用 必须也是 this.属性 来调用 属性值
+
+            2, 在 函数方法 中 也可以定义变量
+                这些变量没有必要写在 实例化对象上 使用 var let const 等定义
+
+                如果多个方法都要使用的属性和属性值,你就写在 实例化对象上,方便调用
+                如果只有一个方法使用的变量,就使用 var let const 定义为这一个方法的变量
+            
+            3, 在 构造函数中,如果要调用构造函数自己定义的函数方法
+                必须要写 this.函数名称() 才能调用
+                也就是必须要 通过 实例化对象 来调用 函数方法
+
+            4, 特别重要的地方
+                调用使用 面向对象编程 必须必须必须 确保 this 指向是 实例化对象
+
+                在构造函数中,大部分的 匿名函数 function(){} 都要改造成 箭头函数 ()=>{}
+
+                确保 this 执行 是 实例化对象
+
+                如果是 给 回调函数 赋值 
+                    可以是 匿名函数 / 函数名称 
+                    执行调用 是 回调函数的 this 指向 都是 undefined
+                    需要改变 this 执行 为 实例化对象
+                    方法1:
+                        匿名函数 ---> 改造成 箭头函数 ()=>{ }
+                        在 箭头函数中 直接调用 回调函数
+
+                    方法2:
+                        赋值 函数名称 通过 bind 语法 生成一个新的函数 改变this指向为 实例化对象
+                        在确保 当前程序 this指向就是 实例化对象 this 也就是 实例化对象
+                        绑定语法    函数名称.bind(this)  此时的 this 就是 实例化对象
+
+            5, 入口函数
+            
+                面向对象语法中,往往需要调用执行多个 函数方法
+                使用一个 init() 统一调用所有需要执行的函数方法
+                创建好实例化对象之后,只要调用 init() 入口函数 就可以调用init()中写入的所有函数方法
+
+        */
+
+
+
+
+
+
+    
+    </script>
+</body>
+
+</html>

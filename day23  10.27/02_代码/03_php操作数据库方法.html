@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            数据库的操作方法有很多
+                cmd 可以操作 
+                可视化工具 可以操作
+                java,nodejs,php等都可以直接操作MySQL数据库,并且获取数据结果
+
+            php操作数据库的方法:
+                mysql函数库: 非常老的版本才会使用的PHP方法
+
+                mysqli函数库: php7.0之前,操作数据库常用的方法
+                以上两种都是面向过程编程方式
+
+                PDO函数库: php7.0之后,新增的操作数据库的方法
+                PDO是 面向对象编程方式
+
+            php操作MySQL数据库有固定的执行步骤
+
+                1, 链接MySQL数据库
+                    $变量link = mysqli_connect( 参数1 , 参数2 , 参数3 , 参数4 , 参数5 );
+                        参数1: MySQL数据库的地址 实际项目中直接输入项目数据库地址就可以
+                               当前 使用 127.0.0.1 或者 localhost 表示 使用的是 当前本地电脑中MySQL数据库
+                               也就是 phpstudy 中 集成安装 的 MySQL数据库
+
+                        参数2: MySQL数据库,登录账号 phpstudy中 统一是 root
+
+                        参数3: MySQL数据库,登录密码 phpstudy中 统一是 root
+
+                        参数4: 链接使用的 库结构 名称
+
+                        参数5: MySQL端口名称 默认是 3306
+
+                    端口: 所谓的端口 就是 计算机程序 在 电脑用运行时 所占用的 通道
+                          操作系统给电脑中,每一个运行程序,都规定了一个执行通道
+                          通过 执行通道 链接 执行的程序 
+                          端口的数值 0 - 65535 一般 推荐使用 4000 以上 
+
+
+                2, 定义要执行的SQL语句
+                    PHP中双引号解析变量,如果是带有变量的SQL语句,最外层,要是用 双引号 包裹
+                    SQL语句中,如果是字符串类型,必须要在外面写上 引号  '{$name}'
+                        {$name} 变量的解析 解析出来的结果 就只是 $name 中存储的数据 张三
+                        SQL语句不是PHP程序,SQL语句需要在MySQL数据库中执行
+                        执行时,只有加上 '' 才是 '张三' 才是 字符串类型的形式 
+                        SQL语句和MySQL数据库,才能正常执行
+
+                    记住: 字符串一定有 引号 
+                          名称:库名,表名,字段名,一定有 反引号
+
+  
+                3, 执行设定好的SQL语句
+                    $变量 = mysqli_query( 参数1 , 参数2 );
+                        参数1 : 执行 链接 MySQL数据的 链接结果
+                                也就是 执行 mysqli_connect() 执行结果, 存储的变量
+                                一般是 $link 第一步执行 结果 的变量
+
+                        参数2 : 你要执行的SQL语句
+
+                    执行的SQL语句,分成两种情况
+
+                        (1) 查询语句
+                            查询语句 --- 查询结果
+                                SQL语句如果是查询结果,是对象形式,称为 结果集对象
+                                所有的查询结果都存储在对象中,没有办法使用
+
+                        (2) 非查询语句
+                            修改,删除,新增 --- 执行结果
+                                执行成功 true
+                                执行失败 false
+
+                4, 获取执行结果
+
+                    (1) 如果是查询语句,可以抽取 结果集对象 中 存储的查询结果数据
+                        会将这些抽取的数据,组成一个新的数组
+
+                        $arr = mysqli_fetch_all( 结果集对象 , MYSQLI_ASSOC );
+                            MYSQLI_ASSOC 设定数组的键名,就是 表结构中,字段的字段名称
+
+                        $num = mysqli_num_rows( 结果集对象 )
+                            获取结果集对象中,查询结果,数据数量
+                        
+
+                    (2) 非查询语句
+
+                        参数不是 结果集对象  是第一步的连接结果
+
+                        mysqli_affected_rows( $link )   非查询语句执行,影响的数据数量
+
+                        mysqli_insert_id( $link )       最新写入的数据,id主键值
+
+
+                5, 关闭数据库
+
+                    mysqli_close($link);
+            
+        */
+
+    </script>
+</body>
+</html>

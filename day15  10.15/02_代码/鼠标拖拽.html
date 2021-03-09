@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0; padding: 0;};
+        div{
+            width: 950px; height: 650px;
+            background-color: yellowgreen;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+            border: plum 20px solid;
+            position: relative;
+        }
+        p{
+            width: 100px; height: 100px;
+            background-color: pink;
+            border: solid yellow 10px;
+            position: absolute;
+            top: 0;  left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p></p>
+    </div>
+    <script src="./tools.js"></script>
+    <script>
+        // var odiv = document.querySelector('div');
+        // var op = document.querySelector('p');
+        // var odivwidth = odiv.clientWidth;
+        // var odivheight = odiv.clientHeight;
+        // var odbl = odiv.clientLeft;
+        // var odbt = odiv.clientTop;
+        // var odml =parseInt(myGetStyle(odiv,'marginLeft'));
+        // var odmt = parseInt(myGetStyle(odiv,'marginTop'));
+        // var opw = op.offsetWidth;
+        // var oph = op.offsetHeight;
+        // op.onmousedown = function(){
+        //     odiv.onmousemove = function(e){
+        //         e = e || window.event;
+        //         var x = e.pageX-odml-odbl-opw/2;
+        //         var y = e.pageY-odmt-odbt-oph/2;
+        //         if( x<0 ){x = 0};
+        //         if( y<0 ){y = 0};
+        //         if(x > odivwidth-opw){
+        //             x = odivwidth-opw;
+        //         }
+        //         if(y > odivheight-oph){
+        //             y = odivheight-oph;
+        //         }
+        //     op.style.left = x + 'px';
+        //     op.style.top = y + 'px';
+        //     }
+        // } 
+        // document.onmouseup = function(){
+        //     odiv.onmousemove = null;
+        // }
+
+    </script>
+</body>
+</html>

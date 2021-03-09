@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 5000px;
+        }
+
+        div {
+            width: 800px;
+            height: 800px;
+            background: pink;
+            position: fixed;
+            top: 0;
+            left: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position:absolute;
+            border:20px solid black;
+            top:0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p></p>
+    </div>
+
+    <script>
+        // 在 粉色div 中 点击, 橙色p标签,会出现在点击的位置上
+        // 点击是: e 中 存储 点击位置的坐标
+        // offsetX offsetY 是 鼠标 相对 点击对象 左上角的做标的
+        // 如果点击的是 粉色div, 坐标就是 相当于 粉色div左上角的坐标
+        // 这个坐标的数值,正好是 橙色p标签, 绝对定位的坐标
+
+        var oDiv = document.querySelector('div');
+        var oP = document.querySelector('p');
+
+        oDiv.onclick = function(e){
+            e = e || window.event;
+
+            // 如果点击是的p标签,就再执行获取数据,定位的效果了
+            // 因为点击 p标签时,获取的是相对于 p标签左上角的距离
+            // 定位数值,与相对于 div左上角的距离不同,会造成定位数值错误
+            if(e.target.tagName === 'P') return;
+            
+            // 将 获取到的 相对于 粉色div 左上角的 offsetX offsetY 坐标
+            // 作为 橙色p标签的定位 坐标,赋值给p标签
+            // 如果需要改变 橙色p标签的定位位置,需要加上或者减去 一定的数值
+            // 如果需啊,粉色p标签的中心,与点击位置重合,定位位置,减去 粉色p标签,占位的一半
+            // 边框线,也会计算到定位数值中,因为获取占位是 宽高+padding+border  
+            // 标签.offsetWidth   标签.offsetHeight
+            var y = e.offsetY - parseInt(oP.offsetHeight)/2;
+            var x =  e.offsetX - parseInt(oP.offsetWidth)/2;
+
+            // 设定极值
+            // 最小是 0 0  最大是 父级内容占位 - 子级内容占位
+            if(x < 0 ){
+                x = 0;
+            } 
+
+            if(y < 0 ){
+                y = 0
+            }
+                
+            if(x > parseInt(oDiv.clientWidth) - parseInt(oP.offsetWidth) ){
+                x = parseInt(oDiv.clientWidth) - parseInt(oP.offsetWidth);
+            }
+
+            if(y > parseInt(oDiv.clientHeight) - parseInt(oP.offsetHeight)){
+                y = parseInt(oDiv.clientHeight) - parseInt(oP.offsetHeight);
+            }
+            
+
+            oP.style.top = y + 'px' ;
+            oP.style.left = x + 'px';
+
+        
+        }
+    </script>
+</body>
+
+</html>

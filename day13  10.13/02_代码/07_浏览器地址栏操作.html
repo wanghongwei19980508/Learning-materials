@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div,点我去百度</div>
+
+    <script>
+        /*
+            浏览器地址操作
+                浏览器地址栏信息,都存储在 window.location 属性中
+
+                window.location.href   浏览器地址栏信息
+                    浏览器地址栏中,中文显示为  %两位十六进制数值
+                    这是 浏览器 自行 转化显示的结果 我们不用管,浏览器可以自动的编译解析
+                    
+                    window.decodeURI()
+                    window.decodeURIComponent()
+                    都可以解析编译 地址栏信息中的 中文乱码
+                    这两个方法有区别,二阶段用不上,三阶段再说
+
+                    window.location.href = 'url地址' 可以设定页面的浏览器地址栏信息
+                        一般用于页面的跳转
+
+
+                window.location.search   获取浏览器地址栏中,传参的数据信息
+
+
+        */
+
+        console.log(window.location);
+        // console.log(window.location.href);
+        // console.log( window.decodeURI( window.location.href ) );
+        // console.log( window.decodeURIComponent( window.location.href ) );
+
+
+        var oDiv = document.querySelector('div');
+        oDiv.onclick = function(){
+            window.location.href = 'http://www.baidu.com';
+        }
+
+
+
+
+    </script>
+</body>
+</html>

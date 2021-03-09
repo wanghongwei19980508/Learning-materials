@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: black;
+            overflow: hidden;
+        }
+        img{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <script src="./jquery.min.js"></script>
+    <script>
+        setInterval(function(){
+		//创建雪花图片
+		const snow = $('<img src="./snow.jpg">');
+		//得到窗口的宽高
+		const width = document.documentElement.clientWidth;
+		const height = document.documentElement.clientHeight;
+		//设置随机雪花宽高0-14
+		const size = Math.floor(Math.random()*15)+'px';
+		//设置随机的横向位置
+		const left = Math.floor(Math.random()*width)+'px';
+		//设置css样式
+		snow.css({'width':size,'height':size,'left':left,'top':0});
+		//添加到body中
+		$('body').append(snow);
+		//让图片移动到窗口最下面
+		const time = Math.floor(Math.random()*5000)+3000;
+		//让图片落下后过一段时间消失
+		snow.animate({'top':(height-parseInt(size))+'px'},time).fadeOut(1000,function(){$(this).remove()});
+	},10);
+    </script>
+</body>
+</html>

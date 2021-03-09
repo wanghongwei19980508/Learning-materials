@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /* 
+            jsonp  完成跨域
+
+            jsonp与json没有任何关系
+
+            是一种完成跨域访问的方式
+
+            jsonp的原理:
+                标签中,有两个属性  src  href 都是加载外部资源使用的属性
+                例如 超链接a href属性 跳转,显示另一个页面内容
+                     图片img src属性 加载显示 一个外部图片
+                     link  href属性  加载使用 一个外部的 css文件
+                     script  src属性  加载使用 一个外部的 js文件
+
+                script标签,通过src属性,加载外部文件中的内容
+                将这个外部文件中的内容,按照 JavaScript程序语法来执行
+                不管这个外部文件是什么格式的文件,只要里面写的是 JavaScript程序 都能执行
+
+                如果是 一个php文件 只要PHP文件输出的是 可执行js程序
+                我们通过 script标签的src 属性 导入这个PHP文件 都会按照js程序来执行
+
+                只是 PHP程序要执行输出 必须要 通过服务器 才能执行 echo 等程序
+
+            优点: 我们通过 标签的 src 或者 href 属性 调用 外部文件的数据
+                  不算是 请求  不会触发同源策略
+                  跨域请求也是可以执行的
+
+            使用 jsonp 来 完成跨域请求 后端程序只能返回给我们数据内容
+            我们 不能 存储 或者 使用 这个 变量
+            只能 是 php程序来使用这个变量
+            
+            需要 先 设定好 使用 返回数据的 函数
+            在 PHP 中来调用执行这个函数 等于就是在 操作返回的数据
+        */
+    </script>
+    <!-- 外部js文件 -->
+    <script src="./demo/demo.js"></script>
+    <!-- 外部txt文件 -->
+    <script src="./demo/demo.txt"></script>
+</body>
+</html>

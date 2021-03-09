@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            ajax兼容 低版本 IE 浏览器
+                创建: ajax 对象
+
+                    标准浏览器:
+                        xhr = new XMLHttpRequest();
+
+                    低版本IE浏览器
+                        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+
+                    兼容语法
+                    let xhr = {};
+                    if(XMLHttpRequest){
+                        xhr = new XMLHttpRequest();
+                    }else{
+                        xhr = new ActiveXObject('Microsoft.XMLHTTP');
+                    }
+
+                接收响应体:
+                    
+                    标准浏览器
+                    xhr.onload = ()=>{}
+                    
+                    低版本IE
+                    没有onload方法
+
+                    兼容语法
+
+                    当 readyState ajax请求状态改变时 执行的程序
+                    xhr.onreadystatechange = function(){
+                        ajax状态码为4,请求结束 并且 http状态码是 200-299,请求成功
+                        if( readyState === 4 && ( status >= 200 && status <= 299 ) ){
+                            请求成功执行的程序
+                        }
+                    }
+
+
+                    正则表达式,判断 在 200 - 299 之间
+
+                    /2\d{2}/.test( status )
+
+        */
+
+
+    </script>
+</body>
+</html>

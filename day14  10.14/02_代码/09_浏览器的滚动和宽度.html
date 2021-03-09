@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            width: 5000px;
+            height: 5000px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        /*
+            获取浏览器的相关属性
+                1,获取浏览器滚动的高度 / 宽度
+                    兼容语法:  
+                        如果兼容有报错,使用 if判断 执行没有报错的
+                        如果兼容不报错,使用 || 逻辑运算符,赋值不是0的数值
+
+                    var height = document.documentElement.scrollTop || document.body.scrollTop;
+                    var width = document.documentElement.scrollLeft || document.body.scrollLeft;
+
+                2,浏览器视窗窗口的宽度,高度
+                    浏览器页面有缩放功能,只有是100%时,获取的数据,才没有误差
+                    
+                    包括滚动条宽度高度
+                        window.innerWidth
+
+                        window.innerHeight
+
+
+                    不包括滚动条宽度高度 
+                        兼容文档类型说明
+                        document.documentElement.clientWidth || document.body.clientWidth
+        
+                        document.documentElement.clientHeight || document.body.clientHeight
+
+        */
+
+        window.onscroll = function(){
+            // console.log( document.documentElement.scrollTop );
+            // console.log( document.documentElement.scrollLeft );
+
+            // console.log( document.body.scrollTop );
+            // console.log( document.body.scrollLeft );
+
+            // 如果document.documentElement.scrollTop 是 0 
+            //     0 会自动转化为 布尔值 false 
+            //     逻辑或 第一个表达式是 false,不能决定整个逻辑或的结果,需要执行第二个表达式
+            //     执行 document.body.scrollTop 获取 数值
+            //     给变量赋值 , 两个表达式都执行 先赋值 0 再赋值 第二表达式的数值
+            //     最终存储的是 第二个表达式的数值 也就是有具体的数据
+            // 如果document.documentElement.scrollTop 不是 0 
+            //     非0数值,会自动专户为 true
+            //     逻辑或 , 第一个表达式是 true ,可以决定整个逻辑运算符的结果,第二个表达式不会执行
+            //     给变量 赋值的是第一个表达式的结果,也就是具体的数据
+            // var height = document.documentElement.scrollTop || document.body.scrollTop
+            // console.log( height )
+        }
+
+
+        window.onresize = function(){
+            console.log( window.innerWidth );
+
+            console.log( document.documentElement.clientWidth );
+
+        }
+
+
+
+    </script>
+</body>
+</html>

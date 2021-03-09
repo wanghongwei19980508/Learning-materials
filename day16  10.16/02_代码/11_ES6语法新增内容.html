@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            ES6 新增语法操作
+                1, 定义变量的关键词 let const
+                    语法    let 变量 = 数值
+                    语法  const 变量 = 数值
+
+                let const 和 var 的区别
+                    (1), var 声明的变量,会有 预解释/预解析
+                        预解释/预解析/预编译
+                            只是 提前预览一下所有的JavaScript程序,如果有var ,function 声明变量和函数
+                            会告诉JavaScript程序,可以提前调用,执行结果var是undefined,function是可以正常执行
+                
+                    (2), var 声明的变量,变量名是可以重复的,效果等于是 重复赋值
+                         let const 只要是已经存在的变量名称,不管是使用什么关键词定义的,都不能再使用了
+
+                    (3), let const 定义的变量,如果在{ } 大括号中,只能在 { } 中使用
+                         如果必须要在{}中操作,可以将变量定义在{}外,在{}中进行赋值等操作在{}外可以调用
+                         这个操作只能对let定义的变量进行
+
+                    (4), const 定义的变量,在定义时,必须赋值,不能只定义不赋值
+                         const 定义的变量,存储的数据,是不能改变的
+                         也就是 const 定义的变量,不能进行重复赋值操作
+                         const 一般存储 引用数据类型 或者 保持不变的数据
+                         因为引用数据类型,const 变量中 存储的是 内存地址
+                         如果改变应用数据类型,单元中存储的数据,可以操作,不是改变内存地址
+
+                    (5), 循环中,let 和 var 声明的变量的区别
+                         使用var声明的循环变量
+                            整个循环过程中,只会声明一个循环变量i
+                            每次循环都对这一个循环变量i进行重复赋值
+                            最终,只有一个i,存储最终的i的数值结果
+
+                         使用let声明的循环变量
+                            每一次循环,都会生成一个独立的循环变量i
+                            存储,不同的独立的相互不影响的数值
+                            最终,如果循环6次,就会生成6个i
+                            每一个i都会存储一个不同的独立的相互不影响的数值
+
+                    以后所有的循环,都要使用 let 来声明
+                        for...in   for( let 变量 in 对象){}
+                        forEach(function(v,k){})  也是使用let方式定义的循环变量
+
+            2, 箭头函数 =>
+                    
+
+
+
+        */
+        // 使用var声明的变量,执行结果是undefined 
+        // console.log( int );
+        // let const 声明的变量,不会预解释,执行结果是报错
+        // console.log( int1 );
+        // console.log( int2 );
+
+        // var int = 100;
+
+        // let int1 = 100;
+        // const int2 = 200;
+
+
+        // var 声明的变量,允许变量名重复
+        // var int = 100;
+        // var int = 200;
+        // console.log(int);
+
+        // 只要是已经存在的变量名称,let,const就不能使用
+        // let int = 300;
+        // const int = 300;
+        // console.log(int);
+
+        // 定义在 {} 中的 let const
+
+        // 在{}外,使用let定义变量
+        let int4;
+
+        if(true){
+            var int1 = 100;
+            let int2 = 200;
+            const int3 = 300;
+
+            // let const 定义的变量,只能在{}中使用
+            console.log(int2);
+            console.log(int3);
+
+            // 对{}外的let声明的变量进行赋值
+            int4 = 400;
+        }
+
+        console.log(int1);
+        // console.log(int2);
+        // console.log(int3);
+
+        console.log(int4);
+
+        const abc = 100;
+        // const定义的变量,不能进行重复赋值操作
+        // 赋值的数据,不能改变
+        // abc = 200;
+
+        const arr = [1,2,3,4,5];
+        // arr中存储的是数组的内存地址
+        // arr[0] = '北京'; 是改变 arr中第一个单元的数据
+        // 没有改变 arr中 存储的内存地址,可以进行的
+        // 不能对 arr 变量赋值 ,可以改变arr中单元存储的数据
+        arr[0] = '北京';
+        console.log(arr);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: fixed;
+            top: 150px;
+            left: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <button>开始</button>
+    <div></div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            运动函数1:
+                解决的问题:
+                    1, 通过累加 数据的方式,将css属性值的改变,逐步完成实现
+                       执行效果看似动画
+                    2, 通过参数 执行动画的标签对象
+                               执行的属性
+                            
+                    3, 运动执行完毕,执行的程序
+
+                没有解决的问题
+                    1, 初始值现在是固定数值
+                        需要获取标签的原始属性的数据
+                        获取的属性,是需要改变css样式的属性
+                        这个属性的初始值
+
+                    2, 最终数值是固定数值
+                        作为一个参数,输入
+
+        */
+
+        var oDiv = document.querySelector('div');
+        var oBtn = document.querySelector('button');
+
+
+        // 点击button按钮,执行 运动函数
+        oBtn.addEventListener('click', () => {
+            move(oDiv, 'width', 500 ,);
+
+        })
+
+
+        function move(element, type, end) {
+
+            let time = setInterval(() => {
+                // 1, 获取标签对象,运动属性的初始值
+                // 也就是 type 输入的是 left 我们就获取标签 left属性的属性值
+                // 使用封装的函数 myGetStyle 来获取样式的属性值
+                // 只获取数值部分,使用 parseInt() 来获取整数部分
+                // 如果将 获取初始值定义在定时器中,每次都会获取当前位置css样式对应的数值
+                // let 定义的变量,无法在定时器的{}之外使用
+                let startVal = parseInt(myGetStyle(element, type));
+
+                // 2, 累加数值
+                startVal += 10;
+
+                // 3, 将累加之后的数值,赋值给标签css样式的属性值
+                element.style[type] = startVal + 'px';
+
+                // 4, 判断,如果到了最终目标位置,停止定时器
+                if (startVal === end) {
+                    clearInterval(time);
+
+                    // 执行运动结束的最终程序
+                    oDiv.style.background = 'blue';
+                }
+
+            }, 30)
+        }
+
+        /*
+            总结:
+            
+            解决的问题
+                1, 初始值的问题:
+                    每次执行定时器,通过定义的函数,获取标签,要执行运动的css样式的属性值
+
+                2, 最终值的问题:
+                    使用一个参数来解决
+
+            新的问题:
+                如果是 两个属性 要同时执行运动效果,怎么办?
+
+        
+        */
+
+    </script>
+</body>
+
+</html>

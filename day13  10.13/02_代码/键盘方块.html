@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            height: 800px;  width: 800px;
+            background-color: aqua;
+            position: relative;
+        }
+        .inner{
+            height: 100px; width: 100px;
+            background-color: yellow;
+            position: absolute;
+            top: 0;   left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="inner"></div>
+    </div>
+    <script src="./tools.js"></script>
+    <script>
+        var int = document.querySelector('.inner');
+        document.onkeydown = function(e){
+            if(e.keyCode === 37){
+                var ozuo = parseInt(myGetStyle(int,'left'));
+                ozuo -= 10;
+                ozuo = ozuo<0 ?0 :ozuo;
+                int.style.left = ozuo + 'px';
+            }
+            if(e.keyCode === 39){
+                var oyou = parseInt(myGetStyle(int,'left'));
+                oyou += 10;
+                oyou = oyou>700 ?700 :oyou;
+                int.style.left = oyou + 'px';
+            }
+            if(e.keyCode === 38){
+                var shang = parseInt(myGetStyle(int,'top'));
+                shang -= 10;
+                shang = shang<0 ?0 :shang;
+                int.style.top = shang+'px';
+            }
+            if(e.keyCode === 40){
+                var xia = parseInt(myGetStyle(int,'top'));
+                xia += 10;
+                xia = xia>700 ?700 :xia;
+                int.style.top = xia+'px';
+            }
+        }
+    </script>
+</body>
+</html>

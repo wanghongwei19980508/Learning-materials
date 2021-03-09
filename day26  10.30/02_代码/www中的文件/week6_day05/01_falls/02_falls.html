@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 解析网络来源图片 meta标签 -->
+    <meta name="referrer" content="never">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7/dist/css/bootstrap.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        a,
+        a:hover,
+        a:active {
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 1200px;
+            margin: 30px auto;
+        }
+
+        .box::after {
+            clear: both;
+            content: "";
+            display: block;
+        }
+
+        .box>ul {
+            width: 260px;
+            display: flex;
+            flex-direction: column;
+            float: left;
+            margin: 0 20px;
+        }
+
+        .box>ul>li {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid black;
+        }
+
+        .box>ul>li>.imgBox {
+            width: 100%;
+        }
+
+        .box>ul>li>.contentBox {
+            width: 100%;
+            padding: 20px 15px;
+        }
+
+
+
+        .box>ul>li>.contentBox>p:nth-child(2) {
+            margin: 20px 0;
+        }
+
+        .box>ul>li>.contentBox>p:nth-child(2)>i {
+            margin: 0 15px;
+        }
+
+        .box>ul>li>.contentBox>p:nth-child(3)>span:first-child {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+        <ul></ul>
+    </div>
+
+    <script>
+        //  请求结果,数据内容分析
+        //  请求结果是一个对象
+        //  第一个属性 :  data
+        //      limit:24        页面是24条数据
+        //      next_start:24   下一次请求,起始的索引下标数据
+        //      object_list:    是一个数组,存储本次请求的内容数据信息
+        //  第二个属性 :  status
+
+
+        // 每次执行 setLi() 生成页面
+        // 初始第一次执行 关键词是 婚纱婚礼 
+        // 初始数据的索引 下标 是 0
+        // 时间戳是 根据 程序执行的时间定义的
+
+        // 关键词
+        let keyWord = '婚纱婚礼';
+
+        // 起始数据索引
+        let start = 0;
+
+        // 获取四个ul的伪数组
+        const oUls = document.querySelectorAll('ul');
+
+        // 先获取一个ul的宽度
+        let divWidth = oUls[0].offsetWidth;
+    
+        // 定义一个变量,存储初始值
+        let bool = true;
+
+        // 第一次执行 setLi()
+        // 生成初始的页面内容
+
+
+        // 虽然你先代用了函数,看似生成了页面中的内容
+        // 但是 实际 执行顺序是 
+        // 先执行其他同步程序 都执行结束,再回来执行异步的ajax请求
+        setLi();
+
+        // 先执行通过 的 document.querySelectorAll('li');
+        // 再执行 异步的 ajax请求, 生成li标签
+        // 因此,当前执行时,没有执行 ajax, 就没有 页面中的li
+        // 如果需要给 li 添加事件 必须要使用事件委托的形式
+        const li = document.querySelectorAll('li');
+        // 获取结果是 空对象
+        console.log(li);
+
+        // 页面滚动,就要写一个页面滚动的监听事件
+        window.onscroll = () => {
+            // 获取相应数据
+
+            // 1,页面上卷高度
+            let htmlScrollTop = document.documentElement.scrollTop;
+
+            // 2,视窗窗口高度
+            let windowHeight = document.documentElement.clientHeight;
+
+            // 3,预留高度
+            // 网速快,就小点,网速慢,就多点
+            let reservedHeight = 500;
+
+            // 3,最矮ul高度 高度数据
+            // 还是先获取最矮ul的索引下标,再通过下标,获取最矮ul标签,再获取高度
+            let minUl = 0;
+
+            // 循环遍历 ul伪数组  v 就是ul标签
+            oUls.forEach((v, k) => {
+                // 认为最小的ul对应索引,获取的ul的高度
+                // 大于
+                // 当前 v表示的ul的高度
+                // 变量 minUl,存储当前v,ul对应的索引下标
+                if (oUls[minUl].offsetHeight > v.offsetHeight) {
+                    minUl = k;
+                }
+            })
+
+            // minUl存储的是最矮的ul的索引下标
+            let minUlHeight =  oUls[minUl].offsetHeight;
+
+            // 如果 上卷高度+视窗高度+预留高度 > 最矮ul高度 
+            // 就   再次发起请求
+            if( htmlScrollTop + windowHeight + reservedHeight > minUlHeight ){
+                if( !bool ) return;
+                bool = false;
+                setLi();
+            }
+        }
+
+
+
+        function setLi() {
+
+            // 时间戳
+            let timeObj = new Date();
+            let t = parseInt(timeObj.getTime() / 1000);
+
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('get', `/dt?include_fields=top_comments%2Cis_root%2Csource_link%2Citem%2Cbuyable%2Croot_id%2Cstatus%2Clike_count%2Csender%2Calbum%2Creply_count&filter_id=${keyWord}&start=${start}&_=${t}`);
+
+            xhr.send();
+
+            xhr.onload = () => {
+                // 响应体程序,获取的数据内容
+                const res = JSON.parse(xhr.response).data;
+
+                // 给 start变量 赋值下一次起始数据的索引下标
+                start = res.next_start;
+
+                // 获取 本次请求,获取的数据数组
+                const imgArr = res.object_list;
+                console.log(imgArr);
+
+                imgArr.forEach(item => {
+                    // 先计算图片父级div的宽度,高度
+                    let divHeight = (divWidth * item.photo.height) / item.photo.width;
+
+                    // 根据这个图片数组,生成li,写入ul
+                    // 这里就是生成一个独立的新的li,写入不同的ul
+                    // 这里是 等于赋值
+                    let str = `
+                    <li>
+                        <div class="imgBox" style="height:${divHeight}px">
+                            <img src="${item.photo.path}">
+                        </div>
+                        <div class="contentBox">
+                            <p>${item.msg}</p>
+                            <p>
+                                <i class="glyphicon glyphicon-thumbs-up"></i>${item.like_count} 
+                                <i class="glyphicon glyphicon-star"></i>${item.favorite_count}
+                            </p>
+                            <p>
+                                <span><img src="${item.sender.avatar}"></span>
+                                <span>
+                                    ${item.sender.username} <br>
+                                    <span>发布到 <a href="JavaScript:;">${item.album.name}</a></span>
+                                </span>
+                            </p>
+                        </div>                
+                    </li>
+                    
+                    `;
+
+                    // 将li,写入ul,写入的是最矮的ul
+
+                    // 初始认为第一个ul最矮,存储第一个ul的索引下标0
+                    let minUl = 0;
+
+                    // 循环遍历 ul伪数组  v 就是ul标签
+                    oUls.forEach((v, k) => {
+                        // 认为最小的ul对应索引,获取的ul的高度
+                        // 大于
+                        // 当前 v表示的ul的高度
+                        // 变量 minUl,存储当前v,ul对应的索引下标
+                        if (oUls[minUl].offsetHeight > v.offsetHeight) {
+                            minUl = k;
+                        }
+                    })
+
+                    // 循环结束 minUl 中 存储 最矮 ul 的索引下标
+                    // 使用索引下标,获取最矮ul标签对象,写入li
+                    // 在之前的ul的末位,再写入新的li,必须是 += 操作
+                    oUls[minUl].innerHTML += str;
+                })
+
+                // 当整个页面 加载 结束 给 bool 再次 赋值 true
+                // 如果再次触发,就可以再次请求了
+                bool = true;
+
+            }
+        }
+
+
+
+    </script>
+
+
+
+    <!--  -->
+</body>
+
+</html>

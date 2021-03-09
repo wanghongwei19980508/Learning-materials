@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            浏览器的历史记录
+                存储在 window.history 中 
+                window.history.length : 长度 也就是当前窗口 访问页面的个数
+
+                
+                window.history.back()     返回上一个访问的页面  功能对应浏览器 后退 按钮
+                window.history.forward()  返回下一个访问的页面  功能对应浏览器 前进 按钮
+
+                window.history.go()       设定跳转次数,跳转至指定页面
+                                          跳转的次数 是  目标页 - 当前页
+
+                注意:
+                    1, 浏览器次数的记录,一定是当前窗口打开的页面
+                       新窗口打开的页面,不算浏览次数
+
+                    2, go() 只能在 浏览次数范围内跳转 如果超出范围,没有执行效果
+
+        */
+        console.log(window.history);
+    </script>
+</body>
+</html>

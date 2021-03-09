@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text">
+    <button>获取</button>
+
+    <script>
+        // 先获取对象
+        var oIpt = document.querySelector('input');
+        var oBtn = document.querySelector('button');
+
+        // oIpt.value = '张三';
+
+        // 绑定点击事件
+        oBtn.onclick = function(){
+            // 触发事件的时候,再获取数据
+            var res = oIpt.value;
+            console.log(res);
+        }
+
+
+        /*
+            带有数据参数的标签
+                input,select,textarea
+                可以通过 标签对象.value 来获取或者设定标签的数据
+
+                var 变量 = 标签对象.value   获取数据
+                    即时输入的是数值,获取的结果也是字符串类型
+
+                标签对象.value = 数值       设定数据
+                   
+                必须注意的问题
+                    必须要在触发事件时,再来获取数据
+                    不要一开始就获取数据
+
+            补充说明
+                h5新增input标签属性
+                    maxlength  设定input标签最多可以输入的字符个数
+                               超过设定个数,不能再输入
+                    minlength  设定input标签最小必须输入的字符个数
+                               少于这个字符长度,不允许提交
+
+
+            标签事件
+                获取焦点   focus
+                    当 标签获取焦点时,执行的执行
+                    鼠标一点,就是获取焦点
+                    不是所有的标签都支持获取焦点事件
+                    常用: input,select,textarea,button,a,
+
+                输入事件   input
+                    在输入框输入内容时,触发事件
+                    每输入一个字符,没按动一次键盘,都会触发 输入事件
+
+                失去焦点   change
+                    触发条件有两个条件,两个条件必须都满足才会触发事件
+                        1, 必须失去焦点
+                        2, 输入的数据内容,必须有改变
+
+        
+                提交事件   submit
+        */
+
+
+
+    </script>
+</body>
+</html>

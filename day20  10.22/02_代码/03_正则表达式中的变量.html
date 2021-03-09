@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            正则表达式,不能解析变量,你写的变量,只会作为验证的字符
+
+            例如 let a = '北京' ;
+
+            /a/   只是验证 字符串a   不会解析a中存储的北京 验证 北京
+
+            实际项目汇中,往往需要验证匹配一些输入的数据
+
+            1, 需要使用 变量存储 正则表达式 , 使用 模板字符串,解析真中表达式
+                如果需要验证的是 变量a 中 存储的内容
+
+                但是这样写了之后,正则表达式,就变成了一个纯字符串
+
+                let reg = `/${a}/`;
+
+
+            2, 需要一个函数方法 eval() 
+               JavaScript提供的一个方法,会解析执行字符串中代表的表达式
+               使用 eval() 来 执行 定义为字符串的正则表达式
+               就会执行正则表达式的效果
+               但是 eval() 的执行效率很低,谨慎使用
+               之后有框架的方法可以解决
+        
+        
+        */ 
+
+        console.log( '2+3+5' );
+        // 将字符串作为JavaScript程序来执行,执行结果是 2+3+5 等于 10
+        console.log( eval('2+3+5') );
+
+    </script>
+</body>
+</html>

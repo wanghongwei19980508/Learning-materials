@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            前端的基本数据交互方式:
+                1, form表单 和 超链接 : 页面跳转
+                    form:属性的设定
+                        action   设定跳转地址
+                        method   设定传参的方式
+                                 get post
+                        enctype  设定上传文件的格式
+                                 application/x-www-form-urlencoded  只能上传 文本文档 text word 文字内容
+                                 multipart/form-data                可以上传 文本文档 以及 图片 音频 视频 等都能上传
+                                 有上传文件需要时,必须要设定 enctype="multipart/form-data"
+                                 同时 method 必须是 post 方式
+
+                        input等存储数据的标签,必须要有name属性
+                            传参标签,name属性的属性值,不能随便设定
+                            在实际项目中,都会在项目手册中,有严格的规定
+                            这个规定是 前端 后端 都必须要遵守的
+                            也可以根据 $_GET[] 方括号中的内容,设定键名
+
+                    
+                    a 超链接传参
+                        超链接传参,只能以 get 方式传参
+                        超链接传参,有严格的语法规范
+                            在 超链接 href属性的属性值 中 设定传参数据
+
+                            <a href="url地址?键名=数值&键名=数值">内容</a> 
+
+                            href中,问号是url地址,和,传参数据的间隔符号
+                            ?问号之前的是 url地址 ?问号之后的是 传参数据
+                            传参数据必须是键值对形式 键名=数值
+                            键名是自定义的,可以是任意的键名
+                            传参的数据,不需要加引号
+                            键值对,不要随便写空格,所有的内容,都会作为参数的一部分
+
+                2, ajax : 局部数据交互,不用页面跳转
+
+                3, 框架语法中的 路由器跳转 --- 三阶段
+        
+        
+        */
+
+    </script>
+</body>
+</html>

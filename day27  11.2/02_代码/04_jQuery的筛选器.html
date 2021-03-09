@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <ul>
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li name="li8">8</li>
+        <li>9</li>
+    </ul>
+
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            筛选器:
+                在选择器获取的标签对象基础上,再次进行筛选或者其他操作
+                存在的目的,是为了 链式编程 选择标签方便
+
+            1, $().first()      获取 伪数组中 第一个标签
+            2, $().last()       获取 伪数组中 最后一个标签
+            3, $().eq()         获取 伪数组中 按照索引下标 符合的标签
+            4, $().prev()       获取 当前标签的上一个标签
+            5, $().next()       获取 当前标签的下一个标签
+
+            6, $().prevAll()       获取 当前标签的上所有标签
+            7, $().nextAll()       获取 当前标签的下所有标签
+            从近到远的获取顺序
+
+
+            8, $().siblings()      获取 当前标签的所有兄弟标签
+
+            9, $().parent()        获取 当前标签的直接父级
+
+            10, $().parents()      获取 当前标签的所有父级
+
+            特殊的
+            11, $().index()        获取 当前标签的所有父级
+
+            12, $().find('条件')    在当前伪数组中,按照条件查找
+
+            13, $().end()          获取 返回链式编程,上一个操作对象
+
+
+
+
+
+
+
+
+            
+        
+        
+        */
+
+
+        // 所有li当中的第一个
+        console.log($('ul>li').first());
+
+        // 所有li当中的最后个
+        console.log($('ul>li').last());
+
+        // 按照索引下标查找
+        // 索引下标是4,其实是第五个的标签
+        console.log($('ul>li').eq(4));
+
+        // 先找ul中所有的li
+        // 再按照索引下标,找索引是4,实际是第五个的标签
+        // 最后,找第五个标签的上一个标签
+        console.log($('ul>li').eq(4).prev());
+
+        // 第五个标签的下一个标签
+        console.log($('ul>li').eq(4).next());
+
+
+        // 第五个标签的上所有标签
+        console.log($('ul>li').eq(4).prevAll());
+
+        // 第五个标签的下所有标签
+        console.log($('ul>li').eq(4).nextAll());
+
+        // 所有兄弟标签
+        console.log($('ul>li').eq(4).siblings());
+
+        // 直接父级
+        console.log($('ul>li').eq(4).parent());
+
+        // 所有父级
+        console.log($('ul>li').eq(4).parents());
+
+        // 获取当前标签在伪数组中的索引下标
+        console.log($('ul>li').eq(4).index());
+
+
+        // 按照设定的条件查找
+        console.log($('ul').find( '[name="li8"]' ) );
+
+
+        // 返回当前链式编程,上一个操作对象
+       $('ul>li').eq(0).css({color:'red'}).next().css({color:'blue'}).next().css({color:'pink'}).end().end().css({background:'orange'}) ;
+
+
+
+
+    </script>
+</body>
+
+</html>

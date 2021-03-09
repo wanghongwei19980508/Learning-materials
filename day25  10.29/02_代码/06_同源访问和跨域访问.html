@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            同源访问 / 同源策略
+
+                浏览器制定了 请求的访问机制 --- 同源访问/同源策略
+
+                只有当两个程序,协议,路径地址,端口号一致时,才会认为是同源文件
+
+                才允许同源文件进行请求访问,获取响应体内容
+                否则的话,只能浏览不能获取响应体
+
+                同一个文件夹中,或者同一个url地址下的文件,就是同源文件
+
+                同一个项目(同一个源的文件),相互之间可以访问,并且获取响应体数据
+                如果不是 同源项目文件 只能 发送 请求 不能 获取 响应体数据
+
+                主要就是为了数据的安全性
+
+            跨域访问 
+
+                不是同源文件 之间 发送请求 获取 响应体数据 就是 跨域访问
+
+                如何实现 跨域 访问:
+                    1, cors 方法 : 跟我们没有关系,是后端程序员,通过设定后端程序
+                                   告诉浏览器,我这个文件,允许所有的请求访问,并且可以获取响应体数据
+
+                                   浏览器不会阻止跨域的请求访问
+
+                        // // 指定 允许其他域名访问   * 允许任意域名,IP地址访问
+                        // header('Access-Control-Allow-Origin:*');
+                        // // 响应的请求类型   
+                        // header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
+                        // // 响应头设置
+                        // header('Access-Control-Allow-Credentials:false');
+
+                    2, 服务器代理方法 : 
+                        apache服务器 和 nignx服务器,都有服务器代理功能
+                        我们 只要 设定好 服务器代理 配置 服务器 可以帮助我们完成 跨域访问
+
+                        apache服务器 和 nignx服务器 代理的区别
+                            1, apache服务器 只能完成 http协议的跨域访问
+                               nginx 服务器 可以完成 所有协议的跨域访问
+
+                            2, apache服务器 完成跨域代理,貌似收费
+                               nginx 服务器 是免费完成跨域代理
+        
+                        
+
+        */
+
+
+    </script>
+</body>
+</html>

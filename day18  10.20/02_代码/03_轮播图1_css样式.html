@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        ul,li,ol{
+            list-style: none;
+        }
+
+        a,a:active,a:hover{
+            text-decoration: none;
+            color: #fff;
+
+        }
+
+        img{
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box{
+            width: 960px;
+            height: 250px;
+            border: 3px solid #000;
+            margin: 40px auto;
+            position: relative;
+        }
+
+        .box>ul{
+            width: 960px;
+            height: 100%;
+            position: absolute;
+            top:0;
+            left:0;
+        }
+
+        /* 伪元素 可以是 1个冒号,也可以是2个冒号 
+           在 HTML4 中 伪元素和伪类不做区分,都是1个冒号
+           在 HTML5 中 为了区别伪元素和伪类 伪元素使用2个冒号 伪类继续使用1个冒号
+           HTML5 是 向下兼容,兼容HTML4的语法,伪类写1个冒号,伪元素写1个或者2个冒号都可以 
+        */
+        .box>ul::after{
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .box>ul>li{
+            width: 960px;
+            height: 250px;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box>ol{
+            height: 20px;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            bottom:30px;
+            left:50%;
+            transform: translateX(-50%) ;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 5px;
+        }
+
+        .box>ol>li{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 10px;
+        }
+
+        .box>ol>li.active{
+            background: red;
+        }
+
+        .box>div{
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%) ;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .box>div>a{
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 25px;
+            background: rgba(0, 0, 0, .5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="box">
+        <ul></ul>
+        <ol></ol>
+        <div>
+            <a href="JavaScript:;">&lt;</a>
+            <a href="JavaScript:;">&gt;</a>
+        </div>
+    </div>
+</body>
+</html>

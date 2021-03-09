@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: fixed;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+
+    <script src="./tools.js"></script>
+
+    <script>
+        const oDiv = document.querySelector('div');
+        oDiv.addEventListener( 'click' , ()=>{
+            myMove( oDiv , {left:500} , function(){})
+            // move( oDiv , {left:500} , 123)
+        } )
+
+
+
+
+
+        /*
+            运动函数的本质:
+                通过定时器,逐步累加一个步长,将css属性值的改变,逐步完成,不是瞬间完成
+
+                1, 封装为一个函数来执行
+                    参数1: 执行运动的标签对象
+                    参数2: 执行运动的属性和属性值,对象形式,可以有多个单元
+                    参数3: 回调函数,运动结束时,执行的函数程序
+                           回调函数,可以是一个 匿名函数 或者 已经定义好的函数的函数名称
+
+                2, 执行的运动,要做兼容
+                    (1) , 兼容多属性运动
+                        每一个属性,执行生成一个定时器,多个属性就有多个定时器
+                        使用 对象 , 存储每一个定时器,对象的属性是运动的属性,对象的属性值是定时器的序号
+
+                    (2) , 兼容透明度属性
+                        将 初始值 和 最终值 都乘以一个 数值,一般是1000
+                        设定 属性属性值 时 再除以 100
+
+                3, 判断运动停止
+                    (1) , 当 累加之后的 初始值 等于 最终值 
+                        清除 当前运动属性 对应的 定时器
+
+                    (2) , 在对象中删除当前属性对应的单元
+
+                    (3) , 使用 Object.keys() 获取对象所有的属性,结果是数组
+                        如果数组的长度length是0,证明对象是一个空对象,所有运动都停止了
+        */
+
+        function myMove(element , typeObj , fun){
+            // 1, 创建一个对象,存储所有的定时器
+            const intervalObj = {};
+
+            // 2, 循环遍历 参数2 
+            for( let type in typeObj ){
+                // 创建一个定时器,存储在对象中
+                intervalObj[type] = setInterval( ()=>{
+                    // 1, 获取初始值和最终值
+                    // 透明度 初始值和最终值 *100
+                    let startVal = type === 'opacity' ? myGetStyle(element , type)*100 : parseInt( myGetStyle(element , type) );
+
+                    let endVal = type === 'opacity' ? typeObj[type]*100 : typeObj[type];
+
+                    // 2, 计算步长
+                    let speed = (endVal - startVal)/5;
+
+                    // 3, 取整
+                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+                    
+                    // 4, 累加步长
+                    startVal += speed;
+
+                    // 5, 将新的数据,赋值给标签css样式
+                    element.style[type] = type === 'opacity' ? startVal/100 : startVal + 'px';
+
+                    // 6, 判断是否到达最终位置
+                    if(startVal === endVal){
+                        // 清除当前属性对应的定时器
+                        clearInterval( intervalObj[type] );
+                        // 删除对象中,对应的单元
+                        delete( intervalObj[type] );
+                        // 判断对象中,单元的个数
+                        const arr = Object.keys( intervalObj );
+                        // 判断arr的长度
+                        if(arr.length === 0){
+                            // 对象已经是空对象,所有定时器都清除了
+                            // 执行回调函数
+                            // 如果第三个参数,类型是函数类型,执行对象的函数程序
+                            // 如果第三个参数,不是函数类型,执行空字符串
+                            typeof( fun ) === 'function' ? fun() : '';
+                        }
+                    }
+                } , 30 )
+            }
+        }
+
+
+
+
+    </script>
+</body>
+</html>

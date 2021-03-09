@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 20px;
+            border:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    姓名: <input type="text" name="addName"><br>
+    年龄: <input type="text" name="addAge"><br>
+    身高: <input type="text" name="addHeight"><br>
+    体重: <input type="text" name="addWidth"><br>
+    <button name="addBtn">新增</button>
+
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>身高</td>
+                <td>体重</td>
+                <td>删除</td>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+
+    <script>
+
+
+        var arr = [
+            {id:1, name:'张老师',age:18,height:180,width:50},
+            {id:20, name:'霞姐',age:16,height:179,width:49},
+            {id:31, name:'马老师',age:17,height:180,width:50},
+            {id:78, name:'刘班长',age:32,height:150,width:85},
+            {id:109, name:'常同学',age:31.9,height:149,width:84},
+        ];
+
+        var oTbody = document.querySelector('tbody');
+
+        var oIptAddName = document.querySelector('[name="addName"]');
+        var oIptAddAge = document.querySelector('[name="addAge"]');
+        var oIptAddHeight = document.querySelector('[name="addHeight"]');
+        var oIptAddWidth = document.querySelector('[name="addWidth"]');
+
+        var oAddBtn = document.querySelector('[name="addBtn"]');
+
+        oAddBtn.addEventListener('click' , function(){
+            var name = oIptAddName.value;
+            var age = oIptAddName.value;
+            var height = oIptAddName.value;
+            var width = oIptAddName.value;
+            var id = arr[arr.length-1].id + 1;
+            var obj = {
+                id : id,
+                name : name,
+                age : age,
+                height : height,
+                width : width,
+            }; 
+            arr.push(obj);
+            oTbody.innerHTML = setTable(arr);
+
+        })
+
+
+        oTbody.innerHTML = setTable(arr);
+
+        oTbody.onclick = function(e){
+            e = e || window.event;
+            if(e.target.tagName === "BUTTON" ){
+                var bool = window.confirm('您确认要删除这条可爱的数据吗?');
+                if( !bool ) return;
+                var index = e.target.getAttribute('index');
+                arr.splice( index , 1 );
+                oTbody.innerHTML = setTable(arr);
+              
+            }
+        }
+
+
+        function setTable(array){
+            // 定义一个空字符串,存储数据
+            var str = '';
+
+            // 循环遍历数组,生成对应的的字符串
+            // v就是数据,就是每一个对象
+            // k就是索引,0,1,2,3,4
+            array.forEach(function(v,k){
+                // 每一次,一个对象,对应就是一个 tr 行 以及其中的td单元
+                str += `
+                    <tr>
+                        <td>${v.id}</td>
+                        <td>${v.name}</td>
+                        <td>${v.age}</td>
+                        <td>${v.height}</td>
+                        <td>${v.width}</td>
+                        <td> <button index="${k}">删除</button> </td>
+                    </tr>
+                `;
+            });
+
+            // 循环结束,数组中的没一个对象,就对应生成一行tr和td
+            // 都拼接在str 中,返回值 是 str
+            return str;
+        }
+
+    
+
+
+
+
+    </script>
+</body>
+</html>

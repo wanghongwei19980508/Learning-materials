@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .s1{
+            color: red;
+        }
+        .s2{
+            background: blue;
+        }
+        .s3{
+            font-size: 100px;
+        }
+
+        .s4{
+            font-weight: 900;
+        }
+    </style>
+</head>
+<body>
+    <div class="s1">我是div</div>
+
+    <script src="./tools.js"></script>
+    <script src="./jquery.min.js"></script>
+    <script>
+        // 1, 新增某一个css选择器
+        // 新增和修改不同,新增是要在原始基础上,新增一个新的选择器
+        // 在原始 属性值 的 基础上 拼接一个 新的 选择器属性值
+        // 新拼接的内容之前,需要有一个 空格
+
+        var oDiv = document.querySelector('div');
+
+        console.log( oDiv.className )
+        // 标签对象.className 是获取 标签对象,原始class属性的属性值
+        // += 是 拼接操作 
+        // 拼接是的 新的 选择器名称,之前还要有空格间隔
+        oDiv.className += ' s2';
+        oDiv.className += ' s3';
+        oDiv.className += ' s3';
+        oDiv.className += ' s3';
+        oDiv.className += ' s3';
+        oDiv.className += ' s4';
+
+
+        // 删除 多个 属性值中的一个
+        myRemoveClass( oDiv , 's2' );
+        myRemoveClass( oDiv , 's3' );
+        
+        // jQuery封装好的,删除方法
+        // $('div').removeClass('s3');
+    </script>
+</body>
+</html>

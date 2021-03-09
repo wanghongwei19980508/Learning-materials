@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        input,div{
+            color: red;
+        }
+
+        input:focus,div:focus{
+            color: green;
+        }
+
+        input:hover,div:hover{
+            color: pink;
+        }
+
+        input:active,div:active{
+            color:blue;
+        }
+    </style>
+</head>
+<body>
+    <input type="text">
+    <div>我是div</div>
+    <script>
+        /*
+            键盘事件
+                keydown   按键按下
+                keyup     按键抬起
+                keypress  按键按下就会触发
+                          实际执行效果与 keydown 是一样的
+            问题:
+                1, 不是所有的标签对象,都支持键盘事件
+                   只有能获取焦点的标签对象,才支持键盘事件
+
+                   input,textarea,button,select,a,iframe
+                   或者 绑定给 document , body , html 和 window
+
+                2, 事件对象
+                    在绑定的匿名函数中,添加一个形参
+                    形参的命名 可以是任意的名称 一般定义为 e 或者 event 表示是 事件对象
+                    执行程序时, JavaScript程序,会自动向形参中存储数据,存储的是触发事件的事件对象的相关信息
+
+                    如果是 鼠标触发的事件 存储的是 鼠标相关的 信息 ,例如 点击坐标,位置,点击的标签等等
+                    如果是 键盘事件 存储的是 键盘按键先关的 信息 ,例如 按键的编号,名称,等等
+        
+                    e.key      存储的是按键的名称 数值键和小键盘数字键, e.key 是相同的结果
+                    e.keycode  键盘按键的编号 所有计算机语言 所有键盘,相同键位,键盘编号是相同的
+                               使用这个属性来区别判断,按下的按键
+                    ctrlKey    true 就是 按下了, false 是没有按
+                    altKey     true 就是 按下了, false 是没有按
+                    shiftKey   true 就是 按下了, false 是没有按   
+        */
+
+        var oIpt = document.querySelector('input');
+        var oDiv = document.querySelector('div');
+
+        oIpt.onkeydown = function(e){
+            console.log('有按键按下了');
+            console.log(e);
+        }
+
+        // oIpt.onkeyup = function(){
+        //     console.log('有按键抬起了');
+        // }
+
+        // oIpt.onkeypress = function(){
+        //     console.log('有按键一直按下');
+        // }
+
+        // 多按键判断  ctrl + alt + y 
+        // ctrlKey 是 true  altKey 也是 true   keyCode 是 y 的编号 89
+        
+        document.onkeydown = function(e){
+            console.log(e);
+            if(e.ctrlKey === true && e.altKey === true && e.keyCode === 89){
+                console.log('三个键都按下了');
+            }   
+        }
+
+    </script>
+</body>
+</html>

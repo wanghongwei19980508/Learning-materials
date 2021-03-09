@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>请求</button>
+
+    <script src="../jquery.min.js"></script>
+    <script>
+        $('button').click(()=>{
+            // 字符串参数
+            // $.get('./demo.php' , 'name=张三&age=18' , res => {console.log(res)} );
+
+            // 对象参数
+            // $.get('./demo.php' , {name:'李四',age:100} , res => {console.log(res)} );
+
+            // 响应体是一个json字符串
+            // $.get('./demo.php' , {name:'李四',age:100} , res => {
+            //     // 如果返回的响应体是 json串,需要 还原为对应的数据类型
+            //     const obj = JSON.parse(res);
+            //     console.log(obj)
+            // } );
+
+            $.get( './demo.php' , {name:'jack'} , res => console.log( res ) , 'json' );
+
+
+        })
+
+
+
+    </script>
+</body>
+</html>

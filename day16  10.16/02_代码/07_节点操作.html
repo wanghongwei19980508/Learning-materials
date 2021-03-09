@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <!-- 我是第一个注释内容 -->
+        我是div标签
+        <!-- 我是第二个注释内容 -->
+        <p id="p1" class="p2">我是p标签</p>
+        <!-- 我是第三个注释内容 -->
+        <span id="span1" class="span2" name="span" index="123">我是span标签</span>
+        <!-- 我是第四个注释内容 -->
+        <h1 id="h1" class="h2">我是h1标签</h1>
+    </div>
+
+
+    <script>
+        /*
+            节点操作:
+                所谓的节点: html 文件中 任意的一个内容,都是节点
+                    标签,属性,内容文本,注释
+                获取节点之后,可以使用JavaScript定义的方式来操作节点
+
+                如果你获取的是一个标签,节点,就跟你获取一个标签对象,是一样的
+
+                我们使用获取标签对象的方式,和,使用获取标签节点的方式,获取的内容是一样的
+                都在支持所有的操作方式
+
+            1, 获取节点的方式:
+
+
+
+
+
+        */
+        var oDiv = document.querySelector('div');
+        var oSpan = document.querySelector('span');
+
+        // 1, 父级标签对象.childNodes  获取父级标签对象中,所有子级节点
+        //    执行结果是一个伪数组,支持forEach
+        console.log(oDiv.childNodes);
+
+        // 2, 父级标签对象.children    获取父级标签中的元素节点 只获取 标签节点
+        //    执行结果是一个伪数组, 不支持forEach
+        console.log(oDiv.children);
+
+        // 3, 父级标签对象.firstChild  获取第一个节点 所有的节点中的第一个
+        //    执行结果是一个唯一的对象
+        console.log(oDiv.firstChild);
+
+        // 4, 父级标签对象.lastChild  获取最后一个节点 所有的节点中的最后一个
+        //    执行结果是一个唯一的对象
+        console.log(oDiv.lastChild);
+
+        // 5, 父级标签对象.firstElementChild  获取第一个标签节点 所有节点中的第一个标签节点
+        //    执行结果是一个唯一的对象
+        console.log(oDiv.firstElementChild);
+
+        // 6, 父级标签对象.lastElementChild  获取最后一个标签节点 所有节点中的最后一个标签节点
+        //    执行结果是一个唯一的对象
+        console.log(oDiv.lastElementChild);
+
+        // 7, 当前标签对象.previousSibling   获取上一个兄弟节点  所有节点中的上一个兄弟节点
+        //    执行结果是一个唯一的对象
+        console.log(oSpan.previousSibling);
+
+        // 8, 当前标签对象.nextSibling   获取下一个兄弟节点  所有节点中的下一个兄弟节点
+        //    执行结果是一个唯一的对象
+        console.log(oSpan.nextSibling);
+
+        // 9, 当前标签对象.previousElementSibling   获取上一个兄弟标签节点  所有节点中的上一个兄弟标签节点
+        //    执行结果是一个唯一的对象
+        console.log(oSpan.previousElementSibling);
+
+        // 10, 当前标签对象.nextElementSibling   获取下一个兄弟标签节点  所有节点中的下一个兄弟标签节点
+        //    执行结果是一个唯一的对象
+        console.log(oSpan.nextElementSibling);
+
+        // 11, 当前标签对象.parentNode      获取父级节点  获取直接父级
+        //    执行结果是一个唯一的对象
+        console.log(oSpan.parentNode);
+
+        // 12, 当前标签对象.attributes      获取所有属性节点
+        //    执行结果是一个伪数组,不支持forEach
+        console.log(oSpan.attributes);
+
+        // 实际项目中,获取节点,推荐大家使用DOM操作方式
+        
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

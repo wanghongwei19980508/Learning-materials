@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            元字符:   单独使用元字符,只要有符合规范的内容就行,不需要完全符合
+
+                \d   数字    只要有数字就行,不用都是数字
+
+                \D   非数字
+
+                \w   数字,字母,下划线
+ 
+                \W   非数字,字母,下划线
+
+                \s   空格
+
+                \S   非空格
+
+            验证语法:
+                正则表达式.test(字符串)  验证字符串是否符合正则表达式规范
+        
+        */ 
+
+        // 正则表达式,是用来验证字符串内容的
+
+        let str1 = 'abc';
+
+        let reg1 = /\d/;   
+
+        console.log( reg1.test(str1) ) ; 
+
+        // 总结:
+        // 独立只用 元字符 作为 正则表达式验证
+        // 只要包含有一个符合规范的内容就行,不用所有的内容都是符合规范的内容
+
+        
+
+    </script>
+</body>
+</html>

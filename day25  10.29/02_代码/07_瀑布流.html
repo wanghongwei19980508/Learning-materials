@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            瀑布流:
+                所谓的瀑布流:
+                    打开页面,每次只请求显示一部分内容
+                    当页面要显示到底部时,再次请求,获取新的内容,渲染生成新的页面
+
+                当前要使用 服务器代理 请求 堆糖网站的数据
+                但是要 注意 不是所有的网站 都支持 服务器代理执行跨域访问
+
+
+            堆糖 数据访问 地址
+
+                https://www.duitang.com/napi/blog/list/by_filter_id/?include_fields=top_comments%2Cis_root%2Csource_link%2Citem%2Cbuyable%2Croot_id%2Cstatus%2Clike_count%2Csender%2Calbum%2Creply_count&filter_id=%E5%A9%9A%E7%BA%B1%E5%A9%9A%E7%A4%BC&start=24&_=1603957405687
+
+
+
+
+                https://www.duitang.com/napi/blog/list/by_filter_id/
+
+                    问号之前的内容 是 访问的 url 地址 
+
+                    问号之后的内容 都是 访问时,携带的参数
+
+                    设定代理时 就写 问号之前,url地址
+
+                    问号之后的参数,拼接在 代理之后
+
+                    代理设定
+
+                    location = /dt {
+                        proxy_pass https://www.duitang.com/napi/blog/list/by_filter_id/;
+                    }
+
+                参数解析:
+                    filter_id=%E5%A9%9A%E7%BA%B1%E5%A9%9A%E7%A4%BC
+                        访问请求的关键词
+                        首页>分类 下 设定的中文关键词
+
+                    start=24
+                        分页显示,获取的数据,起始索引下标
+                        第一次是 0 
+                        通过修改这个数据,可以获取到不同的 响应体内容
+
+                    _=1603957405687
+                        时间戳  当前发起访问时,当前时间的时间戳
+                    
+                    
+
+        */
+
+    </script>
+</body>
+</html>

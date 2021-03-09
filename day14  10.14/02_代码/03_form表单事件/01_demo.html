@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            display: none;
+            margin: 20px 0 ;
+        }
+    </style>
+</head>
+<body>
+    <h1>注册信息页面</h1>
+
+    <form action="./02_demo.html" method="get">
+        账号 : <input type="text" name="username" maxlength="16" placeholder="请输入8-16位账号"><br>
+        
+        <div name="name">请您输入8-16位的账号</div>
+        
+        
+        密码 : <input type="password" name="userpwd1" maxlength="16" placeholder="请输入8-16位密码"><br>
+
+        <div name="pwd1">请您输入8-16位的密码</div>
+
+        确认密码 : <input type="password" name="userpwd2" maxlength="16" placeholder="请再次输入密码"><br>
+        
+        <div name="pwd2">请您再次输入密码</div>
+        
+        <button>注册</button>
+    </form>
+
+
+    <script>
+        // 1, 获取标签对象
+        // 3个input标签对象
+        var oIptName = document.querySelector('[name="username"]');
+        var oIptPwd1 = document.querySelector('[name="userpwd1"]');
+        var oIptPwd2 = document.querySelector('[name="userpwd2"]');
+
+        // 3个div标签对象
+        var oDivName = document.querySelector('[name="name"]');
+        var oDivPwd1 = document.querySelector('[name="pwd1"]');
+        var oDivPwd2 = document.querySelector('[name="pwd2"]');
+
+        // console.log( oIptName , oIptPwd1 , oIptPwd2 , oDivName , oDivPwd1 , oDivPwd2 )
+
+        // 1,添加 获取焦点事件 
+        // 鼠标点击标签,获取焦点时,执行的程序
+        oIptName.onfocus = function(){
+            // 让 对应的div 样式设定为 display:block
+            oDivName.style.display = 'block';
+        }
+
+        oIptPwd1.onfocus = function(){
+            // 让 对应的div 样式设定为 display:block
+            oDivPwd1.style.display = 'block';
+        }
+
+        oIptPwd2.onfocus = function(){
+            // 让 对应的div 样式设定为 display:block
+            oDivPwd2.style.display = 'block';
+        }
+
+
+        // 2, 输入事件 每次敲击键盘,都会触发input事件
+        // 输入字符,提示还有几个字符可以输入
+
+        oIptName.oninput = function(){
+            // 获取标签中输入的内容
+            var nameStr = oIptName.value;
+            // 字符串都有length属性,属性值就是字符串长度,就是字符个数
+            // 根据输入的内容,改变div中标签内容
+
+            // if(nameStr.length < 8 ){
+            //     oDivName.innerHTML = `<span style="color:red">您需要至少输入8个字符,您当前输入了${nameStr.length}个字符,最多输入16个字符,还可以输入${16-nameStr.length}个字符</span>`;
+            // }else{
+            //     oDivName.innerHTML = `<span style="color:black">您需要至少输入8个字符,您当前输入了${nameStr.length}个字符,最多输入16个字符,还可以输入${16-nameStr.length}个字符</span>`;
+            // }
+
+
+            // oDivName.innerHTML = nameStr.length < 8 ? `<span style="color:red">您需要至少输入8个字符,您当前输入了${nameStr.length}个字符,最多输入16个字符,还可以输入${16-nameStr.length}个字符</span>` :  `<span style="color:black">您需要至少输入8个字符,您当前输入了${nameStr.length}个字符,最多输入16个字符,还可以输入${16-nameStr.length}个字符</span>` ;
+
+
+            oDivName.innerHTML = `<span style="color:${ nameStr.length < 8 ? 'red' : 'black' }">您需要至少输入8个字符,您当前输入了${nameStr.length}个字符,最多输入16个字符,还可以输入${16-nameStr.length}个字符</span>`;
+
+        }
+
+
+        oIptPwd1.oninput = function(){
+            // 获取标签中输入的内容
+            var pwd1Str = oIptPwd1.value;
+            // 根据输入字符长度,输入提示信息
+            oDivPwd1.innerHTML = `<span style="color:${ pwd1Str.length < 8 ? 'red' : 'black' }">您需要至少输入8个字符,您当前输入了${pwd1Str.length}个字符,最多输入16个字符,还可以输入${16-pwd1Str.length}个字符</span>`;
+
+        }
+
+        oIptPwd2.oninput = function(){
+            // 获取标签中输入的内容
+            var pwd2Str = oIptPwd2.value;
+            // 根据输入字符长度,输入提示信息
+            oDivPwd2.innerHTML = `<span style="color:${ pwd2Str.length < 8 ? 'red' : 'black' }">您需要至少输入8个字符,您当前输入了${pwd2Str.length}个字符,最多输入16个字符,还可以输入${16-pwd2Str.length}个字符</span>`;
+
+        }
+
+
+        // 失去焦点事件
+        // 1,失去焦点,2,输入内容改变,才会触发事件
+        oIptName.onchange = function(){
+            // 1, 获取输入的数据
+            var nameStr = oIptName.value;
+
+            // 2, 根据输入数据的长度做判断
+            if( nameStr.length < 8 ){
+                // 错误格式,提示信息
+
+                // 修改input字体样颜色为红色,边框线为红色
+                oIptName.style.color = 'red';
+                oIptName.style.borderColor = 'red';
+
+                // 修改div中的提示信息
+                oDivName.style.color = 'orange';
+                oDivName.innerHTML = '您输入的账号格式不符合要求,请检查,并且重新输入';
+            }else{
+                // 正确格式的提示信息
+                oDivName.style.color = 'pink';
+                oDivName.innerHTML = '亲,您输入的内容,格式完全正确,棒棒哒,么么哒, ^_^!!!';
+
+            }
+        }
+
+
+        // 确认密码必须要和原始密码完全相同
+        // ===  严格区分大小写
+
+        oIptPwd2.onchange = function(){
+            // 1,获取数据 获取 密码框 和 确认密码框 输入的数据
+            var pwd1Str = oIptPwd1.value;
+            var pwd2Str = oIptPwd2.value;
+
+            if(pwd1Str === pwd2Str){
+                oDivPwd2.innerHTML = '<span style="color:pink">密码和确认密码相同</span>';
+            }else{
+                oDivPwd2.innerHTML = '<span style="color:red">密码和确认密码不同</span>';
+            }
+        }
+
+        
+
+
+
+    </script>
+</body>
+</html>

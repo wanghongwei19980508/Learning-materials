@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>点击发送请求</button>
+
+    <script>
+        // 通过原生ajax,向php程序发送请求
+
+        const oBtn = document.querySelector('button');
+
+        oBtn.addEventListener('click' , ()=>{
+            // 执行原生ajax,get请求方式
+
+            // 1,先创建一个 ajax请求对象 , 一般都叫 xhr
+            // 通过 JavaScript 定义的 专门创建 ajax请求对象的 构造函数 
+            // XMLHttpRequest()  来 创建 一个 ajax请求对象
+            // XML     html中的一个版本,对语法要求非常严格
+            // HTTP    http协议
+            // Request 请求
+            // 最初的 ajax 是 一个 基于 XML文档格式 , 使用 HTTP协议的 请求方式
+            // 现在html也可以支持,其他请求协议也可以支持
+
+            const xhr = new XMLHttpRequest();
+            
+            // 2,设定 请求方式 和 请求地址
+            // 使用 open(参数1 , 参数2) 方法 来定义
+            // 参数1 : 请求方式
+            // 参数2 : 请求地址
+
+            // get方式 在 url地址栏之后,拼接传参数据
+            // 语法就是 超链接 传参语法 
+            xhr.open('get' , './demo.php?name=张三&age=18&sex=男');
+
+            // 3,发送 请求
+            // 使用 send() 
+            // get请求方式,send()中没有任何参数
+            xhr.send();
+
+            // 4,接收 请求
+            // 当请求结束时,执行的成程序
+            xhr.onload = ()=>{
+                console.log(xhr);
+            }
+
+        })
+
+
+        /*
+            总结: get 方式 , 请求步骤
+                1, 使用 JavaScript 定义的 内置构造函数 
+                   创建 ajax请求的 实力话对象
+
+                   const xhr = new XMLHttpRequest();
+
+                2, 使用 ajax 实例化对象中的 open() 方法
+                   给 ajax 请求, 设定 请求方式 和 请求url地址
+
+                   xhr.open( 'get' , 'url地址?键名=数值&键名=数值...' );
+
+                   get方式,发送请求,在url地址栏之后,拼接传参数据
+                   语法 与 超链接传参语法相同
+                        ? 问号 间隔 url地址 和 参数数据
+                        之后以 键值对的形式 设定键名和数值
+                        多个键值对,使用, & 符号间隔
+
+
+                3, 使用 ajax 实例化对象中的 send() 方法 发送请求
+                   get方式,send() 没有参数
+
+                   xhr.send();
+
+                4, 使用 ajax 实例化对象中的 onload 方法 接收响应结果
+                   xhr.onload = ()=>{ 请求结束,执行的程序 }
+        */
+    </script>
+</body>
+</html>

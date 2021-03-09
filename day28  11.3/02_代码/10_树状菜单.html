@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        ul,ol,li{
+            list-style: none;
+        }
+        ul{
+            width: 300px;
+            border : 3px solid #000;
+            margin: 30px  auto;
+            padding: 0 0 0 20px; 
+        }
+
+        ul>li{
+            cursor: pointer;
+        }
+
+        
+
+        ul>li::before{
+            content: "+";
+        }
+
+        ul>li.active::before{
+            content: "-";
+        }
+
+        ul>li>ol{
+            padding:0 0 0 20px;
+            display: none;
+        }
+
+
+    </style>
+</head>
+<body>
+
+    <ul>
+        <li>
+            一级菜单
+            <ol>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ol>
+        </li>
+        <li>
+            一级菜单
+            <ol>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ol>
+        </li>
+        <li>
+            一级菜单
+            <ol>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ol>
+        </li>
+        <li>
+            一级菜单
+            <ol>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ol>
+        </li>
+        <li>
+            一级菜单
+            <ol>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+                <li>二级菜单</li>
+            </ol>
+        </li>
+    </ul>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            需求分析:
+                1,有一级二级菜单内容
+                2,二级菜单默认是隐藏的,一级li之前,默认是+加号
+                3,点击一级菜单:
+                    点击的一级菜单的 二级菜单 做 显示/隐藏 的切换
+                    其他二级菜单隐藏
+
+                    点击的一级菜单li之前的  + / - 做切换效果
+                    其他一级此单li之前的 必须都是 +加号
+        */
+
+        $('ul>li').click( function(){
+            $(this)                   // 当前点击的li标签
+            .toggleClass('active')    // 切换 class,active属性, 让 +/- 做切换效果
+            .find('ol')               // 找当前 li下的 ol标签
+            .slideToggle()            // 让 ol 做显示 隐藏的切换
+            .parent()                 // 找到 ol 的父级 也就是 点击的 li
+            .siblings()               // 找到 点击li 的所有兄弟 li
+            .removeClass('active')    // 删除 active li之前的符号都变成 + 加号
+            .find('ol')               // 找到 所有兄弟li 中的 ol 标签
+            .slideUp();               // 设定 所有兄弟li 中的 ol 标签 上卷隐藏
+        } )
+    </script>
+</body>
+</html>

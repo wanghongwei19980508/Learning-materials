@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li,
+        ol {
+            list-style: none;
+        }
+
+        a,
+        a:active,
+        a:hover {
+            text-decoration: none;
+            color: #fff;
+
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 960px;
+            height: 250px;
+            border: 3px solid #000;
+            margin: 40px auto;
+            position: relative;
+            /* overflow: hidden; */
+        }
+
+        .box>ul {
+            width: 960px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box>ul::after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .box>ul>li {
+            width: 960px;
+            height: 250px;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box>ol {
+            height: 20px;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 5px;
+        }
+
+        .box>ol>li {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 10px;
+        }
+
+        .box>ol>li.active {
+            background: red;
+        }
+
+        .box>div {
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .box>div>a {
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 25px;
+            background: rgba(0, 0, 0, .5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul></ul>
+        <ol></ol>
+        <div>
+            <a name="l" href="JavaScript:;">&lt;</a>
+            <a name="r" href="JavaScript:;">&gt;</a>
+        </div>
+    </div>
+
+
+    <script src="./tools.js"></script>
+    <script>
+        // 模拟的图片数组
+        const imgArr = [
+            { path: '1.jpg', width: 1920, height: 500, size: 127 },
+            { path: '2.jpg', width: 1920, height: 500, size: 128 },
+            { path: '3.jpg', width: 1920, height: 500, size: 129 },
+            { path: '4.jpg', width: 1920, height: 500, size: 130 },
+            { path: '5.jpg', width: 1920, height: 500, size: 131 },
+            { path: '6.jpg', width: 1920, height: 500, size: 123 },
+        ];
+
+
+        // 获取标签对象
+
+        // 获取轮播图div标签
+        const oBox = document.querySelector('.box');
+        // 在div标签中,获取子级标签对象
+        const oUl = oBox.querySelector('ul');
+        const oOl = oBox.querySelector('ol');
+
+        // 获取li的宽度,目前原始状态,li没有这个标签,没有占位,无法获取宽度设定
+        // 先定义一个全局变量,将来写入了li,再获取宽度
+        let oLiWidth = 0;
+
+        // 定义一个变量,存储当前显示的li的索引下标
+        // 这个 index 就是 我们控制 轮播图 显示 内容的 关键变量
+        // index的值 直接决定了 ul 定位的数值数据
+        // ul的定位 就是 负的 index 乘以 li的宽度
+        // 通过 控制 index 就可以控制 ul 的定位,就可以控制 轮播图 显示的 图片内容
+        // 就可以达到轮播的效果
+        let index = 1;
+
+        // 定义一个变量,存储原始图片数组长度
+        let imgLength = imgArr.length;
+
+        // 定义一个变量,存储ol中,生成的li标签对象
+        let olLis = {};
+
+        // 定义变量,存储定时器
+        let time;
+
+        // 定义变量,存储初始值,控制,事件的执行
+        let bool = true;
+
+
+
+        // 根据图片数组,动态生成ul>li和ol>li
+        setLi(imgArr);
+
+        // 自动轮播函数
+        autoLoop();
+
+        // 鼠标移入移出事件
+        mouseInOut();
+
+        // 设定切换事件
+        setActiveChange();
+
+        // 解决浏览器隐藏问题
+        hid();
+
+
+
+        // 1, 动态渲染生成页面
+        // 实际项目中,轮播图,图片内容,个数,都是从数据库获取的数据信息
+        // 我们当前使用 一个 轮播图,图片数据信息数组,模拟获取的图片数据
+
+
+
+        // 动态渲染生成页面
+        // 动态生成ul中的li,ol中的li
+        // ol>li与 图片数量相同 第一个li有css样式active
+
+        // 参数:图片数据信息
+        function setLi(array) {
+            // 创建 ol>li  ul>li 存储变量
+            let olLiStr = '';
+            let ulLiStr = '';
+
+            // 循环遍历 图片数组信息
+            array.forEach((v, k) => {
+                //如果是第一个ol>li,添加active样式
+                if (k === 0) {
+                    olLiStr += `<li num="${k}" name="olli" class="active li1 li3 li4"></li>`;
+                } else {
+                    olLiStr += `<li num="${k}" name="olli" class="li1 li3 li4"></li>`;
+                }
+                // 每一个ul>li,其中有图片标签,src路径是相对路径,拼接图片名称
+                ulLiStr += `<li><img src="./images/${v.path}"></li>`;
+            })
+
+            // 写入ol
+            oOl.innerHTML = olLiStr;
+
+            // 写入ul
+            oUl.innerHTML = ulLiStr;
+
+            // 当前ul中有了6个li,需要克隆第一个和最后一个li
+            const cloneFirst = oBox.querySelectorAll('ul>li')[0].cloneNode(true);
+            const cloneLast = oBox.querySelectorAll('ul>li')[array.length - 1].cloneNode(true);
+
+            // 克隆的第一个li,写入到ul的最后
+            oUl.appendChild(cloneFirst);
+
+            // 克隆的最后一个li,写入到ul中,第一个标签之前
+            oUl.insertBefore(cloneLast, oBox.querySelectorAll('ul>li')[0]);
+
+            // 获取li的宽度 赋值给 全局作用域变量
+            oLiWidth = oBox.querySelectorAll('ul>li')[0].offsetWidth;
+
+            // 获取ol中,写入的所有的li标签
+            olLis = oOl.querySelectorAll('li');
+
+            // 设定 ul 的宽度 , 每个li的宽度 * 当前li的个数( 原始图片个数+2 )
+            oUl.style.width = oLiWidth * (array.length + 2) + 'px';
+
+            // 默认显示的第一张是原始的最后一张,当前的第二张,才是原始的第一张
+            // 定位ul,显示第二个li
+            oUl.style.left = `-${index * oLiWidth}px`;
+        }
+
+        // 自动轮播函数
+        // 让轮播图自动轮序播放
+        // 每次轮播图的运动切换,使用 move 运动函数实现
+        // 通过 定时器 每间隔一段事件,执行一个 move 运动函数,实现轮播
+        // 每次定位,就是从当前的li定位,到下一个li的定位,每次位移的距离,是一个li的宽度960
+
+        // 第一次显示的是,当前第二张图片,原始第一张图片,当前的索引下标是 1   定位是为 -960 -1 乘以 宽度
+        // 下一张图片,是当前第三张图片,原始第二张图片,当前的索引下标是 2 定位是 -1920  -2 乘以 宽度     
+        // 下一张图片,是当前第四张图片,原始第三张图片,当前的索引下标是 3 定位是 -2880  -3 乘以 宽度
+        // .....
+        // 每张图片显示时,定位数值,正好是 负的 索引 乘以 li宽度 
+        // 使用变量index 存储 索引, 起始图片,索引是 1 , index初始值是 1
+        // 每次切换下一张图片,index值要 +1     
+
+        function autoLoop() {
+            // 给全局变量赋值定时器的序号
+            time = setInterval(() => {
+                // index++ 就是 index 存储的数值 +1 
+                index++;
+                // 给ul做定位的位移 下一个 最终位置 是 负的 当前索引 乘以 li 的宽度
+
+                setLiStyle();
+
+                // 方法1: 在匿名函数中,调用 已经定义的 轮播运功终止函数
+                // move( oUl , {left : -index * oLiWidth } , function(){ loopEnd() } );
+                // 方法2: 直接赋值函数名称,在参数3的位置上
+                move(oUl, { left: -index * oLiWidth }, loopEnd);
+                // 两种方法,目前没有区别,过两天讲面向对象,就有区别了
+
+            }, 3000);
+        }
+
+
+        // 轮播运动停止函数
+        // 当轮播图,运动结束时,执行的回调函数
+        function loopEnd() {
+            // 1 , 完成轮播图的轮序播放
+            // 当轮播图显示为当前最后一个li,运动结束,将ul,瞬间定位到 当前第二个li的位置 index是 1
+            // 最后一个 li 对应的索引下标 --- 原始图片数组长度+1
+            if (index === imgLength + 1) {
+                // index 赋值 当前第二个,原始第一个图片的索引下标 --- 1
+                index = 1;
+                // 给 ul 做定位 这个定位是 瞬间发生的,不需要运动函数,直接定位
+                oUl.style.left = `-${index * oLiWidth}px`;
+
+                // 当显示的li是当前的一个li,也就是原始的最后一张图片
+                // 需要切换到 当前的 倒数第二个 li 位置 
+            } else if (index === 0) {
+                index = imgLength;
+                oUl.style.left = `-${index * oLiWidth}px`;
+            }
+
+            // 2 , 焦点样式切换
+            // setLiStyle();
+
+            // 3 , 给变量赋值原始值
+            bool = true;
+        }
+
+
+        // 焦点样式切换函数
+        // 给所有的 ol>li 都清除 active 
+        // 再给索引对应的 li 添加 active
+
+        function setLiStyle() {
+            // ol>li 与 显示的 ul>li 的对应的 索引下标, 相差 1 
+            // 循环遍历
+            // v是li标签,k是索引下标
+            olLis.forEach((v, k) => {
+                // 给所有的 li 清除 class样式
+                myRemoveClass(v, 'active');
+
+                // 给索引,比当前index值小1 的标签,添加active
+                if (k === index - 1) {
+                    v.className += ' active';
+                }
+            })
+        }
+
+
+        // 鼠标移入移出
+        // 鼠标移入,停止轮播图执行,清除定时器
+        // 鼠标移出,轮播图再次自动执行,再次调用自动轮播函数
+        // 子级标签,不要再触发事件,只有父级,轮播图标签,触发事件就可以了
+
+        function mouseInOut() {
+            // 鼠标移入 div ,清除定时器
+            oBox.addEventListener('mouseenter', () => {
+                clearInterval(time);
+            })
+
+            // 鼠标移出div,再次启动自动轮播函数
+            oBox.addEventListener('mouseleave', () => {
+                autoLoop();
+            })
+        }
+
+
+        /*
+            切换事件
+                通过事件委托方式,判断点击的标签,执行不同的操作
+
+                左右切换
+                    点击左a标签 , 显示上一张图片 , index--
+                        根据新的index数值,调用move()运动函数,完成显示的运动切换
+                    点击右a标签 , 显示下一张图片 , index++
+                        根据新的index数值,调用move()运动函数,完成显示的运动切换
+
+                焦点切换
+                    获取点击ol>li标签的索引下标 +1 是 index 的数值
+                        根据新的index数值,调用move()运动函数,完成显示的运动切换
+
+            核心: 获取点击之后,对应的 index 的数值 然后执行 move() 运动函数 完成 运动切换
+        
+        */
+
+        function setActiveChange() {
+            oBox.addEventListener('click', e => {
+                // 兼容事件对象
+                e = e || window.event;
+
+                // 判断点击标签的name属性值
+
+                if (e.target.getAttribute('name') === 'l') {
+                    // 控制事件触发的执行
+                    if (!bool) return;
+                    bool = false;
+
+
+                    // 如果name的属性值是l,证明点击的是左按钮
+                    index--;
+                    // 图片做动态切换,使用move函数来完成
+                    move(oUl, { left: -index * oLiWidth },  );
+                } else if (e.target.getAttribute('name') === 'r') {
+                    // 控制事件触发的执行
+                    if (!bool) return;
+                    bool = false;
+
+                    // 如果name的属性值是r,证明点击的是右按钮
+                    index++;
+                    // 图片做动态切换,使用move函数来完成
+                    move(oUl, { left: -index * oLiWidth }, loopEnd);
+                } else if (e.target.getAttribute('name') === 'olli') {
+                    // 控制事件触发的执行
+                    if (!bool) return;
+                    bool = false;
+
+                    // 每一个ol,li,都有一个num属性,属性值+1,就是对应的显示li的索引下标,就是index的数值
+                    // 所有属性的属性值,获取的结果,都是字符串类型,要进行计算,要先转化为数值类型
+                    index = e.target.getAttribute('num') - 0 + 1;
+                    move(oUl, { left: -index * oLiWidth }, loopEnd);
+                }
+
+            })
+        }
+
+
+        // 自动轮播函数,定时器事件过段, 点击过快 , 引起的 轮播图抽疯现象
+        /* 核心原因: 上一个定时器还没有清除,下一个定时器就开始执行了
+                如果自动轮播的定时器时间过段
+                    每次启动 自动轮播,都会调用 move() 运动函数 通过move()运动函数,完成图片的运动切换
+                    move() 运动函数 本身也有定时器 要完成运动 也需要时间
+                    如果 自动轮播函数 定时器的时间 太短 move()运动函数  还没有执行完毕
+                    也就是 上一张 图片的运动切换 还没有完成 下一张图片的运动切换就开始了
+                    因此, 自动轮播的时间 一定要 大于 move()运动的时间 
+
+                    点击切换也是一个道理
+                    每次触发点击切换,都会触发执行一个 move() 运动函数 
+                    必须要在上一个move()运动函数 执行结束 之后 再次点击,触发下一个切换事件,触发下一个move()运动函数
+
+                解决方案:
+                    1 , 禁用标签
+                    2 , 删除绑定的事件
+                    3 , 添加一个变量,效果类似于开关
+
+                        变量赋值初始值
+                        如果是初始值,执行程序,变量赋值其他数值
+                        如果不是初始值,执行return,终止函数程序执行
+                        运动结束,变量赋值初始值
+
+                总结:
+                    所有点击触发切换的事件
+                    在 执行 index等操作之前 先判断 bool 存储的数据
+                    如果是 原始值 true 就是执行 下面的程序 执行 index 操作, 触发move()运动函数 给bool 赋值其他数值
+                    如果不是 原始值 true 就执行  return  不再执行 index操作,不再触发move()运动函数
+                    当运动结束时,也就是在 loopEnd() 函数中, 给变量bool 赋值原始值
+        */
+
+
+        /*
+            轮播图隐藏,时间长了,就疯了:
+                轮播图虽然隐藏了,但是,自动轮播,仍然在执行,就需要做页面定位设置的操作
+                但是,现在浏览器隐藏了,定位设置切换,不会执行的
+                浏览器显示时,会把之前要执行的定位切换,一次性,一起执行
+                就变成了多个move()运动函数同时执行,就类似于点击过快的效果
+                是多个运动函数同时执行引起的
+
+            解决方案:
+                浏览器隐藏时,停止定时器,浏览器显示时,再启动定时器
+
+                visibilitychange 事件 当浏览器显示状态发生改变时 触发事件
+                                        浏览器   隐藏--->显示
+                                                显示--->隐藏  
+                                        都会触发函数
+
+                visibilityState 获取浏览器显示属性值
+                    hidden   隐藏
+                    visible  显示
+        
+        */
+
+        function hid() {
+            document.addEventListener('visibilitychange', () => {
+
+                if (document.visibilityState === 'hidden') {
+                    // 清除定时器,终止自动录播的执行
+                    clearInterval(time);
+                } else if (document.visibilityState === 'visible') {
+                    // 再次调用自动轮播函数
+                    autoLoop();
+                }
+
+            })
+
+        }
+
+
+    </script>
+</body>
+
+</html>

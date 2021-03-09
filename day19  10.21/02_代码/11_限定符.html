@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            限制符:
+                显示内容字符个数的正则表达式
+                一般要与 起始和结束符号一起使用, 独立使用要出问题
+
+                *     0  至  正无穷 个字符   可以没有,可以有无穷多个 
+                +     1  至  正无穷 个字符   至少有一个字符
+                ?     0  至  1 个字符   可以没有,最多有一个
+                {n}   只能有n个字符
+                {n,}  n 至 正无穷个字符串 
+                {n,m}  n 至 m 个字符串 
+        
+        */
+
+        let str = '12221111';
+
+        let reg1 = /^\d*$/;     // 从开始到结束,可以有 0-正无穷个数字字符,不能有其他字符
+        let reg2 = /^\d+$/;     // 从开始到结束,可以有 1-正无穷个数字字符,不能有其他字符
+        let reg3 = /^\d?$/;     // 从开始到结束,可以有 0-1 个数字字符,不能有其他字符
+        let reg4 = /^\d{5}$/;   // 从开始到结束,只能有 5个数字字符,不能有其他字符
+        let reg5 = /^\d{5,}$/;   // 从开始到结束,可以有 5 - 正无穷个数字字符 ,不能有其他字符
+        let reg6 = /^\d{5,6}$/;   // 从开始到结束,可以有 5 - 6 个数字字符 ,不能有其他字符
+
+
+
+        console.log( reg1.test(str) );
+        console.log( reg2.test(str) );
+        console.log( reg3.test(str) );
+        console.log( reg4.test(str) );
+        console.log( reg5.test(str) );
+        console.log( reg6.test(str) );
+
+        /*
+            限定符 一定要和 ^  $  起始结束边界符配合使用
+            单独使用,语法效果,完全不同
+        */ 
+
+    </script>
+</body>
+</html>

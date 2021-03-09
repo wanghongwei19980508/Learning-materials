@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        body {
+            background-color: black;
+        }
+        
+        .c-nav {
+            width: 900px;
+            height: 42px;
+            background: #fff url(images/rss.png) no-repeat right center;
+            margin: 100px auto;
+            border-radius: 5px;
+            position: relative;
+        }
+        
+        .c-nav ul {
+            position: absolute;
+        }
+        
+        .c-nav li {
+            float: left;
+            width: 83px;
+            text-align: center;
+            line-height: 42px;
+        }
+        
+        .c-nav li a {
+            color: #333;
+            text-decoration: none;
+            display: inline-block;
+            height: 42px;
+        }
+        
+        .c-nav li a:hover {
+            color: white;
+        }
+        
+        .c-nav li.current a {
+            color: #0dff1d;
+        }
+        
+        .cloud {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 83px;
+            height: 42px;
+            background: url(images/cloud.gif) no-repeat;
+        }
+    </style>
+</head>
+<body>
+    <div id="c_nav" class="c-nav">
+        <span class="cloud"></span>
+        <ul>
+            <li class="current"><a href="#">IG</a></li>
+            <li><a href="#">TheShy</a></li>
+            <li><a href="#">Ning</a></li>
+            <li><a href="#">Rookie</a></li>
+            <li><a href="#">Baolan</a></li>
+            <li><a href="#">Jacklove</a></li>
+            <li><a href="#">WXZ</a></li>
+            <li><a href="#">望远烬</a></li>
+        </ul>
+    </div>
+    
+    <script src="animate1.js"></script>
+    <script>
+        window.addEventListener('load',()=>{
+            let cloud = document.querySelector('.cloud');
+            let c_nav = document.querySelector('.c-nav');
+            let lis   = c_nav.querySelectorAll('li');
+            console.log(lis);
+
+
+            //2.设定 cloud 的起始位置
+
+            let current = 0;
+
+            lis.forEach((v,k)=>{
+                lis[k].addEventListener('mouseenter',function(){
+                    animate1(cloud,this.offsetLeft);
+                })
+                lis[k].addEventListener('mouseleave',function(){
+                    animate1(cloud,current);
+                })
+                lis[k].addEventListener('click',function(){
+                    current = this.offsetLeft;
+                })
+
+            })
+        })
+    
+    </script>
+</body>
+</html>

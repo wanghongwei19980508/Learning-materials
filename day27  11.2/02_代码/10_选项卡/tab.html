@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+
+        ul,ol,li{
+            list-style: none;
+        }
+
+        img{
+            display:block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box{
+            width: 500px;
+            height: 383px;
+            border: 5px solid #000;
+            margin: 40px auto;
+            display: flex;
+            flex-direction: column;   
+        }
+
+        .box>ul{
+            width: 100%;
+            height: 50px;
+            display: flex;
+        }
+
+        .box>ul>li{
+            flex: 1 ;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            background: skyblue;
+            font-size: 30px;
+            border-right: 3px solid #000 ;
+        }
+
+        .box>ul>li:last-child{
+            border-right: none;
+        }
+
+        .box>ul>li.active1{
+            background: red;
+        }
+
+        .box>ol{
+            flex: 1;
+            position: relative;
+        }
+
+        .box>ol>li{
+            position: absolute;
+            top:0;
+            left: 0;
+            display: none;
+        }
+
+        .box>ol>li.active2{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="box">
+        <ul></ul>
+        <ol></ol>
+    </div>
+
+
+    <script src="../jquery.min.js"></script>
+    <script src="./tools.js"></script>
+    <script src="./tab.js"></script>
+    <script>
+        // 根据数组信息,动态生成标签
+        // 给标签添加效果,鼠标点击/移动某个标签,显示对应的内容
+        // 选项卡重要思路:
+        //     ul>li 与 ol>li 个数一定相同
+        //     索引下标一定是相同的
+
+        // 定义一个图片信息数组
+        const imgArr = [
+            {name:'合影',path:'1.jpg',width:500,height:333},
+            {name:'卡卡西',path:'2.jpg',width:500,height:333},
+            {name:'鸣人',path:'3.jpg',width:500,height:333},
+        ];
+
+        // 选项卡 标签对象
+        const oTab = document.querySelector('.box');
+
+        // 使用构造函数,创建实例化对象
+        const oTabObj = new mySetTab( imgArr , oTab , 'mouseover');
+        // 只用 JavaScript,生成页面内容
+        oTabObj.setLi();
+
+
+
+        // 使用 jQuery语法,实现选项卡,效果
+        // 基本思路是相同的:
+        // 1,给所有的ul>li添加点击事件
+        //   点击时: 给所有的ul>li清除active样式,给点击的ul>li添加active
+        //           给所有的ol>li请求active样式,给索引与点击的ul>li相同的ol>li添加active样式
+
+        $('ul>li').click(function(){
+            $(this)                     // this,是当前点击的ul>li,是JavaScript独立的标签对象,$()包裹,就是jQuery伪数组
+            .addClass('active1')        // 给当前点击的this,添加 active1 class属性值
+            .siblings()                 // 找到当前点击this,li标签的所有兄弟li标签
+            .removeClass('active1')     // 给所有兄弟li标签,删除 active1 class属性值
+            .parent()                   // 找到 当期点击this,li标签的直接父级标签---ul标签
+            .next()                     // 找到 ul标签的下一个兄弟标签---ol
+            .find('li')                 // 按照条件,在ol中,找到所有li标签
+            .removeClass('active2')     // 给所有li标签,删除 active2 class属性值
+            .eq($(this).index())        // eq()按照索引下标,在 ol 中查询li标签
+                                        // $(this).index()  当前点击的ul>li标签的 索引下标
+            .addClass('active2');       // 给 找到的 ol>li中与点击的ul>li索引下标相同的 li 添加 active2 class属性值
+        });
+
+
+
+
+
+        // 面向过程编程方式
+
+        // 获取ul,ol标签对象,是 div 中 ul ol 
+        // const oUl = oTab.querySelector('ul');
+        // const oOl = oTab.querySelector('ol');
+
+        // // 定义变量,存储所有的ul>li   ol>li
+        // let oUllis ;
+        // let oOllis ;
+
+
+        // // 执行调用函数
+        // setLi(imgArr);
+
+        // setActive();
+
+
+
+
+        // (1) 动态生成标签,写入到页面中
+        // function setLi(array){
+        //     // 定义存储生成字符串的变量
+        //     let ulLiStr = '';
+        //     let olLiStr = '';
+
+        //     // 循环遍历,数组,生成标签对象,以字符串的形式,存储在变量中
+        //     array.forEach( (v,k)=>{
+        //         // 给每一个 ul>li 添加 num 属性,存储的属性值 就是 当前 li标签的索引下标
+        //         ulLiStr += k === 0 ? `<li num="${k}" name="ulli" class="active1">${v.name}</li>` : `<li  num="${k}"  name="ulli">${v.name}</li>`;
+
+        //         olLiStr += k === 0 ? `<li name="olli" class="active2"><img src="./images/${v.path}"></li>` : `<li name="olli"><img src="./images/${v.path}"></li>`;
+        //     } )
+
+        //     // 将字符串内容,写入到 ul ol 中
+        //     oUl.innerHTML = ulLiStr;
+        //     oOl.innerHTML = olLiStr;
+
+        //     // 写入之后,页面就有ul>li ol>li 获取所有的标签
+        //     oUllis = oTab.querySelectorAll('ul>li');
+        //     oOllis = oTab.querySelectorAll('ol>li');
+        // }
+        
+
+        // (2) 动态生成的标签,最好是用事件委托的形式,添加点击事件
+        // 给父级 oTab 添加 点击事件
+        // function setActive(){
+        //     oTab.addEventListener('click' , e => {
+        //         if(e.target.getAttribute('name') === 'ulli'){
+        //             // 1, 给所有的 ul>li 清除样式
+        //             oUllis.forEach( (v , k)=>{
+        //                 // v是 ul>li 伪数组中的 li标签
+        //                 myRemoveClass( v , 'active1' );
+        //                 // k是 ul>li的索引 与 ol>li的索引相同
+        //                 // 用k 作为 ol>li 伪数组的索引 可以获取 ul>li 伪数组中的 li标签
+        //                 // 可以 同时删除 ol>li 中 li 标签的 active2 样式
+        //                 myRemoveClass( oOllis[k] , 'active2' );
+
+        //             } )
+
+        //             // 2, 给点击的添加 active1
+        //             e.target.className += ' active1';
+
+        //             // 3, 给与当前点击的 ul>li 标签 索引相同的 ol>li 添加样式
+        //             oOllis[ e.target.getAttribute('num') ].className += ' active2';
+        //         }
+        //     })
+        // }
+
+        /*
+        
+            思路总结:
+                1 , 动态生成ul>li    ol>li
+                    给 第一个 ul>li  ol>li 添加 css 样式属性
+                    给 ul>li 添加属性 属性值 是 索引下标
+
+                2 , 点击 / 鼠标经过  ul>li 标签 
+
+                    给 所有的 ul>li  ol>li  去除css样式
+                    
+                    给 点击的 ul>li 标签 添加 css 样式
+
+                    给 与 点击的 ul>li 索引下标相同的 ol>li 添加 css 样式
+
+                3 , 如果要实现的是 鼠标经过 改变样式 
+                    必须使用  mousemove 事件类型 不能使用 mouseenter 事件类型
+                    经过子级标签li时 也要出发 mousemove 事件
+        */
+    </script>
+</body>
+</html>

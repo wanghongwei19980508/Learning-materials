@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <span id="span">我是span标签</span>
+        <p class="p">我是p标签</p>
+        <h1 name="h1">我是h1标签</h1>
+        <a href="JavaScript:;">我是a标签</a>
+    </div>
+
+    <script>
+        /*
+            事件委托语法
+
+            父级标签中,嵌套子级标签,给所有的子级标签添加事件
+                1, 先获取每一个子级标签,给每一个子级标签,都添加事件
+
+                2, 可以给父级标签,添加事件,根据触发事件,不同的 事件对象,执行不同的程序
+
+            在动态生成,标签对象时,推荐使用事件委托语法
+            所谓的动态生成,就是根据数据,渲染生成页面
+        */
+
+        // 1,普通方法
+
+        // var oSpan = document.querySelector('span');
+        // var oP = document.querySelector('p');
+        // var oH1 = document.querySelector('h1');
+        // var oA = document.querySelector('a');
+
+        // oSpan.onclick = function(){
+        //     console.log('我是点击span标签,触发的程序')
+        // }
+
+        // oP.onclick = function(){
+        //     console.log('我是点击P标签,触发的程序')
+        // }
+
+        // oH1.onclick = function(){
+        //     console.log('我是点击H1标签,触发的程序')
+        // }
+
+        // oA.onclick = function(){
+        //     console.log('我是点击a标签,触发的程序')
+        // }
+
+
+
+        // 2, 事件委托
+        // 给父级 div 添加事件
+        var oDiv = document.querySelector('div');
+
+        oDiv.onclick = function(e){
+            // 兼容事件对象
+            e = e || window.event;
+
+            // 判断 事件对象 是哪个标签,执行不同的操作
+            // 可以通过标签名称,id,class,属性等等,都可以进行判断
+            // 根据id属性值判断
+            if( e.target.id === 'span' ){
+                console.log( '我是点击span标签,触发的程序' )
+            }
+
+            // 根据class属性值判断
+            if( e.target.className === 'p' ){
+                console.log( '我是点击p标签,触发的程序' )
+            }
+            // 获取 name 属性的属性值 判断
+            if( e.target.getAttribute('name') === 'h1' ){
+                console.log( '我是点击h1标签,触发的程序' )
+            }
+
+            // 获取 href 属性的属性值 判断
+            if( e.target.getAttribute('href') === 'JavaScript:;' ){
+                console.log( '我是点击a标签,触发的程序' )
+            }
+        }
+
+    </script>
+</body>
+</html>

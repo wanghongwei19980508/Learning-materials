@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            先记住第一句话:
+                箭头函数不能改变this指向
+                只有普通函数 function(){} ,可以改变this指向
+
+            改变this指向的方式有两种:
+                1, 在函数程序执行时,改变this指向
+                    函数.call(参数1, 其他一个或者多个参数)
+                        在调用函数的同时,改变函数的this指向
+                        参数1,是改变的this,指向的是谁
+                        之后其他的参数,都是原始函数执行时,需要输入的实参
+                        多个实参之间,使用逗号间隔
+
+                    函数.apply(参数1 , [ 一个或者多个单元的实参 ])
+                        在调用函数的同时,改变函数的this指向
+                        参数1,是改变的this,指向的是谁
+                        之后的数组中,定义原始函数执行时,需要的实参
+
+
+                    在改变this指向的作用上,call() 和 apply() 语法用法作用,是完全相同的
+                    在传参时,两个方法,传参的语法不同
+                    call() 和 apply() 只是赋值实参方式不同,执行效果等完全相同
+                    爱用哪个用那个
+
+                2, 生成一个与原始函数完全相同的函数,只是this指向不同
+                    函数.bind(参数) 
+                    一般会使用 变量等 存储 bind() 执行结果,也就是生成的新的函数
+        
+        */
+
+
+        const obj1 = {
+            name:'张三',
+            sex:'男',
+            fun1:function( age , addr , phone ){
+                // 定义在 obj1 中的函数 fun1
+                // this指向的是 obj1 这个对象
+                // this.name 就是 obj1.name  就是 张三
+                // this.sex  就是 obj1.sex   就是 男
+                console.log(this.name , this.sex , age , addr , phone);
+            }
+        }
+
+        obj2 = {
+            name:'李四',
+            sex:'女',
+        }
+
+        // 输入三个实参,对应 age , addr , phone
+        obj1.fun1(18 , '北京' , 123456);
+
+        // 通过 call() 方法,改变fun1 函数的this指向
+        // 原始fun1 this 指向是 obj1 调用的数据 this.name this.sex 是 obj1.name  obj1.sex
+        // 通过 call()语法 将 fun1 的this 指向,变成了 obj2
+        // this.name this.sex 就从原始的 obj1.name   obj1.sex  变成了 obj2.name  obj2.sex
+        // 输出的就是 obj2 中 存储的 name sex 数据
+
+        // 第一个参数 obj2 是 this指向,改变成 obj2
+        // 之后的实参 20 上海 654321 都是原始函数 fun1 执行是需要输入的实参
+        obj1.fun1.call(obj2 , 20 , '上海' , 654321);
+
+        // apply() 方法,也可以改变this指向,将原始fun1的this指向,从obj1变成了obj2
+        obj1.fun1.apply(obj2 , [ 200 , '火星' , '%#^&!932903' ]);
+
+
+
+        // bind()方法
+
+        // 当期,只是在改变 ojb1中存储的函数fun1的this指向
+        // 并且生成一个新的 函数 , 函数的内存地址 存储在 newFun 变量中
+        // 此时 我们没有执行调用 fun1 只是在定义生成一个新的函数
+        // 这个新的函数,只是this指向与 fun1 不同,其他,程序,参数,等等都与 fun1 完全相同
+        const newFun = obj1.fun1.bind(obj2);
+
+        newFun(500 , '不知道' , '穷,没有手机');
+
+        // 面向对象编程,会改变this指向
+
+
+        /*
+            总结:
+                箭头函数不能改变this指向
+
+                call 和 apply 使用是一样的,用一个就行了
+                    只是赋值实参语法不同
+                        call 多个参数,赋值实参
+                        apply 一个数组,赋值实参
+                    两个方法都是直接调用执行函数时,改变this指向
+
+                bind 是 生成一个新的函数
+                    使用时,没有调用执行原始函数,只是在生成一个新的函数
+                    新的函数与原始函数,其他都完全一样,只是this指向不同
+                    
+        
+        
+        */
+
+
+    </script>
+</body>
+</html>

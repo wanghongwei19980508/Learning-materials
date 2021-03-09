@@ -1,0 +1,168 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html.body{
+            width:100%;
+            height:100%;
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:600px;
+            height:240px;
+            border:1px solid #000;
+            margin:10px auto;
+        }
+        #box #header{
+            margin-top:30px;
+            margin-left:30px;
+        }
+        #box #header .search{
+            width:140px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .replace{
+            width:140px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .but1{
+            width:60px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .but2{
+            width:60px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .but3{
+            width:60px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #text{
+            margin-top:15px;
+            font-size:13px;
+            text-indent:20px;/*首行缩进20px*/
+        }
+
+        .s1{
+            background: pink;
+        }
+
+        .s2{
+            background: skyblue;
+        } 
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="header">
+            <input name="search" type="text" placeholder="搜索内容" class="search"/>
+            <button class="but1">搜索</button>
+            <input name="replace" type="text" placeholder="替换内容" class="replace"/>
+            <button class="but2">替换</button>
+            <button class="but3">重置</button>
+        </div>
+        <div id="text">
+            <p>张家界，原名大庸市，湖南省辖地级市，辖2个市辖区(永定区、武陵源区)、2个县(慈利县、桑植县)。位于湖南西北部，澧水中上游，属武陵山区腹地，
+                张家界因旅游建市，是中国重要的旅游城市之一是湘鄂渝黔革命根据地的发源地和中心区域。</p>
+            <p>1982年9月，张家界国家森林公园为第一个国家森林公园</p>
+            <p>1988年8月，张家界 武陵源被列入国家第二批40处重点风景名胜区之内。1992年，
+                由张家界武陵源自然风景区被联合国教科文组织列入《世界自然遗产名录》</p>
+        </div>
+    </div> 
+
+        
+    <script>
+        // 核心思路:
+        // 1,查询有背景颜色
+        //   找到匹配关键词的内容,替换为带有标签的关键词内容,给标签添加css样式
+        // 2,替换功能
+        //   找到匹配关键单的内容,替换为带有标签的关键词内容,将内容替换为,替换的关键词 给标签添加css样式
+
+
+
+        // 1,获取标签对象
+        const oIptSearch = document.querySelector('[name="search"]');
+        const oIptReplace = document.querySelector('[name="replace"]');
+
+        const oBtnSearch = document.querySelector('.but1');
+        const oBtnReplace = document.querySelector('.but2');
+        const oBtnReset = document.querySelector('.but3');
+
+        const oText = document.querySelector('#text');
+
+        // 存储div中的原始内容,原始内容必须保存,确保可以执行重置功能
+        let oldStr = oText.innerHTML;
+
+        // 再定义一个变量,存储oldStr
+        let s = oldStr;
+
+        // 2,添加点击事件,点击时,获取input中输入的关键词数据
+        oBtnSearch.addEventListener('click' , ()=>{
+            // 获取搜索input中,输入的关键词
+            let searchVal = oIptSearch.value;
+
+            // 先设定正则表达式
+            let reg = `/${searchVal}/g`;
+
+            // 执行替换效果
+            let str = s.replace( eval(reg) , `<span class="s2">${searchVal}</span>` );
+
+            // 将替换结果写入到 div 中
+            oText.innerHTML = str;
+        })
+
+        // 3,替换功能
+
+        oBtnReplace.addEventListener('click' , ()=>{
+            // 获取搜索input中,输入的关键词
+            let searchVal = oIptSearch.value;
+
+            // 获取替换input中,输入的关键词
+            let replaceVal = oIptReplace.value;
+
+            // 先设定正则表达式
+            let reg = `/${searchVal}/g`;
+
+            // 执行替换效果
+            let str = s.replace( eval(reg) , `<span class="s1">${replaceVal}</span>` );
+
+            // 只换字的操作,不加标签,不加样式
+            let ss = s.replace( eval(reg) , `${replaceVal}` );
+
+            // 将替换结果写入到 div 中
+            oText.innerHTML = str;
+            
+            // 将替换的新的字符串内容,赋值给 s变量 , 等于存储的是新的替换之后的内容
+            // 是需要没有span标签的内容
+            s = ss;
+
+        })
+
+
+        // 点击重置,回复原始内容
+        oBtnReset.addEventListener( 'click' , ()=>{
+            oText.innerHTML = oldStr;
+        } )
+
+
+    </script>
+
+
+</body>
+</html>

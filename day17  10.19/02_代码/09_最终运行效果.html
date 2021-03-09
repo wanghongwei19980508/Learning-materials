@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div>1</div>
+
+    <script src="./tools.js"></script>
+
+    <script>
+        const oDiv = document.querySelector('div');
+
+        oDiv.addEventListener( 'click' , function(){
+            move( oDiv , {left: 600 , top:400 , width:600 , height:400 , fontSize : 300 , opacity: .4} , function(){
+                oDiv.style.background = 'blue';
+                oDiv.style.color = '#fff';
+                console.log('所有运动结束了');
+            } );
+        } )
+    </script>
+</body>
+</html>

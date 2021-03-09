@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            面向对象,编程语法
+                1, 面向对象的编程语法:
+                    本质是 : 创建一个对象
+                             将需要的数据,定义成对象的属性和属性值
+                             将需要的函数方法,定义成对象的函数方法
+                            通过生成对象,调用对象中的属性属性值 和 函数方法 完成编程
+
+                    面向对象的有点:
+                        1, 封装:
+                            将一个模块所需要的的所有的内容,都封装在一个对象中
+                        2, 继承:
+                            子类构造函数 可以 继承 父类构造函数的 属性和方法
+                            作用是优化简化代码,防止重复冗余的代码出现
+                        3, 多态
+                            不同情况下,不同状态下,面向对象编程,执行不同的程序内容
+
+                2, 语法: 创建一个构造函数,使用 new 关键词 配合构造函数使用
+                    ES5: 
+
+                        function Fun(name,age){
+                            定义在构造函数中的,通过this定义的属性和属性值
+                            属性和属性值,会直接定义在 实例化对象上
+                            this.name = name;
+                            this.age = age;
+                        }
+
+                        定义在 prototype 公共空间中的 方法
+                        只会定义在 构造函数中 实例化对象 通过 __proto__ 来调用 prototype 中的内容
+                        Fun.prototype.f1 = function(){}
+
+                    ES6:
+                        class Fun{
+                            在 构造器 constructor 中 定义 属性属性值
+                            属性和属性值也会定义在 实例化对象上
+                            constructor(name,age){
+                                this.name = name;
+                                this.age = age;
+                            }
+                            直接定义函数方法,class会将函数方法,自动定义在 prototype 中
+                            f1();
+                        }                        
+        
+                构造函数 : 专门用于创建对象的函数称为构造函数
+                          构造函数本质上,还是一个函数,只是用法语法特殊
+                          构造函数中,一定不要写 return , 关键词 new 会自动定义 return 的内容
+
+                          JavaScript语法规范规定, 构造函数 使用 大驼峰命名法
+
+                          构造函数 一定要与 new 一起使用
+
+                          构造函数规定,this,指向,生成的实例化对象
+
+                实例化对象 : 通过 构造函数 生成的对象
+                             实例化对象,本质上,就是一个对象,只是由构造函数创建的
+
+                原型 / 原型对象 : 
+                        每一个函数,天生都有一个 prototype 特殊的 公共的 存储空间
+                        prototype 本质上是一个对象 , 可以 设定属性属性值 函数方法
+                        prototype 中存储的内容 所有 通过 这个构造函数生成的实例化对象,都可以访问
+
+                原型属性 : 
+                        每一个对象,天生都有一个 __proto__
+                        __proto__ 本质上是一个对象
+                        存储的内存地址,就是 生成这个对象的构造函数的 prototype 的内存地址
+                        实例化对象 的 __proto__ 就是 构造函数 prototype
+
+                访问机制: 就近原则
+                        对象自己有的属性访问自己的
+                        自己没有的属性,通过 __proto__ 找 构造函数的 prototype 如果有就调用
+                        如果冲突,调用自己的
+                        如果想直接调用 __proto__ , 也就是调用 prototype , 对象.__proto__.属性
+
+        */
+
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 20px;
+            border:1px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>身高</td>
+                <td>体重</td>
+                <td>删除</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        var arr = [
+            {id:1, name:'张老师',age:18,height:180,width:50},
+            {id:20, name:'霞姐',age:16,height:179,width:49},
+            {id:31, name:'马老师',age:17,height:180,width:50},
+            {id:78, name:'刘班长',age:32,height:150,width:85},
+            {id:109, name:'常同学',age:31.9,height:149,width:84},
+        ];
+
+        // 普通的innerHTML写入
+        var oTbody = document.querySelector('tbody');
+
+        // var str = '';
+        // arr.forEach(function(v,k){
+        //     str += `
+        //         <tr>
+        //             <td>${v.id}</td>    
+        //             <td>${v.name}</td>    
+        //             <td>${v.age}</td>    
+        //             <td>${v.height}</td>    
+        //             <td>${v.width}</td>
+        //             <td><button index="${k}">删除</button></td>    
+        //         </tr>
+        //     `;
+        // })
+        // oTbody.innerHTML = str;
+
+
+        // 节点操作
+        
+        arr.forEach(function(v,k){
+            var tr = document.createElement('tr');
+            for( var key in v ){
+                // 创建一个td标签
+                var td = document.createElement('td');
+                // 创建一个文本标签,内容是 对象的数据
+                var text = document.createTextNode( v[key] );
+                // 将文本写入td
+                td.appendChild(text);
+
+                // 将td写入tr
+                tr.appendChild(td);
+            }
+
+            // 循环对象所有的数据之后,新增td,td中有button,button中有字和属性
+            // 创建td标签
+            var tdBtn = document.createElement('td');
+            //创建button标签
+            var button = document.createElement('button');
+            // 创建button标签的内容
+            var textBtn = document.createTextNode( '删除' );
+            // 将内容写入到button标签中
+            button.appendChild(textBtn);
+            // 设定button标签的属性
+            button.setAttribute('index' , k);
+
+            // 将button吸入到td中
+            tdBtn.appendChild(button)
+
+            // 将tdBtn,写入到tr中
+            tr.appendChild(tdBtn);
+
+            // 将生成的tr写入tbody
+            oTbody.appendChild(tr);
+        })
+
+
+    </script>
+</body>
+</html>

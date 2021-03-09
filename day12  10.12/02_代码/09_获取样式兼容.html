@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="div">我是div</div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            标准浏览器 / 普通浏览器 才支持   低版本IE不支持
+                window.getComputedStyle(标签对象).属性   
+
+            低版本IE 
+                标签对象.currentStyle.属性
+
+            兼容语法:使用if判断,谁有这个方法,就用那个方法
+                如果是浏览器支持的方法会有执行结果
+                如果是浏览器不支持的方法,执行结果是 undefined
+                undefined 会自动转化为布尔值 false
+                可以使用if判断,根据 方法不同的结果,执行不同的程序
+
+        */
+        console.log(123);
+
+        var oDiv = document.getElementById('div');
+
+        // 如果浏览器支持,就是有内容,不支持,就是undefined
+        console.log( window.getComputedStyle );
+        console.log( oDiv.currentStyle );
+
+        // 如果 浏览器 支持 window.getComputedStyle    执行结果有内容,自动转化为 true
+        // 如果 浏览器 不支持 window.getComputedStyle  执行结果,为undefined,自动转化为 false
+        // if(window.getComputedStyle){
+        //     // window.getComputedStyle 转化为 true 的情况
+        //     // 也就是 浏览器 支持 window.getComputedStyle 可以使用
+        //     console.log( window.getComputedStyle(oDiv).color );
+        // }else{
+        //     // window.getComputedStyle 转化为 false 的情况
+        //     // 浏览器不支持 window.getComputedStyle 方法  不能使用
+        //     console.log(  oDiv.currentStyle.color );
+        // }
+
+        console.log( myGetStyle( oDiv , 'color') );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            对象也可以使用结构赋值,将对象中的数据,一一对应的赋值给变量
+            数组的解构,直接写[]和变量 就可以了
+                因为数组的单元,只能是 数值编号的索引下标,结构时,会按照顺序解构
+
+            对象中,数据单元,键名是字符串,而且,是使用{ }来结构
+        */ 
+
+        const obj = {name:'张三' , age:18 , sex:'男' , addr:'北京' , phone:12345};
+        // 按照 name键名 在 obj对象中调用数据,赋值给 name 变量本身
+        // 定义的变量名称,必须与键名完全相同
+        // 如果定义的变量名称,不是键名,无法获取数据,赋值结果是undefined
+        // let { name , age , sex , addr , phone } = obj;
+        // console.log( name , age , sex , addr , phone );
+
+
+        // 可以给变量名称,定义一个别名 最终使用的是别名,来调用数据
+        // 使用键名name,在obj中,调用数据张三,存储在别名变量n中
+        let { name:n , sex:s , addr:dizhi , phone:p , age:a} = obj;
+
+        console.log(n);
+
+        /*
+            总结:
+                对象的结构
+                    1, 对象使用 { } 做结构赋值运算符
+                    2, 结构对象时,必须先定义对象的键名,从对象中获取数据
+                    3, 如果不定义别名,键名就是解构赋值的变量名称
+                       可以定义别名,就是解构之后,赋值的新的变量名称
+        
+        */
+
+    </script>
+</body>
+</html>

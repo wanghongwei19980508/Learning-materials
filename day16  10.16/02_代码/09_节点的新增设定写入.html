@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            我们实际项目中,一般通过DOM来操作标签,不使用节点方式操作标签
+            一般是使用节点的新增,设定,写入,克隆操作
+        */
+
+        // 节点的新增操作
+        //     1,创建一个标签节点 创建出来的是一个空标签
+        //  语法  变量 = document.createElement('标签名称');
+        var oDiv = document.createElement('div');
+
+        oDiv.id = 'div1';
+        oDiv.className = 'div2';
+        oDiv.setAttribute('name' , '我是div标签');
+        oDiv.innerHTML = '我是DOM操作写入的内容';
+
+        //     2,创建一个文本节点
+        // 语法   变量 = document.createTextNode('文本内容'); 
+        var oText = document.createTextNode('我是div');
+
+
+        // 节点的写入操作
+        //      1, 在父级标签的末位,新增节点
+        // 语法   父级标签.appendChild( 要新增的节点 );
+
+        // 在div标签中,末位新增 文本节点
+        // 将文字在div的末位,写入
+        // oDiv.appendChild( oText );
+
+
+        //     2, 在父级标签的起始,新增节点
+        // 语法   父级标签.insertBefore( 你要新增的节点 , 你要写在哪个节点之前 ) 
+
+        // 创建一个span标签
+        var oSpan = document.createElement('span');
+
+        // 写入到 div中 第一个标签之前
+        oDiv.insertBefore( oSpan , oDiv.firstChild );
+
+        // console.log(oDiv);
+
+        //  将div标签,写入到页面中
+        //  可以写入到任意一个标签对象中,例如 body,html,其他标签
+        //  只是不能直接对 document 执行 新增节点操作
+
+        // 获取body标签对象
+        var oBody = document.body;
+
+        // 在 body 标签的最后,写入到div
+        // oBody.appendChild(oDiv);
+
+        // 在body标签的第一个位置,写入div标签
+        oBody.insertBefore(oDiv , oBody.firstChild );
+
+
+        // 克隆:  也就是复制标签
+        //     标签节点.cloneNode()       只克隆标签名称本身 克隆结果是一个空标签 但是会克隆标签本身的属性和属性值
+        //     标签节点.cloneNode(true)   克隆标签本身和标签内容
+        
+        var clone1 = oDiv.cloneNode();
+        var clone2 = oDiv.cloneNode(true);
+
+        console.log(clone1);
+        console.log(clone2);
+
+        /*
+            总结: 节点操作
+                1, 创建标签/节点
+                    标签节点
+                        变量 = document.createElement('标签名称');   
+                    文本节点
+                        变量 = document.createTextNode('文本内容'); 
+                    
+                    实际项目中,往往只是创建标签节点,之后使用 DOM 操作方式,来设定节点内容和属性
+                        节点.innerHTML = '写入的内容'
+                        节点.id = 'id属性值'
+                        节点.setAttribute(属性,属性值);
+
+                2, 节点的写入
+                    在父级标签的最后写入
+                        父级标签.appendChild( 要写入的标签节点/标签对象 );
+
+                    在父级标签中,指定的标签之前写入
+                        父级标签.insertBefore( 要写入的标签节点/标签对象 , 在哪个标签之前);
+                    特别提示: 同一个节点,标签对象,只能写入一次,只会出现在一个位置上
+                             例如 你先把div写在 span前,又把div写在 span后
+                                  div最终的位置只会出现在 span后
+        
+                3, 克隆
+                    标签节点/对象.clone()        只克隆标签本身
+                    标签节点/对象.clone(true)    克隆标签本身和内容
+
+            PS: 节点的操作,一般多用于,节点的新增和克隆
+                复杂的新增节点操作,直接设定 innerHTML 更方便
+        */
+
+    </script>
+
+</body>
+</html>

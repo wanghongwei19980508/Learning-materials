@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            ajax请求时 会先创建一个 ajax请求的 实例化对象 -- xhr
+            这个 实力化对象 -- xhr 中 JavaScript定义了很多属性和函数方法
+
+                1, readyState  ajax状态码
+                    表示 ajax  请求进行的步骤
+                        0: 创建了ajax对象
+
+                        1: 设定了 open() 设定了传参方式和传递对象url地址
+
+                        2: 发送了 请求
+
+                        3: 接收了 响应报文 , 在 响应报文中 有 响应体 响应体是请求结果
+                           并且正在从响应报文中,解析响应体 内容 
+
+                        4: 响应报文解析完毕,响应体内容,已经存储在 response 和 responseText中
+                           可以获取了
+                    
+                    readyState 状态码 为 4 的时候 , 表示 请求 已经结束了
+                               但是不能表示请求已经成功了
+                               只是执行步骤的状态码
+
+                2, response 和 responseText
+                    请求 解析出来的 响应体 内容
+
+                    如果请求成功,是响应体内容
+
+                    如果请求失败,一般是报错信息 
+
+                3, status        http状态码  范围 是 100 - 599
+
+                    表示 请求 状态 
+
+                    100 - 199  表示 请求正在连接中,可以继续执行操作
+
+                    200 - 299  表示 请求成功
+
+                    300 - 399  表示 是重定向请求
+                               重定向  我想去A  但是 实际上 先去了 B 从 B 再去了 A 
+
+                    400 - 499  表示 请求失败 失败原因在 客户端
+
+                    500 - 599  表示 请求失败 失败原因在 服务器
+
+                4, statusText   http状态秒数
+                    通过文字内容,描述请求状态
+
+        */
+
+
+    </script>
+</body>
+</html>

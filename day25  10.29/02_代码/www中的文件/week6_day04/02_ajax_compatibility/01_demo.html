@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>请求</button>
+
+    <script>
+        const oBtn = document.querySelector('button');
+
+        oBtn.addEventListener('click' , ()=>{
+            // 1,创建 xhr对象
+            let xhr = {};
+
+            if(XMLHttpRequest){
+                xhr = new XMLHttpRequest();
+            }else{
+                xhr = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+
+            // 2,设定open()
+            xhr.open('get' , './demo.php');
+
+            // 3,发送send()
+            xhr.send()
+
+            // 4,接收
+            xhr.onreadystatechange = ()=>{
+                if(xhr.readyState === 4 && /2\d{2}/.test(xhr.status) ){
+                    console.log( JSON.parse(xhr.response) );
+                }
+            }
+        
+
+        })
+    </script>
+</body>
+</html>

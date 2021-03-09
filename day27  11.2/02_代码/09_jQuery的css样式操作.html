@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            border:1px solid red;
+            position: fixed;
+            top:0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div style="font-size: 20px;">我是div</div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            JavaScript中操作css样式
+                1, 设定 
+                    标签对象.style.属性 = 时序性质
+                        一次只能设定一个属性的属性值
+                        不支持减号,属性值,必须写成小驼峰命名法
+                        该有px单位的,必须要写px单位
+                        属性值必须是字符串格式
+                2, 获取
+                    标签.style.属性  只能获取行内样式的属性值
+                    获取设定的属性值 要使用 兼容语法
+        
+            jQuery中css样式操作
+                1, 获取
+                    $().css('属性')
+                    直接获取标签对象,css样式的属性值
+
+                2, 设定
+                    语法1:
+                        $().css(属性 , 属性值)  
+                        只能设定一个属性属性值
+
+                    语法2:
+                        $().css( { 属性:属性值 , 属性:属性值 , 属性:属性值.... } )
+                        可以同时设定多个属性和属性值
+
+            总结:
+                1, 不用考虑兼容语法
+                2, 支持小驼峰,也支持减号语法
+                3, 符合属性,写所有的属性,获取所有的属性
+                           写独立的属性,获取独立的属性
+                4, 设定属性值时,可以不写px单位
+
+        */
+
+        // 获取
+        console.log( $('div').css('width') );
+        console.log( $('div').css('fontSize') );
+        console.log( $('div').css('font-size') );
+        console.log( $('div').css('border') );
+        console.log( $('div').css('border-style') );
+
+        // 设定
+        $('div').css( { width:200 , height:200 } );
+    </script>
+</body>
+</html>

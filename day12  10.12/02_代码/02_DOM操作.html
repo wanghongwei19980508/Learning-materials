@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #div1{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1" class="div1-1" name="我是div">我是div1</div>
+    <div id="div1" class="div1-1" name="我是div">我是div2</div>
+    <div id="div1" class="div1-1" name="我是div">我是div3</div>
+    <div id="div1" class="div1-1" name="我是div">我是div4</div>
+
+
+    <ul>
+        <li>我是第一个li</li>
+        <li>我是第二个li</li>
+        <li>我是第三个li</li>
+        <li>我是第四个li</li>
+        <li>我是第五个li</li>
+        <li>我是第六个li</li>
+    </ul>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            DOM 操作
+                document Object model  
+                  文档     对象  模型
+                是 JavaScript 提供的 操作 html 文件的 方法
+
+            1,需要操作html文件当中的内容,就先要获取文件中的内容
+                旧的获取方法,所有的浏览器都支持
+                新的获取方法,低版本IE浏览器不支持
+
+                (1) 通过标签id属性值获取
+
+                    var 变量 = document.getElementById('标签id属性的属性值');
+                    执行结果,获取的是一个 标签对象 / 标签节点
+                    有很多的方法,属性,可以使用可以操作 
+                    可以通过 console.dir(变量) 查看
+
+                    如果 多个标签的 id属性值重复 只会获取第一个 匹配的标签
+                    执行结果永远是一个标签对象
+
+                (2) 通过标签class属性值获取
+                    
+                    var 变量 = document.getElementsByClassName('class属性值');
+
+                    执行结果是一个 伪数组 
+                    可以 通过 [索引下标] 语法 来获取数组单元 存储的数据 ---- 就是 每一个标签对象
+
+                (3) 通过 标签名称 获取
+
+                    var 变量 = document.getElementsByTagName('标签名称');
+
+                    执行结果是一个 伪数组 
+                    可以 通过 [索引下标] 语法 来获取数组单元 存储的数据 ---- 就是 每一个标签对象
+
+                (4) 通过 标签name属性的属性值 获取
+                    
+                    var 变量 = document.getElementsByName('name属性的属性值');
+
+                    执行结果是一个 伪数组 
+                    可以 通过 [索引下标] 语法 来获取数组单元 存储的数据 ---- 就是 每一个标签对象
+
+                (5) 获取第一个符合条件的标签对象
+                    var 变量 = document.querySelector('条件');
+                    获取的结果 一定是一个唯一的标签对象
+
+                (6) 获取所有符合条件的标签对象
+                    var 变量 = document.querySelectorAll('条件');
+                    获取的结果 一定是一个 伪数组
+                    伪数组 支持 forEach 循环
+
+                    条件: 可以写任意html和css允许的内容
+                          标签名称   '标签名称'
+                          标签id属性值  '#id属性值'
+                          标签class属性值  '.class属性值'
+                          标签name属性值   '[name="name属性值"]'
+                                          '[name*="name属性值"]'
+                                          '[name^="name属性值"]'
+                                          '[name$="name属性值"]'
+                          标签结构:
+                              css伪类选择器 
+                                父子  'ul>li'
+                                后代  'ul li'
+                                兄弟  'div+p'   'div~p'
+
+                          等等,等等,等等
+
+
+
+            注意区别:
+                通过id,获取的是唯一的标签对象
+                通过其他方法 class属性值 标签名称 标签name属性值 获取的都是一个伪数组
+                
+                class属性值 标签名称 获取的伪数组 不支持 forEach循环
+
+                标签name属性值 获取的 伪数组 支持 forEach循环
+        
+        */
+
+        // 1, 普通的获取方法
+        // (1) 通过 标签id 属性的属性值 获取
+        // var oDiv1 = document.getElementById('div1');
+        // console.log(oDiv1);
+        // console.dir(oDiv1);
+
+        // (2) 通过 标签class 属性的属性值 获取
+        // 变量中 以 伪数组的形式 存储所有符合条件的 标签对象
+        // 通过 变量[索引下标] 来 获取操作每一个标签对象
+        // var oDiv2 = document.getElementsByClassName('div1-1');
+        // console.log(oDiv2);
+        // console.log(oDiv2[0]);
+        // console.log(oDiv2[1]);
+        // console.log(oDiv2[2]);
+        // console.log(oDiv2[3]);
+
+
+        // (3) 通过 标签名称 获取
+        // var oDiv3 = document.getElementsByTagName('div');
+        // console.log(oDiv3);
+
+        // 不支持forEach
+        // oDiv3.forEach(function(v,k){
+        //     console.log(v,k);
+        // })
+
+        // for...in
+        // 不仅仅会获取 伪数组的 length 还会从 伪数组的方法中获取内容
+        // 如果使用 for...in 循环 操作 伪数组 最后会有报错
+        // for(var key in oDiv3){
+        //     oDiv3[key].style.color = setColor();
+        // }
+
+        // 推荐使用 for循环
+        // for(var i = 0 ; i <= oDiv3.length-1 ; i++){
+        //     // i 是 0-最后一个标签的索引下标
+        //     // 每次循环 i 是不同数值 会通过 oDiv3[i] 获取不同数值表示的索引下标对应的标签对象
+        //     // 操作设定对应标签对象的颜色属性 
+        //     oDiv3[i].style.color = setColor();
+        // }
+
+
+        // (4) 通过 标签 name属性的属性值 获取
+        // var oDiv4 = document.getElementsByName('我是div');
+        // console.log(oDiv4);
+        
+        // forEach 第一个参数,存储数组单元的数据,也就是 标签对象
+        //         第一个参数,存储数组单元的索引下标,也就是 0,1,2,3
+        // oDiv4.forEach(function(v,k){
+        //     // 如果需要 操作标签对象 直接操作 第一个参数v 中 存储的数据,就是标签对象
+        //     v.style.color = setColor();
+        // })
+
+
+        // 2, 新增的获取方法
+
+        // (1) 获取第一个符合条件的标签对象
+        // var oDiv5 = document.querySelector('div');
+        // console.log(oDiv5);
+
+        // (2) 获取所有符合条件的标签对象
+        // var oDiv6 = document.querySelectorAll('div');
+        // console.log(oDiv6);
+
+        // 条件可以写所有 html 和 css 支持的内容
+
+        // 通过id
+        // var oDiv7 = document.querySelector('#div1');
+        // // 可以获取所有id属性值相同的标签
+        // var oDiv8 = document.querySelectorAll('#div1');
+
+        // console.log(oDiv7);
+        // console.log(oDiv8);
+
+        // 通过class
+        // var oDiv9 = document.querySelector('.div1-1');
+        // // 可以获取所有class属性值相同的标签
+        // var oDiv10 = document.querySelectorAll('.div1-1'); 
+
+        // console.log(oDiv9);
+        // console.log(oDiv10);    
+
+        // 通过标签名称
+        // var oDiv11 = document.querySelector('div');
+        // var oDiv12 = document.querySelectorAll('div');
+
+        // console.log(oDiv11);
+        // console.log(oDiv12); 
+
+        // 通过标签name
+        // var oDiv13 = document.querySelector('[name="我是div"]');
+        // var oDiv14 = document.querySelectorAll('[name="我是div"]');
+
+        // console.log(oDiv13);
+        // console.log(oDiv14);  
+
+        // css 父子选择器    
+        
+        // 获取ul中所有的li
+        // var oDiv15 = document.querySelectorAll('ul>li');
+        // console.log(oDiv15);
+        
+        // 结构伪类 
+
+        // ul中的第一个li
+        var oDiv16 = document.querySelectorAll('ul>li:first-child');
+        console.log(oDiv16);
+
+        var oDiv17 = document.querySelectorAll('ul>li:nth-child(1)');
+        console.log(oDiv17);
+
+        // 获取ul中所有偶数个li
+        var oDiv18 = document.querySelectorAll('ul>li:nth-child(even)');
+        console.log(oDiv18);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div name="我是div" id="div1" class="div1-1">我是div</div>
+
+    <input type="checkbox" disabled checked="checked">
+
+    <script>    
+        /*
+            注意: 标签的属性,不是css样式
+
+            标签的属性 从设定使用行可以分成 3类
+                1, 标签本身就具有的属性(在标签对象中具有的),可以直接操作的
+                    console.dir(标签对象) 可以看到的
+                    id属性 ---- 标签对象.id
+                    class属性 ---- 标签对象.className
+                    还有一个步长用的 title
+                    title属性 ---- 标签对象.title
+
+                2, 布尔属性
+                    一般都支持 直接从 标签的属性中操作
+                    标签对象.布尔属性
+                    获取的执行结果是 是 布尔值 
+                        有效果是 true 
+                        没有效果是 false
+                    设定时,也要设定布尔值
+
+                3, 不支持直接设定的属性值
+                    标签对象.setAttribute( '属性' , 属性值 )   设定标签属性的属性值
+                        覆盖设定,会覆盖之前设定的属性值
+                    标签对象.getAttribute( '属性' )            获取标签属性的属性值
+                    标签对象.removeAttribute( '属性' )         删除标签属性
+                        删除整个属性
+                
+        */
+
+        var oDiv = document.querySelector('div');
+        // console.dir(oDiv);
+
+        // oDiv.name = '我不是div';
+        // oDiv.id = '我是修改的id属性值';
+        // oDiv.className = '我是修改的class属性值';
+
+        // 获取 input 标签对象
+        var oIpt = document.querySelector('input');
+        // console.dir(oIpt);
+
+        // 设定布尔属性的属性值,也要设定 true / false 布尔值
+        // oIpt.checked = false;
+        // oIpt.disabled = false;
+
+        // JavaScript方法
+
+        // 获取属性的属性值
+        // var oDivId = oDiv.getAttribute('id');
+        // var oDivName = oDiv.getAttribute('name');
+        // // Attribute 使用 class 不要使用 className
+        // var oDivClass = oDiv.getAttribute('class');
+        // console.log( oDivId );
+        // console.log( oDivName );
+        // console.log( oDivClass );
+
+        // 设定属性的属性值
+        // oDiv.setAttribute( 'class' , '我是设定的class属性值' );
+        // oDiv.setAttribute( 'id' , '我是设定的id属性值' );
+
+        // 布尔属性
+        // 使用 getAttribute() 来获取 布尔属性的属性值
+        // 在html标签中,如果不写 属性值,获取的结果是空字符串
+        // 在html标签中,如果写了 属性值,才能获取属性值
+        // 布尔属性不要使用 Attribute 来操作
+        // 直接 标签对象.布尔属性 来操作
+        console.log( oIpt.getAttribute('checked') );
+
+
+        // 删除属性
+        oDiv.removeAttribute('name');
+        oDiv.removeAttribute('id');
+        oDiv.removeAttribute('class');
+
+        oIpt.removeAttribute('checked');
+
+
+ 
+    </script>
+</body>
+</html>

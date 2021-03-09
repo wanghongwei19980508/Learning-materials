@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        ul,ol,li{
+            list-style: none;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .box{
+            width: 1300px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            margin: 40px auto;
+        }
+
+        .show{
+            width: 400px;
+            height: 400px;
+            border: 5px solid red;
+        }
+
+        .mask{
+            width: 200px;
+            height: 200px;
+            background: yellow;
+            opacity: .4;
+            position: absolute;
+            top:0;
+            left: 0;
+            display: none;
+
+        }
+
+        .list{
+            width: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+
+        }
+
+        .list li{
+            width: 60px;
+            height: 60px;
+            margin: 20px 20px;
+        }
+
+        .list li.active{
+            border:1px solid red;
+        }
+
+        .glass{
+            display: none;
+            width: 800px;
+            height: 800px;
+            border: 3px solid red;
+            position:absolute;
+            left: 450px;
+            top:0;
+            background-image: url('');
+            background-repeat:no-repeat ;
+            background-position:0 0;
+            background-size:1600px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="show">
+            <img src="">
+            <div class="mask"></div>
+        </div>
+
+        <ul class="list"></ul>
+        <div class="glass"></div>
+    </div>
+
+    <script src="./tools.js"></script>
+    <script src="./glass.js"></script>
+    <script>
+        /*
+            实际项目中 放大镜图片个数,图片内容,都是动态生成的,不能写死
+            需要一个图片数组,存储图片信息
+        */
+
+        // 图片数组
+        const imgArr = [
+            { big: '1.large.jpg' , small : '1.small.jpg' , },
+            { big: '2.large.jpg' , small : '2.small.jpg' , },
+            { big: '3.large.jpg' , small : '3.small.jpg' , },
+        ];
+
+        // 放大镜区域标签对象
+        const oBox = document.querySelector('.box');
+
+        // 调用 构造函数 创建实力化对象
+        const glassObj = new SetGlass( imgArr , oBox );
+        // 调用入口函数
+        glassObj.init();
+        
+
+    </script>
+</body>
+</html>

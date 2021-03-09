@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            jQuery:
+                1, 内容的操作
+                    $().html()  ----- 标签.innerHTML
+                    $().text()  ----- 标签.innerText
+                    $().val()   ----- 标签.value
+
+                2, 占位
+                    $().height()   ().width()
+                        内容 --- 宽高  
+
+                    $().innerHeight()   ().innerWidth()
+                        内容 + padding 
+
+                    $().outerHeight()   ().outerWidth()
+                        内容 + padding + border
+
+                    $().outerHeight(true)   ().outerWidth(true)
+                        内容 + padding + border + margin
+
+                    $().offset()  
+                        距离定位父级的间距
+                        执行结果是一个对象 有两个属性 top上间距   left左间距
+
+                3, 事件:
+                    (1) 事件的绑定
+                        a, jQuery支持的直接绑定的事件类型
+                            $().click( [{传参的数据},]  事件处理函数 )
+
+                                如果第一个参数定义为 对象,向 事件处理函数中定义的 事件对象e
+                                e.data 中 存储 传参的 对象
+
+                        b, jQuery中的通用绑定事件语法
+                            $().on( '事件类型' , [ '事件委托的条件' , ] [ {传参的参数} , ]  事件处理函数 )
+
+                        c, jQuery的阻止事件
+                            阻止默认事件 --- 表单的提交,鼠标右键菜单
+                                事件对象.preventDefault() 
+
+                            阻止事件的传播/阻止冒泡 --- 子级事件触发父级相同类型事件
+                                事件对象.stopPropagation()
+
+                            阻止一切 : 默认事件/事件的传播都能阻止 
+                                注意 return false 一定写在事件的末位,还会阻止其他程序的执行
+                                return false;
+
+                补充: 说明文档中 使用 [ ] 包裹的内容 都是表示可有可无的内容 也就是 可选内容
+
+                4, 动画
+                    (1) 出现,消失,切换
+                        $().show()
+                        $().hid()
+                        $().toggle()
+
+                    (2) 下拉,上卷,切换
+                        $().slideDown()
+                        $().slideUp()
+                        $().slideToggle()
+
+                    (3) 渐现,渐隐,切换
+                        $().fadeIn()
+                        $().fadeOut()
+                        $().fadeToggle() 
+
+                    参数1: 时间,单位是毫秒
+                    参数2: 运行形势
+                    参数3: 运动结束的回调函数
+
+
+                    (4) 自定义 
+                        $().animate()  
+                    参数1: 对象,运动的属性和属性值 --- 最终的目标位置/属性值
+                    参数2: 时间,单位是毫秒
+                    参数3: 运行形势
+                    参数4: 运动结束的回调函数
+        */
+    </script>
+</body>
+</html>

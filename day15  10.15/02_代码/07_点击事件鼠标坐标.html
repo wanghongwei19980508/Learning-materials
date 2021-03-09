@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            height: 5000px;
+        }
+
+        div{
+            width: 400px;
+            height: 400px;
+            background: pink;
+            position: fixed;
+            top:0;
+            left: 200px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        p{
+            width: 200px;
+            height: 200px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <p></p>
+    </div>
+
+    <script>
+        // 点击事件,事件对象e 中 存储的坐标
+        // 1, offsetX  offSetY
+        //    点击的位置,和触发事件的事件对象,左上角的坐标
+        //    触发事件的标签是谁,就是到谁左上角的坐标
+        
+        // 2, clientX  clientY
+        //    距离视窗窗口,左上角的坐标
+
+        // 3, pageX    pageY
+        //    距离html文档,左上角的坐标
+        // 平时两个数据是完全相同的,如果页面滚动了,两个数据不同
+        // 如果是: 鼠标点击事件,使用  offsetX  offSetY 更简单
+        // 如果是: 鼠标拖拽事件,没有页面滚动,使用 client 和 page都可以
+        //                    如果有页面滚动,使用 pageX   pageY
+
+
+
+
+        var oDiv = document.querySelector('div');
+
+        document.onclick = function(e){
+            e = e || window.event;
+            console.log(e);
+        }
+
+    </script>
+</body>
+</html>

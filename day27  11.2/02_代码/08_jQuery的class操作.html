@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .div1{
+            color: blue;
+        }
+        .div2{
+            font-size: 100px;
+        }
+        .div3{
+            background: pink;
+        }
+        .div4{
+            font-weight: 900;
+        }
+        .div5{
+            font-style: italic;
+        }
+
+    </style>
+</head>
+<body>
+    <div>我是div</div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            JavaScript中,class操作,要使用 className 来执行
+                操作都是全覆盖操作
+                要删除其中一个属性值 
+                    先获取所有的属性值字符串,按照空格转化为数组,删除对应的数组单元
+                    再以空格为拼接为字符串,赋值给标签
+
+                要新增一个属性值
+                    执行 字符串 += 拼接操作
+
+            jQuery中 操作 class属性值,都是已经封装好的函数方法,我们直接使用就可以了
+        
+        */
+
+        // 1, 不能给标签设定class属性值
+        // 只能新增 --- 在原始基础上新增   $().addClass()
+        // 只能删除 --- 在原始基础上删除   $().removeClass()
+        // 切换 --- 如果有,就删除,如果没有就新增  $().toggleClass
+        // 判断 --- 判断有没有这个属性值   $().has()
+
+        // 新增
+
+        // 一个
+        // $('div').addClass( 'div1' );
+
+        // 多个
+        $('div').addClass( 'div1 div2 div3 div4 div5');
+
+        // 删除
+
+        // 一个
+        // $('div').removeClass('div3');
+
+        // 多个
+        $('div').removeClass('div1');
+
+        // 切换  有就删除 没有就新增
+        // $('div').toggleClass('div3');
+
+        // 判断 
+        console.log( $('div').hasClass('div3') )
+
+    </script>
+</body>
+</html>

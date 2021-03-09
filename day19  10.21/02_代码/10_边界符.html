@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            边界符 :
+                ^   起始   写在 正则表达式开始的位置
+                $   结束   写在 正则表达式结束的位置
+
+                ^ 独立使用 起始边界符 表示 必须以符合规范的内容起始 之后的内容没有限制
+                $ 独立使用 结束边界符 表示 必须以符合规范的内容结束 之前的内容没有限制
+
+                ^正则$  只能是一个符合规范的字符
+        */ 
+
+        let str = '12';
+
+        let reg1 = /^\d/;   // 数字开头
+
+        let reg2 = /\d$/;   // 数字结尾
+
+        let reg3 = /^\d$/;  // 只能有一个数字
+
+
+    
+        // console.log( reg1.test(str) );
+
+        // console.log( reg2.test(str) );
+
+        console.log( reg3.test(str) );
+
+
+    </script>
+</body>
+</html>

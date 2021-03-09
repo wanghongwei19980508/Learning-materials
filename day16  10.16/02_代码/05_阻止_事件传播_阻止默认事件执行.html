@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 800px;
+            height: 800px;
+            background: pink;
+        }
+
+        .middle {
+            width: 600px;
+            height: 600px;
+            background: orange;
+        }
+
+        .inner {
+            width: 400px;
+            height: 400px;
+            background: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="middle">
+            <div class="inner"></div>
+        </div>
+    </div>
+
+    <script>
+        /*
+            阻止事件的传播
+                在绑定事件的同时,绑定阻止事件传播的兼容语法
+                通过事件对象e
+                if(e.stopPropagation){
+                    // 标准浏览器
+                    e.stopPropagation();
+                }else{
+                    // 低版本IE
+                    e.cancelBubble = true;
+                }
+                谁写谁阻止,不写的,不会阻止
+
+            阻止默认事件的执行
+                通过事件对象e
+                if (e.preventDefault) {
+                    // 标准浏览器
+                    e.preventDefault();
+                } else {
+                    // 低版本IE
+                    e.returnValue = false;
+                }
+
+        */
+
+        // 给父子级关系的三个标签,都添加相同的事件类型
+        // 点击 inner最里面的标签,两个父级,绑定的,点击事件,也会一起触发
+        var oBox = document.querySelector('.box');
+        var oMiddle = document.querySelector('.middle');
+        var oInner = document.querySelector('.inner');
+        
+        // oBox添加阻止传播的代码,事件的传播,就到 box 为止
+        // box 的父级 就不会在触发相同类型的事件了
+        oBox.addEventListener('click', function (e) {
+            e = e || window.event;
+            if (e.stopPropagation) {
+                // 标准浏览器
+                e.stopPropagation();
+            } else {
+                // 低版本IE
+                e.cancelBubble = true;
+            }
+
+            console.log('我是box触发的');
+        });
+
+
+        // 如果给 middle 添加 阻止传播,事件的传播就到middle为止
+        // box 以及 body html 等父级就不会触发了
+        oMiddle.addEventListener('click', function (e) {
+            e = e || window.event;
+            if (e.stopPropagation) {
+                // 标准浏览器
+                e.stopPropagation();
+            } else {
+                // 低版本IE
+                e.cancelBubble = true;
+            }
+
+
+            console.log('我是middle触发的');
+        });
+        oInner.addEventListener('click', function (e) {
+            e = e || window.event;
+            if (e.stopPropagation) {
+                // 标准浏览器
+                e.stopPropagation();
+            } else {
+                // 低版本IE
+                e.cancelBubble = true;
+            }
+
+
+            console.log('我是inner触发的');
+        });
+
+
+
+    </script>
+</body>
+
+</html>

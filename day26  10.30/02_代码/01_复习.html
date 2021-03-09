@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            ajax数据交互
+                1, ajax的兼容
+
+                    (1) 创建 ajax 
+
+                        if(XMLHttpRequest){
+                            //  标准浏览器
+                            xhr = new XMLHttpRequest();
+                        }else{
+                            // 兼容IE低版本
+                            xhr = new ActiveXObject('Microsoft.XMLHTTP');
+                        }
+
+                    (2) 接收响应体
+
+                        // 标准浏览器
+                        xhr.onload = function(){}
+
+                        // 低版本IE创建的 xhr ajax对象,没有 onload方法
+
+                        // 兼容语法
+                        // 正则语法   /2\d{2}/.test( xhr.status )
+                        xhr.onreadystatechange = function(){     
+                            if( xhr.readyState === 4 && ( xhr.status >= 200 && xhr.status <= 299 ) ){
+                                请求成功执行的程序
+                            }
+                        }
+                        
+                2, 同源和跨域
+                    (1) 同源:
+                        同一个项目,同一个文件夹,同一个域名地址
+                            协议,url地址,端口   三项都相同,就是同源文件
+                            同源文件之间的访问,就是 同源访问/同源请求
+                            浏览器默认只支持 同源请求 只有同源请求可以获取响应体数据内容
+
+                    (2) 跨域:
+                        不是同源的文件,之期间的请求,称为跨域请求
+                        跨域请求,不能获取响应体数据
+
+                3, 解决 跨域访问
+                    (1), cors : 后端程序,设定数据可以被所有的请求访问
+                                浏览器对于这个文件,不再执行同源策略,任何跨域都可以访问
+
+                        
+                        // 指定 允许其他域名访问   * 允许任意域名,IP地址访问
+                        // header('Access-Control-Allow-Origin:*');
+                        // // 响应的请求类型   
+                        // header('Access-Control-Allow-Methods:GET, POST, OPTIONS');
+                        // // 响应头设置
+                        // header('Access-Control-Allow-Credentials:false');
+
+                    (2), proxy服务器代理
+
+                        apache 和 nginx 都可以实现 代理
+
+                        apache只能实现 http协议的代理
+                        nginx 可以实现 所有协议的代理
+
+                            配置步骤:
+                                1, 切换 服务器为 nginx
+
+                                2, 修改 nginx 配置文件
+                                    在 server{}   大括号中 , 定义 代理
+                                    一个 代理 只能 解决一个地址
+
+                                location = /dt {
+                                    proxy_pass https://www.duitang.com/napi/blog/list/by_filter_id/;
+                                }
+
+                                location    关键词 
+                                /dt         代理名称
+                                proxy_pass  url      代理的地址
+
+                                写 JavaScript 请求时 使用  代理名称 /dt 来设定 请求 的url地址
+
+
+                    (3), jsonp方法
+        
+
+
+                4, json字符串
+                    (1), json字符串 本质 就是字符串
+                    (2), 作用: 不同计算机语言之间,传输数据,专用的字符串格式
+                               类似于 通用语言 所有的 计算机程序都能看懂
+                    (3), 操作:
+                            php:    json_encode()     将其他数据格式转化为json串
+                                    json_decode()     json串,还原为其他数据格式
+
+                            JavaScript:  JSON.stringify()    将其他数据格式转化为json串
+                                         JSON.parse()        json串,还原为其他数据格式
+
+                    (4), 手写:
+                            1,所有的字符串数据格式,都要添加 双引号
+                            2,不要使用单引号,只能使用 双引号
+
+                    (5), 请求:
+                            请求一个 json 文件 
+                            apache 可以支持 get,post
+                            nginx  只支持   get方式
+                        实际项目中,一般请求 json文件 都是get方式
+                            
+        
+        */
+
+
+    </script>
+</body>
+</html>

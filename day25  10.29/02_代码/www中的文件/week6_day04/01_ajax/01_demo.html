@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>请求</button>
+
+    <script>
+        const oBtn = document.querySelector('button');
+
+        oBtn.addEventListener('click' , ()=>{
+            // 1,创建 ajax对象
+            const xhr = new XMLHttpRequest();
+
+            // 2,设定open()
+            xhr.open('get' , './demop');
+
+            // 3,发送send()
+            xhr.send();
+
+            console.log(xhr);
+        })
+
+    </script>
+</body>
+</html>

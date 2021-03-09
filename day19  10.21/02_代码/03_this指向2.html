@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 800px;
+            height: 800px;
+            background: pink;
+            margin: 40px auto;
+        }
+
+        .middle{
+            width: 600px;
+            height: 600px;
+            background: orange;
+        }
+
+        .inner{
+            width: 400px;
+            height: 400px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="middle">
+            <div class="inner"></div>
+        </div>
+    </div>
+
+    <script>
+        /*
+            this指向:
+                函数中才有this,this的作用就是替代替换的作用
+                可以替换指向的对象内容
+
+            普通函数,this指向,调用函数时,点之前写的对象内容
+                声明式,赋值式定义函数
+                    调用时, 应该是  window.函数名称()   但是 window可以省略不写
+                    this指向, window
+
+                定义在对象中的函数
+                    函数有this,this指向的是 定义存储函数的 对象 
+                    调用语法 : 对象.函数名称()
+
+                特殊:
+                    定时器,延时器
+                    forEach() 
+                    函数的this,指向的是 window
+
+            this指向2:
+                事件:
+                    所有事件,事件处理函数,this指向是 绑定事件的标签 事件源
+                必须要注意:
+                    事件的传播:触发子级事件,通过事件的传播,同时会触发父级绑定的类型相同的事件
+                    此时: e.target 也就是 触发事件的 事件对象,都是 子级
+                    this指向 : 每一个事件处理函数,this指向都是绑定事件的标签对象
+                    
+            普通函数,就看调用函数时 点 之前写的是谁, this指向就是谁
+
+            箭头函数的this指向:
+                父级程序的this指向
+                如果父级没有this,或者没有父级程序,this指向window
+
+                实际项目中,使用面向对象语法编程时,通常使用箭头函数
+
+                平时程序中,不牵扯this问题,用那个都行
+
+            如果初学时,分不清楚this是谁,直接console.log(this),瞅瞅
+
+        */
+
+
+        const oBox = document.querySelector('.box');
+        const oMiddle = document.querySelector('.middle');
+        const oInner = document.querySelector('.inner');
+
+        oBox.addEventListener( 'click' , function(e){
+            // this指向永远是 oBox 标签
+            console.log(this);
+            // 谁触发的事件指向的就是谁
+            // 如果是点击inner,通过事件传播触发的,e.target就是inner
+            // console.log(e.target);
+        });
+
+        oBox.addEventListener( 'click' , ()=>{
+            // 当前程序,没有父级程序,this指向是window
+            console.log(this);
+        } )
+
+
+
+
+        oMiddle.addEventListener( 'click' , function(e){
+            // this指向永远是 oMiddle 标签
+            console.log(this);
+            console.log(e.target);
+
+        });
+
+        oInner.addEventListener( 'click' , function(e){
+            // this指向永远是 oInner 标签
+            console.log(this);
+            console.log(e.target);
+        });
+
+
+        const obj = {
+            name:'张三',
+            sex:'男',
+            // 普通的匿名函数,this指向,应该是存储函数的obj对象
+            fun1:function(){
+                // console.log(this);
+
+                // 以 赋值语法 将 箭头函数 封装给一个变量
+                // 调用 函数 fun3,this指向是 对象 obj
+                // 箭头函数的this指向是父级程序
+                // 当前 fun3 的父级程序是 fun1 
+                // fun3 的this指向 就是 fun1 的this指向
+                // fun1的this指向是 obj 对象 fun3 的this指向,也是 obj对象
+                const fun3 = ()=>{
+                    console.log(this);
+                };
+
+                fun3();
+
+            },
+            // 匿名函数
+            // this指向的是父级程序的this指向
+            // 当前函数的父级程序是,obj对象,对象是没有this的,只有函数有this
+            // 箭头函数的this指向就是window
+            fun2:()=>{
+                // console.log(this);
+            }
+        }
+
+        obj.fun1();
+        obj.fun2();
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="s1 s2 s3">我是div</div> -->
+
+    <ul name="ul1">
+        <li>我是第一个li</li>
+        <li>我是第二个li</li>
+        <li>我是第三个li</li>
+        <li>我是第四个li</li>
+    </ul>
+
+    <ul name="ul2">
+        <li>我是第一个li</li>
+        <li>我是第二个li</li>
+        <li>我是第三个li</li>
+        <li>我是第四个li</li>
+    </ul>
+
+    <ul name="ul3">
+        <li>我是第一个li</li>
+        <li>我是第二个li</li>
+        <li>我是第三个li</li>
+        <li>我是第四个li</li>
+    </ul>
+
+    <script>    
+        /*
+            DOM操作就是操作页面,操作文档的
+            
+            一,获取标签对象
+                原始方法 --- 所有浏览器都支持
+                    document.getElementById('id属性值')  
+                        执行结果是获取唯一的标签对象
+                       
+                    document.getElementsByClassName('class属性值')  
+                        执行结果是获取所有符合class属性值的标签对象
+                        属性值,只要匹配一部分就可以了,不用完全匹配
+                        执行结果是 伪数组
+                        伪数组不能使用forEach 循环遍历 
+
+                    document.getElementsByTagName('标签名称')  
+                        执行结果是获取所有符合标签名称的标签对象
+                        执行结果是 伪数组
+                        伪数组不能使用forEach 循环遍历 
+
+                    document.getElementsByName('name属性值')  
+                        执行结果是获取所有符合name属性值的标签对象
+                        执行结果是 伪数组
+                        伪数组可以使用forEach 循环遍历 
+
+                新增方法 --- 低版本IE不支持
+                    document.querySelector('条件')
+                        获取第一个符合条件的标签对象
+                        执行结果是获取唯一的标签对象
+
+                    document.querySelectorAll('条件')
+                        获取所有符合条件的标签对象
+                        执行结果是伪数组
+                        伪数组可以使用forEach 循环遍历 
+                获取标签对象时,使用的 document 表示 是从整个文档中获取
+                还可以先获取一个标签对象,在这个标签对象中,获取指定的标签
+                    标签对象.getElementById('id属性值')  
+                    标签对象.querySelectorAll('条件')
+                    .....
+                    这样获取标签对象更加精确,防止冲突
+
+            二, 标签的操作设定
+                1, 内容操作
+                    获取
+                        var 变量 = 标签对象.innerHTML
+                            获取标签对象的所有内容,包括内容,以及子级后代标签名称和标签内容
+
+                        var 变量 = 标签对象.innerText
+                            获取标签对象的所有内容,包括内容,子级后代标签内容,不包括标签名称
+
+                    设定
+                        标签对象.innerHTML = '内容';
+                            将内容,写入到 标签对象中 , 执行的是 覆盖写入 会覆盖之前的原始内容
+                            内容中支持 标签语法 , 可以解析标签语法,显示标签效果
+
+                        标签对象.innerText = '内容';
+                            将内容,写入到 标签对象中 , 执行的是 覆盖写入 会覆盖之前的原始内容
+                            内容中不支持 标签语法,写入的标签不会解析执行为标签效果,就是纯字符串
+
+                        如果要在原始内容后拼接新的内容
+                            标签对象.innerHTML += '内容';
+                            标签对象.innerText += '内容';
+
+                2, 标签属性的操作
+                    (1) 标签直接支持的属性 id  class  title
+                        获取: 
+                            var 变量 = 标签对象.id;
+                            var 变量 = 标签对象.className;
+                            var 变量 = 标签对象.title;
+
+                        设定
+                            标签对象.id = XXX ;
+                            标签对象.className = XXX ;
+                            标签对象.title = XXX ;
+
+                        class支持多个属性值,多个属性值之间使用空格键间隔
+                            新增class属性值 要 执行 += 拼接 操作
+                                           拼接的 空格 + 新的属性值
+                            删除某个属性值,需要先将属性值转化为数组,删除组单元,再拼接为新的字符串
+
+                    (2) 布尔属性  设定获取的结果都是布尔类型属性值
+                        获取:
+                            var 变量 = 标签对象.布尔属性;
+
+                        设定 
+                            标签对象.布尔属性 = true / false;
+
+                    (3) 其他属性 
+                        获取  
+                            var 变量 = 标签对象.getAttribute('属性');
+
+                        设定  
+                            var 变量 = 标签对象.setAttribute('属性',属性值);
+
+                        删除  
+                            var 变量 = 标签对象.removeAttribute('属性');
+
+                3, css样式的操作
+                    设定
+                        标签对象.style.css样式属性 = '属性值' ; 
+                            不支持-减号 要写成 小驼峰命名法
+                            该有px单位要有px单位
+
+                    获取  兼容语法
+       
+                    function myGetStyle(element, style) {
+                        if (window.getComputedStyle) {
+                            return window.getComputedStyle(element)[style];
+                        } else {
+                            return element.currentStyle[style];
+                        }
+                    }
+
+
+                4, 占位
+                    offsetWidth   offsetHeight
+                        宽高 + padding + border
+
+                    clientWidth   clientHeight
+                        宽高 + padding
+
+                    clientLeft   clientTop
+                        左 / 上 border 宽度
+
+                5, 定位
+                    offsetTop    offsetLeft
+                    与定位父级的间距
+
+                    offsetParent 存储的对象,是定位父级
+
+       
+        */
+
+
+        // var oDivs = document.getElementsByClassName('s2 s3');
+        // console.log(oDivs)
+
+        var oUl1 = document.querySelector('[name="ul1"]');
+
+        var oLis = oUl1.querySelectorAll('li');
+
+        console.log(oUl1);
+        console.log(oLis);
+    </script>
+</body>
+</html>

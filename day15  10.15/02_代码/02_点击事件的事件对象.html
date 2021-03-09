@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div">我是div
+        <p>我是p标签</p>
+        <span>我是span标签</span>
+    </div>
+    <script>
+        /*
+            事件:
+                事件的三要素:
+                    事件源        绑定事件的标签对象 
+                    事件类型      绑定的事件的类型
+                    事件处理函数  触发事件执行的函数程序
+                                 可以是一个 匿名函数 function(){}
+                                 也可以是一个 已经定义好的函数名称
+
+                事件对象:
+                    触发事件的对象,相关信息
+                    触发事件的对象,与绑定事件的对象,不一定相同
+                    在 事件处理函数中 定义一个形参,触发事件,JavaScript程序,自动给形参赋值,存储触发事件对象的先关信息
+                    按键事件,存储的是,按下按键的相关信息
+                    鼠标事件,存储的是,鼠标点击移动的相关信息
+
+                事件对象的兼容语法:
+                    低版本IE浏览器,不会自动向 形参中存储数据信息
+                    有一个专门的属性 window.event 来存储事件对象的信息
+                    只要不报错,一个有一个没有,使用 逻辑或 || 来兼容  
+                    如果报错,使用if判断来兼容
+
+                    e = e || window.event;
+
+            点击事件,事件对象:
+                1, 存储了点击时,鼠标的坐标
+                    
+
+                2, 存储了点击时,点击的标签对象
+                    点击事件,将事件 绑定给我的标签对象成为事件源
+                    触发事件的标签对象是 事件对象
+                    往往不是相同的标签对象
+
+                e.target 获取的 就是跟我们直接获取标签对象,结果是完全相同的
+                多有对于标签对象的操作, 都可以直接对 e.target 进行
+                可以获取 id className 内容 属性...
+                通过不同的 e.target 信息,可以判断,点击的是 不同的 标签/事件对象     
+                标签对象.tagName  存储的是 标签对象名称, 是 大写 英文字母
+
+                判断方法有很多,只要不冲突,只要能判断正确,都可以使用
+
+        */
+        var oDiv = document.getElementById('div');
+
+        var oSpan = document.querySelector('span');
+
+        oDiv.onclick = function(e){
+            e = e || window.event;
+            // 根据点击不同的标签,执行不同的代码程序
+            if(e.target.tagName === 'SPAN' ){
+                console.log('点击的是span标签');
+            }else if(e.target.tagName === 'P' ){
+                console.log('点击的是P标签');
+            }else if(e.target.tagName === 'DIV' ){
+                console.log('点击的是div标签');
+            }
+
+        }
+
+    </script>
+</body>
+</html>

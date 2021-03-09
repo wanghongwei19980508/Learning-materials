@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div">我是div</div>
+
+    <script>
+        /*
+            事件的监听和删除,低版本的IE浏览器有自己的语法形式,需要做兼容处理
+
+            使用函数方式完成
+
+            事件的监听
+                标准浏览器
+                    标签对象.addEventListener( '事件类型,没有on' , 事件处理函数 )
+
+                低版本IE浏览器
+                    标签对象.attachEvent( '事件类型,要有on' , 事件处理函数 )
+
+            事件的删除
+                标准浏览器
+                    标签对象.removeEventListener( '事件类型,没有on' , 事件处理函数 )
+        */
+
+        var oDiv = document.getElementById('div');
+
+        // 标准浏览器
+        // oDiv.addEventListener('click' , function(){
+        //     console.log(111);
+        // })
+
+        // 低版本IE
+        // oDiv.attachEvent('onclick' , function(){
+        //     console.log(111);
+        // })
+
+        // 兼容方式
+
+        mySetEvent(oDiv , 'click' , function(){console.log(1111)});
+
+        mySetEvent(oDiv , 'click' , fun2 );
+
+        function fun2(){
+            console.log(2222)
+        }
+
+
+        // 删除事件
+        
+        // 标准浏览器
+        // oDiv.removeEventListener('click' , fun2);
+
+        // 低版本IE
+        // oDiv.detachEvent('onclick' , fun2);
+
+        // 兼容方式
+        // myDelEvent( oDiv , 'click' , fun2 );
+
+
+        // 兼容处理 绑定
+        // 需要三个参数
+        // 1,事件源 : 绑定事件的标签对象
+        // 2,事件类型 : 绑定事件的事件类型,此处输入的参数,不要有on
+        // 3,事件处理函数 : 可以是 匿名函数,也可以是函数名称
+
+        function mySetEvent(element , type , fun){
+            // 如果有 addEventListener 这个方法,证明是普通浏览器
+            // 可以使用 addEventListener 这个方法
+            if(element.addEventListener){
+                // 给标签,直接绑定事件类型和事件处理函数
+                element.addEventListener( type , fun );
+            }else{
+            // 没有 addEventListener 这个方法,证明是低版本IE浏览器
+                // 使用 低版本IE浏览器语法
+                element.attachEvent( 'on' + type , fun );
+            }
+        }
+
+        // 兼容处理 删除
+        // 需要三个参数
+        // 1,事件源 : 删除事件的标签对象
+        // 2,事件类型 : 删除事件的事件类型,此处输入的参数,不要有on
+        // 3,事件处理函数 : 可以是 匿名函数,也可以是函数名称
+
+        function myDelEvent(element , type , fun){
+            // 如果有 removeEventListener 这个方法,证明是普通浏览器
+            // 可以使用 removeEventListener 这个方法
+            if(element.removeEventListener){
+                // 给标签,直接绑定事件类型和事件处理函数
+                element.removeEventListener( type , fun );
+            }else{
+            // 没有 removeEventListener 这个方法,证明是低版本IE浏览器
+                // 使用 低版本IE浏览器语法
+                element.detachEvent( 'on' + type , fun );
+            }
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>

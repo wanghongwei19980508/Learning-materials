@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 通过设定好的代理,向堆糖网站,发送数据请求
+        /*
+            在 nginx 配置文件中, 设定好 堆糖 的代理
+                    
+            location = /dt {
+                proxy_pass https://www.duitang.com/napi/blog/list/by_filter_id/;
+            }
+
+            重启 phpstudy
+        
+        */
+
+        // 通过ajax请求,携带参数,访问 堆糖网站
+
+        // 设定访问参数:
+        
+        // 关键词 : 首页 -- 分类 中的 中文内容
+        let keyWord = '婚纱婚礼';
+
+        // 起始数据的索引下标  
+        // 第一次是从第一条数据开始获取,索引下标是0
+        let start = 0;
+
+        // 时间戳
+        const time = new Data();
+        let t = parseInt( time.getTime()/1000 ) ; 
+
+
+
+
+
+        // ajax请求
+        
+        // 创建 ajax 对象
+        const xhr = new XMLHttpRequest();
+        
+        // 通过open() 设定 请求方式 是 get 与 堆糖的请求 方式一致
+        // 通过代理名称 完成 跨域请求
+        // 之后要需要拼接请求的参数
+        xhr.open( 'get' , `/dt?include_fields=top_comments%2Cis_root%2Csource_link%2Citem%2Cbuyable%2Croot_id%2Cstatus%2Clike_count%2Csender%2Calbum%2Creply_count&filter_id=${keyWord}&start=${start}&_=${t}` );
+    
+        // 发送请求
+        xhr.send()
+
+        // 接收请求结果,响应体
+        xhr.onload = ()=>{
+            console.log( JSON.parse( xhr.response ) );
+        }
+    
+    
+    </script>
+</body>
+</html>

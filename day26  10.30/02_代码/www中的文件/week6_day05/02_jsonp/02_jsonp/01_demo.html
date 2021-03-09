@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width: 100px;
+            height: 40px;
+            border:1px solid #000;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const oTbody = document.querySelector('tbody');
+
+        // 定义好函数,用于生成table表格
+        // 需要 参数数据,数据库获取的table表格数据
+        function setTab( array , element ){
+            let str = '';
+            array.forEach(v=>{
+                str += `
+                    <tr>
+                        <td>${v.name}</td>    
+                        <td>${v.age}</td>    
+                        <td>${v.sex}</td>    
+                    </tr>
+
+                `;
+            })
+            element.innerHTML = str;
+        }
+         
+        // 先定义一个变量,准备存储数据
+        let abc = 0;
+
+    </script>
+
+    <!-- 执行外部PHP程序,给变量进行赋值 
+    
+         通过 src 使用 jsonp的方式,调用加载php程序中
+         echo 输出的部分
+         同时我们还可以给php程序传参
+         可以在url地址之后,使用?问号间隔参数
+         参数是键值对的形式,以&符号间隔
+         也就是超链接传参语法
+    -->
+    <script src="./demo.php?cb=setTab&ele=oTbody"></script>
+
+    <script>
+
+        // 执行外 script标签 等于给 abc 变量进行了赋值
+        // setTab( abc , oTbody );
+    </script>
+
+    <script>
+        /*
+            总结 jsonp:
+                1, 原理:
+                    a, src 还是 href 都不会收到浏览器 同源策略的限制
+                       这两个属性就是为了加载外部文件使用的 浏览器 不会 限制 src 和 href 来 读取外部文件
+
+                    b, src 还是 href 读取的外部文件,都会按照标签的语法格式执行
+                       link 导入的外部文件 就会按照 css 语法格式执行
+                       img  导入的外部文件 就会按照 图片的格式执行
+                       script 导入的外部文件 就会按照 JavaScript语法执行
+
+                2, 实现核心:
+                    必须要先 定义好 函数 或者 变量
+
+                    在 外部PHP程序中 
+                        给 变量 赋值 
+                        或者 调用函数 并且给 函数赋值 实参
+
+                    通过 src 加载 外部 php程序
+                        将 php 程序 echo 输出的内容 
+                        在 script标签中,按照js语法来执行
+
+                    等于,在js中定义变量或者函数
+                         在 PHP中 变量赋值 或者 调用函数赋值实参
+                         PHP echo 输出 变量赋值程序 或者 调用函数赋值实参程序
+                         再通过 src 加载到 script标签 来执行
+
+                    到底是定义变量赋值,还是定义函数PHP调用,要看PHP程序的需求
+        
+        
+        */ 
+
+    </script>
+</body>
+</html>

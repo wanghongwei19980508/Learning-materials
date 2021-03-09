@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            合并展开运算符:
+                ...   三个点就是合并展开运算符
+                    写在 函数的形参中,作用是 合并运算符
+                    写在 函数的实参赋值中,作用是 展开运算符
+
+                合并运算符,作用于 arguments 类似
+                    ... 是 将 定义的对应的实参,以伪数组的形式,存储在形参中
+                        可以只存储一部分的实参
+                    
+                    arguments 会存储所有的实参
+
+                    箭头函数,没有 arguments 要是数值的形式存储实参 / 不定项函数,也就是不确定实参个数的函数
+                        必须要使用 ... 合并运算符
+
+                展开运算符,定义在 函数的实参中 , 一般是 ...数组
+                    作用是将数组中的每一个单元,存储的数据,一一对应的赋值给函数形参
+        */
+
+
+        // 函数中有属性,叫arguments,将所有实参,以数组的形式存储
+        // 不定项求和
+        function getAdd1(){
+            console.log(arguments)
+            let res = 0;
+            for(let i = 0 ; i <= arguments.length-1 ; i++){
+                res += arguments[i];
+            }
+
+            return res;
+        }
+
+        // console.log( getAdd1( 1,2,3,4,5) )
+        // console.log( getAdd1( 1,4,5) )
+        // console.log( getAdd1( 1,4,5,1,1,1,1,1,100,1,1,1) )
+
+
+        // 合并运算符
+        // 第一个实参存储在num1中,第二个实参存储在num2,其他所有的实参,存储在arr中
+        // function getAdd2( num1 , num2 , ...arr ){
+        //     console.log(num1);
+        //     console.log(num2);
+        //     console.log(arr);
+        // }
+
+        // getAdd2(1,2,3,4,5,6,7,8,9,10);
+
+        // 箭头函数没有 arguments 只能使用 ... 合并运算符
+        // const fun3 =  ()=>{
+        //     console.log( arguments );
+        // }
+
+        // fun3();
+
+
+
+        // 展开运算符
+
+        function fun4(a,b,c,d,e,f,g){
+            console.log(a,b,c,d,e,f,g) ;
+        }
+
+        fun4(1,2,3,4,5,6,7);
+
+        const arr = [7,6,5,4,3,2,1];
+
+        fun4(arr[0] , arr[1] , arr[2] , arr[3] , arr[4] , arr[5] , arr[6] );
+
+        // 展开运算符
+        // JavaScript程序,会自动获取,数组arr中,每一个单元存储的数据
+        // 按照顺序,一一对应赋值给 函数fun4的形参
+        fun4( ...arr );
+
+
+        /*
+            总结:
+                ... 三个点,既是 合并 也是 展开 就看你 写在哪儿了
+
+                定义在 函数的形参中 function ( 形参1,形参2 , ...变量){} 
+                    以 数组的形式,存储对应的实参
+                        第一个实参,赋值给形参1
+                        第二个实参,赋值给形参2
+                        其他所有的实参,以数组的形式,赋值给变量存储
+
+                定义在 函数调用时 的 实参中 fun( ...数组 );
+                    将 数组展开, 数组中每一个单元,存储的数据,作为实参,一一对应的赋值给函数的形参
+        
+        
+        */ 
+
+
+    </script>
+</body>
+</html>

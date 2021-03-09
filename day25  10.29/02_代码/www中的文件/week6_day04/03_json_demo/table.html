@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width: 100px;
+            height: 80px;
+            text-align: center;
+            border:1px solid #000;
+        }
+
+        img{
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <td>头像</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>地址</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <script>
+        const xhr = new XMLHttpRequest();
+        xhr.open( 'get' , './data.json' );
+        xhr.send();
+        xhr.onload = ()=>{
+            const res = JSON.parse( xhr.response );
+
+            let str = '';
+
+            res.forEach( v => {
+                str += `
+                <tr>
+                    <td><img src="./${v.img}"></td>
+                    <td>${v.name}</td>
+                    <td>${v.age}</td>
+                    <td>${v.sex}</td>
+                    <td>${v.add}</td>
+                </tr>`;
+            } )
+
+            const oTbody = document.querySelector('tbody');
+            oTbody.innerHTML  = str;
+
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+    <div>00:00:00:00</div>
+    <button>开始</button>
+    <button>暂停</button>
+    <button>继续</button>
+    <button>重置</button>
+
+    <script>
+        /*
+            计时器:
+                每到1000毫秒,给秒进1
+                每到60秒,给分钟进1
+                每到60分钟,给小时进1
+                整个程序,通过定时器来计时,间隔一个时间一直执行
+            
+            说明:
+                时间间隔:
+                    每个电脑都有自己的刷新频率,一般是 60Hz 或者 144Hz 或者 240Hz
+                    表示 一秒 电脑刷新的频率
+                    1秒60次 一次间隔 16.66666...毫秒
+                    如果 定时器 事件间隔小于 16.6666.... 电脑的刷新频率不够 
+                    推荐定义 20以上 比较安全, 一般最小写 100毫秒
+
+            点击过快效果:
+                所谓的点击过快,本质是:
+                    同一时间内,同时运行的定时器太多了
+                    上一个定时器还没有定制,下一个定时器,就又触发了
+                    就会造成程序执行的混乱
+
+                解决方案:
+                    1, 添加一个变量 存储数据,根据数据,判断新的定时器是否要启动
+                        添加一个变量,赋值默认值
+                        启动定时器之前,执行判断,如果是默认值,可以启动定时器,如果是其他数值,执行return,不启动定时器
+                        每次启动定时器之后,都给变量,赋值其他数值,确保不会启动新的定时器
+                        执行清除定时器程序之后,可以再次启动定时器,给变量赋值原始数值,触发可以再次启动新的定时器
+
+                    2, 给标签,添加禁用属性 或者 改变标签的功能 或者 删除绑定的事件
+
+            核心: 同一个时间内,只允许,一个定时器执行
+                  前一个定时器执行时,不允许启动新的定时器
+                  前一个定时器清除之后,才能启动新的定时器
+        */
+
+        // 1, 获取标签对象
+
+        var oStart = document.querySelectorAll('button')[0];
+        var oPause = document.querySelectorAll('button')[1];
+        var oGoon = document.querySelectorAll('button')[2];
+        var oReset = document.querySelectorAll('button')[3];
+
+        var oDiv = document.querySelector('div');
+
+        // 设定 毫秒 秒 分钟 小时 的计时变量
+        var ms = 0;
+        var s = 0;
+        var m = 0;
+        var h = 0;
+
+        // 在全局作用域中,定义变量,在函数中对这个全局作用域变量进行赋值
+        // 全局作用域变量,在所有的作用域,函数中,都可以调用执行
+        var time ;
+
+        // 添加变量,存储数据,用于判断定时器,要不要启动
+        var bool = true;
+
+
+        // 点击开始,触发函数,执行定时器,开始计时
+        oStart.onclick = function() {
+            // bool 中 存储 的数据 不是 true;
+            // 执行一个 return 之后的程序不会执行不会启动,没有新的定时器执行了
+            if( !bool ) return;
+
+            // 第一次执行程序, bool 中是 true 
+            // if判断不会触发,可以执行 start(); 启动 定时器
+            start();
+
+            // 一旦启动了定时器,就给bool赋值false
+            // 如果再次点击,bool此时是false,就执行 return 
+            // 就不会执行 start(); 就不会有 新的定时器启动了
+            bool = false;
+
+            // 添加禁用:
+            // oStart.disabled = true;
+
+            // 删除绑定的事件
+            // 使用空函数,覆盖之前绑定的事件处理函数
+            // null  function(){}
+            // oStart.onclick = null;
+        }
+
+        // 点击暂停标签,
+        oPause.onclick = function(){
+            clearInterval(time);
+            // 触发了暂定,会清除定时器,没有定时器了,就可以启动新的定时器了
+            // 给bool 赋值给 true 点击开始,可以再次启动定时器了
+            bool = true;
+
+            // 点击暂停,再让开始按钮可以使用
+            // oStart.disabled = false;
+
+            // 点击时,再给 button开始 绑定上定时器
+            // oStart.onclick = function() {
+            //     start();
+            //     oStart.onclick = null;
+            // }
+        }
+
+
+
+        // 2, 设定定时器 -- 点击开始时执行
+
+        function start() {
+            // 在函数中,对全局作用域变量赋值
+            time = setInterval(function () {
+                // 当前时钟,是两位数值
+                // 从 1000 变成 100 
+                // 累加 100 变成 累加 10
+                ms += 10;
+
+                // 毫秒计数,满100,每次都向秒进1
+                if (ms === 100) {
+                    // 秒位 进1
+                    s += 1;
+                    // 进位之后,ms就要清零
+                    ms = 0;
+                }
+
+                // 秒计数,数值大于0,并且可以被60整除,每次都向分钟进1
+                if (s == 60) {
+                    m += 1;
+                    s = 0;
+                }
+
+                // 分钟计数,数值大于0,并且可以被60整除,每次都向小时进1
+                if (m === 60) {
+                    h += 1;
+                    m = 0;
+                }
+
+                // 因为h,m,s,ms 都要执行累加操作,不能直接前导补零
+                // 需要定义新的变量,存储结果
+                var msStr = ms < 10 ? '0' + ms : ms;
+                var sStr = s < 10 ? '0' + s : s;
+                var mStr = m < 10 ? '0' + m : m;
+                var hStr = h < 10 ? '0' + h : h;
+
+
+                oDiv.innerHTML = `${hStr}:${mStr}:${sStr}:${msStr}`;
+
+            }, 100);
+            console.log(time)
+        }
+    </script>
+</body>
+
+</html>

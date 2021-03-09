@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1" class="div2" name="我是div" index="1">我是div</div>
+
+    <input type="checkbox" checked>
+    
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            原生js中的属性设定:
+                1, 直接定义在标签中的属性 ---- 直接调用和设定
+                    标签对象.id  标签对象.className  标签对象.title
+                   
+                2, 布尔属性 --- 获取设定的都必须是布尔值
+                    标签对象.布尔属性
+
+                3, 其他属性 
+                    标签对象.getAttribute()
+                    标签对象.setAttribute()
+                    标签对象.removeAttribute()
+
+            jQuery中:
+                1, 专门操作布尔属性  .prop()
+                
+                    设定: $().prop('属性' , 属性值) 
+                    获取: $().prop('属性')
+                    删除: $().removeProp('属性')
+
+                2, 操作其他属性  .attr()
+                    设定: $().attr('属性' , 属性值) 
+                    获取: $().attr('属性')
+                    删除: $().removeAttr('属性')
+                    
+        
+        */
+
+        // 设定
+        $('div').attr('id' , '123');
+
+        // 获取
+        console.log( $('div').attr('class' ) )
+        console.log( $('div').attr('name' ) )
+        console.log( $('div').attr('index' ) )
+
+        // prop获取其他属性,无法正确获取属性值
+        console.log( $('input').prop( 'name' ) );
+        console.log( $('input').prop( 'index' ) );
+
+
+        // 删除
+        // $('div').removeAttr( 'index' );
+
+
+        // 获取布尔属性
+        console.log( $('input').attr( 'checked' ) );
+        console.log( $('input').prop( 'checked' ) );
+
+
+        /*
+            1, 隐式迭代,是 jQuery自动执行的代码效果,不用专门的去使用,jQuery会自动执行
+
+            2, 隐式迭代执行原理:
+                设定时 默认会对 伪数组中的所有标签对象,执行循环遍历,都操作一遍
+                获取时 只会获取第一个标签对象的数据,之后的不再执行
+                       解决 : 必须使用 each 来循环伪数组
+                       参数1:索引下标
+                       参数2:存储的数据---标签对象
+                       $().each( (k,v)=>{} )
+        
+        */
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            height: 6000px;
+        }
+
+        div{
+            width: 500px;
+            height: 500px;
+            background: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            position: fixed;
+        }
+        p{
+            width: 200px;
+            height: 200px;
+            background: orange;
+            position: fixed;
+            top:0;
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+        <p></p>
+    </div>
+
+
+    <script>
+        /*
+            标签的定位
+                offsetTop    offsetLeft
+                与定位父级的间距
+
+                每一个标签,在 标签对象中 都有一个属性 offsetParent
+                属性值是 就是 当前标签,定位父级 
+                offsetTop    offsetLeft 就是 存储 当前标签与定位父级之间的间距
+
+                关键是 找 定位父级是谁
+
+                如果记不清楚 , console.dir(标签对象) 自己看看就行了
+
+                标签没有定位,父级没有定位, 定位父级是 body
+
+                标签有定位,父级没有定位  
+                    relative ---- body
+                    absolute ---- body
+                    fixed ---- null 视窗窗口
+
+                标签有定位,父级也有定位
+                    父级有定位,当前标签是 relative  absolute
+                        定位父级是 父级标签
+
+                    父级有定位,当前标签是 fixed
+                        定位父级是 null 视窗窗口
+        */
+
+        var oDiv = document.querySelector('div');
+        var oP = document.querySelector('p');
+        
+        console.dir(oP);
+    </script>
+</body>
+</html>

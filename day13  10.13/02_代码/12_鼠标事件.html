@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 400px;
+            height: 400px;
+            background: pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        p{
+            width: 200px;
+            height: 200px;
+            background: orange;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p></p>
+    </div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /* 
+            事件的三要素
+                1,事件源        div标签
+                2,事件类型      click 鼠标左键单击事件
+                               on 是 绑定事件类型的 语法
+                3,事件处理函数  function(){} 匿名函数
+                               也可以是一个定义好的函数名称
+
+        */
+
+        // 点击div标签,设定随机颜色
+        var oDiv = document.querySelector('div');
+        // 绑定匿名函数
+        // 匿名函数形式,等于是将整个匿名函数,绑定在事件上,触发事件,就会触发执行函数中的程序
+        // 类似于 var abc = function(){} 将整个函数 赋值给这个变量
+        // oDiv.onclick = function(){
+        //     oDiv.style.color = setColor();
+        // }
+
+        // 绑定函数名称
+        // fun这个函数名称中,存储的是 已经定义好的函数的 内存地址
+        // 触发事件,通过 内存地址, 找到函数的存储空间,调用执行函数
+        // 如果绑定是 fun() 等于绑定的是 函数的执行结果 return 的内容
+        // 触发时间时 就不是通过函数地址,调用函数了
+        // 绑定函数名称,必须没有();
+        // oDiv.onclick = fun;
+
+        // function fun(){
+        //     oDiv.style.color = setColor();
+        // }
+        // oDiv.onclick = function(){
+        //     console.log('我是单击事件的执行内容')
+        // }
+
+
+        // oDiv.ondblclick = function(){
+        //     console.log('我是双击事件的执行内容')
+        // }
+
+        // oDiv.oncontextmenu = function(){
+        //     console.log('我是鼠标右键单击事件')
+        // }
+
+        // oDiv.onmousedown = function(){
+        //     console.log('我是鼠标按键按下事件')
+        // }
+
+        // oDiv.onmouseup = function(){
+        //     console.log('我是鼠标按键抬起事件')
+        // }
+
+        // oDiv.onmousemove = function(){
+        //     console.log('鼠标在div上移动了')
+        // }
+
+        oDiv.onmouseenter = function(){
+            console.log('我进去了')
+        }
+
+        oDiv.onmouseleave = function(){
+            console.log('我出来了')
+        }
+
+        // 鼠标左键单击事件  click   分成按下抬起两个动作,两个都做都执行完毕,才会触发单击事件
+        // 鼠标左键双击事件  dblclick
+        // 鼠标右键单击事件  contextmenu
+        // 鼠标按键按下      mousedown
+        // 鼠标按键抬起      mouseup
+        // 鼠标移动          mousemove   必须移动才会触发,悬停不会触发
+        // 鼠标移入          mouseover     mouseenter
+        // 鼠标移出          mouseout      mouseleave
+        // 移入移出事件,只有在经过标签范围 边界线时 才会触发
+        // 在 标签 范围内 移动 不会触发事件
+        // 在 标签 范围内 移动 触发的是 mousemove 事件
+        // 经过 子级标签 边界线时 mouseover     mouseout    也会被触发
+        // 经过 子级标签 边界线时 onmouseenter  mouseleave  不会被触发
+
+            
+    </script>
+</body>
+</html>

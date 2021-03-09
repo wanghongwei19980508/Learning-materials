@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>请求</button>
+
+    <script src="../jquery.min.js"></script>
+    <script>
+        $('button').click(()=>{
+
+
+            $.post( './demo.php' , {name:'jack'} , res => console.log( res ) , 'json' );
+
+
+        })
+
+
+
+    </script>
+</body>
+</html>

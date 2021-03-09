@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+            }
+        td{
+            height: 50px; width: 100px;
+            border:aqua 2px solid;
+            text-align: center;
+            line-height: 50px;
+        }
+        .box{
+            width: 100%; height: 100%;
+            background: rgba(0, 0,0, .5);
+            position: fixed;
+            top: 0;  left: 0;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index:10000;
+        }
+        .box>div{
+            width: 200px;  height: 180px;
+            background: chartreuse;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        姓名<input type="text" name="xzxm"><br>
+        年龄<input type="text" name="xznl"><br>
+        身高<input type="text" name="xzsg"><br>
+        体重<input type="text" name="xztz"><br>
+        <button name="xinzengb">新增</button>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>身高</td>
+                <td>体重</td>
+                <td>删除</td>
+                <td>修改</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="box">
+        <div>
+        姓名<input type="text" name="xgxm"><br>
+        年龄<input type="text" name="xgnl"><br>
+        身高<input type="text" name="xgsg"><br>
+        体重<input type="text" name="xgtz"><br>
+        <button name="xiugaib">修改</button>
+        </div>
+    </div>
+
+    <script>
+        const tbody = document.querySelector('tbody');
+
+        const ocd = document.querySelector('.box');
+
+        const oicn = document.querySelector('[name="xgxm"]');
+        const oica = document.querySelector('[name="xgnl"]');
+        const oich = document.querySelector('[name="xgsg"]');
+        const oicw = document.querySelector('[name="xgtz"]');
+        const oicb = document.querySelector('[name="xiugaib"]');
+
+        const oan = document.querySelector('[name="xzxm"]');
+        const oaa = document.querySelector('[name="xznl"]');
+        const oah = document.querySelector('[name="xzsg"]');
+        const oaw = document.querySelector('[name="xztz"]');
+        const oab = document.querySelector('[name="xinzengb"]');
+
+        let num = '';
+        const arr = [
+            {id:1, name:'diyi', age:5, height:10, weight:10},
+            {id:2, name:'diyi', age:5, height:10, weight:10},
+            {id:3, name:'diyi', age:5, height:10, weight:10},
+        ]
+
+        tbody.innerHTML = setTable(arr);
+        function setTable(array){
+            let str = '';
+            array.forEach((v,k)=>{
+                str += `
+                <tr>
+                    <td>${v.id}</td>
+                    <td>${v.name}</td>
+                    <td>${v.age}</td>
+                    <td>${v.height}</td>
+                    <td>${v.weight}</td>
+                    <td><button index="${k}" name="del">删除</button></td>
+                    <td><button index="${k}" name="change">修改</button></td>
+                </tr>
+                `;
+            })
+            return str;
+        }
+
+        tbody.addEventListener('click',e=>{
+            if(e.target.getAttribute('name') === 'del'){
+                let bool = window.confirm('确定删除？');
+                if(bool){
+                    let index = e.target.getAttribute('index');
+                    arr.splice(index,1);
+                    tbody.innerHTML = setTable(arr);
+                }else{return};               
+            }
+            if(e.target.getAttribute('name') === 'change'){
+                ocd.style.display = 'flex';
+                num = e.target.getAttribute('index');
+            }
+        })
+// 修改
+        oicb.addEventListener('click',()=>{
+            arr[num].name = oicn.value; 
+            arr[num].age = oica.value; 
+            arr[num].height = oich.value; 
+            arr[num].weight = oicw.value; 
+
+            tbody.innerHTML = setTable(arr);
+            ocd.style.display = 'none';
+        })
+
+ // 新增
+        oab.addEventListener('click',()=>{
+            const obj = {
+                id:arr[arr.length-1].id+1,
+                name:oan.value,
+                age:oaa.value,
+                height:oah.value,
+                weight:oaw.value,
+            }
+            arr.push(obj);
+            tbody.innerHTML = setTable(arr);
+        })
+    </script>
+</body>
+
+</html>

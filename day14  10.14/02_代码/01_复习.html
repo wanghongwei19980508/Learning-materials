@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <script>
+        /*
+            1, DOM
+                标签的占位 
+                    宽高 + padding + border
+                        offsetWidth   offsHeight
+                    宽高 + padding
+                        clientWidth   clientHeight
+                    border 上 / 左
+                        clientTop     clientLeft
+
+                标签的定位
+                    与定位父级的间距
+                        定位父级就是  标签对象.offsetParent 指向的对象
+
+                        当前标签没有定位,父级没有定位
+                            body
+
+                        当前标签没有定位,父级有定位
+                            父级标签
+
+                        当前标签有定位,父级没有定位
+                            相对定义    body
+                            绝对定位    body
+                            固定定位    null   视窗窗口
+
+                        当前标签有定位,父级有定位
+                            对定义      父级标签
+                            绝对定位    父级标签
+                            固定定位    null   视窗窗口
+
+                自己 父级 都没有 定位  --- body
+                自己 没有 父级有 定位 --- 父级
+                自己 有 父级没有 定位
+                    相对,绝对 都是 body  固定是 null 窗口
+                自己 父级 都有 
+                    相对,绝对 都是 父级  固定是 null 窗口
+
+
+            2, BOM
+                (1) 浏览器的三大弹窗
+                    window.alert()   警告框
+                    window.prompt()  输入框
+                    window.confirm() 确认框
+
+                (2) 浏览器地址栏信息
+                    window.location
+
+                    window.location.href  设定/获取浏览器地址栏信息
+                        获取时,如果有中文,会显示为 #两位十六进制数值( 哈希值 )
+                        浏览器可以自动的转化识别,我们不用管
+
+                        window.decodeURI
+                        window.decodeURIComponent
+
+                        可以将 哈希值 转化为正常的中文
+
+                    window.location.search 获取地址栏中get方式传参的数据数值
+                        获取的是 url地址之后  ?以及之后的传参键值对
+                        需要将带有 ?问号的键值对字符串 转化为 对象
+
+                    function getUrlVal(){
+                        新的对象,存储键值对数据
+                        var obj = {};
+
+                        1, 获取字符串,需要去掉第一个字符问号
+                        var str = window.decodeURI( window.location.search ).substr(1);
+
+                        2, 以 & 为间隔,转化为数组
+                        var arr1 = str.split('&');
+
+                        3, 循环遍历arr1,将每一个单元,存储的键值对数据,再按照=等号,转化为数组
+                           新数组索引是0的单元,存储的键值对的键名,也就是对象的键名
+                           新数组索引是1的单元,存储的键值对的数据,也就是对象的数据
+
+                        arr1.forEach(function(val){
+                            var arr2 = val.split('=');
+                            obj[arr2[0]] = arr2[1]; 
+                        })
+
+                        4, 返回值是新的对象
+                        return obj;
+                    }
+
+
+                (3) 历史记录
+                    window.history
+
+                    window.history.length    当前窗口浏览器页面的次数
+
+                    window.history.back()       返回上一个浏览器的页面
+                    window.history.forward()    返回下一个浏览器的页面
+                    window.history.go()         设定跳转的次数
+                                                最终页面 - 起始页面
+
+                (4) 浏览器信息
+                    window.navigator
+
+                    window.navigator.userAgent    浏览器型号,内核,版本等等信息
+
+                    window.navigator.appName      统一都是网景
+
+                    window.navigator.appVersion   浏览器版本
+
+                    window.navigator.platform     操作系统
+
+                (5) 鼠标事件
+                    click        左键单击
+                    dblclick     左键双击
+                    contextmenu  右键单击
+                    mousedown    按键按下
+                    mouseup      按键抬起
+                    mousemove    鼠标移动
+                    mouseover    鼠标移入  子级标签会触发
+                    mouseout     鼠标移出  子级标签会触发
+                    mouseenter   鼠标移入  子级标签不会触发
+                    mouseleave   鼠标移出  子级标签不会触发
+
+                (6) 键盘事件
+                    keydown      按键按下
+                    keyup        按键抬起
+                    keypress     与 keydown 效果相同
+
+                    e.keyCode    按键的编号
+                    e.shiftKey   shift按键是否按下
+                    e.ctrlKey    ctrl按键是否按下
+                    e.altKey     alt按键是否按下
+
+       
+
+            3, 事件的三要素
+                事件源 : 绑定事件的对象
+                事件类型 : 绑定事件的类型
+                          点击事件  click  不是 onclick 
+                          on 表示 绑定的意思
+                事件处理函数 : 当触发事件时,执行的程序
+
+                oDiv.onclick = function(){}
+                给 div标签(事件源) 绑定了(on) 点击事件(click事件类型)
+                触发 事件时 执行的是 事件处理函数( function(){} )
+
+            4, 事件对象
+                在事件处理函数中 可以 定义一个形参,名称可以任意,一般是 e 或者 event
+                JavaScript程序在执行时,一旦触发事件,会自动向 形参 中存储触发事件的事件对象相关信息
+                如果是 键盘事件 , 存储的是 按键的信息
+                如果是 鼠标事件 , 存储的是 鼠标的信息
+
+                事件对象,不一定就是 事件源
+
+                
+        
+        */
+
+        // 事件源 是 document 整个文档
+        // e中存储的事件对象是 按下的按键
+        // 此时 事件源 和 事件对象 不是一个对象
+        document.onkeydown = function(e){
+            console.log(e);
+        }
+
+    </script>
+</body>
+</html>

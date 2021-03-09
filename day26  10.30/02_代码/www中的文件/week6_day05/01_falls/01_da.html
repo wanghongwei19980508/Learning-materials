@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            瀑布流:
+                1, 页面初始状态:
+                    先向 数据库 发送请求 获取 第一次显示的内容
+                    渲染生成页面
+
+                2, 页面向下滚动
+                    当页面要滚动至底部时 再次发起请求 
+                    获取 第二次显示的内容
+                    再次渲染生成新的页面内容
+
+                3, 从网络数据库获取的图片,往往都有数据保护,防止导图
+                   需要在 head 中 添加 meta标签 来解析网络来源图片
+
+                   <meta name="referrer" content="never">
+
+                4, bootstrap 的简单使用
+                    (1) 去 常用软件,下载 bootstrap3.3.7 压缩包 解压缩到瀑布流文件夹中
+                    (2) 在 瀑布流 html 文档中 通过 link导入 css文件
+                        bootstrap-3.3.7/dist/css/bootstrap.min.css
+                    (3) 在 bootstrap 官网 
+                        上面 导航栏中 选择 bootstrap3中文文档
+                        在 中文文档  组件  选项中 找到  icon字体图标的说明
+                        在 标签中 class 属性值 粘贴你要使用的 图片的 class选择器名称
+
+                5, 在 瀑布流 中 纵向 竖着 一共是 4列 4个ul
+                   生成的li 写入 4个 ul 中 最矮 的 ul 
+                   
+                   获取 4个 ul 的高度 通过 标签占位获取(所有占位)  offsetHeight
+
+                6, 如何判断 4个ul中 最矮的ul --- 简易 的 选择排序
+                   获取 4个 ul的 伪数组 
+                   默认第一个ul是最矮ul
+                   如果之后的ul,比这个ul矮,就存储之后ul的索引下标
+
+                   循环结束,变量中会存储最矮ul的索引下标
+
+                7, 解决网速太慢,图片加载不及时,造成图片没有加载,就判断了高度
+                   加载图片之后,高度变化造成的对应最矮高度判断不准确的问题
+
+                   可以先根据 图片的原始比例,计算,父级标签div的宽度和高度
+                   等于图片没有加载,先根据数值,计算出父级div的宽度高度
+
+                   图片宽    div宽
+                   ------ = ------
+                   图片高    div高
+
+                   div高 = ( div宽 * 图片高 ) / 图片的宽
+                   
+                8, 滚轮运动一次,监听事件 window.onscroll 会执行多次
+                   是 JavaScript 规定的效果
+                   滚轮运动一次,浏览器页面,运动的不是一个像素,是多个像素
+                   一次像素的改变,就会触发一次 window.onscroll
+
+                9, 在 最矮的 ul 即将要显示完的时候,再次发起请求
+                   判断依据:
+                       应该是   上卷高度 + 视窗窗口高度 + 预留高度 = 最矮ul高度
+                       当  上卷高度 + 视窗窗口高度 + 预留高度 > 最矮ul高度  再次发起请求
+
+                10, 触发请求过多:
+                    引起原因:
+                        页面上卷滚动一次,不是移动1个像素,是移动多个像素
+                        移动多个像素,就会触发多次 onscroll 事件
+                        就会造成多次 if判断 触发多次请求
+
+                    解决方案:
+                        添加一个 变量,存储初始值 true
+
+                        第一次 if判断 上卷高度 + 视窗窗口高度 + 预留高度 > 最矮ul高度
+                            可以 再次发起请求, 生成新的页面
+                            给 bool 赋值 false
+
+                        之后如果 bool 是 false 执行 return 不再 发起 新的请求
+
+                        在 xhr.onload 中 , 将所有的 li 都写入 ul 之后
+                        给 bool 再次赋值 true 
+
+            数据请求:
+                在 nginx 中 代理 堆糖的首页面 代理只代理url请求地址,不代理 ?问号之后的参数
+
+                返回的响应体,是 json串 格式 要使用 JSON.parse() 解析
+
+                堆糖数据请求地址
+                https://www.duitang.com/napi/blog/list/by_filter_id/?include_fields=top_comments%2Cis_root%2Csource_link%2Citem%2Cbuyable%2Croot_id%2Cstatus%2Clike_count%2Csender%2Calbum%2Creply_count&filter_id=%E5%A9%9A%E7%BA%B1%E5%A9%9A%E7%A4%BC&start=24&_=1604021702139
+        
+        
+                URL地址,也就是代理的地址, 问号之前的
+                https://www.duitang.com/napi/blog/list/by_filter_id/
+
+                问号之后的都是数据参数
+
+                // 不知道干啥的,反正没影响
+                include_fields=top_comments%2Cis_root%2Csource_link%2Citem%2Cbuyable%2Croot_id%2Cstatus%2Clike_count%2Csender%2Calbum%2Creply_count
+                
+                // 请求的关键词  内容  首页面 > 分类  中的中文
+                &filter_id=%E5%A9%9A%E7%BA%B1%E5%A9%9A%E7%A4%BC
+                
+                // 请求显示数据的起始索引下标,数据库执行的是 分页显示
+                &start=24
+                
+                // 请求的时间戳
+                &_=1604021702139
+        */
+
+
+        /*
+            瀑布流总结:
+                1, 通过跨域,请求 堆糖 数据接口 中的数据内容
+                    设定 nginx 代理
+                    设定 请求时的 参数数据
+
+                2, 根据请求结果,生成页面内容
+                    注意: 通过 ajax 获取 数据内容
+                          ajax 是一个异步请求,会在所有的同步程序结束之后,再执行
+                          虽然先调用了 setLi() 但是 里面的 ajax请求和渲染生成页面的程序部分会最后执行
+
+                          每一个生成的li,都是独立的li,写入到 最矮ul中
+
+                          生成li时,先根据 图片的原始比例,计算生成 图片父级div的高度
+                          为了防止图片加载过慢,没有高度,影响对最矮ul的判断
+
+                          默认第一个ul最矮,存储索引下标0
+                          循环遍历所有的ul,如果循环的ul小于 存储的索引对应的ul高度
+                          就存储 循环ul的索引 下标
+
+                        
+                3, 添加 页面滚动监听事件
+                    判断依据:
+                        上卷高度 + 视窗窗口高度 + 预留高度(自定义的) > 最矮ul高度
+                        此时 再次发起请求 生成新的页面 也就是再次调用 setLi()
+
+                    注意:
+                        一次滚动,改变的不止一个px,会多次触发 onscroll 事件
+                        有可能一次改变,触发多次 新的请求
+
+                        解决:
+                            添加一个 开关变量 存储 true
+
+                            如果 变量是 true 可以 触发程序 调用 setLi()     给变量 赋值false
+                            如果 变量是 false 执行 return 不再调用 setLi() 
+                            
+                            当 xhr.onload 中 所有li都写入ul之后, 给 bool 赋值 true 可以再次调用
+                            
+        */
+    </script>
+</body>
+</html>

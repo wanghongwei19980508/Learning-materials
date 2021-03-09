@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            原型对象 / 原型   prototype
+                原型对象: 是 每一个函数, 天生就有的 特殊的 公共的 存储空间
+                         每一个通过 构造函数生成的实例化对象 都可以访问代用这个 空间中 存储的内容
+                         prototype 本质上是一个对象
+
+            原型属性  __proto__
+                原型属性: 是 每一个对象, 天生都有的 属性
+                         __proto__ 本质上 是一个 对象 
+                         __proto__ 存储的内存的地址 就是 生成这个实例化对象 的 构造函数的 prototype 内存地址
+                        也就是 实例化对象,通过访问 __proto__ 本质 就是 访问 prototype
+
+                        每一个 实例化对象的 __proto__ 就是 生成这个实例化对象 的 构造函数的 prototype
+        
+            调用数据原则: 就近原则
+                自己有用自己,自己没有找爹的
+                实例化对象自己有的属性,调用自己的
+                自己没有的属性,通过 __proto__ 找 构造函数 prototype ,如果有就调用
+
+                如果需要执行调用 prototype 公共空间中的数据,就要写
+                    对象.__proto__.属性
+
+                一般情况下,prototype 公共空间中,只写 函数方法,不写属性
+        
+        */
+
+        function Fun(){
+            // 定义在构造函数中的,会直接定义在实力话对象上
+            // 实力话对象,就会有属性 name age 
+            this.name = '张三';
+            this.age= 18;
+        }
+        Fun.prototype.fun = function(){};
+        Fun.prototype.sex = '男';
+        Fun.prototype.add = '北京';
+
+        const obj = new Fun();
+        obj.sex = '不知道';
+
+        console.log(obj);
+
+        console.log(obj.name);
+        // 自己有调用自己的,自己没有调用 构造函数 prototype的
+        console.log(obj.sex);
+        // 不用自己的,直接用 构造函数 prototype的
+        console.log(obj.__proto__.sex);
+
+
+
+
+
+
+
+    </script>
+</body>
+</html>

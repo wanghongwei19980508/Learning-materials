@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            特殊符号:
+                正则表达式,默认就是逻辑与的执行关系
+
+                |    逻辑运算符   表示逻辑或
+                ()   将()中的内容,作为一个整体来验证
+                     一般每一个条件都会使用()包裹,确保执行顺序的正确
+                [ ]  表示符合[]中定义的任意一个内容就可以
+                     每次设定,都是匹配一个字符,不能匹配多个字符
+                     逗号间隔,就是独立的一个字符的匹配
+                     如果没有逗号间隔,就是一个整体验证,只要是字符内容,符合[]中的内容就可以,顺序等无所谓
+                     注意: [] 中 有没有逗号,是两种验证语法
+
+                a-b  只要是 a - b 范围内的内容,都可以
+                
+                [^]  非符合的内容,就是逻辑非
+
+                写在正则表达式 // 外的  一般是与 函数配合使用
+                    //g   全局匹配
+
+                    //i   不区分大小写
+        
+
+        */
+
+        let str = 'acdfdsjkafuweiruqjkfldsaj';
+
+        // 定义了两个条件,数字6-9个,字母5-7个
+        // 两个条件必须都满足
+        let reg1 = /^\d{6,9}\w{5,7}$/;
+
+        // 两个条件是逻辑或的关系,只要满足一个,结果就是true
+        let reg2 = /^(\d{6,9})|(\w{5,7})$/;
+
+        let reg3 = /^[abcd]$/ ; 
+
+        let reg4 = /^[a-z]*$/ ; 
+
+
+        console.log( reg1.test(str) );
+        console.log( reg2.test(str) );
+        console.log( reg3.test(str) );
+
+        console.log( reg4.test(str) );
+
+
+    </script>
+</body>
+</html>

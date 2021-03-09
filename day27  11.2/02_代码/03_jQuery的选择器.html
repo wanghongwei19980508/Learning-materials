@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div>123</div> -->
+
+    <ul class="ul" num="1">
+        <li id="li1">1</li>
+        <li id="li2">2</li>
+        <li id="li3">3</li>
+        <li id="li4">4</li>
+        <li id="li5">5</li>
+        <li id="li6">6</li>
+        <li id="li7">7</li>
+    </ul>
+
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            jQuery选择器:
+                什么是 jQuery的选择器
+                    就是 jQuery 获取 标签对象的方法
+
+            基本语法:
+                $('条件')  或者  jQuery('条件')
+                只要是 符合条件的 标签对象都会获取到
+                
+                注意:
+                    1, jQuery获取标签对象的结果,一定是一个伪数组
+                       就算只有一个符合条件的标签,获取的结果是一个伪数组,只是数组的单元是一个
+                       如果没有符合条件的标签对象,执行结果是 一个空数组 --- length为0
+
+                    2, ()中的条件,可以写什么
+
+                        (1), 与 document.querySelector() 一样 可以写任意 html,css支持的语法
+                             id属性值,class属性值,属性属性值,标签名称,各种选择器,都支持
+
+                        (2), 特殊的选择器语法
+                             $('ul>li:first')         获取ul中,第一个li
+                             $('ul>li:eq(索引下标)')   按照设定的索引下标,获取ul中,索引下标对应的li标签
+
+                             $('ul>li:odd')            获取奇数索引下标,对应的li标签
+                                                       索引是奇数,对应的是偶数个数
+                             $('ul>li:even')           获取偶数索引下标,对应的li标签
+                                                       索引是偶数,对应的是奇数个数
+
+                总结:
+                    条件都能写什么
+                        html,css 都是按照 标签顺序来获取
+                        特殊选择器,都是按照 标签的索引下标来获取
+
+
+                补充知识:
+                    判断 空对象 
+                        1, 转化 json串 空对象的结果是 "{}"
+                        2, 循环遍历,如果是空对象,没有数据结果的
+                        3, 使用Object.keys(对象),获取对象的所有键名
+                           如果空对象,执行结果是 空数组
+        */
+
+
+        // console.log( $('div') );
+
+        // 获取标签对象
+
+        // 1, id属性值
+        // console.log( $('#li1') );
+
+        // 2, class属性值
+        // console.log( $('.ul') );
+
+        // 3, 属性属性值
+        // console.log( $('[num="1"]') );
+
+        // 4, 选择器
+        // console.log( $('ul>li') );
+
+        // console.log( $('ul>li:first-child()') );
+
+        // console.log( $('ul>li:last-child()') );
+
+        // console.log( $('ul>li:nth-child(4)') );
+
+        // console.log( $('ul>li:nth-child(odd)') );
+        // console.log( $('ul>li:nth-child(even)') );
+
+
+        // 5, 特殊选择器
+
+        // 获取 ul 中 第一个li 最后一个li
+        console.log( $('ul>li:first') );
+        console.log( $('ul>li:last') );
+
+        // 获取索引下标是2的 第三个li标签
+        console.log( $('ul>li:eq(2)') );
+
+        // 获取奇数索引,偶数个数的li标签
+        console.log( $('ul>li:odd') );
+
+        // 获取偶数索引,奇数个数的li标签
+        console.log( $('ul>li:even') );
+
+
+
+
+
+    </script>
+</body>
+</html>

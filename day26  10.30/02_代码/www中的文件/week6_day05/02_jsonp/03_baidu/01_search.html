@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        input {
+            width: 500px;
+            height: 40px;
+            display: block;
+            margin: 30px auto 0;
+            padding: 0 0 0 20px;
+        }
+
+        ul {
+            width: 500px;
+            margin: 0px auto;
+            padding: 0 0 0 20px;
+            display: none;
+        }
+
+        ul>li {
+            height: 30px;
+            line-height: 30px;
+        }
+
+        ul>li:hover {
+            color: blue;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input type="text">
+        <ul></ul>
+    </div>
+
+    <script>
+        // 1, 获取标签对象
+        const oIpt = document.querySelector('input');
+        const oUl = document.querySelector('ul');
+
+        // 定义变量存储,延时器
+        let time = 0;
+
+        // 2, 我们当前没有输入的历史记录
+        //    点击,获取焦点时,不做操作
+        //    输入数据的时候,再做操作
+        // 给input标签,添加 input事件
+        oIpt.addEventListener('input', () => {
+
+            // 防抖,清除延时器
+            clearInterval(time);
+
+            // 通过延时器,调用函数程序
+            time = setTimeout( f , 1000 );
+
+        })
+
+        // 定义一个函数,作为防抖节流的函数
+        function f() {
+            // 让ul显示
+            oUl.style.display = 'block';
+
+            // 2-1, 获取input中输入的数据
+            let kw = oIpt.value;
+
+            // 2-2, 准备时间戳
+            const timeObj = new Date();
+            let t = parseInt(timeObj.getTime() / 1000);
+
+            // 2-3, 准备一个函数,这个函数就是根据结果,生成ul中li的函数
+            // 现在准备的函数叫 setLi
+
+            // 2-4, 根据获取的数据,来获取搜索结果
+            // 生成一个 script标签,src的属性是 百度搜索数据接口的地址,参数是我们自己的参数
+
+            // 创建一个标签节点,是script标签
+            const s = document.createElement('script');
+            // 设定 script标签,src属性
+            s.src = `https://www.baidu.com/sugrec?pre=1&p=3&ie=utf-8&json=1&prod=pc&from=pc_web&sugsid=32818,1426,32855,31660,32706,7517,32447,32846,32761,32912&wd=${kw}&req=2&csor=2&pwd=1&cb=setLi&_=${t}`;
+            // 将标签节点,写入页面
+
+            // 将 script 标签写入 body
+            // 写入的同时,等于会立即执行程序
+            const oBody = document.body;
+            oBody.appendChild(s);
+
+            // 写入之后,会立即执行,执行之后就删除 script标签
+            oBody.removeChild(s);
+
+        }
+
+
+
+        // 失去焦点时,让ul隐藏
+        oIpt.addEventListener('change', () => {
+            // 让ul消失
+            oUl.style.display = 'none';
+        })
+
+
+
+
+        // 定义生成li的函数
+        function setLi(res) {
+            // 根据res的结果,也就是 百度搜索接口传给我们的数据
+            // 生成 ul中的li
+            // 在res 中 有一个 属性 g 存储所有结果
+
+            // 搜索结果,也有可能是没有对应的数据
+            // 此时 res.g; 是 undefined
+            // arr 存储的是 undefined
+            const arr = res.g;
+
+            if (arr === undefined) {
+                // 让ul消失
+                oUl.style.display = 'none';
+                // 执行 return 下方的程序就不执行了
+                return;
+            }
+
+            let str = '';
+
+            // 生成li
+            arr.forEach(v => {
+                str += `<li>${v.q}</li>`;
+            })
+
+            // 将字符串也就是li,写入ul
+            oUl.innerHTML = str;
+        }
+
+    </script>
+
+
+</body>
+
+</html>

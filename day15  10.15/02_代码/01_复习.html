@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1 , 表单事件:
+                focus    焦点事件
+                         只有支持获取焦点的标签,才支持这个事件类型
+                         input select textarea button a
+                         点击标签,获取焦点时,触发事件
+                    
+                input    获取焦点之后,输入数据,敲击键盘,就会触发事件
+
+                change   必须要同时满足两个条件,才会触发事件
+                         1,失去焦点
+                         2,标签输入的数据数值,有变化
+
+                submit   绑定给form表单的事件
+                         触发表单提交时,会触发事件
+
+            2, 触摸事件
+                    只有移动端设备支持,PC不支持
+                touchstart   触摸开始
+                touchend     触摸结束
+                touchmove    触摸移动
+
+            3, 特殊事件
+                动画开始 / 结束 
+                    animationstart
+                    animationend
+
+                过渡开始 / 结束
+                    transitionstart
+                    transitionend
+
+                这两组特殊事件,浏览器支持效果不佳,最好不要使用on语法绑定
+                 最好使用事件监听语法绑定 
+
+            4, 浏览器的特殊事件
+                window.onload = function(){}
+                    当 html中的所有标签,以及所有标签内容都加载完毕之后,才会触发其中的程序
+                    在定义html标签之前,定义JavaScript程序,一般定义在 window.onload 中
+
+                window.onscroll = function(){}
+                    当浏览器页面发生滚动时,触发事件,滚动分 上下和左右
+
+                window.onresize = function(){}
+                    当浏览器视窗窗口大小发生改变时,触发事件
+                    不是 文档大小改变
+
+                window.open( 'url地址' )
+                    新窗口打开url地址
+
+                window.close()
+                    关闭当前窗口
+
+            3, 获取浏览器 滚动大小 和 视窗窗口大小
+                滚动大小: 兼容语法
+                    var w = document.documentElement.scrollLeft || document.body.scrollLeft
+                    var h = document.documentElement.scrollTop || document.body.scrollTop
+
+                视窗窗口大小
+                    包括滚动条的大小
+                        var w = window.innerWidth;
+                        var h = window.innerHeight;
+
+                    不包括滚动条的
+                        var w = document.documentElement.clientWidth || document.body.clientWidth ;
+                        var h = document.documentElement.clientHeight || document.body.clientHeight ;
+        
+            document.documentElement  获取的是 html标签对象
+            document.body             获取的是 body标签对象
+            document.head             获取的是 head标签对象
+            document.title            获取的是 title标签对象
+        
+        低版本火狐浏览器,没有 keyCode属性 触发 按键按下事件,通过 e.which 来获取 按键编号
+        兼容语法 var code = e.keyCode || e.which 
+
+        */
+
+        console.log( document.documentElement );
+        console.log( document.body );
+        console.log( document.head );
+        console.log( document.title );
+
+    </script>
+</body>
+</html>

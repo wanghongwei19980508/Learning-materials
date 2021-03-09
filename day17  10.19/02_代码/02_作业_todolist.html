@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{
+            border-collapse: collapse;
+        }
+        td{
+            width: 100px;
+            height: 50px;
+            border:1px solid #000;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .box{
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.5);
+            position: fixed;
+            top:0;
+            left: 0;
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box>div{
+            width: 250px;
+            height: 200px;
+            background: #fff;
+            padding: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        姓名: <input type="text" name="addName"><br>
+        年龄: <input type="text" name="addAge"><br>
+        身高: <input type="text" name="addHeight"><br>
+        体重: <input type="text" name="addWeight"><br>
+        <button name="addBtn">新增</button>       
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>身高</td>
+                <td>体重</td>
+                <td>删除</td>
+                <td>修改</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <!-- 修改的输入区域,平时是隐藏的,点击修改,才会显示 -->
+    <div class="box">
+        <div>
+            姓名: <input type="text" name="changeName"><br>
+            年龄: <input type="text" name="changeAge"><br>
+            身高: <input type="text" name="changeHeight"><br>
+            体重: <input type="text" name="changeWeight"><br>
+            <button name="changeBtn">修改</button>
+        </div>
+    </div>
+
+    <script>
+        // 1, 获取标签对象,设定一些变数据
+
+        // tbody标签
+        const oTbody = document.querySelector('tbody');
+
+        // 修改div标签
+        const oChangeDiv = document.querySelector('.box');
+
+        // 修改div标签中,input和button,标签对象
+        const oIptChangeName = document.querySelector('[name="changeName"]');
+        const oIptChangeAge = document.querySelector('[name="changeAge"]');
+        const oIptChangeHeight = document.querySelector('[name="changeHeight"]');
+        const oIptChangeWeight = document.querySelector('[name="changeWeight"]');
+
+        const oIptChangeBtn = document.querySelector('[name="changeBtn"]');
+
+        // 新增input和button,标签对象
+        const oAddName = document.querySelector('[name="addName"]');
+        const oAddAge = document.querySelector('[name="addAge"]');
+        const oAddHeight = document.querySelector('[name="addHeight"]');
+        const oAddWeight = document.querySelector('[name="addWeight"]');
+
+        const oIptAddBtn = document.querySelector('[name="addBtn"]');
+
+    
+
+        // 定义一个全局变量,存储修改时,点击的标签,对应的数据,在数组中的索引下标
+        // 此时不用赋值,点击table表格中的修改button,再赋值
+        let num;
+
+        // 数据数组,模拟,从数据库获取到的数据结果
+        const arr = [
+            {id:1, name:'张老师',age:18,height:180,weight:50},
+            {id:20, name:'霞姐',age:16,height:179,weight:49},
+            {id:31, name:'马老师',age:17,height:180,weight:50},
+            {id:78, name:'刘班长',age:32,height:150,weight:85},
+            {id:109, name:'常同学',age:31.9,height:149,weight:84},
+        ];
+
+        // 2, 通过函数,生成标签,渲染页面
+        oTbody.innerHTML = setTable(arr);
+
+        // 3, 通过事件委托的方式,给删除按钮,修改按钮,绑定事件
+        oTbody.addEventListener('click' , e => {
+            // 如果点击的标签,name属性值,是del,证明点击的是删除button
+            if(e.target.getAttribute('name') === 'del'){
+                // 弹出 确认框,点击的是确认,再执行删除删除
+                let bool = window.confirm('您确定删除吗?');
+                // 如果 bool 中存储 的不是 true ,就执行return,不执行删除
+                if (!bool) return ; 
+
+                // 1, 获取当前点击的button,对应数据,在arr数组中的索引下标
+                // 也就是添加的index属性的属性值
+                let index = e.target.getAttribute('index');
+
+                // 2, 根据索引,在数组中,以这个索引为起始,删除一个单元
+                arr.splice(index , 1);
+
+                // 3, 根据经新的数组,重新传染页面
+                oTbody.innerHTML = setTable(arr);
+            }
+
+            // 如果点击的标签,name属性值,是change,证明点击的是修改button
+            if(e.target.getAttribute('name') === 'change'){
+                // 让修改div,显示
+                oChangeDiv.style.display = 'flex';
+
+                // 给num变量,赋值,点击标签存储的索引下标
+                num = e.target.getAttribute('index');
+            }
+        })
+
+        // 4, 点击修改div中,修改button
+        oIptChangeBtn.addEventListener('click' , ()=>{
+            // 1, 获取修改div中,所有的input中的数据
+            // let changeNameVal = oIptChangeName.value;
+            // let changeNameAgeVal = oIptChangeAge.value;
+            // let changeNameHeightVal = oIptChangeHeight.value;
+            // let changeNameWeightVal = oIptChangeWeight.value;
+
+            // 2, 修改数组中的数据
+            // 数组[索引].属性  通过索引找到对应的对象,通过对象的属性,修改数据
+            // 索引是 num , 属性就是固定的属性 , 数据是获取到的,input标签输入的数据
+            // arr[num].name =  changeNameVal;
+            // arr[num].age =  changeNameAgeVal;
+            // arr[num].height =  changeNameHeightVal;
+            // arr[num].weight =  changeNameWeightVal;
+
+            // 可以直接赋值,获取的数据
+            arr[num].name =  oIptChangeName.value;
+            arr[num].age =  oIptChangeAge.value;
+            arr[num].height =  oIptChangeHeight.value;
+            arr[num].weight =  oIptChangeWeight.value;
+
+            // 根据新的数组,重新渲染生成页面
+            oTbody.innerHTML = setTable(arr);
+
+            // 让修改div,再次隐藏
+            oChangeDiv.style.display = 'none';
+        })
+
+        // 5, 新增,button
+        oIptAddBtn.addEventListener('click' , ()=>{
+            // 新增操作,本质上,需要在arr数组中,新增一个对象单元
+            // {id:110, name:'aaa',age:100,height:100,weight:100},
+            // id是最后一个数组单元,对象的id数值+1
+            // 其他的数据,是input输入的结果
+            const obj = {
+                id: arr[arr.length-1].id+1 ,
+                name:oAddName.value,
+                age:oAddAge.value,
+                height:oAddHeight.value,
+                weight:oAddWeight.value,
+            }
+
+            // 需要将对象,写入到arr数组的末位
+            arr.push(obj);
+
+            // 根据新的数组,再次渲染生成页面
+            oTbody.innerHTML = setTable(arr);
+
+        })
+
+
+
+        // 定义一个函数,根据数组,生成标签对象字符串
+        // 参数:数据数组
+        function setTable(array){
+            let str = '';
+            array.forEach((v,k)=>{
+                str += `
+                    <tr>
+                        <td>${v.id}</td>
+                        <td>${v.name}</td>
+                        <td>${v.age}</td>
+                        <td>${v.height}</td>
+                        <td>${v.weight}</td>
+                        <td><button index="${k}" name="del">删除</button></td>
+                        <td><button index="${k}" name="change">修改</button></td>
+                    </tr>
+                `;
+            })
+            return str;
+        }
+
+
+        var arr1 = [
+            {name:'张三' , age:18},
+            {name:'李四' , age:20}
+        ]
+
+        arr1[0].name='张三三';
+    </script>
+</body>
+</html>

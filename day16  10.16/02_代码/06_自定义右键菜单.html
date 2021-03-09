@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        body{
+            height: 5000px;
+        }
+
+        ul,li,ol{
+            list-style: none;
+        }
+
+        ul{
+            width: 100px;
+            border: 1px solid #000;
+            padding: 20px 15px;
+            position: fixed;
+            display: none;
+        }
+
+        li{
+            width: 100%;
+            height: 40px;
+            text-align: center;
+            line-height: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li><a href="https://www.baidu.com">百度</a></li>
+        <li>内容2</li>
+        <li>内容3</li>
+        <li>内容4</li>
+    </ul>
+
+    <script>
+        /*
+            自定义右键菜单
+                1, 点击鼠标右键,会有一个默认菜单弹出
+                   需要阻止这个默认菜单的弹出
+        */
+        var oUl = document.querySelector('ul');
+
+  
+
+        document.addEventListener('contextmenu', function (e) {
+            e = e || window.event;
+            // 通过事件对象,阻止默认事件的执行
+            if (e.preventDefault) {
+                // 标准浏览器
+                e.preventDefault();
+            } else {
+                // 低版本IE
+                e.returnValue = false;
+            }
+
+            // 1,让菜单div,显示
+            oUl.style.display = 'block';
+
+            // 2,将鼠标点击的坐标,设定为ul的定位坐标
+            // 定位位置,是相对于,视窗窗口的定位的
+            oUl.style.top = e.clientY + 'px';
+            oUl.style.left = e.clientX + 'px';
+        })
+
+
+        // 点击左键,让 div 显示为 none 消失
+        // 不是 取消删除绑定的事件     
+        document.addEventListener('click' , function(){
+            oUl.style.display = 'none';
+        })
+
+    </script>
+</body>
+
+</html>

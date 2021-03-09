@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            DOM操作:  文档对象模型,JavaScript提供的专门用于操作文档的方法
+                1, 获取标签对象
+                    通过id  
+                        获取的是唯一的标签对象
+                    通过class  标签名称
+                        获取的是伪数组,不能forEach循环
+                    通过name属性
+                        获取的是伪数组,可以forEach循环
+
+                    低版本IE不支持
+                    document.querySelector()      获取第一个符合条件的标签
+                        获取的是唯一的标签对象
+
+                    document.querySelectorAll()   获取所有符合条件的标签
+                        获取的是伪数组,可以forEach循环
+
+                2, 操作标签对象
+                    (1) , 操作标签内容
+                        标签对象.innerHTML   获取和写入都支持,解析标签
+                        标签对象.innerText   获取和写入都不支持,解析标签
+
+                    (2) , 标签属性的操作
+                        标签对象本身就支持的属性,可以直接通过 标签对象.属性 操作
+                            标签对象.id   标签对象.className
+
+                        布尔属性 通过 标签对象.属性 获取 属性值
+                            设定,获取,属性值都必须是 布尔属性
+
+                        其他属性
+                            标签对象.getAttribute(属性)          获取属性值
+                            标签对象.setAttribute(属性,属性值)    设定属性值
+
+                    (3) , 样式操作
+                        获取
+                            标签对象.style.属性 只能获取行内样式的属性值
+
+                            获取 标签执行的样式的属性值
+                                需要使用兼容语法来获取
+
+                        设定
+                            统一使用 标签对象.style.属性 = 属性值
+                                JavaScript不支持减号语法,font-size --- fontSize
+                                设定的 属性值如果需要,必须要有px单位
+                                支持 符合属性语法形式 
+
+        */
+
+    </script>
+</body>
+</html>

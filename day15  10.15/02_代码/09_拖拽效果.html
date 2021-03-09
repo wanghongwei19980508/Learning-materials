@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            height: 5000px;
+        }
+
+        div {
+            width: 800px;
+            height: 800px;
+            background: pink;
+            position: relative;
+            margin: 300px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 40px solid green;
+        }
+
+        p {
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: absolute;
+            border: 20px solid black;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p></p>
+    </div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            拖拽效果:
+                点击在 p标签上,鼠标移动,触发事件
+                    鼠标的移动事件最好帮顶给 div 或者 document
+                整个文档定义鼠标抬起,给move事件赋值null
+
+            坐标:
+                x : 鼠标pageX - div左外边距 - div左边框 - p标签宽度一半
+                y : 鼠标pageY - div上外边距 - div上边框 - p标签高度一半
+
+                极值 : 
+                最小  0  0
+                最大  div占位(无border) - p占位(有border)
+        */
+
+
+        // 获取当前对象
+        var oDiv = document.querySelector('div');
+        var oP = document.querySelector('p');
+
+        // 先获取相关数据
+
+        // 无border占位
+        var oDivWidth = oDiv.clientWidth;
+        var oDivHeight = oDiv.clientHeight;
+
+        // div,border
+        var oDivBorderLeft = oDiv.clientLeft;
+        var oDivBorderTop = oDiv.clientTop;
+
+        // div,margin 通过 css样式获取
+        var oDivMarginLeft = parseInt(myGetStyle(oDiv, 'marginLeft'));
+        var oDivMarginTop = parseInt(myGetStyle(oDiv, 'marginTop'));
+
+        // p,占位,包括border
+        var oPWidth = oP.offsetWidth;
+        var oPHeight = oP.offsetHeight;
+
+        // 给p标签,添加事件,鼠标按下
+        oP.onmousedown = function () {
+            oDiv.onmousemove = function (e) {
+                e = e || window.event;
+
+                // 将鼠标的坐标赋值给p标签,作为定位的数值
+                // 点击在p标签上,获取的offset,是相对于p标签左上角的距离
+                // 不符和相对于div左上角的定位
+
+                // 如果有滚动条,要是用pageX 和 pageY
+                // 距离文档左上角的坐标
+
+                // page - 外边距 - border - p宽高的一半
+                var x = e.pageX - oDivMarginLeft - oDivBorderLeft - oPWidth / 2;
+                var y = e.pageY - oDivMarginTop - oDivBorderTop - oPHeight / 2;
+
+                // 设定极值
+                // 最小是  0   0 
+                // 最大是  div占位(无border) - p占位(有border)
+
+                if (x < 0) {
+                    x = 0;
+                }
+
+                if (y < 0) {
+                    y = 0
+                }
+
+                if (x > oDivWidth - oPWidth ) {
+                    x =  oDivWidth - oPWidth  ;
+                }
+
+                if (y > oDivHeight - oPHeight ) {
+                    y = oDivHeight - oPHeight;
+                }
+
+
+                // 将结果赋值给p标签作为定位数值
+                oP.style.left = x + 'px';
+                oP.style.top = y + 'px';
+            }
+        }
+
+        // 最好给 document 添加鼠标抬起事件
+        // 鼠标在任意位置上抬起,都会终止move效果
+        document.onmouseup = function () {
+            oDiv.onmousemove = null;
+        }
+
+    </script>
+</body>
+
+</html>

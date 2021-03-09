@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <div>我是div标签</div>
+    <script>
+        /*
+            标签样式的设定
+                标签对象.style.css样式属性 = css样式属性的属性值
+
+                设定的css样式会以行内样式的语法形式来设定
+
+            注意问题:
+                1, JavaScript语法中,不支持减号,减号只能是减法运算符
+                   css样式中所有带有-减号的css属性,都要写成小驼峰
+                   font-size ---> fontSize
+
+                2, 设定css样式的属性值时,该写px单位,必须要写px单位
+                   不能直接写数值
+
+                3, 设定的属性值,如果是字符串要有引号
+
+                4, 支持符合属性值的设定
+                   '2px solid black' 
+        
+            
+        */
+
+        var oDiv =document.querySelector('div');
+        console.dir(oDiv);
+
+        oDiv.style.color = 'blue';
+        oDiv.style.fontSize = '100px';
+        oDiv.style.border = '2px solid black';
+
+
+    </script>
+</body>
+</html>

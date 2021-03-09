@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        html.body{
+            width:100%;
+            height:100%;
+            margin:0;
+            padding:0;
+        }
+        #box{
+            width:600px;
+            height:240px;
+            border:1px solid #000;
+            margin:10px auto;
+        }
+        #box #header{
+            margin-top:30px;
+            margin-left:30px;
+        }
+        #box #header .search{
+            width:140px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .replace{
+            width:140px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .but1{
+            width:60px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .but2{
+            width:60px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #box #header .but3{
+            width:60px;
+            height:30px;
+            line-height:30px;
+            text-align:center;
+        }
+        #text{
+            margin-top:15px;
+            font-size:13px;
+            text-indent:20px;/*首行缩进20px*/
+        }
+
+        #text p {
+            font-style: italic;
+        }
+
+        .s1{
+            background: skyblue;
+        }
+
+        .s2{
+            background: pink;
+        } 
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="header">
+            <input name="search" type="text" placeholder="搜索内容" class="search"/>
+            <button class="but1">搜索</button>
+            <input name="replace" type="text" placeholder="替换内容" class="replace"/>
+            <button class="but2">替换</button>
+            <button class="but3">重置</button>
+        </div>
+        <div id="text">
+            <p>张家界，原名大庸市，湖南省辖地级市，辖2个市辖区(永定区、武陵源区)、2个县(慈利县、桑植县)。位于湖南西北部，澧水中上游，属武陵山区腹地，
+                张家界因旅游建市，是中国重要的旅游城市之一是湘鄂渝黔革命根据地的发源地和中心区域。</p>
+            <p>1982年9月，张家界国家森林公园为第一个国家森林公园</p>
+            <p>1988年8月，张家界 武陵源被列入国家第二批40处重点风景名胜区之内。1992年，
+                由张家界武陵源自然风景区被联合国教科文组织列入《世界自然遗产名录》</p>
+        </div>
+    </div> 
+
+        
+    <script>
+        // 核心思路:
+        // 1,查询有背景颜色
+        //   找到匹配关键词的内容,替换为带有标签的关键词内容,给标签添加css样式
+        // 2,替换功能
+        //   找到匹配关键单的内容,替换为带有标签的关键词内容,将内容替换为,替换的关键词 给标签添加css样式
+
+
+        // 一,获取标签对象
+
+        // 标签对象
+
+        // input标签
+        const oIptSearch = document.querySelector('[name="search"]');
+        const oIptReplace = document.querySelector('[name="replace"]');
+
+        // button标签
+        const oBtnSearch = document.querySelector('.but1');
+        const oBtnReplace = document.querySelector('.but2');
+        const oBtnReset = document.querySelector('.but3');
+
+        // 存储内容的标签
+        const oText = document.querySelector('#text');
+
+        // 存储原始的标签内容
+        const oldText = oText.innerHTML;
+
+        // 再定义一个变量,存储没有标签的内容
+        let oldStr = oText.innerHTML;
+
+        // 点击 搜索按钮
+        // 本质:将输入的搜索关键词,替换为带有css样式的标签,内容是搜索的关键词内容
+        // 张家界 --->  <span class="s1">张家界</span>   
+        oBtnSearch.addEventListener( 'click' , ()=>{
+            // 1,获取input,搜索,输入的关键词
+            let searchWord = oIptSearch.value;
+            
+            // 2,将 字符串内容 中的字符,替换
+
+            // 每次执行查询操作之前,先进行一次获取操作,获取当前标签中,实际内容
+            let str = oText.innerHTML;
+
+            // 先定义一个变量,存储解析 变量searchWord 中 存储的内容
+            // 但是这么写的只是一个字符串,并不是正则表达式
+            let reg = `/${searchWord}/g`;
+
+            // 执行替换操作   将替换之后的字符串,写回标签中
+            // 查找的是 没有标签写入的内容
+            oText.innerHTML = oldStr.replace( eval(reg) , `<span class="s1">${searchWord}</span>` );
+
+        })
+
+
+        // 点击替换按钮:
+        // 本质:将输入的搜索关键词,替换为,带有样式标签的内容,内容是输入的替换内容
+
+        oBtnReplace.addEventListener( 'click' , ()=>{
+            // 1,获取input,搜索,输入的关键词
+            //   获取input,替换,输入的关键词
+            let searchWord = oIptSearch.value;
+            let replaceWord = oIptReplace.value;
+            
+            // 2,将 字符串内容 中的字符,替换
+            // 每次执行查询操作之前,先进行一次获取操作,获取当前标签中,实际内容
+            let str = oText.innerHTML;
+
+            // 先定义一个变量,存储解析 变量searchWord 中 存储的内容
+            // 但是这么写的只是一个字符串,并不是正则表达式
+            let reg = `/${searchWord}/g`;
+
+            // 执行替换操作   将替换之后的字符串,写回标签中
+            // 替换的是 没有标签写入的内容
+            oText.innerHTML = oldStr.replace( eval(reg) , `<span class="s2">${replaceWord}</span>` );
+
+            // 在 oldStr 中 做一个没有标签的替换
+            oldStr = oldStr.replace( eval(reg) , replaceWord );
+        
+        })    
+
+
+
+        // 重置按钮:
+        oBtnReset.addEventListener( 'click' , ()=>{
+            oText.innerHTML = oldText;
+            oldStr = oldText;
+        })
+
+
+        /*
+            总结:
+                1, 正则表达式,不能解析变量
+                   如果正则表达式中,有变量,需要使用 模板字符串,解析变量
+
+                   问题: 正则表达式,从一个验证规范,变成了一个纯粹的字符串
+                   类似于 : 2+5+3 是表达式 结果是 10
+                           '2+5+3' 就是 一个字符串,没有结果10
+
+                2, 使用 eval() 来执行字符串
+                   会将字符串,按照JavaScript程序来运行,就会有一个运行结果
+                   eval('2+5+3') ---> 结果是 10
+                   使用 eval() 来运行转化为字符串之后的 正则表达式
+
+                3, 如果是替换,等操作,要保存原始字符串,做重置工作
+
+                   如果替换内容,带有标签,要保存一个没有标签替换的内容,做下一次的插叙替换操作
+
+                4, 如果重置
+                    需要将两个变量中的内容,都重置为原始内容
+        
+        */
+
+
+       
+
+    </script>
+
+
+</body>
+</html>

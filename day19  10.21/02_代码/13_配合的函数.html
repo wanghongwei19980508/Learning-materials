@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            配合正则表达式的函数
+                search() 查询是否有这个数据字符串
+                         效果有与 indexOf() 相同
+                         indexOf() 不支持正则表达式
+
+                replace()  字符串替换,默认值替换符合规范的第一个内容 --- 懒惰模式
+        */
+
+        let str = 'abcdefg';
+
+        console.log( str.search('g') );
+        console.log( str.search('G') );
+        // /G/   使用正则表达式,查找 G大写字母G 
+        // /G/i  使用正则表达式,查找 G 大写字符G 同时不区分大小写,也就是 大写G 小写g 都算匹配
+
+        console.log( str.search( /G/ ) );
+        console.log( str.search( /G/i ) );
+
+
+        let str2 = 'abcabcabc';
+
+        // 默认只替换第一个a
+        // str2 = str2.replace( 'a' , '北京' );
+
+        // 使用正则表达式,替换所有
+        // /a/g   替换字符串中所有的 a 字符
+        str2 = str2.replace( /a/g , '北京' );
+
+
+        console.log(str2);
+
+        // 实际项目中,验证都可以使用插件或者框架完成,其中的规范都是写好的,直接使用就可以了
+        // 本质原理是正则的验证
+
+
+    </script>
+</body>
+</html>

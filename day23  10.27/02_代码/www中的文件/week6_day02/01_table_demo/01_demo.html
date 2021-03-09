@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            margin: 30px;
+            display: none;
+        }
+
+        td {
+            width: 100px;
+            height: 40px;
+            border: 1px solid #000;
+            text-align: center;
+        }
+
+        .box{
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top:0;
+            left: 0;
+            display: none;
+        }
+        .box>div{
+            padding: 30px;
+            width: 250px;
+            height: 250px;
+            background: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    新增数据:<br>
+        姓名: <input name="insName" type="text" ><br>  
+        年龄: <input name="insAge" type="text" ><br>  
+        性别: <input name="insSex" type="text" ><br>  
+        班级: <input name="insClass" type="text" ><br>  
+        成绩: <input name="insScore" type="text" ><br> 
+        <button name="insert">新增</button> 
+
+    <br><br><br><br><br><br>
+
+    输入查询姓名: <input name="selName" type="text"><br>
+    <button name="select">查询</button>
+
+    <table>
+        <thead>
+            <tr>
+                <td>序号</td>
+                <td>姓名</td>
+                <td>年龄</td>
+                <td>性别</td>
+                <td>班级</td>
+                <td>成绩</td>
+                <td>删除</td>
+                <td>修改</td>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div class="box" >
+        <div>
+            姓名: <input name="upName" type="text" ><br>  
+            年龄: <input name="upAge" type="text" ><br>  
+            性别: <input name="upSex" type="text" ><br>  
+            班级: <input name="upClass" type="text" ><br>  
+            成绩: <input name="upScore" type="text" ><br> 
+            <button name="updateBtn">修改</button> 
+        </div>
+    </div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        // 定义变量,存储id
+        let id;
+
+        // 查询
+        $('[name="select"]').click(() => {
+            // 给PHP程序发送数据,使用 ajax形式
+            $.ajax({
+                url: './server/select.php',
+                data: { keyWord: $('[name="selName"]').val() },
+                type: 'get',
+                dataType: 'json',
+                success: res => {
+                    $('tbody').html(setTab(res));
+                }
+            })
+        })
+
+        // 删除和修改操作
+        $('tbody').click(e => {
+            // 删除操作
+            if (e.target.getAttribute('name') === 'del') {
+                $.ajax({
+                    url: './server/delete.php',
+                    data: { id: e.target.getAttribute('num'), keyWord: $('[name="selName"]').val() },
+                    dataType: 'json',
+                    type: 'post',
+                    success: res => {
+                        console.log(res);
+                        $('tbody').html(setTab(res));
+
+                    }
+                })
+            }else if(e.target.getAttribute('name') === 'update'){
+                $('.box').css({display:'flex'});
+                id = e.target.getAttribute('num');
+            }
+        })
+
+        // 新增
+        $('[name="insert"]').click( ()=>{
+            $.ajax({
+                url : './server/insert.php',
+                data : 
+                { 
+                    name: $('[name="insName"]').val(),
+                    age: $('[name="insAge"]').val(),
+                    sex: $('[name="insSex"]').val(),
+                    class: $('[name="insClass"]').val(),
+                    score: $('[name="insScore"]').val(),
+                },
+                dataType: 'json',
+                type:'post',
+                success: res=>{
+                    $('tbody').html(setTab(res));
+                }
+            })
+        } )
+
+        // 数据更新操作
+        $('[name="updateBtn"]').click(()=>{
+            $.ajax({
+                url : './server/update.php',
+                data : 
+                { 
+                    id:id,
+                    name: $('[name="upName"]').val(),
+                    age: $('[name="upAge"]').val(),
+                    sex: $('[name="upSex"]').val(),
+                    class: $('[name="upClass"]').val(),
+                    score: $('[name="upScore"]').val(),
+                },
+                dataType: 'json',
+                type:'post',
+                success: res=>{
+                    $('tbody').html(setTab(res));
+                }
+            })
+
+            $('.box').css({display:'none'});
+        })
+
+
+        function setTab(array) {
+            $('table').css({ display: 'block' });
+
+            let str = '';
+            array.forEach(v => {
+                str += `
+                            <tr>
+                                <td>${v.id}</td>        
+                                <td>${v.name}</td>        
+                                <td>${v.age}</td>        
+                                <td>${v.sex}</td>        
+                                <td>${v.class}</td>        
+                                <td>${v.score}</td> 
+                                <td><button num="${v.id}" name="del">删除</button></td> 
+                                <td><button num="${v.id}" name="update">修改</button></td> 
+                            </tr>
+                        `;
+            })
+            return str;
+        }
+
+    </script>
+</body>
+
+</html>

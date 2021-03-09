@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>我是第三个页面</h1>
+    <a href="./04_demo.html">跳转至第四个页面</a><br>
+
+    <button name="back">上一个</button>
+    <button name="forward">下一个</button>
+
+    <script>
+        // 获取两个 button 标签
+        var oBack = document.querySelector('[name="back"]');
+        var oForward = document.querySelector('[name="forward"]');
+
+        // 上一个 button标签
+        oBack.onclick = function(){
+            window.history.back();
+        }
+
+        // 下一个 button标签
+        oForward.onclick = function(){
+            window.history.forward();
+        }
+    </script>
+</body>
+</html>

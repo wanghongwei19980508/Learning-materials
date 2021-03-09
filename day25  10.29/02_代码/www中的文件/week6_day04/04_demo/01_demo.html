@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const xhr = new XMLHttpRequest();
+        // 相对路径,请求访问 demo.php程序
+        // xhr.open( 'get' , './demo.php' );
+
+        // 绝对路径,访问 demo.php程序 可以访问
+        // xhr.open( 'get' , 'http://127.0.0.1/bk_2003/week6_day04/04_demo/demo.php' );
+
+
+        // get方式
+        xhr.open( 'get' , '/pro?name=张三&age=18' );
+        xhr.send();
+        xhr.onload = ()=>{
+            console.log(xhr.response);
+        }
+
+        // post方式
+        // xhr.open( 'post' , '/pro' );
+        // xhr.setRequestHeader( 'Content-Type' , 'application/x-www-form-urlencoded' );
+        // xhr.send('name=张三&age=18');
+        // xhr.onload = ()=>{
+        //     console.log(xhr.response);
+        // }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        div{
+            width: 400px;
+            height: 400px;
+            border: 10px solid  #000;
+        }
+
+        div{
+            border-right: 30px  solid red;
+            border-bottom: 50px  solid blue;
+        }
+    </style>
+</head>
+<body>
+    <div></div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            标签的占位:
+                所谓占位,就是标签所占的面积
+                一般是 宽,高,padding,margin,border
+
+            执行结果,都是数值,没有px单位,可以直接使用
+
+            offsetWidth   offsetHeight
+                宽高 + padding + border
+
+            clientWidth   clientHeight
+                宽高 + padding
+
+            clientLeft   clientTop
+                左           上   边框线的宽度
+                如果需要 获取 右下 只能使用 css样式属性获取
+
+        */
+
+
+        var oDiv = document.querySelector('div');
+
+        console.dir(oDiv);
+
+        console.log( oDiv.clientHeight );
+
+
+        // 获取 右 / 下 边框线数据
+        console.log( myGetStyle(oDiv , 'borderRightWidth') );
+        console.log( myGetStyle(oDiv , 'borderBottomWidth') );
+    </script>
+</body>
+</html>

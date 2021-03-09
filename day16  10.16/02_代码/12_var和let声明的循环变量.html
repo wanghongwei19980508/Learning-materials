@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>我是第一个li</li>
+        <li>我是第二个li</li>
+        <li>我是第三个li</li>
+        <li>我是第四个li</li>
+        <li>我是第五个li</li>
+    </ul>
+
+    <script>
+        // 点击每一个li,输出,li在数组中的索引下标
+
+        var oUllis = document.querySelectorAll('ul>li');
+        // console.log(oUllis);
+
+        // for(var i = 0 ; i <= oUllis.length-1 ;i++ ){
+        //     oUllis[i].addEventListener('click' , function(){
+        //         console.log(i);
+        //     })
+        // }
+
+        oUllis.forEach((v,k)=>{
+            v.addEventListener('click' , e => console.log(k) )
+        })
+
+        /*
+            1, 在通过循环语句,绑定事件时,并没有触发执行事件
+               在打开页面的瞬间,for循环已经执行结束,所有的li标签,已经绑定了事件
+               在绑定事件时,我们并没有触发执行事件
+
+            2, 点击标签,触发事件,执行函数程序,console.log(i)
+               此时 使用 var 声明的变量 i 存储的数据,已经不是绑定事件时,索引下标了
+               因为执行的是重复赋值, i 数值都是相同的数值,是循环结束时,i的最终数值 5 
+        
+        */
+
+    </script>
+</body>
+</html>

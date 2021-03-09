@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div</div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            jQuery:
+                1,基本概念:
+                    本质上就是一个外部的js文件,其中封装了很多的方法,我们可以直接使用
+                    实际上就是一个 函数的 方法库 / 类库
+
+                2,基本语法:
+                    (1), 加载外部的js文件
+                    (2), 通过两个关键词 $  或者  jQuery  来调用方法
+
+                3,优点:
+                    (1), 强大的选择器
+                        方便获取标签对象进行操作
+                    (2), 链式编程
+                        可以一行代码编辑到底
+                    (3), 隐式迭代
+                        自动对标签对象伪数组循环遍历
+
+                4,选择器:
+                    $('条件')   jQuery('条件')
+                    条件可以是 html,css 支持的任意语法形式
+                        id属性值
+                        class属性值
+                        标签名称
+                        任意属性属性值
+                        伪类选择器等等
+                    特殊:
+                        $('ul>li:first')        第一个li
+                        $('ul>li:last')         最后一个li
+                        $('ul>li:eq(数值)')     按照索引查找li
+                        $('ul>li:odd')          按照奇数索引查找li
+                        $('ul>li:even')         按照偶数索引查找li
+
+                5,筛选器:
+                    在选择器获取的标签对象伪数组基础上,进行筛选
+
+                    $().first()          伪数组中的第一个
+                    $().last()           伪数组中的最后一个
+                    $().eq()             伪数组中的按照索引下标查找
+                    $().prev()           当前标签的上一个兄弟标签
+                    $().next()           当前标签的下一个兄弟标签
+                    $().prevAll()        当前标签的上有所兄弟标签
+                    $().nextAll()        当前标签的下所有兄弟标签
+                    $().siblings()       当前标签的所有兄弟标签
+                    $().parent()         当前标签的直接父级标签
+                    $().parents()        当前标签的所有父级标签
+                    $().index()          当前标签在伪数组中的索引下标
+                    $().find('条件')      在当前标签中,按照条件查找
+                    $().end()             返回上一个操作的标签对象
+
+                注意:
+                    JavaScript 操作 的标签对象 都是 独立的标签对象
+                    jQuery 操作的 标签对象 都是 伪数组标签对象
+
+                    转化:  $()[索引下标]    jQuery标签对象---JavaScript独立的标签对象
+                           $(js标签对象)    JavaScript独立的标签对象---jQuery标签对象
+
+                6, 属性操作:
+                    prop()  专门操作 布尔属性
+                    attr()  操作其他属性
+
+                    removeProp()   只能删除通过prop()添加的属性
+                    removeAttr()   可以删除任意属性,除了使用 prop() 添加的属性
+
+
+                    特别说明: 
+                        attr() 添加的属性属性值,会直接定义在标签本身上,在html中可以看到
+                        prop() 添加的属性属性值,不会在html中看到,会直接定义在标签对象中
+
+                        一般新增属性都是用  attr() 来新增
+
+                7, class的操作
+                    $().addClass('类名')       在原始基础上,新增类名
+                    $().removeClass('类名')    在原始基础上,删除类名
+                    $().toggleClass('类名')    切换类名,有就删除,没有就新增
+                    $().has('类名')            判断有没有这个类名
+
+                8, css样式操作
+                    $().css('属性')            获取属性值
+                    $().css('属性',属性值)      设定属性值,只能设定一个
+                    $().css({属性:属性值,属性:属性值,属性:属性值})      设定属性值,多个
+
+                9, 隐式迭代
+                    设定,默认会循环遍历,给伪数组中所有的标签,都设定效果
+                    获取,只能获取第一个标签对象的数据
+
+                10, 循环
+                    $().each( (k,v)=>{} )
+
+                特别注意:
+                    事件处理函数中的this  each循环中的v 都是 JavaScript语法格式的对象
+                    也就是 一个 独立的标签对象
+                    要使用 jQuery语法,要 $() 包裹
+
+        */
+
+        $('div').attr('index' , 1);
+        $('div').prop('num' , 1);
+
+
+        // $('div').removeProp('num');
+
+        $('div').removeAttr('num');
+
+        $('div').removeAttr('index');
+
+        console.dir( $('div')[0] );
+
+
+    </script>
+</body>
+</html>

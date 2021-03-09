@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div</div>
+
+    <script>
+        /*
+            使用 on语法,能不能同时给一个标签,相同的事件类型,绑定不同的事件处理函数
+
+            事件监听,绑定语法
+                标签对象.addEventListener( '事件类型,没有on' , 事件处理函数 )
+                可以绑定 匿名函数 也可以是 定义好的函数名称
+
+            事件监听,删除语法
+                标签对象.removeEventListener( '事件类型,没有on' , 要删除的事件处理函数 );
+                1, 删除绑定的事件,必须要有第二个参数,也就是要删除的事件处理函数
+                2, 只有绑定的函数名称,可以删除
+                   绑定的是一个匿名函数,无法删除的
+
+                   每一个匿名函数,都有一个自己的地址
+                
+        */
+
+        var oDiv = document.querySelector('div');
+
+        // on语法  只能给 一个标签,一个事件类型,绑定一个事件处理函数
+        // oDiv.onclick = function(){
+        //     console.log('1111');
+        // }
+
+        // oDiv.onclick = function(){
+        //     console.log('2222');
+        // }
+        
+
+        // 事件监听语法 可以同时给一个标签,一个事件类型,绑定多个事件处理函数
+        oDiv.addEventListener( 'click' , function(){
+            console.log(1111);
+        } )
+
+        oDiv.addEventListener( 'click' , function(){
+            console.log(2222);
+        } )
+        // 绑定的是 匿名函数地址,比如是00ff11
+        oDiv.addEventListener( 'click' , function(){
+            console.log(3333);
+        } )
+
+        oDiv.addEventListener( 'click' , fun4 );
+
+
+        function fun4(){
+            console.log(4444);
+        }
+
+
+        oDiv.removeEventListener('click' , fun4 );
+
+        // 删除的是匿名函数的地址 , 新的匿名函数,就会有新的地址 00ff22
+        // 跟之前的匿名函数,虽然程序相同,但是,内存地址不同
+        // 此时删除的是 00ff22 不是 之前的 00ff11 
+        oDiv.removeEventListener('click' , function(){
+            console.log(3333);
+        } );
+
+
+        /*
+            通过on语法,给标签绑定事件,本质上是一个赋值操作
+            本质上,是将 函数的内存地址 赋值绑定给 事件类型
+            触发事件类型时,通过 赋值绑定的内存地址 找到函数的存储空间,调用执行其中程序
+
+            如果对同一个事件类型,多次绑定,事件处理函数,后赋值绑定的内存地址就会将之前的内存地址覆盖
+
+            实际项目中,有给一个标签,一个事件类型,绑定多个事件处理函数,有这样的操作
+
+            需要使用 事件监听语法 绑定事件类型和事件处理函数
+
+            有些新增的事件类型,使用on语法绑定,支持效果不佳,推荐使用 事件监听语法
+        
+        */
+
+
+
+        /*
+            on
+                同一个标签,相同类型,只能同时绑定一个事件处理函数
+                有一些事件类型,使用on语法绑定,支持效果不佳
+                删除事件,只要 赋值 null 就可以了
+
+
+            事件监听
+                同一个标签,相同类型,可以同时赋值多个事件处理函数
+                绑定事件处理函数,可以是匿名函数,也可以是函数名称
+                删除事件,只能删除,绑定的函数名称,不能删除匿名函数
+        
+            今后的事件,推荐使用 事件监听语法
+        
+        */
+
+
+    </script>
+</body>
+</html>

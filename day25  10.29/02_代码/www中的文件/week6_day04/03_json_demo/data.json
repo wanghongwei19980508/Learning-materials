@@ -1,0 +1,6 @@
+[
+    { "name": "小玉", "age": 18, "sex": "女", "add": "非人公寓", "img": "images/1.jpg" },
+    { "name": "哪吒", "age": 18, "sex": "男", "add": "非人公寓", "img": "images/2.jpg" },
+    { "name": "熬烈", "age": 18, "sex": "男", "add": "非人公寓", "img": "images/3.jpg" },
+    { "name": "弥勒", "age": 18, "sex": "男", "add": "非人公寓", "img": "images/4.jpg" }
+]

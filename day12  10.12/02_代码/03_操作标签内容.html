@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div标签
+        <p>我是div中的p标签</p>
+        <span>我是div中span标签</span>
+        <h1>我是div中的h1标签</h1>
+    </div>
+
+    <script>
+        /*
+            操作标签内容  推荐大家使用  innerHTML
+
+
+                标签对象.innerHTML
+                    var 变量 = 标签对象.innerHTML
+                        获取标签对象, 所有标签内容 包括 子级后代标签的标签名称
+
+                    
+                    标签对象.innerHTML = 内容
+                        设定 标签对象 的内容
+                        设定 内容 是一个 覆盖 操作
+                        直接赋值 会 覆盖之前的 标签内容 
+                        如果要执行新增标签内容的操作,最好是用 += 
+                        += 如果有字符串参与 会执行拼接操作,是在原始内容的基础上,再拼接上新的内容,然后将拼接的结果,赋值给标签对象
+                        支持 字符串中的 标签名称 可以解析执行 标签效果
+
+                标签对象.innerText
+                    var 变量 = 标签对象.innerText
+                        获取标签对象, 所有标签内容 不包括 子级后代标签的标签名称
+                                                 只获取 子级后代标签的标签内容
+
+                    标签对象.innerText = 内容
+                        设定 标签对象 的内容
+                        设定 内容 是一个 覆盖 操作
+                        直接赋值 会 覆盖之前的 标签内容 
+                        不支持字符串中的标签名称 直接解析程序为字符串内容,不会显示标签效果
+            
+            
+            innerHTML 获取,设定 都支持标签
+            innerText 获取,设定 都不支持标签
+
+            实际操作中,推荐使用 innerHTML
+
+            覆盖 直接赋值 innerHTML = XXXXXX
+            拼接 +=赋值   innerHTML += XXXXXX
+        */
+
+        // 1, 获取标签对象中的内容
+
+        var oDiv = document.querySelector('div');
+
+        var res1 = oDiv.innerHTML;
+        var res2 = oDiv.innerText;
+
+        console.log(res1);
+        console.log(res2);
+
+        // 2, 设定 写入 标签内容
+
+        // 直接赋值是 覆盖
+        // oDiv.innerHTML = '我是设定的内容111';
+        // oDiv.innerText = '我是设定的内容222';
+
+        // +=赋值 是 拼接
+        // oDiv.innerHTML += '<a href="http://www.baidu.com">我是设定的内容111</a>';
+
+        oDiv.innerText += '<a href="http://www.baidu.com">我是设定的内容222</a>';
+
+    </script>
+</body>
+</html>

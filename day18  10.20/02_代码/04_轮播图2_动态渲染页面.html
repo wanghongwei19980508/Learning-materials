@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li,
+        ol {
+            list-style: none;
+        }
+
+        a,
+        a:active,
+        a:hover {
+            text-decoration: none;
+            color: #fff;
+
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 960px;
+            height: 250px;
+            border: 3px solid #000;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box>ul {
+            width: 960px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box>ul::after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .box>ul>li {
+            width: 960px;
+            height: 250px;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box>ol {
+            height: 20px;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 5px;
+        }
+
+        .box>ol>li {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 10px;
+        }
+
+        .box>ol>li.active {
+            background: red;
+        }
+
+        .box>div {
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .box>div>a {
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 25px;
+            background: rgba(0, 0, 0, .5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul></ul>
+        <ol></ol>
+        <div>
+            <a href="JavaScript:;">&lt;</a>
+            <a href="JavaScript:;">&gt;</a>
+        </div>
+    </div>
+
+    <script>
+        // 模拟的图片数组
+        const imgArr = [
+            { path: '1.jpg', width: 1920, height: 500, size: 127 },
+            { path: '2.jpg', width: 1920, height: 500, size: 128 },
+            { path: '3.jpg', width: 1920, height: 500, size: 129 },
+            { path: '4.jpg', width: 1920, height: 500, size: 130 },
+            { path: '5.jpg', width: 1920, height: 500, size: 131 },
+            { path: '6.jpg', width: 1920, height: 500, size: 123 },
+        ];
+
+
+        // 获取标签对象
+
+        // 获取轮播图div标签
+        const oBox = document.querySelector('.box');
+        // 在div标签中,获取子级标签对象
+        const oUl = oBox.querySelector('ul');
+        const oOl = oBox.querySelector('ol');
+
+        // 根据图片数组,动态生成ul>li和ol>li
+        setLi(imgArr);
+
+
+
+
+
+
+        // 1, 动态渲染生成页面
+        // 实际项目中,轮播图,图片内容,个数,都是从数据库获取的数据信息
+        // 我们当前使用 一个 轮播图,图片数据信息数组,模拟获取的图片数据
+
+
+
+        // 动态渲染生成页面
+        // 动态生成ul中的li,ol中的li
+        // ol>li与 图片数量相同 第一个li有css样式active
+
+        // 参数:图片数据信息
+        function setLi(array){
+            // 创建 ol>li  ul>li 存储变量
+            let olLiStr = '';
+            let ulLiStr = '';
+
+            // 循环遍历 图片数组信息
+            array.forEach((v,k)=>{
+                //如果是第一个ol>li,添加active样式
+                if(k === 0){
+                    olLiStr += '<li class="active"></li>';
+                }else{
+                    olLiStr += '<li></li>';
+                }
+                // 每一个ul>li,其中有图片标签,src路径是相对路径,拼接图片名称
+                ulLiStr += `<li><img src="./images/${v.path}"></li>`;
+            })
+
+            // 写入ol
+            oOl.innerHTML = olLiStr;
+
+            // 写入ul
+            oUl.innerHTML = ulLiStr;
+
+            // 当前ul中有了6个li,需要克隆第一个和最后一个li
+            const cloneFirst = oBox.querySelectorAll('ul>li')[0].cloneNode( true );
+            const cloneLast = oBox.querySelectorAll('ul>li')[array.length-1].cloneNode(true);
+
+            // 克隆的第一个li,写入到ul的最后
+            oUl.appendChild( cloneFirst );
+
+            // 克隆的最后一个li,写入到ul中,第一个标签之前
+            oUl.insertBefore( cloneLast , oBox.querySelectorAll('ul>li')[0] );
+
+            // 设定 ul 的宽度 , 每个li的宽度 * 当前li的个数( 原始图片个数+2 )
+            oUl.style.width = 960 * (array.length+2) + 'px';
+
+            // 默认显示的第一张是原始的最后一张,当前的第二张,才是原始的第一张
+            // 定位ul,显示第二个li
+            oUl.style.left = '-960px';
+        }
+
+
+
+    </script>
+</body>
+
+</html>

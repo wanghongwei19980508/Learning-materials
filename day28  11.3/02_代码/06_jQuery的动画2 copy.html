@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <button name="block">出现</button>
+    <button name="none">消失</button>
+    <button name="toggle">切换</button>
+
+    <div></div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            原生js中没有动画效果,我们是通过自定义 move() 运动函数实现的
+        
+            jQuery中给我们封装了动画,实现原理就是我们的 move() 运动函数的原理
+                通过 +=  -=  逐步 改变标签的css样式
+
+                多种css属性,都在同时改变
+                    让 height 高度发生变化
+                    最终 添加 display:none 属性
+
+                $().slideDown( 参数1 , 参数2 , 参数3 )  
+                $().slideUp( 参数1 , 参数2 , 参数3 )  
+                $().slideToggle( 参数1 , 参数2 , 参数3 ) 
+                参数1: 运动时间 
+                参数2: 运动方式( linear线性 )
+                参数3: 运动结束的回调函数 
+        */
+
+        $('[name="block"]').click(()=>{
+            $('div').slideDown( 2000 , 'linear' , ()=> console.log('出现动画结束了') );
+        })
+
+        $('[name="none"]').click(()=>{
+            $('div').slideUp( 2000 , 'linear' , ()=> console.log('消失动画结束了'));
+        })
+
+        $('[name="toggle"]').click(()=>{
+            $('div').slideToggle( 2000 , 'linear' , ()=> console.log('切换动画结束了') );
+        })
+    </script>
+</body>
+</html>

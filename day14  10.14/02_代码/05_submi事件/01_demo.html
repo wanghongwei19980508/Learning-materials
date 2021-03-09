@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="./02_demo.html" method="get">
+        账号 : <input name="username" type="text"> <span name="name"></span> <br>
+        密码 : <input name="userpwd" type="password"> <span name="pwd"></span> <br>
+        验证码 : <input name="uservc" type="text"> <span name="vc"></span>  <span name="vvcc"></span>  <br>
+        <button>注册</button>
+    </form>
+
+    <script src="../tools.js"></script>
+    <script>
+        // 获取标签对象
+        var oIptName = document.querySelector('[name="username"]');
+        var oIptPwd = document.querySelector('[name="userpwd"]');
+        var oIptVc = document.querySelector('[name="uservc"]');
+
+        var oSpanVc = document.querySelector('[name="vc"]');
+
+        var oForm = document.querySelector('form');
+
+        var oSpanName = document.querySelector('[name="name"]');
+        var oSpanPwd = document.querySelector('[name="pwd"]');
+        var oSpanVVCC = document.querySelector('[name="vvcc"]');
+
+        // 1,添加验证码
+        oSpanVc.innerHTML = setVc();
+
+        // 点击 span标签,可以切换新的验证码
+        oSpanVc.onclick = function(){
+            oSpanVc.innerHTML = setVc();
+        }
+
+        // 给form表单,添加 submit 提交事件
+        oForm.onsubmit = function(e){
+
+            // 提交事件,应该先做验证
+            // 如果 验证没有通过 就不执行之后的程序
+
+            // 目前只能验证,输入数据的长度,对于内容的验证,使用正则表达式会更简单
+            // 目前验证,输入数据的长度和不能是空字符串
+
+            // 获取,账号,密码,验证码输入的数据
+            var nameVal = oIptName.value;
+            var pwdVal = oIptPwd.value;
+            var vcVal = oIptVc.value;
+
+            // 1,输入的账号进行验证
+            
+            // 账号验证, 不能为空字符串 , 长度必须是 8-16 位
+            // 如果是 空字符串 或者 长度不在 8-16位 之间 我们就阻止表单的提交
+            if( nameVal === '' || !( nameVal.length >= 8 && nameVal.length <= 16 )   ){
+                e.preventDefault() ;
+                // 在 name的 span 中,写入提示信息
+                oSpanName.innerHTML = '<span style="color:red">您输入的账号不符和格式</span>'
+            }else{
+                // 符合格式,输入空字符串,替换错误提示
+                oSpanName.innerHTML = '';
+            }
+
+            // 密码验证 不能为空字符串 , 长度必须是 8-16 位
+            if( pwdVal === '' || !( pwdVal.length >= 8 && pwdVal.length <= 16 )   ){
+                e.preventDefault() ;
+                // 在 pwd的 span 中,写入提示信息
+                oSpanPwd.innerHTML = '<span style="color:red">您输入的密码不符和格式</span>'
+            }else{
+                // 符合格式,输入空字符串,替换错误提示
+                oSpanPwd.innerHTML = '';
+            }
+
+
+            // 验证码  输入的字符串不能为空
+            if( vcVal === ''){
+                e.preventDefault() ;
+                // 在 验证码的span 中,写入提示信息
+                oSpanVVCC.innerHTML = '<span style="color:red">您输入的验证码不能为空</span>'
+            
+            // 验证码 input中输入的数据,必须 和 之后 span 中写入的 字符串相同 
+            // 如果不相同,就阻止表单的提交
+            // 如果要区分大小写,大小写敏感,直接 ===判断就可以
+            // 如果不分区大小写,大小写不敏感,可以统一都转化为大写或者小写
+            }else if( vcVal.toUpperCase() !== oSpanVc.innerHTML.toUpperCase() ){
+                e.preventDefault() ;
+                oSpanVVCC.innerHTML = '<span style="color:red">您输入的验证码错误</span>'
+
+            }else{
+                // 符合格式,输入空字符串,替换错误提示
+                oSpanVVCC.innerHTML = '';
+            } 
+        }
+
+
+        /*
+            1, 当前使用的是 跳转页面的数据交互
+               之后还会学习 ajax局部数据交互
+
+               都是使用 e.preventDefault() ; 来阻止form表单的默认提交事件
+
+            2, 必须要记住, submit 提交事件,是绑定给 form表单标签
+               不是绑定给 button标签 
+
+            3, 通过验证 input等标签中,输入的数据,判断输入的数据,是否符合格式要求
+               如果不符合,就阻止表单的提交
+
+            4, 目前只能做长度和空字符串的验证
+               内容的验证,要是用正则表达式来执行
+
+            5, 验证码:
+                (1) 随机验证码直接写入到 span标签中
+                    比较判断的是 input输入框,输入的数据,与span标签的内容,是否一致
+
+                (2) 如果要区分大小写,就直接 === 判断
+                    如果不要区分大小写,将字符串统一为大写,或者小写字符串
+        
+        
+        
+        
+        */
+
+    </script>
+</body>
+</html>

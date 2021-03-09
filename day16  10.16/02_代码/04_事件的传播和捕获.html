@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width:800px ;
+            height: 800px;
+            background: pink;
+        }
+
+        .middle{
+            width:600px ;
+            height: 600px;
+            background: orange;
+        }
+
+        .inner{
+            width:400px ;
+            height: 400px;
+            background: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="middle"> 
+            <div class="inner" ></div>
+        </div>
+    </div>
+
+    <script>
+        /*
+            事件的传播:
+                所谓的事件的传播,是 JavaScript中 事件的一种执行方式
+                当前标签,触发事件时,父级标签,也会触发相同类型的事件
+                这样事件的执行方式成为 事件的传播 / 事件的冒泡
+
+            事件的捕获
+                事件的传播,有两种执行方式:
+                    1,由内而外 : 子级 ---> 父级  事件的冒泡执行方式
+                    2,由外而内 : 父级 ---> 子级  事件的捕获执行方式
+                    目前,所有的是浏览器,都是按照 子级 --- 父级 按照事件的冒泡方式执行
+                可以通过 addEventListener() 定义 第三个参数 来 设定 事件的传播 执行方式
+                    true  : 捕获方式 执行
+                    false : 默认的执行方式 冒泡方式执行
+
+        */
+
+        // 给父子级关系的三个标签,都添加相同的事件类型
+        // 点击 inner最里面的标签,两个父级,绑定的,点击事件,也会一起触发
+        var oBox = document.querySelector('.box');
+        var oMiddle = document.querySelector('.middle');
+        var oInner = document.querySelector('.inner');
+
+        // 默认值 false 冒泡 子级---父级
+        // 设定为 true  捕获 父级---子级
+        oBox.addEventListener('click' , function(){console.log('我是box触发的')} , true);
+        oMiddle.addEventListener('click' , function(){console.log('我是middle触发的')} , true);
+        oInner.addEventListener('click' , function(){console.log('我是inner触发的')} , true);
+
+    </script>
+</body>
+</html>

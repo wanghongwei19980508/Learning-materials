@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            height: 5000px;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        /*
+            函数的防抖和节流
+                函数的防抖 和 函数的节流 都是为了 防止一次 触发事件过多请求过多
+                造成服务器负担过重
+
+            典型的:
+                页面滚动
+                input输入过快
+        
+        */
+
+        /*
+            鼠标滚轮滚动一次,实际上会触发多次 scroll 事件
+            现在希望,滚动一次,就触发一次 scroll 事件
+
+            方法有两种:
+                函数的节流:
+                    定义一个开关,如果是 true 执行程序,给变量定义false
+                                如果是 false 执行 return 终止程序
+                函数的防抖
+                    定义一个变量,存储定时器
+                        每次触发程序之前,先清除之前,定义的定时器/延时器
+                        多次触发,之后最后一次,生成的定时器,延时器没有被清除,会执行
+
+                都要将程序定义到一个异步程序中
+                    延时器  或者  ajax 异步请求
+
+                原理:
+                    定义的 scroll 事件 一次会执行多次请求,都是同步执行程序
+                    调用的 setTimeout 是一个 异步程序
+
+                    执行过程是 : 
+                        触发 scroll事件 会同时触发多个 scroll事件处理函数
+                        第一次触发 事件处理函数 bool 是 true 
+                            给bool赋值为false  代用 延时器异步程序 --- 此时这个异步程序不会执行
+                        会先执行之后所有的,触发的,多次的 scroll事件处理函数
+                            此时 异步延时器还没有执行,fun函数就没有执行,bool就没有赋值为true
+                            bool为false, scroll事件处理函数 就会执行 return 不会触发新的 延时器
+                            就没有新的 fun 函数的代用
+
+
+        */ 
+        // 定义变量,存储true,控制调用
+        let bool = true;
+
+        // 定义变量,存储定时器
+        let time = 0;
+
+        window.onscroll = ()=>{
+            // 防抖
+            // 清除定时器
+            clearInterval(time);
+
+
+            // 节流  通过 bool 控制 程序的调用
+            // if( !bool ) return;
+            // bool = false;
+
+            // 必须要有一个异步执行的程序
+            time = setTimeout( fun , 500);
+        }
+
+        function fun() {
+            console.log(123);
+            bool = true;
+        }
+
+    </script>
+</body>
+</html>

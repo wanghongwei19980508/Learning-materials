@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 800px;
+            height: 800px;
+            background: pink;
+            position: relative;
+        }
+
+        .inner{
+            width: 100px;
+            height: 100px;
+            background: orange;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="inner"></div>
+    </div>
+
+    <script src="./tools.js"></script>
+    <script>
+        /*
+            通过键盘按键,让橙色div,移动
+            左 37
+            上 38
+            右 39
+            下 40
+        */ 
+
+        // 橙色div,移动的div
+        var oInner = document.querySelector('.inner');
+
+        // 给整个文档添加 键盘事件
+        document.onkeydown = function(e){
+            // 根据不同的按键,执行不同的操作
+            // e.keyCode 来判断按键
+
+            // 左
+            if( e.keyCode === 37 ){
+                // 按的是 左键 div应该左移
+                // left 值 在原有数值基础上  -= 一个数值
+
+                // 获取橙色div,原始left定位数值,并且只要数值部分,去除px单位
+                var oldLeft = parseInt( myGetStyle(oInner , 'left') );
+
+                // 减等一个固定的数值
+                oldLeft -= 10;
+
+                // 设定极值: left定位 最小是 0
+                // 三元运算符,如果小于0,就赋值0,如果不小于0,就是本身
+                oldLeft = oldLeft < 0 ? 0 : oldLeft;
+                
+                // 将新的数据,赋值给橙色div,当前oldLeft 只有数值,需要拼接px单位
+                oInner.style.left = oldLeft + 'px';
+            }
+
+            // 右
+            if( e.keyCode === 39 ){
+                // 按的是 右键 div应该右移
+                // left 值 在原有数值基础上  += 一个数值
+
+                // 获取橙色div,原始left定位数值,并且只要数值部分,去除px单位
+                var oldLeft = parseInt( myGetStyle(oInner , 'left') );
+
+                // 减等一个固定的数值
+                oldLeft += 10;
+
+                // 设定极值: left定位 最大值 父级div宽度 - 橙色div宽度
+                // 大于 最大定位值 700 就 赋值700 否则就是本身
+                oldLeft = oldLeft > 700 ? 700 : oldLeft; 
+                
+                // 将新的数据,赋值给橙色div,当前oldLeft 只有数值,需要拼接px单位
+                oInner.style.left = oldLeft + 'px';
+            }
+
+            // 上
+            if( e.keyCode === 38 ){
+                // 按的是 上键 div应该上移
+                // top 值 在原有数值基础上  -= 一个数值
+
+                // 获取橙色div,原始left定位数值,并且只要数值部分,去除px单位
+                var oldTop = parseInt( myGetStyle(oInner , 'top') );
+
+                // 减等一个固定的数值
+                oldTop -= 10;
+
+                // 设定极值: top 的最小值 是 0
+                // 如果 小于 0 就赋值 0 不小于0 就赋值本身
+                oldTop = oldTop < 0 ? 0 : oldTop; 
+                
+                // 将新的数据,赋值给橙色div,当前oldLeft 只有数值,需要拼接px单位
+                oInner.style.top = oldTop + 'px';
+            }
+            
+            // 下
+            if( e.keyCode === 40 ){
+                // 按的是 下键 div应该下移
+                // top 值 在原有数值基础上  += 一个数值
+
+                // 获取橙色div,原始left定位数值,并且只要数值部分,去除px单位
+                var oldTop = parseInt( myGetStyle(oInner , 'top') );
+
+                // 减等一个固定的数值
+                oldTop += 10;
+
+                // 设定极值: top定位 最大值 父级div宽度 - 橙色div宽度
+                // 大于 最大定位值 700 就 赋值700 否则就是本身
+                oldTop = oldTop > 700 ? 700 : oldTop; 
+                
+                // 将新的数据,赋值给橙色div,当前oldLeft 只有数值,需要拼接px单位
+                oInner.style.top = oldTop + 'px';
+            }
+        }
+
+        /*
+            总结 : 
+                1, 需要通过 e.keyCode 获取 按键编号
+                    直接输入英文,和,中文输入法,获取的 e.keyCode 是不同的
+
+                2, 设定极值
+                    在 父级div 中 绝对定位
+                    极值: 最小 是 0 
+                          最大 是 父级标签宽度 / 高度 - 子级标签宽高 / 高度
+        
+        */
+
+    </script>
+</body>
+</html>

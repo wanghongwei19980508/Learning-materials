@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./demo.js"></script>
+    <script src="./demo.txt"></script>
+    <!-- 通过 src 导入一个外部的 php文件  
+         而且 导入的路径 是 跨域路径
+         因为 src 是 专门读取外部文件的属性,浏览器允许执行跨域读取
+         我们就可以 借用 script标签 src 属性 访问 跨域的 后端程序/接口 获取数据
+    -->
+    <script src="http://localhost/bk_2003/week6_day05/02_jsonp/01_demo/demo.php"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            JavaScript中的原生ajax请求
+                1, 创建一个ajax对象
+                2, 通过 open() 设定 请求方式 和 请求url地址
+                   get方式 可以在url地址之后,拼接携带的参数
+
+                3, 如果是 post方式 要设定请求头
+                
+                4, 通过 send() 发送请求
+                   post方式,在 send() 中 设定携带的参数
+                5, 接收响应体内容
+
+            jQuery中,给我们分装好了请求方式,我们只要直接使用就可以了
+
+                $.get()   专门发送get请求的
+                $.post()  专门发送post请求的
+
+                参数1: url传参地址
+
+                参数2: 携带的参数
+                       可以是字符串形式  '键名=数值&键名=数值...'
+                       还可以是对象形式  { 键名:数值 , 键名:数值.... }
+
+                参数3: 回调函数
+                       定义一个形参,jQuery程序会将返回的响应体内容,直接存储在形参中
+
+                参数4: 期望返回的数据类型
+                       如果定义第四个参数是 json 
+                       jQuery会自动解析还原,响应体json串
+                       但是必须要确保结果是 json字符串
+
+
+
+
+                $.ajax()  可以发送多种形式的请求
+                    参数只有一个,必须是对象形式
+
+                    $.ajax( { 
+                        常用的:
+                            url: '请求地址',
+                            data: {}/字符串 请求携带的参数,
+                            type/method: 请求的方式 get/post
+                            dataType: 返回的数据类型 如果是json串,就定义 'json' 会自动还原
+                            success: ()=>{}  请求结束时,执行的回调函数
+
+                        不常用:
+                            async: true / false  是否异步请求
+                            error: 请求错误时,执行的程序
+                            timeout: 设定请求超时
+                                     设定时间,如果请求时间超过设定时间,认为请求错误
+                                     单位毫秒
+                            cache: 浏览器是否缓存 只对get请求方式有用
+                            context: 设定 success 或者 error 中 回调函数的this
+                                     this默认指向 jQuery创建的 ajax请求对象
+                     } )
+        
+                跨域请求:
+                     1, cors  服务器程序添加代码,让任意前端请求都可以访问数据
+
+                     2, proxy 服务器代理
+                              设定好服务器代理名称和代理地址,完成服务器自动完成跨域请求
+
+                        只要配置好服务器的代理,请求时,使用代理名称,jQuery的ajax,就可以完成跨域
+
+                     3, jsonp
+                            需要先定义好一个回调函数
+                            通过 script 标签,src属性,完成跨域请求
+                            发送请求时,要携带 回调函数名称 
+
+                        jQuery的jsonp请求
+                            1, url地址就正常填写跨区请求地址
+                            2, data就正常传参
+                            3, type / method 必须是 get方式
+                            4, dataType 必须是 jsonp
+                            5, 新增属性 jsonp 属性值是 传参函数名称的键名 一般是 cb
+                            6, success的回调函数,就是发送的函数
+                               因为 dataType 写成了 jsonp 如果响应体是 json串格式 只能手动解析
+        */
+
+    </script>
+</body>
+</html>

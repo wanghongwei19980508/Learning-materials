@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul, li {
+      list-style: none;
+    }
+
+    ul {
+      height: 40px;
+      margin: 30px auto;
+      border-bottom: 3px solid pink;
+      width: 1000px;
+      position: relative;
+    }
+
+    li {
+      height: 100%;
+      width: 100px;
+      float: left;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    ul > span {
+      width: 100px;
+      height: 3px;
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      background-color: red;
+    }
+
+    ul > p {
+      width: 100px;
+      height: 40px;
+      background-color: skyblue;
+      color: #fff;
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+  </style>
+
+</head>
+<body>
+  <ul>
+    <li>第1个选项</li>
+    <li>第2个选项</li>
+    <li>第3个选项</li>
+    <li>第4个选项</li>
+    <li>第5个选项</li>
+    <li>第6个选项</li>
+    <li>第7个选项</li>
+    <li>第8个选项</li>
+    <li>第9个选项</li>
+    <li>第10个选项</li>
+    <span></span>
+    <p>第1个选项</p>
+  </ul>
+
+
+  <script src="./jquery/jquery.min.js"></script>
+  <script>
+    $('li').mouseenter(function () {
+      $('ul > span')
+        .stop()
+        .animate({ left: $(this).index() * 100 }, 150, 'linear')
+      $('ul > p')
+        .stop()
+        .animate({ left: $(this).index() * 100 }, 150, 'linear')
+        .text($(this).text())
+      $(this)
+        .siblings()
+        .removeClass('active')
+        .end()
+        .addClass('active')
+    })
+
+    // $('li').click(function () {
+    //   console.log($(this).text())
+    // })
+
+    // $('p').click(function () {
+    //   const index = $(this).position().left / 100
+    //   $('ul > li').eq(index).trigger('click')
+    // })
+
+  </script>
+</body>
+</html>

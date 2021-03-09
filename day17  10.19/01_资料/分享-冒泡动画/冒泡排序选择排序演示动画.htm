@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        button{
+            margin-left: 400px;
+            margin-bottom: 20px;
+        }
+        header{
+            margin-left:400px;
+            height: 300px;
+            width: 700px;
+            border-left:1px solid black ;
+            border-bottom:1px solid black ;
+            position: relative;
+        }
+        header>div{
+            position: absolute;
+            bottom: 0px;
+            border: 1px solid black;
+            transition: 1s;
+            width: 20px;
+        }
+        nav{
+            margin-left:400px;
+            height: 300px;
+            width: 700px;
+            border-left:1px solid black ;
+            border-bottom:1px solid black ;
+            position: relative;
+        }
+        nav>div{
+            position: absolute;
+            bottom: 0px;
+            border: 1px solid black;
+            transition: 1s;
+            width: 20px;
+        }
+        p{
+            margin-left: 400px;
+        }
+
+    </style>
+</head>
+<body>
+    <button>冒泡排序下一步</button>
+    <header>
+    </header>
+    <button>选择排序下一步</button>
+    <nav></nav>
+    <p></p>
+    <script>
+        var oBut = document.querySelectorAll("button");
+        var ohea = document.querySelector("header");
+        var onav = document.querySelector('nav');
+        var op = document.querySelector('p');
+        console.log(ohea);
+        console.log(oBut);
+        var s = window.prompt("请输入数字并用空格隔开");
+        var arr = s.split(" ");
+        var arr3 = s.split(" ");
+        arr3.forEach(function(v,k){
+            arr3[k] = v*1;
+        })
+        arr.forEach(function(v,k){
+            arr[k] = v*1;
+            if(arr[k]<30){
+                ohea.innerHTML += `<div style = 'left:${0 + k*70}px;background-color:rgb(${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)});height:${10*v}px;'></div>`;
+                onav.innerHTML += `<div style = 'left:${0 + k*70}px;background-color:rgb(${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)});height:${10*v}px;'></div>`;
+            }else{
+                ohea.innerHTML += `<div style = 'left:${0 + k*70}px;background-color:rgb(${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)});height:300px;'>${v}</div>`;
+                onav.innerHTML += `<div style = 'left:${0 + k*70}px;background-color:rgb(${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)},${parseInt(Math.random() * 256)});height:300px;'>${v}</div>`;
+            }
+        })
+        var oDiv = document.querySelectorAll("nav>div")
+        var odiv = document.querySelectorAll("header>div");
+        var arr1 =[]; 
+        for(var x = 0;x<=arr.length-1;x++){
+            arr1[x]=x;
+        };
+
+        console.log(arr1);
+        var i = 0;
+        var c = i + 1;
+        var z = 0
+        oBut[0].onclick = function(){
+            if(arr[i]>arr[c]){
+                var t = arr[i];
+                arr[i] = arr[c];
+                arr[c] = t;
+                var b = odiv[arr1[i]].style.left;
+                odiv[arr1[i]].style.left = odiv[arr1[c]].style.left;
+                odiv[arr1[c]].style.left = b;
+                var e = arr1[i];
+                arr1[i] = arr1[c];
+                arr1[c] = e;
+                i++;
+                c++;
+                if(c>arr.length-1-z){
+                    i = 0;
+                    c=i+1;
+                    z++;
+                }
+            }else{
+                i++;
+                c++;
+                if(c>arr.length-1-z){
+                    i = 0;
+                    c=i+1;
+                    z++;
+                }
+            }
+            console.log(arr);
+            console.log(arr1);
+        }
+
+
+
+        //xuanzhe
+        var arr2 = [];
+        for(var x = 0;x<=arr.length-1;x++){
+            arr2[x]=x;
+        }
+        var o = 0;
+        var m = 0;
+        var n = m+1;
+        var r = m;
+        op.innerHTML = `当前存储的索引下标为${r},当前比较的是${n}`;
+            
+        oBut[1].onclick = function(){
+            if(arr3[m]>arr3[n]){
+                r = n;
+                op.innerHTML = `当前存储的索引下标为${r},当前比较的是${n}`;
+                n++;
+                o = 1;
+                if(n > arr3.length-1){
+                    var t = arr3[m];
+                    arr3[m] = arr3[r];
+                    arr3[r] = t;
+                    var b = oDiv[arr2[m]].style.left;
+                    oDiv[arr2[m]].style.left = oDiv[arr2[r]].style.left;
+                    oDiv[arr2[r]].style.left = b;
+                    var e = arr2[m];
+                    arr2[m] = arr2[r];
+                    arr2[r] = e;
+                    if(o === 1 ){
+                        m = 0;
+                        o = 0;
+                    }else{
+                        m++;
+                        o = 0;
+                    }
+                    n=m+1;
+                    r= m;
+                }
+            }else{
+                op.innerHTML = `当前存储的索引下标为${r},当前比较的是${n}`;
+                n++;
+                if(n > arr3.length-1){
+                    var t = arr3[m];
+                    arr3[m] = arr3[r];
+                    arr3[r] = t;
+                    var b = oDiv[arr2[m]].style.left;
+                    oDiv[arr2[m]].style.left = oDiv[arr2[r]].style.left;
+                    oDiv[arr2[r]].style.left = b;
+                    var e = arr2[m];
+                    arr2[m] = arr2[r];
+                    arr2[r] = e;
+                    if(o === 1 ){
+                        m = 0;
+                        o = 0;
+                    }else{
+                        m++;
+                        o = 0;
+                        if(m>arr2.length-1){
+                            m=0;
+                        }
+                    }
+                    n=m+1;
+                    r= m;
+                }
+            }
+            console.log(arr3);
+            console.log(arr2);
+        }
+        
+    </script>
+</body>
+</html>

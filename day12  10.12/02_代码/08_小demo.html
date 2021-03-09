@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            width: 800px;
+            height: 800px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 100px;
+            border:3px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <button name="放大">放大</button>
+    <button name="缩小">缩小</button>
+    <div>内容</div>
+
+    <script>
+        /*
+            方法缩小字体:
+                在 原始 大小属性值 基础之上, += / -= 一个数值
+        
+        */
+
+        // 1,获取标签对象,两个button,一个div
+
+        // 当前两个button标签,没有区别,如何获取每一个标签对象?
+
+        // 方法1 获取所有的标签对象,执行结果是一个伪数组
+        //       在通过索引下标,获取每一个具体的button标签
+        // var oBtn1 = document.querySelectorAll('button')[0];
+        // var oBtn2 = document.querySelectorAll('button')[1];
+
+
+        // 方法2 给两个标签,添加区别的属性
+        var oBtn1 = document.querySelector('[name="放大"]');
+        var oBtn2 = document.querySelector('[name="缩小"]');
+        
+        // 获取 div 标签对象
+        var oDiv = document.querySelector('div');
+
+        // 给 两个 button标签 添加 点击事件
+        // 点击不同的button标签,执行不同的程序
+        // 给 div标签, fontSize 字体大小, += / -= 数值
+
+        oBtn1.onclick = function(){
+            // 1,获取div标签,原始字体大小,只要数值
+            var oldSize = parseInt( window.getComputedStyle(oDiv).fontSize ); 
+            // 2,在原始数值的基础上, += 20 大小
+            oldSize += 20;
+
+            // 设定极值
+            // 如果 oldSize 数值 大于 400 就 赋值 400 本身
+            // 如果 oldSize 数值 没有大于 400 就赋值 oldSize 本身
+            oldSize = oldSize > 400 ? 400 : oldSize;
+
+            // 3,将新的属性值,再设定给 div 标签
+            //   当前 oldSize 只是数值 ,必须要有px单位
+            oDiv.style.fontSize = oldSize + 'px';   // 拼接
+            // oDiv.style.fontSize = `${oldSize}px`;   // 模板字符串
+        }
+
+        oBtn2.onclick = function(){
+            // 1,获取div标签,原始字体大小,只要数值
+            var oldSize = parseInt( window.getComputedStyle(oDiv).fontSize ); 
+            // 2,在原始数值的基础上, -= 20 大小
+            oldSize -= 20;
+
+            // 设定极值
+            // 如果 oldSize 数值 大于 400 就 赋值 400 本身
+            // 如果 oldSize 数值 没有大于 400 就赋值 oldSize 本身
+            oldSize = oldSize < 20 ? 20 : oldSize;
+
+            // 3,将新的属性值,再设定给 div 标签
+            //   当前 oldSize 只是数值 ,必须要有px单位
+            oDiv.style.fontSize = oldSize + 'px';   // 拼接
+            // oDiv.style.fontSize = `${oldSize}px`;   // 模板字符串
+        }
+
+    </script>
+</body>
+</html>

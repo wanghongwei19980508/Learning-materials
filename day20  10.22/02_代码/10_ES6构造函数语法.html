@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            ES6构造函数语法:
+                本质上,还是 ES5 的构造函数语法
+                    属性属性值,通过this写在实例化对象上
+                    函数方法,通过prototype,定义在构造函数的公共空间中
+                只是语法更加简单了
+
+            声明 ES6 构造函数,有专门的关键词 class  不再使用 function 了
+            也没有()和参数了 直接写 {}
+            在函数中有一个新增的 构造器 constructor(){}
+
+            在构造器中,定义参数,属性属性值
+                原来的形参,写在 构造器 的 ()中
+                原来的属性属性值,写在构造器中
+
+            函数方法执行接定义,class 会将 函数方法写在 prototype 中
+            直接定义 函数名称(){} 就可以了
+        */
+
+        class CrateObj {
+            // 构造器
+            constructor(start, end) {
+                this.start = start;
+                this.end = end;
+            }
+            // 直接定义函数方法,class会自动定义在prototype公共空间中
+            fun() {
+                let res = 0;
+                for (let i = this.start; i <= this.end; i++) {
+                    res += i;
+                }
+                return res;
+            }
+        }
+
+        const obj1 = new CrateObj(1,100);
+
+
+    </script>
+</body>
+
+</html>

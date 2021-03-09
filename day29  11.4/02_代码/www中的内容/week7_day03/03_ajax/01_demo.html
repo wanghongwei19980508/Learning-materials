@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>请求</button>
+
+    <script src="../jquery.min.js"></script>
+    <script>
+        $('button').click( ()=>{
+            $.ajax({
+                url: '/demo',
+                type: 'post',
+                data: { name:'张三' , age:18 },
+                dataType:'json',
+                success: function(res){
+               
+                    console.log(456);
+                },
+                error:()=>{
+                    console.log('请求错误');
+                },
+        
+            })
+
+        } )
+
+
+
+    </script>
+</body>
+</html>

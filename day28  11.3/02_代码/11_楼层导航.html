@@ -1,0 +1,334 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+
+        ul,ol,li{
+            list-style: none;
+        }
+
+        .searchTop{
+            width: 100%;
+            height: 50px;
+            background: rgba(0,0,0,.5);
+            color: #fff;
+            line-height: 50px;
+            text-align: center;
+            font-size: 35px;
+            position: fixed;
+            top:0;
+            left: 0;
+            display: none;
+        }
+
+        .container{
+            width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header{
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav{
+            width: 100%;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: #fff;
+            background: skyblue;
+        }
+
+        .search{
+            width: 100%;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: #fff;
+            background: orange;
+        }
+
+        .banner{
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: #fff;
+            background: pink;
+        }
+
+        .storey{
+            margin: 50px 0 ;
+        }
+
+        .storey>ul{
+            display: flex;
+            flex-direction: column;
+        }
+
+        .storey>ul>li{
+            margin: 30px 0;
+        }
+
+        .storey>ul>li>h3{
+            width: 100%;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: #fff;
+            background: green;
+            
+        }
+
+        .storey>ul>li>div{
+            width: 100%;
+            height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: #fff;
+            background: rebeccapurple; 
+        }
+
+        .footer{
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            color: #fff;
+            background: black; 
+        }
+
+        .storeNav{
+            width: 50px;
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top:30%;
+            right: 100px;
+            display: none;
+        }
+
+        .storeNav>ul{
+            width: 100%;
+        }
+        
+        .storeNav>ul>li{
+            width: 100%;
+            height: 50px;
+            border: 2px solid #000;
+            background: chartreuse;
+        }
+
+
+
+        .storeNav>ul>li.active{
+            color: red;
+        }
+
+        .storeNav>ul>li:hover{
+            background: red;
+            color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    <!-- 模拟页面吸顶部分 -->
+    <div class="searchTop">我是吸顶的搜索栏内容</div>
+
+    <!-- 模拟页面内容部分 -->
+    <div class="container">
+        <!-- 页面头部内容 -->
+        <div class="header">
+            <div class="nav" >页面内容的导航栏</div>
+            <div class="search" >页面内容的搜索栏</div>
+            <div class="banner">页面的轮播图部分</div>
+        </div>
+
+        <!-- 楼层导航内容 -->
+        <div class="storey">
+            <ul>
+                <li>
+                    <h3>秒杀区域</h3>
+                    <div>秒杀区域内容</div>
+                </li>
+                <li>
+                    <h3>双11</h3>
+                    <div>双11内容</div>
+
+                </li>
+                <li>
+                    <h3>每日特价</h3>
+                    <div>每日特价内容</div>
+
+                </li>
+                <li>
+                    <h3>发现好货</h3>
+                    <div>发现好货内容</div>
+
+                </li>
+                <li>
+                    <h3>新品首发</h3>
+                    <div>新品首发内容</div>
+
+                </li>
+                <li>
+                    <h3>频道广场</h3>
+                    <div>频道广场内容</div>
+
+                </li>
+                <li>
+                    <h3>为你推荐</h3>
+                    <div>为你推荐内容</div>
+
+                </li>
+            </ul>
+        </div>
+
+        <!-- 页面的底部 -->
+        <div class="footer">我是页面的底部</div>
+
+        <!-- 页面的侧边栏 -->
+        <div class="storeNav">
+            <ul>
+                <li name="li" class="active">秒杀区域</li>
+                <li name="li">双11</li>
+                <li name="li">每日特价</li>
+                <li name="li">发现好货</li>
+                <li name="li">新品首发</li>
+                <li name="li">频道广场</li>
+                <li name="li">为你推荐</li>
+                <li name="back">返回顶部</li>
+            </ul>
+        </div>
+    </div>
+
+
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            楼层导航的需要分析
+                1, 吸顶效果
+                    有一个吸顶div,固定定位,在页面的最上方
+                    有一个侧边栏div,预定定位,在页面的右侧
+                    两个模块 平时是 消失的 页面滚动至一定高度,两个模块显示,动画效果根据实际项目需求而定
+                    目前就我们自己看着来
+                    小于 一定高度 隐藏消失
+
+                2, 楼层导航的思路:
+                    判断 页面上卷的高度 和 楼层中li高度 做比较
+                         如果 页面上卷的高度 > 楼层中li占位高度 
+                         将 右侧侧边栏 中 索引对应的 li 添加 active样式 其他的删除 active样式
+
+    
+
+        补充知识
+
+                // JavaScript中获取页面上卷高度:
+                let height = document.documentElement.scrollTop || document.body.scrollTop;
+                // jQuery中
+                let height = $(window).scrollTop(); 
+
+                // $().offset 获取当前标签,距离 定位父级元素的 间距,左侧和右侧
+                // 执行结果是一个对象, top属性是距离定位父级对象的高度间距 --- 上间距
+                // 执行结果是一个对象, left属性是距离定位父级对象的宽度间距 --- 左间距
+                // 当前 offsetParent 是 body标签
+                // 就等于 是 当前标签距离页面顶部的距离  距离页面左侧的距离
+                // $('.storey li').offset().top    是 li标签 距离 页面顶部的距离
+                // $('.storey li').offset().left   是 li标签 距离 页面左侧的距离
+
+
+        */
+
+
+        
+
+
+        // 吸顶效果  jQuery的 页面滚动监听事件 $(window).scroll
+        // console.log( $(window) )
+
+
+
+        $(window).scroll( function(){
+            // 吸顶div和侧边的显示隐藏
+            if( $(window).scrollTop() > 200 ){
+                // 吸顶div,显示
+                $('.searchTop').slideDown( 1000 );
+                $('.storeNav').fadeIn( 1000 );
+            }else{
+                // 吸顶div,消失
+                $('.searchTop').slideUp( 1000 );
+                $('.storeNav').fadeOut( 1000 );
+            }
+
+            
+            // 页面上卷,楼层对应侧边栏li,active样式改变
+            // 给 所有的 楼层li 添加事件 
+            // 使用循环遍历获取,每一个li的占位
+            // v是JavaScript标签对象,也就是一个独立的标签对象,必须要$()包裹,才能使用jQuery语法
+            $('.storey li').each( function( k , v){
+                // 判断 页面上卷的高度 和 v也就是楼层li的位置
+                // 当 页面上卷的高度+预留的高度 大于 li与页面顶部的距离
+                // 给 当前v也就是楼层li 对应的 侧边li添加样式
+                // 给 其他的侧边栏li删除样式
+                if( $(window).scrollTop() + 700 > $(v).offset().top ){
+                    $( '.storeNav li' ).eq( k ).addClass('active').siblings().removeClass('active');
+                }
+            }) 
+ 
+        })
+
+
+        // 给 侧边栏 中所有的li添加点击事件
+        // 其他的都点击跳转至对应的楼层li的位置
+        // 返回顶部,直接返回至页面的顶部
+
+        // 单独添加事件
+        // $('[name="back"]').click(function(){
+        //     $('html').animate( {scrollTop : 0} , 1000 );
+        // })
+
+
+        // 事件委托形式
+        $('.storeNav').on( 'click' , '[name="back"]' , function(){
+            $('html').animate( {scrollTop : 0} , 1000 );
+        })
+
+        // 其他侧边栏li添加点击事件
+        $('.storeNav').on( 'click' , '[name="li"]' , function(){
+            // 获取点击标签,距离页面顶部的高度
+            // 根据你当前点击的li,也就是this,按照this的index()索引
+            // 在 楼层li中 找到对应的 li标签, 获取 到 页面顶部的距离 再减去一个预留值
+            // 就是页面滚动定位的位置
+            let height = $('.storey li').eq( $(this).index() ).offset().top - 200;
+            // 通过动画,让页面运动到li对应的高度位置
+            $('html').animate( {scrollTop :height } , 1000 );
+
+        })
+
+    </script>
+</body>
+</html>

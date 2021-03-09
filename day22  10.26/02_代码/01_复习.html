@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            一,构造函数需要注意的问题:
+                1,语法格式:
+                    (1) 使用 class 关键词定义 构造函数
+
+                    (2) 在 构造器 中 定义 参数 
+                        如果在多个方法中都需要使用的数据,在 构造器 中 定义
+                            定义在 构造器 中 要是用 this语法定义
+                            定义的属性和属性值 直接 写在 实例化对象中
+                        如果是只在一个方法中使用的数据,一般 定义在 函数方法中
+                            一般使用 var let  const 等 来声明
+                            一定不能使用 this语法声明
+
+                    (3) 定义一个 入口函数 调用所有需要执行的 函数方法
+                        入口函数,一定要 定义 名称 为 init()
+
+                    (4) 直接定义方法 每一个方法 还可以有自己的参数数据
+                        在 调用 方法时 再输入参数数据
+
+                        调用 构造函数 生成 实例化 对象时 只需要 输入 构造器 中的参数
+
+                        在调用 函数方法时, 再输入 函数方法 的参数 
+
+                2, this指向
+                    必须要确保 调用 构造函数 中 属性 和 方法时 this指向是 实例化对象
+
+                    (1) 一般情况下 匿名函数 function(){}  都需要写成  箭头函数
+
+                    (2) 回调函数 
+                        默认情况下 回调函数的this指向是 undefined
+                        改变this 指向的方法:
+                            方法1: 不直接绑定 函数名称
+                                   绑定一个箭头函数  在 箭头函数中调用执行回调函数
+                                   move(参数1,参数2,()=>{ this.loopEnd() })
+
+                            方法2: 绑定函数名称时,通过 bind() 方法 改变this指向
+                                   move(参数1,参数2, this.loopEnd.bind(this) )
+                                    
+
+        */
+
+        class Fun{
+            constructor(name){
+                // 定义在构造器中的参数
+                // 会直接定义在 实例化对象中
+                this.name = name;
+            }
+    
+            f1(age){
+                console.log(this.name,age);
+            }
+        }
+
+        // 创建 实例化对象 只需要输入 构造器 中的参数
+        const obj = new Fun('张三');
+        console.log(obj);
+        // 在调用方法时,才需要输入方法中的参数
+        obj.f1(18);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color:red;
+            background: blue;
+            width: 500px;
+            height: 100px;
+            border:3px solid #000;
+        }
+    </style>
+</head>
+<body>
+    <div style="font-size: 50px; width: 600px;">我是div</div>
+
+    <script>
+        // 获取标签样式的属性值
+        // 方法1, 标签对象.style.属性 获取属性值
+        //        获取的结果有 px 单位 , 是字符串类型
+        //        如果只需要获取数值,需要通过 parseInt() 获取整数部分
+        // 特别注意: 方法1,只能获取行内样式,其他css语法,内部,外部样式,都不能获取
+
+        // 方法2, window.getComputedStyle(标签对象).属性    获取属性值
+        //        方法2,只能获取属性值,不能设定属性值,设定css样式属性值,只能是 标签对象.style.属性 = '属性值' 设定
+        //        获取的语法,是 JavaScript 固定的语法,你不能改
+        //        获取的执行结果,也是有 px 单位的
+        //        符合属性会获取所有的属性值,如果只获取某一个属性的属性值,要写清楚具体的属性
+        
+
+
+        var oDiv = document.querySelector('div');
+
+        // 方法1:
+        // 直接获取,结果是 带有px 单位的,字符串
+        console.log( oDiv.style.fontSize );
+        // parseInt() 获取整数部分 , 只有数值部分
+        console.log( parseInt( oDiv.style.fontSize ) );
+
+
+        console.log( oDiv.style.color );
+        console.log( oDiv.style.width );
+        console.log( oDiv.style.height );
+        console.log( oDiv.style.border );
+        console.log( oDiv.style.background );
+
+
+        // 方法2 
+        console.log( window.getComputedStyle(oDiv).width );
+        console.log( window.getComputedStyle(oDiv).height );
+        console.log( window.getComputedStyle(oDiv).border );
+        console.log( window.getComputedStyle(oDiv).background );
+        console.log( window.getComputedStyle(oDiv).fontSize );
+        console.log( window.getComputedStyle(oDiv).backgroundColor );
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            面向对象编程:
+                面向对象 中的 对象 值得就是 对象数据类型 object 
+                面向对象 本质就是 针对  对象类型的 编程
+
+                对象中有属性和属性值,属性值可以是 各种数据类型 基本数据类型和引用数据类型,数据类型可以存储数据
+                同时还可以存储函数,函数中可以存储 要执行的程序
+                就可以将 程序需要的数据和程序内容,都存储在对象中  
+        
+        
+        */
+
+        // 小例子
+        // 1-100累加求和
+
+        // 函数语法
+        function add(a, b) {
+            let res = 0;
+            for (let i = a; i <= b; i++) {
+                res += i;
+            }
+            return res;
+        }
+
+        console.log( add(1,100) );
+
+        // 对象语法:
+        const obj = {
+            start : 1,
+            end : 100,
+            // 直接写匿名函数,this指向是obj对象,this.start和this.end指向的是obj中的属性
+            // 写成箭头函数,this是父级程序的this,也就是obj的this
+            //             对象没有this,箭头函数的this是window,不能正确调用数据
+            fun: function() {
+                let res = 0;
+                for (let i = this.start; i <= this.end; i++) {
+                    res += i;
+                }
+                return res;
+            }
+        }
+
+        console.log( obj.fun() );
+
+
+
+
+
+
+    </script>
+</body>
+
+</html>

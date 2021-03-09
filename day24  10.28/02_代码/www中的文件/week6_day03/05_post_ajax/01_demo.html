@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button>请求</button>
+
+    <script >
+        /*
+        
+        
+        */
+
+        const oBtn = document.querySelector('button');
+
+        oBtn.addEventListener( 'click' , ()=>{
+            // post方式,发送ajax请求
+            
+            // 1,创建 ajax请求对象
+            const xhr = new XMLHttpRequest();
+
+            // 2,通过 open() 设定 传参方式为post 和 url地址
+            // 当前方式是 post 方式 不能在 url地址之后拼接 参数
+            xhr.open( 'post' , './demo.php' );
+
+            // 3,设定请求头
+            // 与post请求方式,在请求报文中,设定的请求头内容,完全一致
+            xhr.setRequestHeader( 'Content-Type' , 'application/x-www-form-urlencoded' );
+            
+            // 4,通过send()来发送请求
+            // post方式 可以通过 send() 来设定请求是传参的参数
+            // 语法格式: 与 超链接 传参语法相同, 只是没有 问号
+            // 以字符串形式设定, '键名=数值&键名=数值...'
+            xhr.send('name=张三&age=18&sex=男');
+
+            // 5,通过 onload 执行 请求结束的程序
+            xhr.onload = ()=>{
+                console.log(xhr);
+            }
+        })
+
+        /*
+            post方式,发送ajax请求
+
+                1, 创建 ajax 请求对象
+
+                    const xhr = new XMLHttpRequest();
+
+                2, 通过open()设定请求方式为post,设定url请求地址
+                   post方式,请求地址能写参数
+
+                    xhr.open( 'post' , './demo.php' );
+
+                3, post方式,必须设定请求头
+                   固定的设定语法
+
+                    xhr.setRequestHeader( 'Content-Type' , 'application/x-www-form-urlencoded' );
+
+                4, 通过send()发送请求,并且携带参数
+                   携带参数的语法与超链接语法相同,只是没有问号
+            
+                    xhr.send('name=张三&age=18&sex=男');
+
+                5, 通过 onload 执行 请求结束的程序
+                    
+                    xhr.onload = ()=>{
+                        console.log(xhr);
+                    }
+        
+        
+        */
+
+    </script>
+</body>
+</html>

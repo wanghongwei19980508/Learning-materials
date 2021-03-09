@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            如果将所有的属性属性值 和 函数方法 都定义在 实例化对象中
+            就造成了 相同的函数方法 定义给了每一个对象
+            造成了代码的重复冗余
+
+            解决方案:
+                属性属性值,每一个对象都会不同,就定义在对象本身上
+
+                函数方法,完全相同的,只是每一个对象都要调用使用
+                将函数方法,定义在 构造函数中 ,每一个通过这个构造函数生成的实例化对象,都可以调用
+
+            原型 / 原型属性
+                1, 每一个 函数 天生都有一个 特殊的 公共空间 , 叫 prototype
+                2, 存储在 这个 公共空间中的数据 函数方法 可以被 调用
+                3, 所有通过这个构造函数 生成的实力话对象,都可以调用
+                4, prototype 本质上是一个 对象
+        
+        */
+
+
+        function CreateObj1(start, end) {
+            this.start = start;
+            this.end = end;
+            // 将 函数方法 fun 定义在 实例化对象上
+            this.fun = function () {
+                let res = 0;
+                for (let i = this.start; i <= this.end; i++) {
+                    res += i;
+                }
+                return res;
+            }
+        }
+
+        function CreateObj2(start, end) {
+            this.start = start;
+            this.end = end;
+
+        }
+        CreateObj2.prototype.fun = function () {
+            let res = 0;
+            for (let i = this.start; i <= this.end; i++) {
+                res += i;
+            }
+            return res;
+        }
+
+        const obj1 = new CreateObj1(1, 100);
+
+
+        
+        console.log(obj1);
+
+        console.log( obj1.fun() )
+
+
+        const obj2 = new CreateObj2(1, 100);
+        console.log(obj2);
+        console.log( obj2.fun() )
+
+
+
+        // 三个对象,start和end属性存储的数据不同
+        // 但是 fun 方法中的程序都是完全相同的
+        // 就会产生冗余的多余的代码
+
+
+    </script>
+</body>
+
+</html>

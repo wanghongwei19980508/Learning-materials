@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            构造函数:
+                构造函数本质上还是函数
+                只是 是 一个专门用来创建对象 的函数
+
+                定义构造函数时,不要写 创建对象 也不要写 返回对象
+                也就是 不要写 const obj = {}  也不要写 return obj
+                构造函数,一定不要写 return 会与 new关键词的 return冲突
+
+                将构造函数与 new 关键词 联动使用 new 关键词 会自动的创建一个对象,并且返回这个对象
+                
+                JavaScript语法规定,构造函数的this,指向的是通过这个构造函数出,创建的对象的名称
+                如果创建时,对象叫obj1,此时this,指向的就是obj1这个对象
+                下一次,创建的对象叫 ojbaaa,此时this,指向的就是objaaa这个对象
+
+                为了区别 普通函数 和 构造函数 
+                JavaScript语法规范规定,构造函数,使用 大驼峰命名法
+                                      普通函数,使用 小驼峰命名法
+        */
+
+        // 定义构造函数
+
+        function CreateObj(start , end){
+            // 不要创建对象
+            this.start = start;
+            this.end = end;
+            this.fun = function(){
+                let res = 0;
+                for (let i = this.start; i <= this.end; i++) {
+                    res += i;
+                }
+                return res;
+            }
+            // 不要返回对象
+            // new 关键词 都会给你干了
+        } 
+
+
+        // 使用构造函数
+        // 必须要与 new 关键词 联动
+
+        const obj = new createObj( 1, 100 );
+
+        console.log(obj);
+
+        /*
+            总结:
+                1, 构造函数,本质,就是个函数
+                2, 构造函数本身不要写 return
+                3, 构造函数 必须和 new 关键词一起使用
+                4, 构造函数中的 this 指向 创建的 对象
+                5, 通过构造函数创建的对象 本质上还是一个对象
+                   称为 实例化对象
+                   实例化对象,本质上,就是一个对象,只是由 构造函数创建的  
+        
+        
+        */
+
+
+
+    </script>
+</body>
+</html>

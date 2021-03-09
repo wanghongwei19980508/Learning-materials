@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 400px;
+            height: 100px;
+            background: pink;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <button name="block">出现</button>
+    <button name="none">消失</button>
+
+    <div></div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            在执行 jQuery动画时 如果点击过快 上一个动画还没有结束,就执行了下一个动画
+            不会造成程序执行的混乱,不会疯
+            会将没有执行的动画效果,保存,一次逐一的执行之后的所有的动画
+
+            动画终止:
+                在执行当前动画之前,终止之前的动画效果
+                    $().finish()   当前动画立即终止,从上一个动画结束的位置,开始执行下一个动画 
+                    $().stop()     当前动画立即终止,从上一个动画,执行的当前位置,开始执行下一个动画
+        
+        */
+
+
+
+        $('[name="block"]').click(() => {
+            // 执行 出现效果 如果让一个消失没有执行完, finish() 会从,消失运动的最终状态,也就是宽度0
+            // 开始执行 出现效果的动画
+            $('div').finish().animate({ width: 400 }, 2000, 'linear', () => console.log('出现动画结束了'));
+        })
+
+        $('[name="none"]').click(() => {
+            // 执行 小时效果 如果让一个出现没有执行完, stop() 会从,出现运动的当前状态,也就是现在有多宽
+            // 开始执行 消失效果的动画
+            $('div').stop().animate({ width: 0 }, 2000, 'linear', () => console.log('消失动画结束了'));
+        })
+    </script>
+</body>
+
+</html>

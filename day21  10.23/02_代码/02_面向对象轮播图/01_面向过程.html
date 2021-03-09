@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul,
+        li,
+        ol {
+            list-style: none;
+        }
+
+        a,
+        a:active,
+        a:hover {
+            text-decoration: none;
+            color: #fff;
+
+        }
+
+        img {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .box {
+            width: 960px;
+            height: 250px;
+            border: 3px solid #000;
+            margin: 40px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .box>ul {
+            width: 960px;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .box>ul::after {
+            display: block;
+            clear: both;
+            content: '';
+        }
+
+        .box>ul>li {
+            width: 960px;
+            height: 250px;
+            float: left;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box>ol {
+            height: 20px;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px 5px;
+        }
+
+        .box>ol>li {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #fff;
+            margin: 10px;
+        }
+
+        .box>ol>li.active {
+            background: red;
+        }
+
+        .box>div {
+            width: 100%;
+            height: 40px;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .box>div>a {
+            display: block;
+            width: 30px;
+            height: 30px;
+            font-size: 25px;
+            background: rgba(0, 0, 0, .5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul></ul>
+        <ol></ol>
+        <div>
+            <a name="l" href="JavaScript:;">&lt;</a>
+            <a name="r" href="JavaScript:;">&gt;</a>
+        </div>
+    </div>
+
+    <script src="./tools.js"></script>
+    <script>
+        // 1, 定义 图片数组 获取标签对象 定义参数变量
+
+        // 图片数组
+        const imgArr = [
+            { path: '1.jpg', width: 1920, height: 500, size: 127 },
+            { path: '2.jpg', width: 1920, height: 500, size: 128 },
+            { path: '3.jpg', width: 1920, height: 500, size: 129 },
+            { path: '4.jpg', width: 1920, height: 500, size: 130 },
+            { path: '5.jpg', width: 1920, height: 500, size: 131 },
+            { path: '6.jpg', width: 1920, height: 500, size: 123 },
+        ];
+
+        // 获取标签对象,定义变量存储参数数据
+
+        // 轮播图div标签对象
+        const oBox = document.querySelector('.box');
+        // 轮播图div中,获取ul
+        const oUl = oBox.querySelector('ul');
+        // 轮播图div中,获取ol
+        const oOl = oBox.querySelector('ol');
+
+        // 获取图片数组长度
+        const imgLength = imgArr.length;
+
+        // 定义变量,存储所有的ol>li,当前没有,写入之后,再赋值
+        let oOlLis = {};
+
+        // 获取每个li的宽度,初始状态没有,写入li之后再获取
+        let liWidth = 0;
+
+        // 定义变量,存储,显示li的索引下标定义的数值,用于定位ul,显示不同的li和图片
+        // 初始值,是第二个li,索引是1
+        let index = 1;
+
+        // 定义变量,存储 定时器
+        let time = 0;
+
+        // 定义变量,存储数据,控制新的move运动函数的执行
+        let bool = true;
+
+        // 调用函数
+
+        // 动态生成li函数
+        setLi(imgArr);
+
+        // 自动轮播函数
+        autoLoop()
+
+        // 鼠标的移入移出
+        mouseInOut()
+
+        // 点击事件
+        setActive()
+
+        // 浏览器隐藏函数
+        hid()
+
+
+
+        // 2, 动态渲染生成 ul>li  ol>li
+        // 参数:图片数组数据
+        function setLi(array) {
+            // 存储 ul>li 字符串的变量
+            let ulLiStr = '';
+            // 存储 ol>li 字符串的变量
+            let olLiStr = '';
+
+            // 循环遍历 数组
+            // v是 数据 对象   k是索引下标
+            array.forEach((v, k) => {
+
+                // 生成,ol>li 标签
+                // 第一个li有 class="active"  每一个li 有 name属性 自定义存储索引下标的属性
+                if (k === 0) {
+                    olLiStr += `<li class="active" name="olli" num="${k}"></li>`;
+                } else {
+                    olLiStr += `<li name="olli" num="${k}"></li>`;
+                }
+
+                // 生成,ul>li 标签
+                // li中有img图片标签,src属性,相对路径是固定,图片名称是,path属性存储的属性值
+                ulLiStr += `<li><img src="./images/${v.path}"></li>`;
+
+                // 循环结束,图片数组中的信息,对应生成了 ul>li  和 ol>li
+            })
+
+            // 将ul>li写入到ul标签中 将ol>li写入到ol标签中 
+            oUl.innerHTML = ulLiStr;
+            oOl.innerHTML = olLiStr;
+
+            // 获取所有的ol中的li
+            oOlLis = oOl.querySelectorAll('li');
+
+            // 克隆,ul中的第一个和最后一个li
+            const cloneFirst = oUl.querySelectorAll('li')[0].cloneNode(true);
+            const cloneLast = oUl.querySelectorAll('li')[imgLength - 1].cloneNode(true);
+
+            // 将克隆的标签,写入ul
+            // 克隆的第一个,写入到ul的最后
+            oUl.appendChild(cloneFirst);
+            // 克隆的最后一个,写入到ul的起始
+            oUl.insertBefore(cloneLast, oUl.querySelectorAll('li')[0]);
+
+            // 重新设定ul的宽度, 每个li的宽度 * ( 图片数组单元个数 + 2 );
+            // 获取li的宽度 --- 实际项目中,最好是 标签的占位 (包含 宽高+padding+border)
+            liWidth = cloneFirst.offsetWidth;
+            // 设定ul宽度,一个li占位 * (原始图片个数+2)
+            oUl.style.width = liWidth * (imgLength + 2) + 'px';
+            // 定义ul,左移一个li宽度
+            oUl.style.left = - index * liWidth + 'px';
+        }
+
+
+        // 3, 自动轮播
+        // 定义一个定时器,调用 move() 运动函数
+        function autoLoop() {
+            time = setInterval(() => {
+                // 先 index++,每次累加,执行显示下一张图片
+                index++;
+
+                // 如果要先改变样式,要在自动轮播中调用设定样式函数
+                setLiStyle();
+
+                // 调用运动函数
+                // 参数1:运动的标签对象,是 ul
+                // 参数2:运动的属性和终点位置的坐标 --- 不是每次移动的距离和方向
+                //                                   负的 index 乘以 li的宽度
+                // 参数3:运动终止时,调用的函数
+                move(oUl, { left: -index * liWidth }, loopEnd);
+            }, 3000);
+        }
+
+
+        // 4, 轮播终止函数
+        // 当轮播图运动停止时,执行的回调函数
+        // (1) 判断 index值  index 是 最后一个li索引,赋值 1 
+        //                   index 是 第一个li索引 , 赋值倒数第二个li索引
+        //                   根据新的index,执行ul的直接定位
+        // (2) 设定 焦点按钮样式
+        //       获取所有的ol>li标签
+        //       循环遍历,给所有的ol>li清除active样式
+        //       判断: 如果当前是 ul>li 的最后一个,给ol>li的第一个添加样式
+        //             如果当前是 ul>li 的第一个,给ol>li的最后一个添加样式
+        //             其他情况,给 ul>li索引 -1 对应的 ol>li 添加样式
+        // 
+        // (3) 给 bool 变量赋值默认值
+
+        function loopEnd() {
+            // 判断index值
+            if (index === imgLength + 1) {
+                index = 1;
+            } else if (index === 0) {
+                index = imgLength;
+            }
+
+            // 根据新的index,执行ul的直接定位
+            oUl.style.left = `-${index * liWidth}px`;
+
+            // 调用设定 焦点按钮样式 函数
+            // setLiStyle();
+
+            // 给变量赋值初始值
+            bool = true;
+        }
+
+        // 焦点按钮,样式函数
+        //       获取所有的ol>li标签
+        //       循环遍历,给所有的ol>li清除active样式
+        //       判断: 如果当前是 ul>li 的最后一个,给ol>li的第一个添加样式
+        //             如果当前是 ul>li 的第一个,给ol>li的最后一个添加样式
+        //             其他情况,给 ul>li索引 -1 对应的 ol>li 添加样式
+
+        function setLiStyle() {
+            // 循环遍历所有的ol>li
+            oOlLis.forEach((v, k) => {               
+                // 先清除所有的li,active样式
+                myRemoveClass(v, 'active');
+            })
+
+            // 给索引对应的li,添加 active
+            if (index === imgLength + 1) {
+                // 当运动到最后一个li时,给第一个ol>li添加样式
+                oOlLis[0].className += ' active';
+            } else if (index === 0) {
+                // 当运动到第一个li时,给最后一个ol>li添加样式
+                oOlLis[imgLength - 1].className += ' active';
+
+            } else {
+                // 不是第一个li,也不是最后一个li,找li索引对应的ol>li
+                oOlLis[index - 1].className += ' active';
+            }
+
+
+        }
+
+
+        // 5, 鼠标移入移出
+        // 鼠标移入,终止定时器,鼠标移出,再次调用自动轮播函数
+        // 最好使用,子级不会触发事件的 enter 和 leave
+
+        function mouseInOut() {
+            // 移入,清除定时器
+            oBox.addEventListener('mouseenter', () => {
+                clearInterval(time);
+            })
+            // 移出,再次启动,自动轮播函数
+            oBox.addEventListener('mouseleave', () => {
+                autoLoop();
+            })
+        }
+
+
+        // 6, 点击事件
+        // 通过事件委托执行
+        // 每一次切换显示内容,都要给,对应的ol>li设定焦点样式
+
+        function setActive() {
+            oBox.addEventListener('click', e => {
+                // 通过触发点击事件的标签的判断,执行不同的程序
+
+                if (e.target.getAttribute('name') === 'l') {
+                    // 防止点击过快
+                    if (!bool) return;
+                    bool = false;
+
+
+                    // 点击的是 左按钮
+                    index--;
+
+                    // 设定ol>li焦点按钮样式
+                    setLiStyle()
+
+                    // 调用move()运动函数,完成ul>li切换
+                    move(oUl, { left: -index * liWidth }, loopEnd)
+
+                } else if (e.target.getAttribute('name') === 'r') {
+                    // 防止点击过快
+                    if (!bool) return;
+                    bool = false;
+
+                    // 点击的是 右按钮
+                    index++;
+
+                    // 设定ol>li焦点按钮样式
+                    setLiStyle()
+
+                    // 调用move()运动函数,完成ul>li切换
+                    move(oUl, { left: -index * liWidth }, loopEnd)
+
+                } else if (e.target.getAttribute('name') === 'olli') {
+                    // 防止点击过快
+                    if (!bool) return;
+                    bool = false;
+
+                    // index赋值,是 点击标签 num 属性值 +1 需要先将属性值转化为数值类型
+                    index = e.target.getAttribute('num') - 0 + 1;
+
+                    // 设定ol>li焦点按钮样式
+                    setLiStyle()
+
+                    // 调用move()运动函数,完成ul>li切换
+                    move(oUl, { left: -index * liWidth }, loopEnd)
+                }
+            })
+        }
+
+
+        // 7, 防止点击过快
+        // 定义变量,存储原始值true
+        // 除了自动轮播之外,所有的点击触发的move()运动函数,在执行之前,都要添加判断,防止点击过快
+        // 如果 变量存储 true   给变量赋值false  执行程序 调用 move()
+        // 如果 变量存储 false  执行return 不再调用 move()
+        // 轮播图运动停止,清除定时器之后, 给变量 赋值 原始值  true
+
+        // 8, 浏览器隐藏
+        // 隐藏:清除定时去
+        // 显示:再次启动调用自动轮播函数
+        // visibilitychange 事件 : 当浏览器显示状态改变时,触发事件
+        // visibilityState 属性值 : hidden 隐藏     visible 显示
+
+
+        function hid() {
+            // 给整个文档添加浏览器显示状态改变,监听事件
+            document.addEventListener('visibilitychange', () => {
+                if (document.visibilityState === 'hidden') {
+                    // 浏览器隐藏,清除定时器
+                    clearInterval(time);
+                } else if (document.visibilityState === 'visible') {
+                    // 再次调用自动轮播函数
+                    autoLoop();
+                }
+            })
+        }
+
+
+    </script>
+</body>
+
+</html>

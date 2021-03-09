@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div</div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            JavaScript获取的标签对象:
+                1, 独立的一个标签对象
+                2, 伪数组 --- 支持forEach()
+                          --- 不支持forEach()
+                JavaScript中,只能对,一个独立的标签对象,进行操作
+                不能对伪数组中,所有的标签对象,一次性的都操作
+                如果要都操作,也必须一个一个循环遍历
+
+            jQuery获取的标签对象
+                一定是一个伪数组
+                jQuery中的隐式迭代,默认会对伪数组中的所有标签对象都进行设定
+
+            问题:
+                使用 jQuery 获取的标签对象,JavaScript语法不能直接操作
+
+            相互转化
+                jQuery语法,获取的标签对象伪数组,如果使用[]语法,通过索引下标,获取到的就是 独立的标签对象
+                就可以使用 JavaScript语法操作
+                $('div')[0].style.color = 'red';
+
+
+                使用 $() 包裹 JavaScript语法获取的独立标签对象
+                就会将 独立的标签对象 转化为一个伪数组
+        
+        */
+
+
+        // 使用JavaScript语法,操作jQuery获取的标签对象
+        // 使用[]语法,通过索引下标,获取独立的标签对象,再使用JavaScript语法操作
+        console.log( $('div') );
+        console.log( $('div')[0] );
+        console.log( document.querySelectorAll('div')[0] );
+
+        $('div')[0].style.color = 'red';
+
+
+        // 使用jQuery语法,操作JavaScript获取的,独立的标签对象
+        const oDiv = document.querySelector('div');
+
+        console.log(oDiv);
+        console.log($(oDiv));
+
+        $(oDiv).css( {color:'blue'} );
+
+    </script>
+</body>
+</html>

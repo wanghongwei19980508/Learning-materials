@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            background: pink;
+            position: fixed;
+            top:100px;
+            left: 0;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <button>点击</button>
+    <div></div>
+
+    <script>
+        /*
+            运动函数:
+                1, 在 页面中,实现运动效果的方法
+                    css3的过渡: 可以实现运动效果,但是当过渡结束时,不好设定,执行的函数程序
+
+                2, 我们自己定义一个函数,让定位不是一次性执行,而是逐步执行
+                    让 100 - 500 定位的改变,不是一次发生测
+                    是 从 100 逐渐累加 只 500
+        
+        */ 
+        const oDiv = document.querySelector('div');
+        const oBtn = document.querySelector('button');
+        // oBtn.addEventListener('click' , ()=>{
+        //     oDiv.style.left = '500px';
+        //     oDiv.style.top = '500px';
+        // })
+
+        // oDiv.addEventListener('transitionend' , ()=>{
+        //     oDiv.style.background = 'blue';
+        //     console.log(111)
+        // })
+
+        // 起始是 0 终点是500
+        let leftStart = 0;
+        let leftEnd = 500;
+        
+        // 点击button按钮,执行运动函数
+        oBtn.addEventListener('click' , ()=>{
+            move(oDiv , 'width');            
+        })
+
+
+
+        // 简单的运动函数:
+        // 参数1 : 要运动的标签对象
+        // 参数2 : 要运动的属性
+        function move(element , type){
+            // 设定定时器,每间隔一段时间,执行一次累加,将新的数据,赋值给div的定位
+            let time = setInterval( ()=>{
+                // 定位的数值,不是直接变成500
+                // 每次改变一个较小的数值,逐渐累加至500
+                leftStart += 10;
+
+                // 将 累加之后的新的数据,作为定位的数值,设定给div
+                element.style[type] = leftStart + 'px'; 
+
+                // 如果到达目标位置,也就是 leftStart 累加至 500 了
+                // 就要清除定时器
+                if(leftStart === 500){
+                    clearInterval(time);
+
+                    // 还可以设定相应的程序
+                    element.style.background = 'blue'; 
+                }
+
+            } , 30 );
+        }
+
+
+        /*
+            总结: 
+            
+            运动函数1
+                1, 解决的问题:
+                    通过 对 属性值 的累加 让瞬间改变的css样式属性,变成了逐步改变,完成样式设定的效果
+                    也就是 瞬间 完成的 样式改变 , 一步一步 像动画效果完成
+
+                    运动执行结束,会触发一个程序,执行响应的操作
+
+                    运动函数有两个参数:
+                        1, 需要执行运动效果的标签对象
+                        1, 需要执行运动效果的css样式
+
+                2, 没有解决的问题
+                    1, 当前的初始值,是固定的零,没有办法改变
+                    2, 当前的终止值,是固定的500,没有办法改变
+        
+        
+        */ 
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background: black;
+            overflow: hidden;
+        }
+        img{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <script src="./jquery.min.js"></script>
+    <script>
+        setInterval(function(){
+            const snow = $('<img src="./snow.jpg">');
+            const width = document.documentElement.clientWidth;
+            const height = document.documentElement.clientHeight;
+            const size = Math.floor(Math.random()*15)+'px';
+            const left = Math.floor(Math.random()*width)+'px';
+            snow.css({'width':size,'height':size,'left':left,'top':0});
+            $('body').append(snow);
+            const time = Math.floor(Math.random()*5000)+3000;
+            snow.animate({'top':(height-parseInt(size))} , time).fadeOut(1000,function(){$(this).remove()})
+        } , 10)
+    </script>
+</body>
+</html>
