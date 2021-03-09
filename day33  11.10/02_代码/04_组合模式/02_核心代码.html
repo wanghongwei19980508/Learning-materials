@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+
+        class A{
+            constructor(){}
+            init(){
+                this.fA1();
+                this.fA2();
+                this.fA3();
+            }
+
+            fA1(){ console.log('A111111') }
+            fA2(){ console.log('A222222') }
+            fA3(){ console.log('A333333') }
+        }
+
+        class B{
+            constructor(){}
+            init(){
+                this.fB1();
+                this.fB2();
+                this.fB3();
+            }
+
+            fB1(){ console.log('B111111') }
+            fB2(){ console.log('B222222') }
+            fB3(){ console.log('B333333') }
+        }
+
+        class C{
+            constructor(){}
+            init(){
+                this.fC1();
+                this.fC2();
+                this.fC3();
+            }
+
+            fC1(){ console.log('C111111') }
+            fC2(){ console.log('C222222') }
+            fC3(){ console.log('C333333') }
+        }
+
+
+        // 普通执行方式
+        // 每次生成一个实例化对象,都调用一次入口函数
+
+        // const objA = new A();
+        // const objB = new B();
+        // const objC = new C();
+
+        // objA.init();
+        // objB.init();
+        // objC.init();
+
+
+        // 组合模式
+
+        // 创建一个构造函数
+
+        class Group{
+            constructor(){
+                // 创建一个空数组,存储添加的实力话对象
+                this.array = [];
+            }
+
+            // 添加方法 向数组中添加实力化对象
+            // 可以使用 合并运算符 将所有的实参,以数组的形式存储在形参中
+            add(...object){
+                object.forEach( v=>{
+                    this.array.push(v);
+                } )
+            }
+
+            // 执行方法 循环遍历数组,调用其中存储的对象中的入口函数
+            extend(){
+                // v 中 存储的就是 添加的 实例化对象
+                this.array.forEach( v => {
+                    // 调用每一个实例化对象中的入口函数
+                    v.init();
+                } )
+            }
+        }
+
+        // 通过 组合模式 构造函数, 创建 一个 实例化对象
+        const group = new Group();
+
+        console.log(group);
+
+        // 创建项目找中的实例化对象
+        const objA = new A();
+        const objB = new B();
+        const objC = new C();
+
+        // 将 创建的 三个实例化对象 添加到 group 的数组中,通过 add方法
+        group.add(objA , objB , objC);
+
+
+        // 通过 group 中的 extend 方法来执行
+        group.extend();
+
+
+
+
+
+
+
+ 
+    </script>
+</body>
+</html>

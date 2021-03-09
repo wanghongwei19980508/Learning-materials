@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            有一个 项目经理 创建了一个主干项目
+
+            有两个程序员 A 和 B
+
+            A修改了其他中一个文件 index.html
+            B也修改了文件 index.html
+
+            如果A 先上传了他的 文件 index.html的历史版本
+
+            此时B 再次上传 同样对于index.html修改的历史版本,就会出问题
+
+            报错信息如下  历史版本冲突的报错信息
+
+            $ git push
+            Logon failed, use ctrl+c to cancel basic credential prompt.
+            To https://github.com/zhangzll-1012/bk-2003-test.git
+            ! [rejected]        master -> master (non-fast-forward)
+            error: failed to push some refs to 'https://github.com/zhangzll-1012/bk-2003-test.git'
+            hint: Updates were rejected because the tip of your current branch is behind
+            hint: its remote counterpart. Integrate the remote changes (e.g.
+            hint: 'git pull ...') before pushing again.
+            hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+
+            解决:
+                先执行 git pull 下载 当前 历史仓库中的 历史版本
+
+                冲突文件中 有 文件内容的选项 
+                    采用当前    采用传入    两个都保留
+
+                选择之后,生产新的历史版本,执行 上传操作就行了
+
+        
+        
+        
+        
+        */
+
+    </script>
+</body>
+</html>

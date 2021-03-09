@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            nodejs:
+                是 JavaScript 程序的 运行环境
+                之前 JavaScript 的运行是 浏览器中的 内核程序 
+                nodejs 是 基于 谷歌的 Chrome V8 引擎 作为 运行环境
+
+                本质上: nodejs 就是一个 脱离浏览器 运行 JavaScript程序的 一个运行环境
+
+            在 nodejs 中 JavaScript 作用
+                在 浏览器中 JavaScript
+                    可以: ECMAScript   DOM    BOM
+                    不能: 不能做 I/O线程操作 
+                            i:  input   o: output
+                            不能做一些输入输出的操作
+                                不能读取本地电脑中的文件
+                                不能写入本地电脑中的文件
+
+                在 nodejs 中
+                    可以: ECMAScript   I/O线程操作
+                    不能: DOM  BOM 
+
+            安装 nodejs
+                官网: https://nodejs.org/en/
+                中文: http://nodejs.cn/
+
+                下载之后,一直下一步安装 nodejs 就可以了
+
+                查看 nodejs 安装成功
+                    node --version
+
+            运行 nodejs 的方式
+                1, cmd 黑窗口
+                    搜索栏 搜索出来的 cmd 
+                    win键 + r 运行的 cmd  是两个 cmd
+                    使用不同的 环境变量
+                        所谓的 环境变量 
+                            cmd中运行命令 应该是在 运行程序对应的文件夹路径下运行命令
+                            例如 mysql -uroot -proot 应该在 mysql>bin文件夹在运行
+                            如果 将 mysql>bin文件夹 设定为 环境变量 命令就可以在任意文件夹下运行
+
+                        目前不需要配置环境变量,phpstudy 和 nodejs 都给我们配置好了
+
+                2, PowerShell
+                    是 window 操作系统 模拟 cmd 做的一个程序
+                    不推荐大家使用 
+                    在一些命令执行上 与 cmd 有细微的差别
+
+                    在任意空白处,按住 shift + 鼠标右键 
+                    鼠标右键菜单中,就有 在此处 打开 PowerShell 窗口
+
+                3, 使用 vscode 终端 编辑
+                    打开终端的方法
+                        查看 > 终端
+                        ctrl + ` 反引号
+
+                    必须确保 终端的运行方式是 cmd
+
+            创建运行 nodejs
+                nodejs 有两种运行方式
+                    1, 在 cmd 命令行 中 输入 
+                        node 回车
+                        出现 欢迎提示信息 可以直接输入 js程序,执行js程序
+
+                        退出  两次  ctrl+c 
+
+                    2, 实际项目中,通过nodejs 运行 外部js文件
+                        (1) 切换路径 为 运行的js文件,所在的文件夹
+                        (2) 运行文件
+                            node 文件名   
+                                 文件名可以没有扩展名,但是最好加上扩展名
+
+        */
+
+    </script>
+</body>
+</html>

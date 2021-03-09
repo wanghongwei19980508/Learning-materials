@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1, 创建一个新的数组,向数值中写入新的数据,只有没有的数据,才写入
+        
+            2, 双重for循环
+                从第一个单元开始,和之后的每一个单元比较,如果相同,就删除之后的单元
+                下一次,就是从第二个单元开始循环,和之后的每一个单元比较
+                为了防止数组坍塌的影响, 循环要 --
+
+            3, 先对数组排序
+                从第一个单元开始,相邻的两个单元,进行比较
+                如果数据相同,就删除后面的单元
+                为了防止数组坍塌的影响, 循环要 --
+
+            4, 利用对象不会存储重复键名的特点
+                对象中,对已经存在的键名进行操作,是修改操作,不会是新增单元操作
+                将数组的数值,作为键名,存储在一个对象中
+                最后再将 对象的键名 存储给数组的数值
+                问题:设定给对象的键名,就会变成字符串类型
+
+            5, 利用set类型的特点,不会存储重复数据
+                将数组结构赋值给set,再将set中的数据,赋值给新数组
+
+
+            最后还有一种字符串,自己研究
+        
+        */
+
+        const arr = [1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5];
+
+        console.log( setArray3(arr) );
+        console.log( setArray4(arr) );
+        console.log( setArray5(arr) );
+
+
+
+
+        // 方法1
+
+        function setArray1(array){
+            const arr = [];
+
+            array.forEach( v=>{
+                if(arr.indexOf(v) === -1){
+                    arr.push(v);
+                }
+            } )
+
+            return arr;
+        }
+
+
+        // 方法2
+        function setArray2(array){
+            for(let i = 0 ; i <= array.length-1-1 ; i++){
+                for( let j = i+1 ; j <= arr.length-1 ; j++ ){
+                    if( array[i] === array[j] ){
+                        array.splice(j,1);
+                        j--;
+                    }
+                }
+            }
+
+            return array;
+        }
+
+
+        // 方法3
+        function setArray3(array){
+            array = array.sort(function(a,b){return a-b});
+            for(let i = 0 ; i <= array.length-1-1 ; i++){
+                if (array[i] === array[i+1]) {
+                    array.splice(i+1 , 1);
+                    i--;
+                }
+            }
+
+            return array;
+        }
+    
+        
+        // 方法4
+        function setArray4(array){
+            const obj = {};
+            const arr = [];
+            array.forEach( (v) => {
+                obj[v] = '随便';
+            } )
+
+            for(let key in obj){
+                arr.push( key );
+            }
+
+            return arr;
+        }
+
+        // 方法5
+        function setArray5(array){
+            // 将原始数组的数据,展开赋值给set类型
+            // 在赋值的过程中,set类型是不会存储重复的数据
+            // 原始数组中,重复的数据,就不会存储在set类型中
+            // const set = new Set([...array]);
+            
+            // // 再将set中的数据,展开,赋值给新的数组
+            // // 这个新数组中,存储的数据,就没有重复数据了
+            // const arr = [...set];
+
+            // console.log(arr);
+
+
+            // 合并之后的代码
+            return [...new Set([...array]) ];
+        }
+    
+    
+    
+    </script>
+</body>
+</html>

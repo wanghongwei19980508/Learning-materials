@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/detail.css">
+</head>
+<body>
+<h1>我是一个商品详情页面</h1>
+
+<div class="container"></div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/tools.js"></script>
+<script src="../js/cookie.js"></script>
+<script>
+  // 1, 获取 url地址栏中的数据对象
+  const urlObj = getUrlVal();
+
+  console.log( urlObj );
+
+  // 2, 根据 goods_id 向数据库做数据查询操作
+  $.ajax({
+    url:'../server/goods_detail.php',
+    data:{ goods_id: urlObj.goods_id },
+    type:'post',
+    dataType:'json',
+    success:res=>{
+      console.log(res);
+      let str = `
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">商品详细信息</h3>
+        </div>
+        <div class="panel-body">
+          <div class="media">
+            <div class="media-left">
+              <a href="#">
+                <img class="media-object" src="${res.goods_small_logo}" alt="...">
+              </a>
+            </div>
+            <div class="media-body">
+              <h4 class="media-heading">${res.goods_name}</h4>
+              <p>
+                <i class="glyphicon glyphicon-yen"></i>
+                <span>${res.goods_price}</span>
+              </p>
+              <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">XL</button>
+                <button type="button" class="btn btn-default">L</button>
+                <button type="button" class="btn btn-default">M</button>
+                <button type="button" class="btn btn-default">S</button>
+                <button type="button" class="btn btn-default">XS</button>
+              </div>
+              <p>
+                <a href="javascript:;" class="btn btn-warning btn-lg" role="button">立即购买</a>
+                <a href="JavaScript:;" name="inCart" class="btn btn-danger btn-lg" role="button">加入购物车</a>
+              </p>
+            </div>
+          </div>
+          <ul class="nav nav-tabs">
+            <li role="presentation" class="active"><a href="#">商品详细信息</a></li>
+            <li role="presentation"><a href="#">商品参数信息</a></li>
+            <li role="presentation"><a href="#">相关商品</a></li>
+          </ul>
+          <div>
+              ${res.goods_introduce}
+          </div>
+        </div>
+      </div>
+      
+      `;
+      // 将 str 写入到 div中
+      $('.container').html(str);
+    
+    }
+  })
+
+  // 3, 给父级添加点击事件,通过事件委托方式,给加入购物车,添加点击事件
+  $('.container').on( 'click' , '[name="inCart"]' , ()=>{
+    // 判断 是否已经 登录
+    // 获取 cookie 对象
+    const cookieObj = myGetCookie();
+
+    if(cookieObj.login === undefined){
+      let bool = window.confirm('您还没有登录,点击确定,跳转登录页面');
+      if(bool){
+        window.location.href = `./login.html?url=${window.location.href}`;
+      }
+    }else{
+      // 已经登录
+    }
+  } )
+
+  /*  
+      js的事件委托
+      const oDiv = document.querySelector('.container');
+      oDiv.addEventListener( 'click' , e=>{
+        if(e.target.getAttribute('name') === 'inCart'){}
+      })  
+  */
+
+
+
+</script>
+
+</body>
+</html>

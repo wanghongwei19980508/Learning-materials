@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            Set数据类型
+                set数据类型,和,mpa数据类型,都是ES6语法,新增的数据类型
+
+                ES6的关键新增内容
+                    1, set,map数据类型
+                    2, let const 关键词声明变量
+                    3, 箭头函数
+                    4, class声明构造函数
+                    5, 解构赋值
+                        let [变量1,变量2...] = [数组]
+                        let {键名1,键名2...} = {对象}
+                    6, ``模板字符串
+                    7, ...合并展开运算符
+
+                set数据类型,是一个类似于数组的数据类型
+                特点是,不会存储重复的数据
+
+                声明1:  使用构造函数声明set类型
+                    const 变量 = new Set()
+
+                声明2:  声明的同时,赋值数据
+                    在()中,定义一个一维数组 数据的单元,就是set类型中存储的数据
+                    const 变量 = new Set([100,200...])
+
+                调用使用:
+                    set类型中的数据,不能通过索引下标等直接调用
+                    方法1: 通过 展开运算符,将 set类型展开,然后通过索引下标来获取
+                        [...set][0]
+                        [...set] 通过 展开运算符,将set类型中的每一个单元,展开,赋值给数组存储
+                        之后在 通过 数组的索引下标,来获取数据
+
+                新增:
+                    set类型.add(数据);
+
+                删除
+                    set类型.delete('删除');
+
+                清除
+                    set类型.clear();
+
+                循环遍历
+                    两个形参,存储的都是数值数据,没有存储索引下标的形参
+                    set类型.forEach( (v,v)=>{} )
+
+                判断
+                    set类型.has(数值)  判断结果是布尔类型
+        */
+
+
+        // 使用构造函数声明
+        const set = new Set([100,200,[1,2,3],{name:'张三',age:18} , ()=>{console.log(123)}]);
+
+        // 调用方法1,通过 ...展开运算符,将set类型展开
+        // console.log( [...set] );
+        // console.log( [...set][0] );
+
+
+        // 新增单元
+        set.add('北京');
+
+        // 删除单元
+        // set.delete(100);
+
+        // 清除
+        // set.clear();
+
+        // 循环遍历
+        // set.forEach( (v,k)=>{
+        //     console.log(v,k);
+        // } )
+
+        // 判断
+        console.log( set.has(100) );
+
+
+        // console.log(set);
+    </script>
+</body>
+</html>

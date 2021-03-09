@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div标签</div>
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            jQuery的多库并存
+                jQuery本质上,是一个JavaScript的方法库/函数库
+                    在 jQuery文件中,封装了很多的JavaScript方法
+                    通过 $ 或者 jQuery 来调用其中存储的方法
+
+            其他函数库,有可能也是用 $ 或者 jQuery 来作为关键词调用其中存储的函数
+            如果 此时继续使用 $ 或者 jQuery 就会造成 调用执行的冲突
+
+            此时就可以设定更换 jQuery 的关键词
+            最终的效果,就是多个 函数库 可以正常的同时使用
+
+            语法1:  
+                $.noConflict()      放弃 $ 关键词 但是保留 jQuery关键词
+
+                $.noConflict(true)  $ 和 jQuery 都被放弃了,都不能使用了
+
+                let 变量 = $.noConflict(true)  设定变量为 jQuery 新的关键词
+
+
+        */
+
+        // 关键词 $ 符号 不能再使用了 jQuery 还能正常使用
+        // $.noConflict();
+
+        // 关键词 $ 和 jQuery都不能使用了
+        // $.noConflict(true);
+
+        // 设定创新的关键词,来调用jQuery
+        let $$ = $.noConflict(true);
+
+        // console.log( $('div') );
+        // console.log( jQuery('div') );
+
+        console.log( $$('div') );
+
+
+    </script>
+</body>
+</html>

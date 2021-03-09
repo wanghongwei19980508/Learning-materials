@@ -1,0 +1,11 @@
+// 属性嵌套
+
+div{
+    margin: 100px{
+        top:10px;
+    };
+
+    border:1px solid red{
+        left: 10px solid black;
+    };
+}

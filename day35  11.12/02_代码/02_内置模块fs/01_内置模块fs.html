@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            内置模块fs
+                作用:读取,写入,外部文件的内容
+
+                使用步骤
+                    1, 需要加载 内置模块 
+                        const fs = require('fs');
+
+                    2, 内置模块 fs 的主要功能
+                        readFile      读取外部文件内容--异步执行--推荐
+                        readFileSync  读取外部文件内容--同步执行
+
+                            语法: fs.readFile(参数1,参数2,参数3){}
+                                参数1: 你要读取的外部文件的路径
+                                参数2: 读取内容,编码格式
+                                    默认的编码格式为 Buffer格式 两位 十六进制数值形式
+                                    应该设定为 utf8 utf-8
+
+                                参数3: 读取内容后,执行的回调函数
+                                    回调函数可以设定两个形参
+                                        第一个形参: nodejs程序,自动存储,报错信息
+                                            如果读取成功,形参1,存储null
+
+                                            读取失败,存储报错信息
+                                            
+                                            报错信息的描述
+                                            [Error: ENOENT: no such file or directory, open 'F:\BK-2003\第8周\day04\02_代码\02_内置模块fs\do1.txt'] 
+                                            {
+                                                errno: -4058,    报错的状态码
+                                                code: 'ENOENT',
+                                                syscall: 'open',
+                                                path: 'F:\\BK-2003\\第8周\\day04\\02_代码\\02_内置模块fs\\do1.txt'    读取外部文件的路径
+                                            }
+
+
+                                        第二个形参: nodejs程序,自动存储,读取内容
+                                            如果读取成功,存储的是外部文件内容
+
+                                            如果读取失败,返回内容为 undefined
+
+
+                        writeFile      向文件写入内容 -- 异步执行      
+                        writeFileSync  向文件写入内容 -- 同步执行
+                            语法:
+                                fs.writeFile( 参数1,参数2,参数3 )
+                                参数1: 要写入的文件的路径
+                                参数2: 你要写的内容
+                                参数3: 写入完成后,执行的回调函数
+
+                                如果有文件,向文件写入内容
+                                如果没有文件,创建文件,也要写入内容
+                                因此,写入操作,一定能成功
+
+                                执行的写入效果,是,全覆盖写入
+                                            
+        
+        */
+    </script>
+</body>
+</html>

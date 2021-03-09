@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            每一个js文件,天生都有一个 属性 module 存储相关的信息内容
+
+            Module {
+                id: '.',
+                // 当前文件的路径
+                path: 'F:\\BK-2003\\第8周\\day03\\02_代码\\08_自定义模块',
+                // 导出的内容
+                exports: {},
+                parent: null,
+                // 当前文件的名称
+                filename: 'F:\\BK-2003\\第8周\\day03\\02_代码\\08_自定义模块\\a.js',
+                // 是否有导入加载依赖其他文件
+                loaded: false,
+                // 是否有其他文件导入依赖当前文件
+                children: [],
+                paths: [
+                    'F:\\BK-2003\\第8周\\day03\\02_代码\\08_自定义模块\\node_modules',
+                    'F:\\BK-2003\\第8周\\day03\\02_代码\\node_modules',
+                    'F:\\BK-2003\\第8周\\day03\\node_modules',
+                    'F:\\BK-2003\\第8周\\node_modules',
+                    'F:\\BK-2003\\node_modules',
+                    'F:\\node_modules'
+                ]
+            }
+
+            当前模块文件,通过 module.exports = {} 设定导出的内容
+                只有导出的数据,才能被其他文件加载使用
+
+            其他 js文件 通过 require(路径) 来导入加载依赖外部js文件
+                将导入的数据,存储在变量中,数据类型是一个对象 
+
+            必须要注意:
+                其他加载的文件中,如果有输出内容,也会显示在执行结果中
+                但是这个内容是直接输出的,是不能调用使用的
+        
+        */
+    </script>
+</body>
+</html>

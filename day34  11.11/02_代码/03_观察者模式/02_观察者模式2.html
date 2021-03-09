@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+ 
+
+        /*
+
+            on方法
+                向 消息盒子中,添加要执行的程序
+                    1, 执行的程序有 分类 也就是 事件类型
+                    2, 在事件类型,绑定添加 事件处理函数
+                    3, 将来这些 事件处理函数,还需要被删除,必须要添加事件处理函数的名称
+
+                添加的过程步骤
+                    判断 是否有这个类型
+                        如果没有这个类型
+                            创建这个类型,同时,添加事件处理函数
+                            事件处理函数,以数组的形式存储
+                        如果有这个类型
+                            循环遍历,如果没有这个事件处理函数,我们再添加
+
+        */
+
+        class Observer{
+            constructor(){
+                // 消息盒子
+                this.msg = {};
+            }
+
+            // 向消息盒子添加要执行的程序
+            // 参数1,事件类型
+            // 参数2,事件处理函数的函数名称
+            on( type , funName ){ 
+                // 判断是否有这个类型
+                if( this.msg[type] === undefined ){
+                    // 证明没有这个 事件类型 是 第一次添加
+                    // 直接向 消息盒子,添加类型,同时以数组的形式,存储事件处理函数名称
+                    this.msg[type] = [funName];
+                }else{
+                    // 证明有这个 事件类型 不是 第一次添加
+                    // 循环遍历 事件类型 看 事件类型数组中 是否已经有了 事件处理函数名称
+                    // 如果没有,再添加
+                    let bool = true;
+                    // 循环遍历,v就是函数名称
+                    this.msg[type].forEach( v=>{
+                        if(v === funName){
+                            // 存储的函数名称 等于 添加的函数名称
+                            bool = false;
+                        }
+                    } )
+
+                    // 循环结束,如果bool还是true,证明事件类型数组中,没有要添加的函数名称
+                    if(bool){
+                        this.msg[type].push( funName );
+                    } 
+                }
+            }
+
+            // 删除消息盒子中已经添加的方法
+            off(){}
+
+            // 执行消息盒子中已经添加的方法
+            emit(){}
+        }
+
+
+        // 创建观察者模式主体,实例化对象
+        const observer = new Observer();
+
+        // 通过on方法,添加事件类型和事件处理函数名称
+        observer.on( 'qing' , qingYeYe);
+        observer.on( 'qing' , qingNaiNai);
+        observer.on( 'qing' , qingBaBa);
+        observer.on( 'qing' , qingMaMa);
+
+        observer.on( 'moshou' , moshouPhone);
+        observer.on( 'moshou' , moshouHeadset);
+        observer.on( 'moshou' , moshouIpad);
+        observer.on( 'moshou' , moshouPc);
+
+        observer.on( 'jiancha' , jianchaBan);
+        observer.on( 'jiancha' , jianchaJiao);
+        observer.on( 'jiancha' , jianchaXiao);
+        observer.on( 'jiancha' , jianchaJu);
+
+
+
+
+        console.log(observer);
+
+
+
+
+        // 先定义事件处理函数
+
+        // 请 类型 事件处理函数
+        function qingYeYe(){
+            console.log('我是请爷爷程序')
+        }
+        function qingNaiNai(){
+            console.log('我是请奶奶程序')
+        }
+        function qingBaBa(){
+            console.log('我是请爸爸程序')
+        }
+        function qingMaMa(){
+            console.log('我是请妈妈程序')
+        }
+
+
+        // 没收 类型 事件处理函数
+        function moshouPhone(){
+            console.log('我是没收手机程序')
+        }
+        function moshouHeadset(){
+            console.log('我是没收耳机程序')
+        }
+        function moshouIpad(){
+            console.log('我是没收Ipad程序')
+        }
+        function moshouPc(){
+            console.log('我是没收电脑程序')
+        }
+
+
+        // 写检查 类型 事件处理函数
+        function jianchaBan(){
+            console.log('我是交给班主任检查程序')
+        }
+        function jianchaJiao(){
+            console.log('我是交给教导主任检查程序')
+        }
+        function jianchaXiao(){
+            console.log('我是交给校长检查程序')
+        }
+        function jianchaJu(){
+            console.log('我是交给教育局长检查程序')
+        }
+
+
+
+    </script>
+</body>
+</html>

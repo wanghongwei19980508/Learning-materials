@@ -1,0 +1,115 @@
+<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><title>Document</title><link rel=stylesheet href=../bootstrap-3.3.7-dist/css/bootstrap.min.css><link rel=stylesheet href=../css/base.css><link rel=stylesheet href=../css/login.css><style>.inputWidth{width:200px;display:inline-block}.spanspan{color:red;font-size:20px}.cover{width:100%;height:100%;background:rgba(0,0,0,.5)}a:hover{text-decoration:none}.mask{width:100%;height:100%;background:rgba(0,0,0,.5);position:fixed;top:0;left:0;z-index:1000;display:none;justify-content:center;align-items:center}.mask>div{background:#fff;width:500px;height:100px;text-align:center}</style></head><body><div class=jumbotron><h1>欢迎注册 BK_2003 SHOP</h1><div class=login><div class=form-horizontal><div class=form-group><label for=username class="col-sm-2 control-label">用户名</label><div class=col-sm-10><input type=text name=name class="form-control inputWidth" placeholder=用户名> <span class=spanspan name=nameSpan></span></div></div><div class=form-group><label for=password class="col-sm-2 control-label">密码</label><div class=col-sm-10><input type=password name=pwd1 class="form-control inputWidth" placeholder=密码> <span class=spanspan></span></div></div><div class=form-group><label for=password class="col-sm-2 control-label">确认密码</label><div class=col-sm-10><input type=password name=pwd2 class="form-control inputWidth" placeholder=确认密码> <span class=spanspan name=pwd2Span></span></div></div><div class=form-group><label for=password class="col-sm-2 control-label">验证码</label><div class=col-sm-10><input type=text name=vc class="form-control inputWidth" placeholder=验证码> <a id=vc></a> <span class=spanspan name=vcSpan></span></div></div><div class=form-group><div class="col-sm-offset-2 col-sm-10"><button class="btn btn-default">注册</button></div></div></div></div></div><div class=mask><div><p>恭喜您,注册成功,5秒后跳转首页面</p><a href=../index.html>等不了,就点我,去首页面</a></div></div><script src=../js/jquery.min.js></script><script src=../js/tools.js></script><script>// 1,生成验证码
+    // 向 id是vc 的 a标签,写入验证码函数setVc() 执行结果 
+    // 给 a标签,添加点击事件,点击a标签,再次写入验证码
+    $('#vc').html(setVc()).click(() => $('#vc').html(setVc()));
+
+
+    // input,name,失去焦点时,获取name的数据,验证是否有这个用户名
+    $('[name="name"]').change(function () {
+      $.ajax({
+        url: '../server/goods_select.php',
+        data: { userName: $(this).val() },
+        type: 'post',
+        dataType: 'json',
+        success: res => {
+          // console.log(res);
+          if(res.result === 1){
+            $('[name="nameSpan"]').html('<span style="color:blue">您的用户名可用</span>');
+          }else{
+            $('[name="nameSpan"]').html('您的用户名重复');
+          }
+        }
+      })
+    })
+
+
+    // 2,点击 注册 button按钮
+    // 当前是 普通的 div 和 button标签,可以直接给button标签添加点击事件
+    // 如果是 form表单中的 button标签 要给 form表单添加 submit 事件 还要阻止默认事件的执
+    //   获取数据 验证数据 发送请求
+    $('button').click(() => {
+      // 2-1 获取数据
+      // 通过 $().val() 可以获取标签的数据
+
+
+      // 2-2 验证
+      // 可以验证  数据的格式  网上找正则
+      // 就做 最简单的验证  两次密码必须相同  验证码必须相同
+
+      // 两次密码必须相同
+      if ($('[name="pwd1"]').val() !== $('[name="pwd2"]').val()) {
+        // 两次密码不同,增加提示功能,在确认密码后,添加提示内容
+        $('[name="pwd2Span"]').html('确认密码错误,请重新检查');
+
+        // 执行return,终止后面程序的执行
+        return;
+      } else {
+        $('[name="pwd2Span"]').html('');
+      }
+
+
+      // 验证码必须相同
+      // 如果不需要区分大小写,要 统一大小写内容
+
+
+      if ($('[name="vc"]').val().toLowerCase() !== $('#vc').text().toLowerCase()) {
+        // 输入的验证码 和 span标签中的验证码如果不同
+        $('[name="vcSpan"]').html('验证码错误,请重新检查');
+
+        // 执行return,终止后面程序的执行
+        return;
+      } else {
+        $('[name="vcSpan"]').html('');
+      }
+
+
+
+
+      // 发送请求
+      // 1, url 是 server文件夹中的goods_res.php文件
+      // 2, 传参方式和携带参数
+      /*
+        $userName = $_POST['userName'];
+        $userPwd = $_POST['userPwd'];
+        请求方式 是 post 传参的键名 userName  userPwd
+      */
+
+      // 3, 发送请求
+
+      $.ajax({
+        url: '../server/goods_res.php',
+        data: { userName: $('[name="name"]').val(), userPwd: $('[name="pwd1"]').val() },
+        type: 'post',
+        dataType: 'json',
+        success: res => {
+          // console.log(res);
+          // 返回的结果 , 是一个对象 msg中存储结果信息 result 是 0 失败  1 成功
+          if (res.result === 1) {
+            // 如果注册成功, 让 mask 遮盖层显示
+            $('.mask').css({ display: 'flex' });
+
+            // 定义变量,倒计时5秒
+            let time = 5;
+
+            // 定时器,每间隔一秒执行一次
+            setInterval(() => {
+              // 数值 -1 倒计时效果
+              time--;
+
+              // 给 p标签中的内容,秒数修改为 time变量中的数值
+              $('.mask div p').html(`恭喜您,注册成功,${time}秒后跳转首页面`);
+
+              // 当time是0,也就是倒计时为 0 秒时 
+              if (time === 0) {
+                // 执行跳转页面功能
+                window.location.href = '../index.html';
+              }
+            }, 1000)
+
+
+          } else {
+            window.alert('注册失败,用户名重复');
+          }
+        }
+      })
+    })</script></body></html>

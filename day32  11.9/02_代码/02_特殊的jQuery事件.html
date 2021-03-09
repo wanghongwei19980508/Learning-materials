@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div
+        <h1>我是h1标签</h1>
+    </div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            jQuery的事件:
+                1, 可以直接绑定的事件
+                    jQuery支持的事件类型 click  mousmove ....
+
+                2, 通过on语法绑定
+                    $().on('事件类型' , '事件委托对象' , {参数} , 事件处理函数)
+
+                3, 阻止:
+                    阻止默认事件
+                    阻止冒泡事件/阻止事件的传播
+                    阻止一切
+
+                4, 特殊的 jQuery 事件
+
+                    绑定的事件类型和事件处理函数,只会执行一次
+                        $().one(事件类型,事件处理函数)
+
+                    事件的发布 --- 绑定的,同一个事件类型的事件,都会默认先执行一次
+                        $().trigger(事件类型);
+
+                    事件的删除 
+                        原生JavaScript中,绑定事件可以使用 
+                            标签.on类型 = 匿名函数function(){}
+                            标签.on类型 = 函数名称
+
+                            标签.addEventListener( 事件类型 , 匿名函数function(){} )
+                            标签.addEventListener( 事件类型 , 函数名称 )
+
+                        可以使用 标签.removeEventListener( 事件类型 , 函数名称 )
+                            删除绑定的事件,但是只能函数绑定的是 函数名称的
+
+                        当前是 jQuery 的 事件删除
+                            语法1: $().off()            
+                                没有参数,删除所有绑定的所有事件类型的所有事件处理函数
+
+                            语法2: $().off('事件类型')   
+                                删除指定类型的所有事件处理函数
+                                其他类型的事件处理函数会保留
+
+                            语法3: $().off('事件类型' , 函数名称)   
+                                删除指定类型的,指定事件处理函数
+                                必须绑定的是函数名称
+
+                    hover事件
+                        $().hover(事件处理函数1 , 事件处理函数2)
+                            参数是两个事件处理函数
+                                事件处理函数1 : 鼠标移入触发的事件
+                                事件处理函数2 : 鼠标移出触发的事件
+
+                            本质是 enter 和 leave 事件子级不会触发
+
+
+
+
+        */    
+
+        // 正常绑定事件   
+        $('div').on('click' , ()=>{
+            console.log('我是绑定给div的正常事件1');
+        })  
+
+        $('div').on('click' , ()=>{
+            console.log('我是绑定给div的正常事件2');
+        })  
+
+        $('div').on('click' , fun1);  
+
+
+
+        function fun1(){
+            console.log('我是绑定函数名称的')
+        }
+
+        // $('div').on('mousemove' , ()=>{
+        //     console.log('我是绑定给div的正常事件3');
+        // })  
+
+
+
+        // 只会触发执行一次的函数
+        // $('div').one('click' , ()=>{
+        //     console.log('我是绑定给div的事件,我只会执行一次');
+        // })
+
+        // 事件的发布
+        // $('div').trigger('click');
+
+        // 事件的删除
+
+        // 删除所有一切类型的一切事件处理函数
+        // $('div').off();
+
+        // 只删除click类型的所有事件处理函数
+        // $('div').off('click');
+
+        // 删除具体事件类型的具体一个事件处理函数
+        // 必须绑定的是 函数名称
+        // 如果非要删除绑定的匿名函数,只能先删除所有的,再一个一个的绑定回来,不绑定删除的事件处理函数
+        // $('div').off('click' , fun1);
+
+
+        // hover事件
+        $('div').hover( ()=>console.log('移入') , ()=>console.log('移出') );
+    </script>
+</body>
+</html>

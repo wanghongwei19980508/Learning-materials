@@ -1,0 +1,26 @@
+// 结构嵌套
+
+div{
+    width: 100px;
+    height: 100px;
+
+    >span{
+        color: red;
+    }
+
+    p{
+        color: blue;
+    }
+
+    +h1{
+        background: pink;
+    }
+
+    ~a{
+        color: skyblue;
+    }
+
+    &:hover{
+        background: red;
+    }
+}

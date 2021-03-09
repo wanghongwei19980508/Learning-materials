@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div标签
+        <p>我是p标签</p>
+        <span>我是span标签</span>
+    </div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            1, 创建节点 --- 创建的都是标签节点
+                const 变量 = $('<标签 属性属性值...>内容</标签>')
+
+            2, 写入节点
+
+                父级标签中,添加子级标签
+                    父级结束位置,新增节点
+                        $(父级标签).append(子级标签)
+                        $(子级标签).appendTo( 父级标签 )
+
+                    父级起始位置,新增节点
+                        $(父级标签).prepend(子级标签)
+                        $(子级标签).prependTo(父级标签)
+
+                添加同级兄弟标签
+                    已有元素,之后新增节点
+                        $(已有标签).after(写入标签)
+                        $(写入标签).insertAfter(已有标签)
+
+                    已有元素,之前新增节点
+                        $(已有标签).before(写入标签)
+                        $(写入标签).insertBefore(已有标签)
+
+
+            3, 删除节点
+                删除标签的内容,标签本身,标签的属性等,都还存在
+                    $().empty()
+
+                删除整个标签
+                    $().remove()
+
+            4, 克隆标签
+                语法1: 只克隆标签的内容,不克隆绑定的事件
+                    const 变量 = $().clone()
+
+                语法2: 克隆标签本身和标签的内容,以及标签本身和子级标签,所有绑定的事件
+                    const 变量 = $().clone(true)
+
+                语法3: 克隆标签本身和标签的内容,只克隆当前标签绑定事件,不会克隆子级标签绑定事件
+                    const 变量 = $().clone(true , false)
+
+        */
+
+        $('div').click(()=>{
+            console.log('我是div标签的事件');
+        })
+
+        $('p').click(e=>{
+            e.stopPropagation();
+            console.log('我是p标签的事件');
+        })
+
+        $('span').click(e=>{
+            e.stopPropagation();
+            console.log('我是span标签的事件');
+        })
+
+
+        // 1,创建标签节点
+        // 创建节点的同时,可以设定标签的内容,属性等等
+        // const oDiv = $('<h1 id="div1" class="div2" name="div3">我是h1标签</h1>');
+
+
+        // 2,写入标签节点
+        
+        // 父级中写入子级标签
+
+        // 父级之后写入 
+        // $('div').append(oDiv);
+        // 父级之后写入
+        // $(oDiv).appendTo($('div'));
+
+        // 父级之前写入
+        // $('div').prepend(oDiv);
+        // 父级之前写入
+        // $(oDiv).prependTo('div');
+
+
+        // 同级标签写入
+
+        // 在已有标签后写入新标签
+        // $('div').after(oDiv);
+        // 在已有标签后写入新标签
+        // $(oDiv).insertAfter('div');
+
+        // 在已有标签前写入新标签
+        // $('div').before(oDiv);
+        // 在已有标签后写入新标签
+        // $(oDiv).insertBefore('div');
+
+        // 删除标签的内容
+        // $(oDiv).empty()
+
+        // 删除整个标签
+        // $(oDiv).remove();
+
+
+        // 克隆标签
+
+        // 1, 只克隆标签的属性和内容,不克隆事件
+        // const oD1 = $('div').clone();
+        // 克隆标签写入
+        // $('div').after(oD1);
+
+
+        // 2, 克隆标签本身和标签的内容,以及标签本身和子级标签,所有绑定的事件
+        // const oD1 = $('div').clone(true);
+        // 克隆标签写入
+        // $('div').after(oD1);
+
+        // 3, 克隆标签本身和标签的内容,只克隆当前标签绑定事件,不会克隆子级标签绑定事件
+        // const oD1 = $('div').clone(true,false);
+        // 克隆标签写入
+        // $('div').after(oD1);
+
+
+        // 4, 如果只需要克隆子级标签的事件,不克隆父级标签的事件
+        // 4-1,克隆标签和标签内容,不克隆标签事件
+        // 4-2,删除标签中,已有的标签
+        // 4-3,可以子级标签,同时克隆事件,然后写入没有事件的父级标签中
+
+        const oD2 = $('div').clone();
+        oD2.find('p').remove().end().find('span').remove().end().append($('div>p').clone(true)).append( $('div>span').clone(true) )                   
+
+        $('div').after(oD2);
+
+    </script>
+</body>
+</html>

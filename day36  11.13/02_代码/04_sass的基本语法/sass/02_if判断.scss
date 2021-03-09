@@ -1,0 +1,39 @@
+// if判断
+// 关键词 if else 前必须有 @符号
+// 判断条件,没有()
+
+$int:4;
+
+
+// if判断
+div{
+    @if $int == 1 {
+        color:red;
+    }
+}
+
+
+// if...else
+p{
+    @if $int == 1 {
+        color:red;
+    }@else{
+        color: blue;
+    } 
+}
+
+
+// if..else if...else
+h1{
+    @if $int == 1 {
+        color:red;
+    }@else if $int == 2 {
+        color: blue;
+    }@else if $int == 3 {
+        color: pink;
+    }@else if $int == 4 {
+        color: yellow;
+    }@else{
+        color: green;
+    } 
+}

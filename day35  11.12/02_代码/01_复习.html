@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            观察者模式
+                主体状态发生改变,通知相关的个体,也更新数据
+                需要框架中的双向数据绑定配合执行
+
+                创建一个实例化对象
+                有一个属性,是 消息盒子
+                有一个on方法,向 消息盒子添加要执行的事件类型和事件处理函数
+                有一个off方法,向 消息盒子 删除 添加的 事件处理函数
+                有一个emit方法,向 消息盒子 执行 添加的 事件处理函数
+                有一个clear方法,清空 消息盒子 中添加的 所有事件类型和事件处理函数
+
+
+                class Observer {
+                    constructor() {
+                        this.msg = {};
+
+                    }
+
+                    on(type, funName) {
+                        if(this.msg[type] === undefined){
+                            this.msg[type] = [funName];
+                        }else{
+                            bool = true;
+
+                            this.msg[type].forEach(v=>{
+                                if(v === funName){
+                                    bool = false;
+                                }
+                            })
+
+                            if(bool){
+                                this.msg[type].push(funName);
+                            }
+                        }
+                    }
+
+                    off(type, funName){
+                        if(this.msg[type] !== undefined ){
+                            this.msg[type].forEach( (v,k)=>{
+                                if( v === funName ){
+                                    this.msg[type].splice(k,1);
+                                }
+                            } )
+                        }
+                    }
+                
+                    clear(){
+                        this.msg = {};
+                    }
+
+                    emit(type , ...funName){
+                        if( this.msg[type] !== undefined ){
+                            this.msg[type].forEach( v1=>{
+                                funName.forEach( v2 =>{
+                                    if(v1 === v2){
+                                        v1();
+                                    }
+                                } )
+                            } )
+                        }
+                    }
+                
+                }
+
+
+
+            nodejs
+                
+                1,基本概念
+                    是一个 JavaScript 的运行环境
+                    让 JavaScript 可以脱离 浏览器 在 nodejs 中执行
+                    是 基于 谷歌 Chrome V8 浏览器内核(引擎) 的 运行环境
+
+                    nodejs文件,如果在浏览器中运行,什么结果也没有
+                    很多内容和模块功能,浏览器是没有的
+
+                    nodejs程序,天生就是异步执行
+
+                2,作用
+                    ECMAScript   I/O 线程 ( 本地文件 数据库 后台接口.... )
+
+                3,运行方式
+                    cmd黑窗口
+                    PowerShell
+                    vscode编辑器终端---确保终端是cmd
+
+                4,运行语法:
+                    cmd中输入 node回车 输入 JavaScript代码
+                    cmd中切换路径至 外部js文件所在文件夹 输入 node js文件名称 运行 外部js文件
+
+                5,nodejs的模块化开发
+                    CommonJs 模块化
+                        外部文件中的数据,必须要导出
+                        其他文件通过导入,加载使用导出的数据
+
+                    外部文件导出  module.exports = { } 
+                    其他文件导入  const 变量 = require('外部文件路径')
+
+                
+        
+        
+        */
+
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            gulp的打包,你要是会自己写最好,不会自己写,至少要会用
+
+            会用的方式:
+                1, 创建一个项目文件夹
+                    src  储存原始文件
+                    dist 储存压缩文件
+                         一开始不用创建,打包时,gulp程序会自己创建
+
+                2, 找别人的 package.json  和 gulpfile.js 这两个文件复制过来
+
+                3, 在 cmd 中 切换路径
+                    执行 npm i  /  npm install
+                    自动安装 package.json 中 下载的所有依赖包
+                    
+                4, 直接实行gulp就可以了
+                    前提是 确保 别人 gulpfile.js 文件 中的路径 
+                    和你的文件夹 路径相同
+
+            自己定义一个gulp封装的过程
+                1, 创建文件夹
+
+                2, 初始化文件夹
+                    npm init -y
+
+                3, 下载所有需要的 依赖包
+                    npm i 各种包名
+                        gulp
+                        css需要的2个依赖包
+                        js需要的4个依赖包
+                        html需要的1个依赖包
+                        webserver需要的1个依赖包
+                        sass需要的1个依赖包
+                        dle删除需要的1个依赖包
+
+                4, 创建一个 gulpfile.js 文件,来定义打包规范
+                    (1) 加载所有的依赖包
+                        js需要的4个依赖包,只要加载2个就行
+
+                    (2) 制定打包规范
+                        2-1 css 规范
+                            在 package.json 中 定义配置项
+                        2-2 js 规范
+                            在 babel() 中 定义配置项
+                        2-3 html规范
+                            在 htmlmin() 中 定义配置项
+                        2-4 sass规范
+                            先转css,再执行css规范
+                        2-5 webserver
+                            在 webserver() 中 定义配置项
+                        2-6 del删除规范
+                            在 dle() 中 定义删除的文件夹
+
+                    (3) 定义一个监听规范,时时监听文件,一旦文件内容改变,会自动打包
+
+                    (4) 定义一个默认执行程序
+                        按照顺序执行操作
+                        定义好之后,只要执行 gulp 命令就可以了
+
+
+            补充说明:
+                指的是文件
+                *.css   文件名是任意名称,扩展名是 css 的文件
+                *.*     文件名和扩展名都是任意名称的文件
+
+                指的是所有文件和文件夹
+                **      文件夹中的所有文件夹和所有文件
+
+            实际项目中,打包规范一般都是定义好的
+            你只需要改路径,能使用就行了
+        
+        
+        */
+    </script>
+</body>
+</html>

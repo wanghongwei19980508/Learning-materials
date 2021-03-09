@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            使用 gulp 编译 sass 文件夹 同时 打包压缩
+
+            1, 需要下载依赖包
+               下载两个项目依赖包
+                    npm i node-sass    提供 sass 打包编译执行的node环境
+                    npm i gulp-sass    sass编译打包的规范
+
+            2, 在 gulpfile.js 中 制定 sass 规范
+                (1) , 导入依赖包
+                    只需要导入 gulp-sass 依赖包
+
+                (2) , 制定规范
+                    指定打包压缩文件位置
+                    将sass文件 编译 为 css 文件
+                    执行 css 文件的打包规范
+                    存储在 css 文件夹中
+
+
+            3, 一般我们自己使用文件,要保证,源文件和压缩文件名称相同
+               便于导入加载使用
+
+               一般插件中会添加 min 前缀名称
+
+            4, 制定打包规范的两种语法形式
+                const cssHandler = function(){
+                    return gulp.src(路径).pipe(规范).pipe( gulp.dest(存储压缩文件路径) )
+                }
+        
+                gulp.task( '打包规范名称' , function(){
+                    打包规范的程序
+                    gulp.src(路径).pipe(规范).pipe( gulp.dest(存储压缩文件路径) )
+                } )   
+        
+        */
+
+
+    </script>
+</body>
+</html>

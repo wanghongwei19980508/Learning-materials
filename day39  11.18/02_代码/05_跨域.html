@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" enctype="multipart/form-data"></form>
+    <script>
+        /*
+            发送请求的3种方式
+
+
+                1, 前端基本方式
+                一定会页面跳转
+
+                    form表单   
+                        form标签属性:
+                            action   请求的url地址
+                            method   请求的方式 get/post
+                            enctype  上传文件,编码格式
+                                        默认只能上传 文本格式 -- 字
+                                        multipart/form-data  可以上传所有格式的文件
+                                            以 二进制 数据流/信息流 来发送文件 接收文件,还原为原始数据类型
+                                            传参方式 必须是 post
+                        input select textarea 等标签,必须有name属性       
+
+                    a超链接
+                        以固定的语法格式传参,只能是get方式传参
+                        <a href="url地址?键名=键值&键名=键值..." >内容</a>
+
+
+                2, ajax请求
+
+                不会页面跳转,是局部请求
+                    jQuery封装的ajax请求
+
+                    $.ajax({
+                        url:发送请求地址,
+                        data:{}, 发送请求携带数据
+                        type/method: 请求方式,
+                        dataType: 相应体数据格式 
+                                  默认是 text 可以写 json
+                        success:()=>{} 请求结束,执行的回调函数
+
+                    })
+
+                3, 三阶段还有一个 路由器跳转
+
+        
+            跨域请求:
+                1,请求协议
+                2,请求地址
+                3,请求端口
+                只要有一个不同,就是跨域请求
+            
+                解决跨域请求的方式
+                    1, cors
+                        后端程序,定义文件可以被所有的请求访问
+                        浏览器不会阻止跨域请求
+
+                    2, proxy
+                        服务器代理
+                            需要配置服务器代理设置
+                            发送请求时,服务器会将代理地址,处理为同源请求的模式
+                            浏览器不会阻止跨域请求
+
+                        步骤:
+                            1, 配置 Nginx 配置文件 
+
+                                location /dt {
+                                    proxy_pass https://www.duitang.com/napi/blog/list/by_filter_id/;
+                                }
+
+                                /dt        是 代理 名称
+                                proxy_pass 是 代理 url地址
+
+                                每一个地址,都要有一个独立的代理设置
+
+                            2,发送请求时,不在使用原始地址,使用 /dt
+
+
+
+                        ajax完成代理跨域
+                            $.ajax({
+                                url: '/dt'; 可以在代理名称之后,拼接参数
+                                data:{},
+                                type:'get',
+                                dataType:'json',
+                                success:()=>{},
+                            })
+
+
+                    3, jsonp
+                        利用 scr 和 href 属性 不会被浏览器阻止跨域请求的特点
+                        使用 script标签 src 属性 发送 请求
+                        浏览器不会阻止跨域请求
+
+                            先定义一个函数
+
+                            在 script 标签中 通过src 发送请求
+                                <script src="url地址?键名=函数名称&键名=参数键值&键名=参数键值">script结束标签
+                        
+                        ajax完成jsonp跨域
+                            $.ajax({
+                                url: '请求地址'; 
+                                data:{},
+                                type:'get',  类型必须是get
+                                dataType:'jsonp',
+                                json: 传参函数名称的键名 cb callback
+                                      函数名称 是 jQuery 自己定义的函数名称
+                                success:()=>{},
+                                        就是作为提前定义好的函数程序
+                            })
+
+            总结:
+                1, 跨域
+                    协议 url地址 端口 不同就是跨域请求
+                    跨域请求,浏览器不允许,不能获取相应体数据
+
+                2, 解决
+                    cors  后端的方法我们不管
+
+                    proxy  服务器代理
+                           设定代理配置
+
+                    jsonp  通过script标签,scr属性发送请求
+
+                    jQuery定义的 $.ajax() 封装了程序,可以执行proxy和jsonp
+
+        */
+
+
+    </script>
+</body>
+</html>

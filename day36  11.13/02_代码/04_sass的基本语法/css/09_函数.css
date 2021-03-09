@@ -1,0 +1,17 @@
+div {
+  transition: all 2s;
+}
+
+p {
+  transition: width 10s;
+}
+
+span {
+  transition: all 2s;
+}
+
+span {
+  transition: height 2s;
+}
+
+/*# sourceMappingURL=09_%E5%87%BD%E6%95%B0.css.map */

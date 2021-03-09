@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1, git 分布式项目管理软件
+                管理本地 项目文件的
+
+            2, git 常用命令
+                (1), 先 配置 全局 git 设置
+                    git config --global user.name 名称   配置账号名称
+                    git config --global user.email 邮箱  配置邮箱名称
+                                                         邮箱一定是可以使用的邮箱
+
+                (2), 创建文件夹,使用git来管理这个项目文件夹
+                    2-1 , 文件夹初始化
+                        git init
+                            初始化之后,git会将项目文件夹,虚拟的分成3个区域
+                                工作区  缓存区  历史区
+                            会生成 .git 隐藏 文件 
+                                其中 config 是 配置文件
+
+                    2-2 , 工作区 上传 缓存区
+                        git add 文件名
+                        git add 文件夹名
+                        git add .     
+                        git add --all
+
+                    2-3 , 从缓存区 撤回/回滚 至 工作区
+                        git reset HEAD -- 文件名
+                        git reset HEAD -- 文件夹名
+                        git reset HEAD -- .
+
+                        缓存区文件撤销回滚,只是删除缓存区中存储的内容
+                        不会对工作区中的内容造成影响
+
+                    2-4 , 缓存区文件生成历史区文件
+                        git commit -m 注释内容
+                        
+                        缓存区文件生成历史区文件之后,会自动释放缓存区中的文件内容
+                        如果已经生成历史区文件,内容没有改变,不会再次上传至缓存区,生成新的历史版本
+
+                        生成的历史版本 有 唯一的 id 编号 有 上传人的账号邮箱 上传的时间
+
+                    2-5 , 切换历史版本
+                        git reset --hard 历史版本id
+
+                        切换不同的历史版本,工作区中的文件,会对应显示不同的文件内容
+
+                    2-6 , 查看命令
+                        git status   查看缓存区工作区中的文件
+                        git log      查看历史版本
+
+                    2-7 , 本地历史版本,上传至远程仓库
+                        2-7-1 去 github / gitee 注册账号 生成远程仓库
+
+                        2-7-2 配置 git 配置项 定义 上传远程仓库地址
+                            git remote add origin url
+
+                            定义之后 .git > config 会增加配置项
+                                [remote "origin"]
+                                url = https://github.com/zhangzll-1012/BK-2003-test1.git
+                                etch = +refs/heads/*:refs/remotes/origin/*
+                            如果以后 上传 远程仓库 地址改变 可以直接 修改 配置文件中 url地址
+
+                        2-7-3 首次上传
+                            git push -u origin 当前分支名称,一般是master
+
+                            首次上传,会让你输入 github 账号密码
+
+                        2-7-4 之后再次上传
+                            git push
+
+                        2-7-5 克隆远程仓库内容
+                            git clone url
+
+                        2-7-6 删除远程仓库
+                            点击 > 设定 > 页面最下方 > delete > 输入 账号/库名
+
+                    2-8 git分支
+                        一个项目分为 主干 和 分支
+                        每一个分支 有 主干上的所有内容
+                        每一个分支 独立编辑 分支中的内容 
+                        再整合到 主干上
+
+                        2-8-1 创建分支
+                            本地内容必须要先至少一个历史版本
+                            一般是从 远程仓库 下载 项目经理创建的主干
+
+                            git branch 分支名称 
+
+                            创建了分支,每一个分支也必须有自己的历史版本
+
+                        2-8-2 切换分支
+                            git checkout  分支名称
+
+                        2-8-3 合并分支
+                            git merge 分支名称
+                                只能将其他分支的内容,加载到当前分支上
+
+                                如果分支之间有冲突: 内容 历史版本...
+                                会弹出一个 操作框
+                                    点击 i 可以输入 备注内容,也可以没有备注
+
+                                    :q      直接退出
+                                    :w      保存
+                                    :wq     保存并且退出
+
+                    2-9 上传历史版本冲突
+                        两个人,对同一个版本的相同文件进行修改
+                        A先上传 B再次上传时,就会报错,无法上传
+
+                        B需要先 执行 git pull
+                        设定本地文件冲突内容如何解决之后
+                        生成新的历史版本,再次上传即可
+
+
+        */
+
+    </script>
+</body>
+</html>

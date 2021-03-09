@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./bootstrap-3.3.7/dist/css/bootstrap.min.css">
+    <style>
+        /* 自己添加的css样式,通过class类名 */
+        .mybtn{
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+    <!-- 可以自己添加类名来修改样式 -->
+
+    <!-- 一行内容 -->
+    <div class="row">
+        <button class="btn btn-success col-lg-3 col-md-3 hidden-sm hidden-xs" type="submit">成功</button>
+        <button class="btn btn-info  col-lg-3 col-md-3 col-sm-4 hidden-xs" type="submit">一般</button>
+        <button class="btn btn-warning col-lg-3 col-md-3 col-sm-4 col-xs-6" type="submit">警告</button>
+        <button class="btn btn-danger col-lg-3 col-md-3 col-sm-4 col-xs-6" type="submit">危险</button>        
+    </div>
+
+
+    <div class="bs-example" data-example-id="contextual-table">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Column heading</th>
+              <th>Column heading</th>
+              <th>Column heading</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="active">
+              <th scope="row">1</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr class="success">
+              <th scope="row">3</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr>
+              <th scope="row">4</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr class="info">
+              <th scope="row">5</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr>
+              <th scope="row">6</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr class="warning">
+              <th scope="row">7</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr>
+              <th scope="row">8</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+            <tr class="danger">
+              <th scope="row">9</th>
+              <td>Column content</td>
+              <td>Column content</td>
+              <td>Column content</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
+    <script>
+        /*
+            bootstrap 是 最早的前端 UI框架
+                主要任务就是负责 设定 css样式
+                定义了很多 class 选择器 有各种各样的 样式 我们直接导入就可以使用了
+
+                官网： https://www.bootcss.com/
+
+                下载使用 稳定版本3.3.7 解压缩之后,加载 bootstrap-3.3.7\dist\css\bootstrap.min.css
+
+            bootstrap 优点：
+                1, 移动端优先
+                    提供了很好的移动端兼容
+                
+                2, 栅格系统 和 媒体自查询
+                    会自动执行 媒体查询 获取 终端设备宽度
+                    根据 设定的 栅格系统 实现 响应式布局
+
+                3, 丰富的class样式类
+                    目前市面上很多 模板 都是 使用 bootstrap 做的 css样式
+
+            使用bootstrap基本步骤
+                1, 加载 css文件  bootstrap.min.css
+
+                2, 定义标签,加载 css中 class样式
+
+            相应式布局
+                1, 栅格系统
+                    将 整个页面的 宽度 分成 纵向 12列 --- 也就是 12格
+                    每个标签,不再设定具体的宽度,只设定所占的格子的列数
+
+                    为什么是 12 , 12 是 2,3,4,6 的最小公倍数
+
+                2, 媒体查询和响应式布局
+                    通过栅格系统完成 媒体查询对应的响应式布局
+
+                    宽度1: 页面整体宽度 < 768px
+                           超小屏   一般适配手机宽度
+                           类名     xs
+                        
+                    宽度2: 页面整体宽度 >= 768px
+                           小屏    一般适配平板电脑
+                           类名    sm
+
+                    宽度3: 页面整体宽度 >= 992px
+                           中屏    一般适配显示器
+                           类名    md
+
+                    宽度4: 页面整体宽度 >= 1200px
+                           大屏    一般适配大显示器
+                           类名    lg
+
+                    响应式布局，先定义 row 行 再 在这一行里，定义每个标签的 col 列
+                        给每个标签设定 css样式
+                            col-md-1   col  列
+                                       md   媒体查询宽度范围
+                                       1    在 md 宽度 范围内 占 1列宽度
+                            这个设定只是 md 宽度下的设定 如果是 其他宽度范围 需要再做其他设定
+                            也就是每一个宽度范围，都要设定标签所占列数
+
+                            hidden-md   在md宽度范围内，标签隐藏不显示
+
+            
+                实际项目中，使用 bootstrap 模板，可以直接复制粘贴代码
+                可以自己设定需要的样式，通过class类名
+                设定在不同宽度范围内，标签所占列数，或者隐藏，达到响应式布局的效果
+        */
+
+
+
+
+
+
+    </script>
+</body>
+</html>

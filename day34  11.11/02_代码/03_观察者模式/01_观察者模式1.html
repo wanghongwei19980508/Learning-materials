@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        /*
+            观察者模式需要的基本内容
+                1,实例化对象
+                2,消息盒子
+                3,on方法,添加执行程序
+                4,off方法,删除执行程序
+                5,emit方法,发布执行程序
+        
+        */
+
+        class Observer{
+            constructor(){
+                // 消息盒子
+                this.msg = {};
+            }
+
+            // 向消息盒子添加要执行的程序
+            on(){ }
+
+            // 删除消息盒子中已经添加的方法
+            off(){}
+
+            // 执行消息盒子中已经添加的方法
+            emit(){}
+        }
+
+    </script>
+</body>
+</html>

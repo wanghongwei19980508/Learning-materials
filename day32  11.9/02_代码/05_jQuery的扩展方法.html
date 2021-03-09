@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>我是div</div>
+
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            jQuery是一个JavaScript的函数方法库
+            如果我们向扩展自己的 jQuery 中的 方法 ,可以向其中添加我们自己定义的函数方法
+
+            $.extend() 是 添加自定义方法的关键词
+                语法1: 直接添加给jQuery的,通过 $.函数名称来调用
+                   $.extend({
+                        自定义函数名称1: ()=>{程序},
+                        自定义函数名称2: ()=>{程序},
+                   }) 
+
+
+
+                语法2: 是 直接添加给标签对象的 , 通过 $.().函数名称 来调用
+                       一般对于标签对象,都要执行链式编程,必须要有 return 和 返回值 
+                       一般返回值,就是你操作的标签对象
+
+                       编辑的对象,和返回值 都是 this 
+                       这个 this 是一个 jQuery标签对象
+
+                   $.fn.extend({
+                       自定义函数名称1: ()=>{ return 返回值 },
+                       自定义函数名称2: ()=>{ return 返回值 },
+                   })
+                
+            总结:
+                    给 jQuery 本身添加 函数方法:
+                        $.extend( { 名称:函数 } )
+                        通过 $.名称() 来调用, 没有 return
+
+                    给 标签对象 添加 函数方法
+                        $.fn.extend( { 名称:函数 } )
+                        通过 $.(标签对象).名称() 来调用
+                        操作,return 的 都是 this---jQuery标签对象
+
+
+
+        
+        */
+                   
+
+
+        // 语法1
+        $.extend({
+            fun1:()=>{console.log(123)}
+        })
+
+        // 调用
+        // $.fun1();
+
+        // 语法2
+        $.fn.extend({
+            f1: function(){
+                // 这里的this,是一个jQuery标签对象
+                console.log( this );
+                this.css({color:'red'});
+
+                return this;
+            }
+        })
+
+        // 调用
+        $('div').f1().click( ()=>{console.log(123)} );
+
+    </script>
+</body>
+</html>

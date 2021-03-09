@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang=en><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=X-UA-Compatible content="ie=edge"><title>Document</title><link rel=stylesheet href=../bootstrap-3.3.7-dist/css/bootstrap.min.css><link rel=stylesheet href=../css/base.css><link rel=stylesheet href=../css/list.css><link rel=stylesheet href=../jquery-pagination/pagination.css><style>.breadcrumb{padding-left:6px;padding-right:6px}.m-style .myPrev{color:#00f;width:150px;text-decoration:none}.m-style .myPrev:hover{color:orange}.m-style .myNext{color:#00f;width:150px;text-decoration:none}.m-style .myNext:hover{color:orange}.m-style .active{background:pink;border:1px solid pink}</style></head><body><h1>我是一个列表页面</h1><div class=pagi></div><div class="M-box1 m-style"></div><div class=container><ul></ul></div><script src=../js/jquery.min.js></script><script src=../jquery-pagination/jquery.pagination.js></script><script src=../js/tools.js></script><script>// 1,使用 tools.js 中的 函数  getUrlVal()来获取 地址栏的中的参数
+    //   获取结果是一个对象
+    const urlObj = getUrlVal();
+
+    // 2,根据数据,向页面发起请求,生成页面内容
+    // 将请求内容封装成一个函数
+
+    // 第一次执行时,应该显示第一页的内容
+    let page = 1;
+    // 设定每页显示的数据数量 -- 根据实际项目而定
+    let line = 8;
+
+    // 第一次执行,获取第一页数据
+    setHtml()
+
+    function setHtml() {
+      $.ajax({
+        url: '../server/goods_list.php',
+        type: 'get',
+        data: { cat_one_id: urlObj.cat_one_id, page: page, line: line },
+        dataType: 'json',
+        success: res => {
+          console.log(res);
+          let str = '';
+          res.forEach((v) => {
+            str += `
+            <li class="list-item">
+              <div class="panel panel-primary">
+                <div class="panel-body">
+                  <ol class="breadcrumb">
+                    <li><a href="#">${v.cat_one_id}</a></li>
+                    <li><a href="#">${v.cat_two_id}</a></li>
+                    <li class="active">${v.cat_three_id}</li>
+                  </ol>
+                </div>
+                <div class="panel-footer">
+                  <div class="row">
+                    <div class="">
+                      <div class="thumbnail">
+                        <img src="${v.goods_big_logo}" alt="...">
+                        <div class="caption">
+                          <h3>${v.goods_name}</h3>
+                          <p>
+                            <i class="glyphicon glyphicon-yen"></i>
+                            <span>${v.goods_price}</span>
+                          </p>
+                          <p>
+                            <a href="javascript:;" class="btn btn-primary" role="button">查找相似商品</a> 
+                            <a href="./detail.html?goods_id=${v.goods_id}" class="btn btn-danger" role="button">查看商品详情</a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            `;
+          })
+
+          // str也就是li,写入到ul中
+          $('.container ul').html(str);
+
+          // 请求回内容之后,执行分页显示
+          $('.M-box1').pagination({
+            mode:'fixed',    // 固定分页显示,按钮数量
+            count:4,         // 除了当前 点击的按钮, 再生成4个 一共是 5个 按钮
+            pageCount: res[0].sumPage,  // 设定总页数  从 所有数据中的第一条获取,每页至少保证有一条数据
+            totalData: res[0].row,      // 数据总数
+            current: res[0].page,       // 当前是第几页
+            showData: line,              // 页面的数据数量
+            prevContent:'上一页',        // 上一页标签内容
+            nextContent:'下一页',        // 下一页标签内容
+            prevCls: 'myPrev',            // 上一页class名称
+            nextCls: 'myNext',            // 下一页class名称
+            activeCls:'active',           // 点中的类名
+            coping : true,                // 开启首页,末页
+            homePage: '首页',             // 首页按钮的内容
+            endPage: '末页',              // 末页按钮的内容
+            callback:(res)=>{             // 回调函数,定义一个形参
+              // 分页显示插件,有回调函数,可以定义一个形参
+              // 形参中,插件会自动定义 方法函数
+              // 其中 res.getCurrent() 会 获取 点击标签,对应的页数数值
+              // 将数值 赋值给 变量 page
+              page = res.getCurrent();
+              // 再次调用函数,生成页面,就是 page 赋值 点击按钮对应的页面 的数据
+              setHtml();
+            },               
+          });
+
+
+
+        }
+      })
+    }</script></body></html>

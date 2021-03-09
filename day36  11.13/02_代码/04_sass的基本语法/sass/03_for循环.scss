@@ -1,0 +1,22 @@
+// for循环语句
+
+//语法1 @for 变量 from 数值1 to 数值2
+//      不包括数值2
+
+@for $i from 1 to 5{
+    div{
+        width: $i*100px;
+        height: $i*100px;
+    }
+}
+
+
+//语法2 @for 变量 from 数值1 through 数值2
+//      包括数值2
+
+@for $i from 1 through 5{
+    p{
+        width: $i*100px;
+        height: $i*100px;
+    }
+}

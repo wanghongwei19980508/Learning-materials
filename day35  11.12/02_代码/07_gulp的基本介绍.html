@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            gulp 是一款,自动化,打包工具依赖包
+            你只要配置好打包规范,运行gulp,会自动的将文件打包压缩
+            并且可以实时监听,只要文件内容发生改变,都会自动打包
+
+            实际项目中,所有的文件,都必须是打包压缩之后的文件形式
+
+            gulp的使用过程:
+                1, 需要安装全局的gulp依赖包
+                    npm i -g gulp
+
+                2, 创建 项目文件夹
+                    src  存储源文件
+                        pages   存储html文件的文件夹
+                        js      存储js文件的文件夹
+                        css     存储css的文件夹
+                        images  存储图片的文件夹
+                        dit     存储js插件的文件夹,也就是别人写好的压缩好的js程序
+
+                    dist 存储压缩文件
+
+                3, 初始化文件夹
+                    npm init -y
+
+                4, 下载依赖包
+                    4-1, 下载一个 项目 gulp 依赖包
+                        npm i gulp
+
+                    4-2, 下载 各种 打包规范 相关的 依赖包
+                        css相关的打包压缩规范
+                            npm i gulp-cssmin        打包压缩css文件的规范
+                            npm i gulp-autoprefixer  自动添加css兼容前缀
+                                需要在 package.json 中 写配置文件
+                                设定 兼容的 浏览器版本信息
+
+                                根据实际需求设定兼容语法的兼容版本
+                                "browserslist":[
+                                    "last 2 version",    所有浏览器都兼容最新的两个版本,其他版本不考虑兼容
+                                    "FireFox > 40",      独立设定某一个浏览器的兼容版本, 火狐浏览器兼容 40 以上版本
+                                    "IOS > 7"            苹果浏览器 兼容 7 以上版本
+                                ]
+                            执行顺序是,先添加前缀,再执行打包压缩
+
+
+                        js相关的打包规范
+                            npm i gulp-babel           将 ES6语法格式 转化为 ES5 语法格式
+                            npm i @babel/preset-env    与 gulp-babel 配合的 依赖包
+                            npm i @babel/core          与 gulp-babel 配合的 依赖包
+
+                            npm i gulp-uglify      将 ES5语法的 js 文件夹压缩
+                            下载时,需要下载这四个依赖包,require 加载时, 只需要加载
+                                gulp-babel 和 gulp-uglify  这两个 依赖包
+                                配合 gulp-babel 的依赖包 gulp-babel 会自动导入
+
+                                执行 babel 规范时 必须要给 babel() 添加参数
+                                参数的形式,是固定的语法格式 {presets:['@babel/env']}
+                                babel( {presets:['@babel/env']} )
+
+                            压缩之后的 js 文件 会默认添加 "use strict"; 执行严格模式
+                            所谓的 严格模式 就是 对 js语法 有一个规范要求
+                            如果不符合js语法规范,打包压缩不能执行
+                            说是严格规范,其实没有那么严格,其中最终要的一条是
+                            声明变量,必须要写 关键词 var let const 
+
+                        
+                        html相关的打包规范
+
+                            npm i gulp-htmlmin
+
+                            在设定打包规范中,要定义很多的配置项
+
+
+                                removeAttributeQuotes:true,          // 删除属性中的双引号
+                                removeComments:true,                 // 删除注释
+                                removeScriptTypeAttributes:true,     // 删除<script>的type="text/javascript"
+                                removeStyleLinkTypeAttributes:true,  //删除<style>和<link>的type="text/css" 
+                                collapseBooleanAttributes:true,      // 布尔属性,只写属性,不写属性值
+                                collapseWhitespace:true,             // 删除标签之间的空格
+                                minifyCSS:true,                      // 压缩内部css样式
+                                minifyJS:true,                       // 压缩内部js代码
+
+                            根据实际项目需求,设定 配置选项
+                            
+                            虽然打包规范中有 压缩 内部css样式 和 压缩内容部 js代码
+                            但是 实际执行过程中 不能很好的打包压缩
+                            实际项目中,css,js代码都要写成外部文件导入模式
+
+                        服务器依赖包
+                            npm i gulp-webserver
+
+                            设定 webserver 依赖包 时 也要设定 相关的配置项
+                                host:'127.0.0.1',           // 服务器地址
+                                port:'8080',                // 端口号
+                                open:'./pages/index.html'   // 默认执行显示的文件
+                                livereload:true,            // 热启动,代码有改变,自动刷新页面
+                            
+                            这个服务器,也是一个简易的服务器,只能响应请求,不能执行PHP等程序
+                            并不能完成一个完整的服务器的功能
+
+                        不需要打包压缩的文件,制定规范,直接存储到对应的文件夹中
+                            例如: 音频,视频,图片,别人压缩好的js程序
+
+
+                    4-?, 下载 del 删除依赖包 删除指定的文件文件夹
+                        npm i del
+
+
+                5, 在专门的js文件中,制定执行 gulp 打包程序
+                    需要在项目文件夹中 创建一个 gulpfile.js 的文件
+                    文件名 是 gulp 规定的 必须叫这个名字
+
+                    5-1, 加载各种依赖包
+
+                
+        
+        
+        */
+    </script>
+</body>
+</html>

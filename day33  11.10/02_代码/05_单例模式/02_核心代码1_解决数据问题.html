@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            之前定义实例化对象,将属性和属性值,直接定义在实例化对象中
+                不同属性和属性值,会生成不同的实例化对象
+
+            将属性和属性值,不再定义在 构造器 中 不会定义在 实例化对象中
+                在调用函数方法时,定义 参数
+        
+        */
+
+
+        // 原始方法
+        class Fun1{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+
+            f1(){
+                console.log( this.name , this.age );
+            }
+        }
+
+        // 不同的属性值,必须要创建不同的实力化对象
+        const obj1 = new Fun1('张三' , 18);
+        const obj2 = new Fun1('李四' , 20);
+        console.log( obj1 , obj2 );
+
+        // 调用方法:
+        obj1.f1();
+        obj2.f1();
+
+
+        // 单例模式
+        // 就创建一个实例化对象,创建时,不定义属性和属性值
+        // 调用函数方法时,再输入实参
+
+        class Fun2{
+            constructor(){}
+
+            f2(name,age){
+                console.log(name,age);
+            }
+        }
+
+        const obj3 = new Fun2();
+
+        console.log(obj3);
+
+        // 调用方法时,出入实参
+        obj3.f2('王五' , 25);
+        obj3.f2('赵六' , 26);
+
+    </script>
+</body>
+</html>

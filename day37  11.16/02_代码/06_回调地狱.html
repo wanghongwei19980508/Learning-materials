@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            回调地狱/嵌套地狱:
+                是 三阶段 必须要面对的问题
+
+            所谓的回调地狱,本质上,就是在一个内容中,再嵌套一个相同的内容
+            一般的回调地狱,指的是异步请求 回调函数中 继续嵌套一个 异步请求
+
+            if(){
+                if(){
+                    if(){
+                        ....
+                    }
+                }
+            }
+
+            for(){
+                for(){
+                    for(){
+                        .....
+                    }
+                }
+            }
+
+            const xhr1 = new XMLHttpRequest();
+            xhr1.open();
+            xhr1.send();
+            xhr1.onload = function(){
+                const xhr2 = new XMLHttpRequest();
+                xhr2.open();
+                xhr2.send();
+                xhr2.onload = function(){
+                    const xhr3 = new XMLHttpRequest();
+                    xhr3.open();
+                    xhr3.send();
+                    xhr3.onload = function(){
+                        const xhr4 = new XMLHttpRequest();
+                        xhr4.open();
+                        xhr4.send();
+                        xhr4.onload = function(){
+                            
+                        }
+                    }
+                }
+            }
+
+            这种嵌套，代码繁琐，嵌套容易混淆，比较容易出现问题
+
+            如果不是嵌套语法，是一个一个的类似于 同步程序执行状态，就便于我们维护更新
+        
+        */
+
+
+    </script>
+</body>
+</html>

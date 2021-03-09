@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            cookie 是 浏览器的一个特别的存储空间
+                本质上是一个 文件 其中存储 数据内容
+            特点:
+                前端程序,后端程序都可以操作 cookie 这个存储文件
+                也就是说,前端,后端,可以通过 cookie 做数据的交互
+
+                等于是一个公共的存储空间,前端,后端都可以操作
+
+            cookie的时效性 --- 保质期
+                cookie 的数据 是 存储 浏览器中的一个文件内,理论上是应该永久存在的
+                但是如果数据 一直存在 容易造成数据泄露,不安全,而且会一直占用存储空间
+                因此,每一个 cookie 数据键值对 都设定了 存储的时间 --- 时效性
+                如果超过了 时效事件 浏览器会自动清除 cookie键值对
+
+                时效性分成两种:
+                    1, 会话时间
+                        页面被打开,cookie就会存在,页面关闭,cookie就会过期,就会被删除
+
+                    2, 指定时间
+                        设定一个 指定的日期时间,超过这个时间,cookie就会过期,就会被浏览器删除
+
+                        设定时间时,不能按照本地的时区计算,需要按照服务器时间---世界标准时间计算
+
+                cookie的同源策略
+                    请求协议,请求url地址,请求端口3项完全一致,才能访问存储的cookie
+                    例如: 在 server文件夹中的 php程序设定的 cookie 
+                          只有在 server文件夹中的 程序文件夹可以访问
+
+                总结:
+                    1, cookie 是 浏览器提供给我们的一个功能
+                    2, cookie 本质上就是一个 外部文件 存储数据信息
+                    3, cookie 这个外部文件,前端,后端程序都可以访问,都可以操作
+                       后端程序写的cookie , 前端程序也可以访问
+                    4, 存储cookie时, 要设定 cookie 的 键名 键值 有效时间 同源路径
+                       键名  键值 有效时间  可以根据实际项目设定
+                       同源路径 一般设定为 / 当前项目中,所有的文件都可以访问
+
+                    5, PHP操纵cookie的方法
+                        设定 
+                            setcookie( '键名' , 键值 , 时效 , 路径 );
+                            时效 time() + 时效的秒数
+                            php会自动将本地时间转化为世界标准时间/服务器时间
+
+                        获取
+                            $_COOKIE 中 以数组的形式,存储所有的 cookie 键值对
+                                $_COOKIE['键名'] 就可以获取对应的键值
+
+                    6, 前端操作cookie的方法
+                        JavaScript中没有设定cookie的操作函数
+                        jQuery中也没有 操作 cookie 的函数
+                        我们要自己封装两个函数,一个是 获取cookie数据,一个是设定cookie数据
+                        
+                        获取:
+                            通过 document.cookie 可以获取到cookie键值对字符串
+                            形式 login=1; name=1; age=1; sex=1
+                            每个键值对,以 分号空格为间隔 需要将 字符串,转化为对象 
+
+                        设定: 
+                            document.cookie = 'login=1';
+                                最基本的设定,设定时效为 session 会话时效
+                                
+                            要设定 cookie 的时效 就要有 一个 时间对象 
+                            时间对象就是 通过 new Date() 创建的对象,就是时间对象
+                            通过设定 时间对象的 时间戳 将时间对象,设定给 cookie键值对
+                            来设定cookie 的时效
+
+                            document.cookie = '键名=键值;expires=时间对象;path=/';
+
+                        删除 
+                            让cookie 时效过期,浏览器就会自动删除 cookie
+                            设定 cookie的时效为 负数或者0就可以,一般习惯写-1
+        */
+
+
+    </script>
+</body>
+</html>

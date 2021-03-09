@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        /*
+            在 ES7 中 为了解决回调地狱,新定义了两个关键词
+                async   await
+            来专门解决 回调 地狱
+
+            async 表示 按照同步程序的效果,一个一个的执行 定义的异步程序
+            await 表示 异步程序按照顺序执行
+
+
+            基本语法:
+                先通过 promise 来定义 一个 异步请求
+
+                const p = new Promise(function( resolved , rejected ){
+                    const xhr = new XMLHttpRequest();
+                    xhr.open();
+                    xhr.send();
+                    xhr.onload = function(){
+                        resolved( res.response )
+                    }
+                })
+
+                p.then( function(data){} );
+
+                现在讲这个promise 程序 定义成一个函数
+
+                function createAjax (type,url){
+                    // 创建了一个 promise 对象 然后定义异步请求
+                    const p = new Promise(function( resolved , rejected ){
+                        const xhr = new XMLHttpRequest();
+                        xhr.open(type,url);
+                        xhr.send();
+                        xhr.onload = function(){
+                            resolved( res.response )
+                        }
+                    })
+                    // 定义请求成功执行的程序
+                    p.then( function(data){} );
+
+                    // 返回值 是 你创建的这个 对象
+                    return p;
+                }
+
+
+                使用 async 和 await 来执行 这个函数
+
+                // 先定义一个新的函数
+                // 这个函数 使用 async 关键词来定义
+                async function myAjax(){
+                    // 在这个函数中调用之前定义的 promise 函数
+                    // 使用 await 关键词来执行
+                    // result1 中 存储的是 createAjax这个函数的执行结果 
+                    // 也就是 定义并且return p 也就是 promise 对象
+                    const result1 = await createAjax();
+                } 
+
+        */
+
+
+
+    </script>
+</body>
+
+</html>

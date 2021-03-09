@@ -1,0 +1,11 @@
+// each 循环
+
+// 定义数组
+$arr:(1 red),(2 blue),(3 pink),(4 yellow),(5 green);
+
+// each 循环
+@each $k , $v in $arr{
+    li:nth-child(#{$k}){
+        color: $v;
+    }
+}

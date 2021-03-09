@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            单例模式的核心
+                解决什么问题
+                    通过构造函数,创建实例化对象
+                    同一个构造函数,创建的实力化对象,都是属性值不同,属性和方法都完全相同
+
+                    等于是 创建了两个对象,但是只是执行时具体的数据不同
+                    属性和函数方法都是完全相同的
+                    实际上是一种冗余代码
+
+
+                怎么解决的
+                    1, 解决属性相同,数值不同的问题
+                       不在 constructor构造器中定义属性和属性值
+                       在 执行 函数方法时,输入参数
+
+                    2, 如果反复调用构造函数,始终只会生成一个实例化对象
+                       不会生成新的实例化对象
+        
+        */
+
+        class Fun1{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+
+            f(){
+                console.log(this.name,this.age);
+            }
+        }
+
+        const obj1 = new Fun1('张三',18);
+        const obj2 = new Fun1('李四',20);
+
+        console.log(obj1);
+        console.log(obj2);
+
+        // 不是在构造器中,定义属性和属性值
+        // 是在函数执行时输入参数
+        class Fun2{
+            constructor(){}
+
+            f(name,age){
+                console.log( name,age );
+            }
+        }
+
+        const obj3 = new Fun2();
+
+        obj3.f('张三',18);
+        obj3.f('李四',20);
+
+    </script>
+</body>
+</html>

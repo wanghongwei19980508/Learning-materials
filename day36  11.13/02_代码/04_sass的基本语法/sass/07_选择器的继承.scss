@@ -1,0 +1,13 @@
+// 选择器的继承
+
+p{
+    width: 100px;
+    height: 100px;
+    background: red;
+}
+
+div{
+    @extend p;
+    color: pink;
+    font-size: 100px;
+}

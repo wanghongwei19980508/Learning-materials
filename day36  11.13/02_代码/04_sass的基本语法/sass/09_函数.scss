@@ -1,0 +1,50 @@
+// 函数/混合器
+
+// 语法1,没有参数
+
+// 定义
+@mixin m1{
+    transition: all 2s;
+}
+
+// 导入使用
+
+div{
+    @include m1;
+}
+
+
+
+// 语法2,有参数
+
+// 定义
+@mixin m2( $type , $time ){
+    transition: $type $time;
+}
+
+// 导入使用
+
+p{
+    @include m2( width  , 10s );
+}
+
+
+
+
+// 语法3,有参数默认值
+
+// 定义
+@mixin m3( $type:all , $time:2s ){
+    transition: $type $time;
+}
+
+// 导入使用
+
+span{
+    @include m3();
+}
+
+span{
+    @include m3(height);
+}
+

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            下载第三方模块/依赖包之前,需要先创建好项目文件夹
+                src : 存储 源文件的文件夹
+                      包括 图片 音频 视频 css js html 等等
+                dist: 存储 压缩后的压缩文件
+
+
+            重要的命令
+                1, npm init -y   自动初始化文件夹
+                    要求当前文件夹必须是英文名称
+
+                    {
+                        "name": "shop",           文件夹的名称,当前也是项目名称
+                        "version": "1.0.0",       当前项目版本
+                        "description": "",
+                        "main": "index.js",
+                        "scripts": {
+                            "test": "echo \"Error: no test specified\" && exit 1"
+                        },
+                        "keywords": [],
+                        "author": "",
+                        "license": "ISC"
+                    }
+
+                    初始化之后,会自动生成一个非常重要的文件, package.json 文件
+                    是一个外部的json文件,存储记录了所有,下载的依赖包的信息
+
+                2, npm install --global 包名        默认是下载最新版本的依赖包
+                   npm install --global 包名@版本号  下载指定版本的依赖包
+                   npm i -g 包名
+                   npm i -g 包名@版本号
+                        安装 全局依赖包
+                             全局依赖包,是整个 nodejs 都可以使用的依赖包
+                             会安装在一个指定的文件夹中
+                             查看
+                                npm ls 包名 --global
+                                    结果是安装路径 和 版本号
+                                包名 --version
+                                    查看版本号
+                                    --version 看执行程序的位置
+                                        如果是项目文件夹,先查项目版本,没有查全局版本
+                                        如果不是项目文件夹,只会查全局版本
+
+
+                    如果选择安装不同版本,之前的版本会被覆盖
+                    始终只会有一个版本存在
+
+                3, npm install 包名  
+                   npm install 包名@版本号  
+                   npm i 包名  
+                   npm i 包名@版本号    
+                        安装项目依赖包包
+                        只能在当期项目文件夹中使用其他位置不能使用
+                        全局依赖包,是整个nodejs都可以使用,任意位置下都可以使用
+                        全局依赖包,有专用的下载位置,存储的文件夹
+                        项目依赖包,会安装在项目中的文件夹中, node-modules 文件夹中
+                        执行 之后 自动生成 package-lock.json 文件 没啥用,但是也别删,放着别动就行了
+                            npm ls 包名 
+                                查看项目依赖包的版本号
+
+                        如果需要同时下载多个依赖包,可以同时下载
+                            npm i 包名1  包名2 包名3...
+
+                        项目下载,会在 package.json 中 记录 下载的所有项目依赖包
+                            "dependencies": {
+                                "bootstrap": "^4.5.3",
+                                "gulp-babel": "^8.0.0",
+                                "gulp-cssmin": "^0.2.0",
+                                "gulp-htmlmin": "^5.0.1",
+                                "gulp-webserver": "^0.9.1"
+                            } 
+
+                4, npm uninstall 包名
+                   npm un 包名
+                        卸载项目依赖包
+
+
+                   npm uninstall --global 包名
+                   npm un -g 包名
+                        卸载全局依赖包
+
+                5, npm install
+                   npm i 
+                        如果创建一个新的项目,需要下载使用之前项目的依赖包
+                        可以将 package.json 文件 复制到新的文件夹中
+                        执行 npm install 或者 npm i
+                        会自动 初始化文件夹 再 自动安装所有记录的 依赖包
+
+                6, npm install -save 包名
+                   npm install -S 包名
+                        原始npm版本的 安装命令
+                        作用效果等于 npm install 包名  / npm i 包名
+                        与 项目安装 是一个效果 
+
+                7, npm install -save-dev 包名
+                   npm install -D 包名
+                        安装 开发依赖包
+                        
+                        开发依赖 和 项目 依赖包 的区别
+                            1, 在 package.json 中存储位置不同
+                            2, 表示的作用意义不同
+                                项目依赖: 开发时和项目上线时,都需要的依赖包
+                                开发依赖: 我们开发项目时,使用的依赖包,项目上线运行之后,就不再需要了
+                                
+                            3, npm install 会自动安装 项目依赖和开发依赖所有依赖包
+                               npm install-production 只会安装开发依赖包
+                        
+                        // 项目依赖包
+                        "dependencies": {   
+                            "bootstrap": "^4.5.3"
+                        },
+
+                        // 开发依赖包
+                        "devDependencies": {
+                            "swiper": "^6.3.5"
+                        }
+        
+                    实际项目中,会规范 依赖包的安装方式 
+                    告诉你,哪个用 npm i 包名  哪个用  npm i -D
+
+                8 npm cache clean --force
+                  npm cache clean -f
+                  npm cache verify
+                    如果下载失败,会生成缓存文件
+                    再次下载会继续之前的缓存文件下载,有可能就会一直失败
+                    需要先 清除 下载缓存,再次安装
+        
+                    
+            一般的套路
+                1,创建文件夹
+                2,初始话 npm init -y
+                3,先安装全局的依赖包 npm i -g 包名
+                4,安装项目依赖包
+                  如果不清楚到底是项目依赖还是开发依赖,安装为 npm i 包名
+                        npm i 包名  
+                        npm i -D 包名
+                5,下载失败,清除缓存
+                    npm cache verify
+                6,新项目,可以复制 package.js 使用 npm i 安装所有依赖包
+                
+                    
+        
+        */
+
+    </script>
+</body>
+</html>

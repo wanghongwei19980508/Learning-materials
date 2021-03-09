@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 通过 promise的方式 完成异步请求
+        // 通过 Promise() 构造函数 创建实例化对象
+        // 参数必须是一个 回调函数
+        // 回调函数定义两个形参,一般第一个叫resolved  第二个叫 rejected
+        // resolved 对应程序执行成功的回调函数
+        // rejected 对应程序执行失败的回调函数
+
+        const p1 = new Promise(function (resolved, rejected) {
+            // 定义异步程序
+            const xhr1 = new XMLHttpRequest();
+            xhr1.open('get', `./demo1.php?a1=100&b1=200`);
+            xhr1.send();
+            xhr1.onload = function () {
+                // 当请求结束,请求成功,执行成功的回调函数
+                resolved(JSON.parse(xhr1.response));
+
+                
+            }
+        })
+
+        // 当前 resolved 和 rejected 还只是形参,没有实际的程序内容
+        // 需要通过 p1.then()  来定义 resolved 执行的程序
+        // 需要通过 p1.catch() 来定义 rejected 执行的程序
+
+        // 通过 then() 来定义 resolved() 的程序内容 
+        // 定义 的 参数 data  实参,就是我们执行 resolved() 时 输入的  JSON.parse( xhr1.response )
+        p1.then(function (data1) {
+            // 开始定义第二次请求
+            const p2 = new Promise(function (resolved, rejected) {
+                // 定义异步程序
+                const xhr2 = new XMLHttpRequest();
+                // 此时,第二次请求的数据,希望是第一次请求结果中,响应的数据内容
+                // 也就是 p1.then( function(data1){} )  中
+                // 形参 data1 中 存储的数据
+                xhr2.open('get', `./demo2.php?a2=${data1.res1}&b2=${data1.res2}`);
+                xhr2.send();
+                xhr2.onload = function () {
+                    // 当请求结束,请求成功,执行成功的回调函数
+                    resolved(JSON.parse(xhr2.response));
+                }
+            })
+
+            p2.then(function (data2) {
+                console.log(data2);
+            })
+        })
+
+        // promise 的本质
+        // 将 异步请求 执行成功 或者 执行失败 时 执行的程序代码
+        // 通过 两个形参  resolved   rejected
+        // 在 异步程序之外 通过 .then()  和  .catch 来 定义
+        // 形式上 是 讲 请求 和 请求成功之后 执行的程序 分开定义
+        // 效果看似是 将 程序 分成了 2个部分
+        // 本质上 对于 异步程序执行 没有改变
+
+        // 对于 promise 我们了解 核心思想就可以了
+        // 先定义一个 实例化对象
+        // Promise() 构造函数 有两个 形参
+        // 第一个对应请求成功执行的函数程序
+        // 第二个对应请求失败执行的函数程序
+
+        // 请求成功使用 promise对象.then()  来定义
+        // 请求鼠标使用 promise对象.catch() 来定义
+
+    </script>
+</body>
+
+</html>

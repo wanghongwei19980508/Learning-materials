@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            本地存储:
+                浏览器给我们提供的存储功能
+                    1, cookie
+                        主要是都是前端操作
+                        是浏览器提供的功能
+                        有2种存储时效: 会话时效   时间时效
+                            一旦超过时效,浏览器会自动删除cookie键值对
+                        根据不同浏览器,存储数据大小受到限制,一般是 4K
+                        自己封装定义函数,来操作cookie
+                        cookie存储的数据,是字符串键值对
+                        cookie的访问必须是同源文件,如果设定path,项目内的所有文件都能访问
+
+
+                    2, localStorage
+                        只能前端操作
+                        是浏览器提供的功能
+                        存储的数据,只要你不主动删除,会一直存在
+                        localStorage,能存储的数据,每个浏览器也不同,一般是 4M
+                        localStorage,有JavaScript准备好的方法来使用
+                        localStorage,存储的数据,数据必须是字符串 或者 json字符串
+                        localStorage,就是项目中的所有文件都能访问
+
+                        设定
+                            window.localStorage.setItem('键名' , 键值);
+                        获取
+                            window.localStorage.getItem('键名');
+                        删除
+                            window.localStorage.removeItem('键名');
+
+
+                        总结:
+                            一般存储都是 json字符串   获取 还要 还原
+
+                            与 cookie 的区别
+                                (1) , cookie前端后端都能操作
+                                      localStorage只能前端操作
+                                (2) , cookie会有效, localStorage永远存在
+
+                                (3) , cookie同源才能访问,localStorage都能访问
+
+                                (4) , cookie字符串键值对,localStorage可以是字符串,可以是json串
+
+                                (5) , cookie存的少,localStorage存的多
+
+                    3, session
+                        主要是后端操作
+                        三阶段讲
+        
+        */
+
+
+        // 设定
+        // window.localStorage.setItem( 'name' , '张三' );
+
+        window.localStorage.setItem( 'msg' , JSON.stringify({name:'张三',age:18,sex:'男'})  );
+
+
+        // 获取
+        // console.log( window.localStorage.getItem( 'name' ) );
+        console.log( JSON.parse( window.localStorage.getItem( 'msg' ) ))
+
+    </script>
+</body>
+</html>

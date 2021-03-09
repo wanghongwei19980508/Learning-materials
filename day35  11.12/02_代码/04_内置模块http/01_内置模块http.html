@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            内置模块http
+                搭建一个简易的服务器
+                可以响应请求内容
+                    你输入一个 网址 我给你一个网页
+                    不能执行php程序,不能操作数据库等
+
+                1,加载http模块
+                    const http = require('http');
+
+                2,通过 使用 createServer 创建一个服务器
+                    const server = http.createServer(回调函数);
+
+                    回调函数的形参
+                        形参1 req
+                            请求内容
+                            其中 req.url 是 请求的 url地址
+
+                        形参2 res
+                            响应内容
+                            res.end(内容) 是设定响应内容,也就是显示页面
+        
+
+
+                3,设定 监听端口
+                    server.listen(端口号)
+                        端口号不能是冲突的端口号
+                        只要是没人用的都能用
+                        端口号范围 : 0 --- 65535  推荐使用 4000以上的
+
+                实际项目中,使用内置http模块的方法不会使用
+                一般是使用 第三方模块 来搭建服务器
+        */
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            全局函数 / 钩子函数
+                与 jQuery中 定的 ajax请求 相互关联
+                在 jQuery中 ajax请求 执行到不同步骤/不同状态时,执行对应的回调函数
+
+                原生的JavaScript,ajax请求,请求状态,从0-4,
+                    0 创建ajax对象
+                    1 定义open
+                    2 定义send,发送请求
+                    3 请求结束,在响应报文中,解析响应体内容
+                    4 正确解析出响应体内容,存储在 ajax对象中
+
+                每个状态,有些是可以控制的,有些是瞬间自动执行完成,不能控制
+                如果在不同状态下,要执行程序,没有办法通过 ajax 来设定
+                jQuery中,提供了,钩子函数,与 ajax 执行绑定
+                ajax执行到不同步骤,不同状态,会有不同的钩子函数,执行设定的对应的程序
+
+            钩子函数内容
+                1, 在所有的 jQuery ajax 请求开始之前执行的 回调函数
+                    $(window).ajaxStart()
+
+                2, 在每一个 jQuery ajax 请求发送之前执行的 回调函数
+                    $(window).ajaxSend()
+
+                3, 在每一个 jQuery ajax 请求成功时执行的 回调函数
+                    $(window).ajaxSuccess()
+
+                4, 在每一个 jQuery ajax 请求失败时执行的 回调函数
+                    $(window).ajaxError()
+
+                5, 在每一个 jQuery ajax 请求结束时执行的 回调函数
+                    $(window).ajaxComplete()
+
+                6, 在所有的 jQuery ajax 请求结束之后执行的 回调函数
+                    $(window).ajaxStop()
+                    
+            总结:
+                执行顺序
+                    ajaxStart() --- ajaxSend() --- ajax请求中定义的success程序 ---- success/error ---- ajaxComplete() ---- ajaxStop()
+
+                我们二阶段,没有实际对于钩子函数的应用
+                    三阶段,复杂项目中,有对钩子函数的应用
+                    但是,语法是,框架中,钩子函数的语法
+
+                为什么要有钩子函数
+                    根本原因,就是 异步执行程序,我们无法控制程序的执行步骤,执行过程,执行时间,我们都无法控制
+                    如果需要在不同的状态下执行不同的程序,
+                    只能 通过 钩子函数 根ajax执行的不同状态 相互关联
+
+                    
+        */
+    </script>
+</body>
+</html>

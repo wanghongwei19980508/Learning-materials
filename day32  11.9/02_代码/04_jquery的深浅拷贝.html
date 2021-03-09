@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./jquery.min.js"></script>
+    <script>
+        /*
+            浅拷贝 / 深拷贝
+                在对引用数据类型来讲,变量中,存储的是 引用数据类型的 内存地址
+                所谓的 浅拷贝 是将 引用数据类型的 内存地址,拷贝,赋值给一个新的变量存储
+                       等于两个变量,存储的是同一个内存地址
+                       效果是,任意一个变量,修改引用数据类型中存储的数据
+                       另一个变量,也会受影响
+                
+                所谓的 深拷贝 是将 引用数据类型的 具体数据,拷贝,赋值给一个新的变量存储
+                      等于两个变量,存储的是不同的内存地址,只是数据相同而已
+                       效果是,任意一个变量,修改引用数据类型中存储的数据
+                       另一个变量,不会受到影响
+
+            总结:
+                浅拷贝 : 复制内存地址,效果,一个改变,另一个也受影响
+                神拷贝 : 复制具体数据,效果,一个改变,另一个不受影响
+
+
+
+            jQuery的深浅拷贝
+                语法1: 浅拷贝 $.extend(变量1 , 变量2 , 变量3.... )  
+                    将 变量2 和 变量3等等 中 存储的数据 都 拷贝 到 变量1中
+
+                语法2: 深拷贝 $.extend(true , 变量1 , 变量2 , 变量3.... )  
+                    将 变量2 和 变量3等等 中 存储的数据 都 拷贝 到 变量1中
+        */
+
+        // obj 中 存储的是 对象 {name:'张三',age:18} 内存地址
+        // const obj1 = {name:'张三',age:18}; 
+
+        // 浅拷贝
+        // 将 obj1 中存储的内存地址,赋值给 obj2 存储
+        // const obj2 = obj1;
+
+        // 深拷贝
+        // 将 obj1 中存储的具体数据,赋值给 obj3 存储
+        // const obj3 = {};
+        // for( let key in obj1 ){
+        //     obj3[key] = obj1[key];
+        // }
+
+
+
+        // 通过 obj1 中 存储的内存地址,操作 引用数据类型中存储的数据
+        // obj1.name = '李四';
+        // obj1.age = 100;
+
+        // console.log(obj2);
+        
+        // console.log(obj3);
+
+
+
+        // jQuery的深浅拷贝
+
+        const obj1 = {name:'张三',age:18,arr1:[1,2,3,4,5]};
+        const obj3 = {sex:'男',addr:'北京', arr2:[6,7,8,9,10]};
+
+        const obj2 = {};
+        
+        // 浅拷贝
+        // $.extend( obj2 , obj1 , obj3 );
+
+        // 深拷贝
+        $.extend(true , obj2 , obj1 , obj3 );
+
+        obj1.arr1[0] = '北京',
+        obj3.arr2[0] = '上海',
+
+        obj1.name = '李四',
+        obj3.sex = '女',
+
+
+        console.log( obj2 );
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="./sea.js"></script>
+    <script src="./c.js"></script>
+    <script>
+        /*
+            CMD 规范
+                需要先加载 sea.js 文件
+
+            解决的问题:
+                1, 前置依赖
+                    按需加载,在需要的时候,才会加载文件执行
+                    同时也留下了 前置依赖的 方法接口
+                    也可以使用前置依赖
+
+            存在的问题
+                1, 即时依赖 / 后置依赖
+                    一开始加载会很快
+                    如果执行时,需要加载会有卡顿
+
+            总结:
+                1, 独立模块
+                    define(function(require,exports,module){
+                        独立模块,没有导入内容
+                        定义好程序之后,一般使用
+                        module.exports = {}  来导出内容
+                    })
+
+                2, 依赖模块
+
+                    define(function(require,exports,module){
+                        先定义自己要执行的程序内容
+                        之前程序的执行,不受导入模块的影响
+
+                        在需要时,通过 变量存储导入内容
+                        const 变量 = require('导入模块路径');
+
+                        定义好程序之后,一般使用
+                        module.exports = {}  来导出内容
+                    })
+
+                3, 整合模块
+                    seajs.use() 来导入加载模块
+
+                    seajs.use(['文件1路径' , '文件2路径'...] , function(形参1,形参2...){})
+                
+        */
+    </script>
+</body>
+</html>

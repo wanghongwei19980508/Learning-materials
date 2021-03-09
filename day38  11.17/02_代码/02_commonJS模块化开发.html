@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+            二阶段的模块化开发,主要是 nodejs 的模块化发开
+
+            前端JavaScript模块化开发,会在3阶段使用 vue 框架完成
+            目前对于 前端 模块化 我们主要理解原理
+
+            nodejs的模块化开发
+                nodejs,所有的程序执行,基本上都是基于模块化
+                nodejs 模块化开发语法 叫 commonJS 模块化
+
+                nodejs为什么必须要有模块化
+                    因为 nodejs 是脱离 html 文件 , 有独立的运行环境来执行 js 外部文件
+                    在一个js文件中,不能直接导入加载另一个js文件,不能使用其中的 变量数据
+                    必须使用 模块化 开发 来 加载使用其他 js 文件
+
+                nodejs 模块化语法
+                    本质上 就是 导出 导入 
+                    每一个 nodejs 文件 天生就有一个 module 属性
+                        module.exports 属性是定义 导入/暴露的数据
+
+                        module.exports = {} 以对象的形式导出暴露数据
+
+                    其他文件 通过 
+                        const 变量 = require('外部文件路径')  导入加载外部文件
+                        就可以使用 外部文件 导出/暴露的数据
+
+                总结: 后端语言的模块化,基本上都是导出 导入的步骤过程
+        */
+    </script>
+</body>
+</html>

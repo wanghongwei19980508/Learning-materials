@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            原型 / 原型对象
+                是 每一个 函数 天生都具有的属性 prototype 
+                是一个 公共的存储空间
+                通过构造函数,生成的实例化对象,都可以访问调用, prototype 中存储的内容
+
+            原型属性
+                每一个 对象 天生都具有的属性 __proto__
+                存储的内存地址 就是 构造函数  prototype 的内存地址
+        
+            原型链:
+                是一个 数据链 的概念
+                通过 __proto__ 将 所有相关的 函数,对象, 串联起来
+                通过 __proto__ 可以访问 公共空间中 存储的数据
+                最终都会执行 顶级对象 Object
+
+                对象 通过 __proto__ 访问 函数的 prototype 
+                函数的 prototype 本质上 也是一个对象 也有  __proto__
+                可以 访问 存储这个函数的 父级对象 
+                父级对象又有 __proto__ 可以 访问 父级对象 生成的函数
+                以此类推 最终 访问到 顶级对象 Object
+
+                只要其中一个环节存储的数据,之后的对象或者函数都可以访问调用
+
+                对象 ---> 函数 ---> 对象 ---> 函数 ---> 对象 ---> 函数 ---> Object对象
+
+            ES5的继承语法
+                (1) 原型继承
+                    借用 父类构造函数生成的 实例化对象 添加给子类构造函数
+                    效果 可以访问调用父类构造函数,公共空间 prototype 中的数据
+
+                    原型继承总结
+                        父类声明实例化对象,直接定义在子类构造函数的 prototype 中
+                        父类实力话对象的属性,并没有直接定义在子类实力话对象中
+                        主要是 通过 父类实例化对象 作为 原型链 的补充部分
+                        链接 父类构造函数  和  子类构造函数
+                        原型继承,主要是通过 __proto__ 让子类构造函数 可以 访问 父类构造函数的 prototype
+
+
+                (2) 借用构造函数继承
+                    为了继承父类的属性和属性值,可以直接定义在子类实例化对象中
+                    只能继承父类的属性,不能访问父类的 prototype 调用父类的方法
+
+                    父类构造函数,this,指向父类实例化对象
+                    在 子类构造函数中 调用 父类构造函数
+                    同时 改变 父类构造函数的this指向
+                    从 指向 父类实例化对象 改变为 指向 子类实例化对象
+
+                    父类.call(this , 参数...)
+                    此处的this是子类构造函数的this,指向的是 子类实例化对象
+
+
+                (3) 组合继承
+                    两种方法一起用,同时继承父类的 属性 直接定义在 子类构造函数中
+                    并且可以访问 父类构造函数 prototype 中的 方法
+
+        */
+
+        // 原型继承
+        // function Father(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // Father.prototype.fun1 = ()=> console.log('我是父类构造函数的程序');
+
+        // // 通过父类构造函数,创建一个 实例化对象
+        // const objFather = new Father('张三',18);
+
+        // // 原型继承语法,将 通过父类构造函数,生成的实力话对象,添加在子类构造函数中
+        // function Son(){}
+        // // 在 prototype 中 直接添加 父类构造函数生成的实力话对象
+        // Son.prototype = objFather;
+
+        // // 通过子类构造函数,生成的实例化对象
+        // const objSon = new Son();
+
+
+        // 简写方式
+        // 原型继承语法,将 通过父类构造函数,生成的实力话对象,添加在子类构造函数中
+        // function Son(){}
+        // Son.prototype = new Father('张三',18);
+
+
+
+        // 借用构造函数继承
+
+        // 父类构造函数 
+        // 父类构造函数中,属性和属性值  this.name = name; this.age = age;
+        // 会直接定义在父类构造函数,生成的实力话对象中
+        // 原因就是因为 构造函数中, this 默认指向的是 构造函数,生成的实力话对象
+        // 子类构造函数,如果需要继承父类构造函数的属性,必须要让父类构造函数,this指向子类实例化对象
+        // function Father(name,age){
+        //     this.name = name;
+        //     this.age = age;
+        // }
+        // Father.prototype.fun1 = ()=> console.log('我是父类构造函数的程序');     
+
+        // const obj1 = new Father('李四' , 100)
+
+        // // 子类的构造函数
+        // function Son(){
+        //     // 调用执行父类构造函数,此时父类构造函数,this,指向父类构造函数,生成的实例化对象
+        //     // 当前的位置是 子类构造函数中 子类构造函数的this,指向子类实例化对象
+        //     // 只要将父类构造函数的this,改变成当前的this,就会执行子类实例化对象
+
+        //     // 父类的this,变成当前的this
+        //     // 也就是父类的this,从指向obj1 变成指向 obj2
+        //     Father.call( this , '王五' , 150 );
+        // }
+
+        // const obj2 = new Son();
+
+
+
+
+        // 组合继承
+
+        // 父类
+        function Father(name,age){
+            this.name = name;
+            this.age = age;
+        }
+        Father.prototype.funFather = ()=> console.log('我是父类构造函数的程序');
+
+
+        // 组合继承
+        function Son(sex){
+            // 继承属性
+            Father.call(this,'张三',18);
+
+            // 定义自己的属性
+            this.sex = sex;
+        }
+        // 继承方法
+        Son.prototype = new Father('李四',20);
+
+        // 定义自己的方法
+        Son.prototype.funSon = ()=> console.log('我是子类构造函数的程序');
+
+        // 创建子类实例化对象,只要输入自己的属性就可以了
+        const objSon = new Son('男');
+
+        console.log(objSon)
+
+    </script>
+</body>
+</html>

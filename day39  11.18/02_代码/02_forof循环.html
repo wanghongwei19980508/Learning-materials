@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            for
+            while
+            for...in
+            forEach
+
+            for...of 基本语法与 for...in类似
+                只是 自定义变量存储的内容不同,
+                for...in 存储的是 索引下标
+                foo...of 存储的是 数据数值
+
+            for...of只能循环遍历 数组,不能循环对对象
+
+            for...of循环数组,只是捎带的副业,主要用于 迭代
+                到了三阶段,要用 for...of 做 迭代 效果
+        
+        */
+
+        const arr = ['北京','上海','广州','重庆','天津'];
+
+        // 自定义变量中,存储的是 数组单元 的索引下标
+        // 第一次循环是 0
+        // 第二次循环是 1
+        // 第三次循环是 2
+        // 第四次循环是 3
+        // 第无次循环是 4
+        for(let key in arr){
+            console.log(key);
+        }
+
+        // 自定义变量中,存储的是 数组单元 的数据数值
+        // 第一次循环是 北京
+        // 第二次循环是 上海
+        // 第三次循环是 广州
+        // 第四次循环是 重庆
+        // 第五次循环是 天津
+        for(let value of arr){
+            console.log(value);
+        }
+
+    </script>
+</body>
+</html>

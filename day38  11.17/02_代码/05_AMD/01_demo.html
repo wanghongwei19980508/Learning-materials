@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 可以写下面,也可以写head中 -->
+    <script src="./require.js"></script>
+    <script src="./c.js"></script>
+    <script>
+        /*
+            AMD 规范
+                必须要 记住 AMD 是 前置依赖
+                必须有一个 require.js 文件
+
+            解决问题:
+                1, 依赖清晰
+                    每一个文件都是通过加载其他模块文件,完成的加载
+                    
+                2, 全局变量污染
+
+            存在问题:
+                1, 前置依赖
+                    收个文件加载速度贼慢,必须要加载完所有的依赖文件
+                    好处是,加载完成之后,程序执行贼快
+
+            语法:
+                1, 独立模块
+                    define(function(){
+                        定义程序
+
+                        return {导出的内容} 
+                    })
+
+                2, 依赖模块
+                    形参会自动存储 导入的模块 return 出来的内容
+                    define(['导入的模块'] , function(形参){
+                        定义程序
+
+                        return {导出的内容} 
+                    })
+        
+                3, 整合模块
+                    require(['导入模块1' , '导入模块2' ...] , function(形参1,形参2...){
+                        定义执行的程序
+                    })
+
+            总结:
+                1, define() 负责定义模块 
+                   require() 负责 整合 执行模块
+
+                2, 实际只需要加载有一个 最终的 require() 文件就可以了
+                   其他的模块,需要哪个,require() 就会加载哪个
+
+                3, 问题:前置加载
+                    c.js文件中,通过require() 加载 了 文件 a.js 和 b.js
+                    如果 a.js 和 b.js 没有执行完,不会执行之后的程序
+                    
+                    加载c.js文件,会很卡,加载结束之后,运行就很流畅
+        */
+
+    </script>
+</body>
+</html>

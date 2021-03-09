@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            组合模式核心内容
+
+                解决什么问题
+                    在实际项目中,我们调用 实例化对象 每一个实力化对象,都会有一个入口函数
+                    如果程序中,实例化对象太多,每次执行都需要调用入口函数
+
+                    需要一个 '遥控器' 可以 一键控制所有的 实例化对象 的入口函数
+
+
+
+                怎么解决的
+                    创建一个构造函数
+
+                    将所有的 实例化对象 添加到 构造函数的属性中
+
+                    调用 这个构造函数的 方法, 循环遍历,执行所有添加的 实例化对象的入口函数
+        
+                本质特点:
+                    将项目中所有的实例化对象,都添加在到一个数组中,统一执行,统一调用
+        */
+    </script>
+</body>
+</html>

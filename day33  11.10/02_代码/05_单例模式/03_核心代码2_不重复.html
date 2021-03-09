@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            如何避免,多次调用构造函数,每次都会生成一个相同的实力化对象
+
+            核心原理:
+                创建一个变量,存储原始值
+                    判断: 如果变量 是 原始值
+                                执行构造函数,将生成的实例化对象,存储在变量中
+                          如果变量 不是 原始值
+                                不再调用构造函数,直接返回 变量
+
+                实际项目中遇到的问题:
+                    res 这个变量,一开始存储原始值,是调用 构造函数 的依据
+                        之后存储,实力化对象,是所有程序中唯一存储实例化对象的变量
+                        因此我们必须保证 res 存储数据的 准确性 
+                        不能被其他程序修改
+                        如果是全局作用域变量,任何一个函数,都可以修改操作,存储的数据不安全
+                        需要将这个 变量 存储在 一个函数中, 变成局部变量,数据才安全
+                        局部作用域变量,函数外部不能访问,可以使用 闭包的方法来解决
+
+        */ 
+
+        // 原始变量
+        let res = '原始值';
+        // 构造函数
+        class Fun{}
+        // 定义一个函数,通过判断来生成实例化对象
+        function createObj(){
+            if( res === '原始值' ){
+                res = new Fun();
+                return res;
+            }else{
+                return res;
+            }
+        }
+
+        // 直接通过 构造函数 生成实力化对象
+        const obj1 = new Fun();
+        const obj2 = new Fun();
+        // 生成了两个完全不同的实例化对象,内存地址完全不相同
+        // 比较结果是 false
+        console.log( obj1 === obj2 );
+
+        // 通过 函数 创建实例化对象
+        const obj3 = createObj();
+        const obj4 = createObj();
+        // 比较判断的结果是 true ,证明 obj3 和 obj4 是相同的内存地址,是同一个对象
+        /*
+            执行过程:
+                第一次 调用 createObj();
+                    res 存储的是 原始值 if判断为 true
+                    调用 构造函数 Fun() 生成 实例化对象 内存地址 存储在 res 中
+                    返回 res 
+                    obj3中 存储的是 实例化对象 的内存地址
+
+                第二次 调用 createObj();
+                    res 存储的是 实例化对象 的内存地址 if判断为 false
+                    直接return res 也就是 返回的是 上一次调用 创建的 实例化对象的内存地址
+                    obj4中 存储的 还是上一次 调用 生成的实例化对象的内存地址
+        
+                本质上: 第一次调用,生成实例化对象,返回i对象的内存地址
+                        之后的每一次调用,不会再生成实例化对象,直接返回之前实例化对象的内存地址
+        */
+
+        console.log( obj3 === obj4 );
+
+
+
+        // 闭包的方式,来保护 res 全局作用域变量
+        // 将所有的程序,定义在一个函数中
+        // return 返回值是 function createObj()
+        // 在 定义函数的同时,我们立即执行这个函数,变量中存储的就是 return 的函数
+        // tools中 存储的 就是 return之后的内容
+        const tools = ( function (){
+            // 定义一个变量
+            let res = '原始值';
+            // 构造函数
+            class Fun{}
+            // 定义一个函数,通过判断来生成实例化对象
+            return function (){
+                if( res === '原始值' ){
+                    res = new Fun();
+                    return res;
+                }else{
+                    return res;
+                }
+            }
+        } )()
+        
+        console.log( tools );
+
+        // 生成实例化对象,就用 tools() 来调用执行返回的函数程序内容
+        const obj5 = tools();
+        const obj6 = tools();
+
+        console.log( obj5 === obj6 );
+
+
+        // 立即执行函数 / 自执行函数
+        // 在封装定义函数的同时,立即执行函数
+        // 语法  (封装的函数)()
+        // 语法  !封装的函数()
+        // 语法  ~封装的函数()
+        // 立即执行函数,只能调用执行一次,不能再次调用执行
+        // 立即执行函数,一般都是匿名函数,没有函数名称
+
+        ~function(){console.log(123)}()
+
+  
+
+
+    </script>
+</body>
+</html>

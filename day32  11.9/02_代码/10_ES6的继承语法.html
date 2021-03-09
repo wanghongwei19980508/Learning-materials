@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            面向对象:
+                三大特点: 封装,继承,多态
+
+                所谓的继承:
+                    一个构造函数,继承另一个构造函数的属性和函数方法,不用自己定义属性和函数方法
+
+                目的: 就是为了优化代码,减少冗余的代码设置
+
+            面向对象的继承语法有很多
+                包括 ES5的继承语法  ES6的继承语法 框架中的继承语法
+                目前二阶段需要掌握的是 ES5 和 ES6的继承语法
+
+            ES6的继承语法
+                关键词:
+                    extends : 表示继承的父类构造函数是谁   
+                    super : 表示继承的属性
+
+            总结:
+                继承的目的: 优化代码,减少冗余程序
+
+                语法形式:
+                    先定义一个父类构造函数
+                    子类构造函数,通过关键词 extends 和 super 来 继承 父类构造函数
+
+                    属性默认会继承父类中的所有的属性,但是可以只给其中个某些属性赋值,其他的属性不赋值
+                    没有赋值的属性,结果就是undefined
+
+                    class 子类 extends 父类{
+                        constructor(形参....){
+                            super(继承的属性)
+
+                            this.子类自己定义的属性 = 形参
+                        }
+
+                        父类的函数方法会自动继承
+                        
+                        子类自己的函数方法(){}
+
+                    }
+        
+        */
+
+        // ES6的继承语法
+
+        class Father{
+            constructor(name,age){
+                this.name = name;
+                this.age = age;
+            }
+
+            fun1(){
+                console.log(this.name,this.age);
+            }
+        }
+
+
+        // 现在有另一个 构造函数 其中 有 Father() 中的属性和方法
+        // 为了防止定义重复的程序,可以从 Father() 中 继承 他的属性和方法
+
+        // 表示 要 继承 Father() 这个 构造函数的属性和方法
+        class Son extends Father {
+            // 在构造其中,定义属性
+            constructor( name,sex ){
+                // supper表示,我们从父类继承了 所有的属性 包括name,age
+                // 继承父类的属性,默认是要继承所有的属性
+                // 但是我们可以只给其中的某些属性来赋值
+                // 给给 name 属性赋值,没有个 age 属性赋值
+                super(name);
+
+                // 子类构造函数,自己定义的属性
+                this.sex = sex;
+            }
+
+            // 方法不写继承语法,可以直接调用使用 父类构造函数 prototype 公共空间中的 函数方法
+
+            // 可以定义 子类构造函数自己的方法,只要函数名称不重复就可以
+            f1(){
+                console.log(this.name,this.sex)
+            }
+        }
+
+        const obj = new Son('李四', '男');
+
+        console.log(obj);
+
+    </script>
+</body>
+</html>

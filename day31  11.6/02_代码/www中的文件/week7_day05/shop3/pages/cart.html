@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/cart.css">
+</head>
+<body>
+  <h1>我是一个购物车页面</h1>
+
+  <div class="container"></div>
+
+  <script src="../js/jquery.min.js"></script>
+  <script>
+
+    // 根据原始购物车内容,生成页面
+    setHtml();
+
+    // 所有数据的处理修改,都不是处理页面的修改
+    // 都是处理数据库的修改
+    // 修改了数据库,根据新的数据,再次渲染页面
+    $('.container').click( e =>{
+      // 点击时,先获取 购物车信息
+      let cartArr = JSON.parse( window.localStorage.getItem('cart') )
+
+      // 点击 全选标签
+      // e.target 是 js对象,要么转化为jQuery对象,要么使用getAttribute()
+      if( $(e.target).attr('name') === 'all' ){
+        // 让全选,checked属性值变成所有input,checked属性值
+        // 本质上,应该是 修改 数组的数据 v.buy 的值 是  全选,checked属性值
+        cartArr.forEach( v=>{
+          v.buy = $(e.target).prop( 'checked' );
+        
+        })
+      }
+
+      // 点击 other,其他小的input,checkbox
+      // 循环遍历 原始数据数组中的每一个数据
+      // 如果遍历的 v.goods_id  和 当前标签的,属性的goods_id 相同
+      // 证明就是我们要修改的数据
+      // 让 循环的数据的 v.buy 等于 当前标签 checked属性的属性值
+
+      if($(e.target).attr('name') === 'other'){
+        cartArr.forEach( v => {
+          // 这里必须用 == 等于判断,因为 获取到的标签的属性,一定是字符串类型的数据
+          // 721 == '721' 这样的一个判断
+          if(v.goods_id == $(e.target).attr('goods_id') ){
+            v.buy = $(e.target).prop('checked');
+          }
+        })
+      }
+
+      // 点击 -
+      // 循环变量 原始数据数组中的每一个的数据
+      // 如果遍历的 v.goods_id  和 当前点击标签的, 属性的 goods_id 相同
+      // 证明 就是我们要修改的数据
+      // 让 循环的数据的 v.num-- 
+      if($(e.target).attr('name') === '-'){
+        cartArr.forEach( v => {
+          if(v.goods_id == $(e.target).attr('goods_id') ){
+            v.num--;
+
+            // v.num不能小于1
+            // 方法1:
+            // 设定极值,如果 v.num < 1 , 就 赋值 1
+            // if(v.num < 1){
+            //   v.num = 1;
+            // } 
+
+            // 方法2:
+            // 当 v.num 为 1 时 禁用 -减号标签
+          }
+        })
+      }
+
+
+      // 点击 +
+      // 循环变量 原始数据数组中的每一个的数据
+      // 如果遍历的 v.goods_id  和 当前点击标签的, 属性的 goods_id 相同
+      // 证明 就是我们要修改的数据
+      // 让 循环的数据的 v.num++ 
+      if($(e.target).attr('name') === '+'){
+        cartArr.forEach( v => {
+          if(v.goods_id == $(e.target).attr('goods_id') ){
+            v.num++;
+
+            // v.num不能大于库存数值
+            // 方法1:
+            // 设定极值,如果 v.num > 库存 , 就 赋值 库存
+            // if(v.num > v.goods_number){
+            //   v.num = v.goods_number;
+            // } 
+
+            // 方法2:
+            // 当 v.num 为 库存 时 禁用 +加号标签
+          }
+        })
+      }
+
+
+      // 点击 我不要了
+      // 循环变量 原始数据数组中的每一个的数据
+      // 如果遍历的 v.goods_id  和 当前点击标签的, 属性的 goods_id 相同
+      // 证明 就是我们要修改的数据
+      // 从 cartArr 数组中,删除这个数据单元
+      if($(e.target).attr('name') === 'del'){
+        cartArr.forEach( (v , k)=> {
+          if(v.goods_id == $(e.target).attr('goods_id') ){
+            // 在 cartArr 数组中 从 当前 索引开始 ,删除1个数据单元
+            cartArr.splice( k , 1 )
+          }
+        })
+      }
+
+
+
+      // 再将新的数据数组,写入到 localStorage 中的 cart 中
+      window.localStorage.setItem( 'cart' , JSON.stringify( cartArr ) );
+
+      // 执行了if之后, 原始购车数据 cartArr 一定会发生变化
+      // 根据新的数组数据,重新渲染生成页面
+      setHtml();
+
+    } )
+
+
+
+    // 生成页面内容
+    function setHtml(){
+      // 获取 localStorage 中的数据
+      if( window.localStorage.getItem('cart') === null ||  JSON.parse( window.localStorage.getItem('cart') ).length === 0 ){
+        // 证明购车不存在 或者 购物车数据数组长度是 0 也就是没有数据
+        // 直接向 div 中 写入 提示购物车是空的,信息,不再执行下面的程序了
+        $('.container').html('<h1>您的购物车已经被爱你的老公清空了,请您再来添加一些内容吧</h1>');
+        // 终止之后的程序执行
+        return;
+      }
+
+      let cartArr = JSON.parse( window.localStorage.getItem('cart') );
+
+      // 定义一个变量,存储true,判断全选效果
+      let bool = true;
+
+      // 定义变量,存储 商品的种类,总个数,总价格
+      let type = 0;     // 商品种类
+      let sumNum = 0;   // 总个数
+      let pay = 0;      // 总价格
+
+
+
+      // li之前的内容,是动态生成的固定的内容
+      let str = `<div class="panel panel-info ">
+        <div class="panel-body bg-info">
+          <div class="checkbox">
+            <label>
+              <input name="all"  type="checkbox" value="">
+              全选
+            </label>
+          </div>
+        </div>
+        <div class="panel-footer">
+          <ul class="cart-list">`;
+          
+      // 循环遍历数组,生成ul中的li内容
+      cartArr.forEach(v=>{
+        // 如果 buy 属性是 false
+        if(v.buy === false){
+          // 给变量赋值false
+          bool = false;
+        }
+
+        // 如果 buy 属性是 true
+        if(v.buy === true){
+          // 商品种类 +1
+          type++;
+          // 总件数 要加上购买个数
+          sumNum += v.num;
+          // 总价格 累加 个数*单价
+          pay += v.num * v.goods_price;
+        }
+
+
+        str += `
+          <li class="cart-item">
+            <div class="left">
+              <input name="other" goods_id="${v.goods_id}" type="checkbox" ${v.buy ? 'checked' : ''}>
+            </div>
+            <div class="right">
+              <div class="media">
+                <div class="media-left">
+                  <a href="#">
+                    <img class="media-object" src="${v.goods_small_logo}" alt="...">
+                  </a>
+                </div>
+                <div class="media-body">
+                  <h4 class="media-heading">${v.goods_name}</h4>
+                  <p>
+                    <i class="glyphicon glyphicon-yen"></i>
+                    <span>${v.goods_price}</span>
+                  </p>
+                  <div class="btn-group pull-right" role="group" aria-label="...">
+                    <button type="button" class="btn btn-default" name="-" goods_id="${v.goods_id}" ${v.num === 1 ? 'disabled' : ''} >-</button>                             
+                    <button type="button" class="btn btn-default" disabled>${v.num}</button>
+                    <button type="button" class="btn btn-default" name="+" goods_id="${v.goods_id}" ${v.num === v.goods_number ? 'disabled' : ''}>+</button>
+                  </div>
+                  <button class="del btn btn-danger" name="del" goods_id="${v.goods_id}" >我不要了</button>
+
+                </div>
+              </div>
+            </div>
+          </li>
+        `;
+      })
+
+      
+      // 动态生成的固定的内容
+      str += `</ul>
+        </div>
+      </div>
+
+      <div>
+        <h1>您一共选择了${type}种商品,一个${sumNum}件</h1>
+        <h1>您总共需简支付${pay.toFixed(2)}元</h1>
+      </div>`;
+
+      // 将内容写入到div中
+      $('.container').html(str);
+
+      // 给input全选标签,设定属性
+      $('[name="all"]').prop('checked' , bool);
+    }
+
+
+
+    /*
+      总结:
+        1, 定义一个函数,根据 localStorage 中 cart 的数据 渲染 生成页面
+          (1) , 获取 localStorage 中 cart 购物车中的信息
+              情况1: 购物车根本没有建立 也就是 localStorage 根本没有 cart 这个属性
+              情况2: localStorage 中 有 cart 这个属性 但是 数组是一个空数组 length 是0
+              这两种情况,没有数据渲染生成购物车页面,直接生成,购物车是空车的提示信息
+
+              情况3: 有购物车属性,购物车中有数据,渲染生成页面
+                 部分1: li标签之前的内容
+                    动态渲染生成的第一部分内容,但是不在forEach循环中
+
+                 部分2  li标签
+                    动态渲染的第二部分,通过 forEach循环 生成
+                        (1), 判断每一个 商品数据信息, buy的属性值
+                             如果 buy 是 false  给变量赋值false
+                        (2), 判断每一个 商品数据信息, buy的属性值
+                             如果 buy 是 true
+                                  计算 购买商品的种类,个数,总价
+                        (3), 如果 num值 等于 1 禁用 -减号标签
+                             如果 num值 等于 库存 禁用 +加号标签
+
+                 部分3: li标签之后的内容
+                    动态渲染生成的第三部分内容,但是不在forEach循环中
+
+                 将生成的字符串内容,写入div标签
+
+                 根据变量,是true还是false 给全选标签,设定 checked属性值
+                     
+    
+        2, 给 父级div 添加点击事件,根据不同的点击目标,触发不同的程序
+          (1) , 点击 全选标签
+              循环遍历,数组的所有单元
+              给每一个数据单元,buy属性,设定属性值,是全选标签,checked属性值
+
+          (2) , 点击 other,input,checkbox
+              循环遍历,数组的所有单元
+              如果 循环对象,goods_id 和 点击标签 goods_id 相同 
+                   循环对象,buy属性 和 点击标签 checked属性值相同
+
+          (3) , 点击 -减号标签
+              循环遍历,数组的所有单元
+              如果 循环对象,goods_id 和 点击标签 goods_id 相同 
+                   循环对象,num属性 --
+
+          (4) , 点击 +加号标签
+              循环遍历,数组的所有单元
+              如果 循环对象,goods_id 和 点击标签 goods_id 相同 
+                   循环对象,num属性 ++
+
+          (5) , 点击 我不要了
+              循环遍历,数组的所有单元
+              如果 循环对象,goods_id 和 点击标签 goods_id 相同 
+                   数组中,从循环对象索引开始,删除1个单元
+
+          (6) , 先将新的数据数组,存储到 localStorage 中 cart键名中
+
+          (7) , 根据新的 localStorage 中 cart 属性值,重新渲染生成页面
+    
+    
+    
+    */
+
+
+
+  </script>
+</body>
+</html>
+
+
+<!-- 
+      
+            
+            <li class="cart-item">
+                <div class="left">
+                  <input type="checkbox">
+                </div>
+                <div class="right">
+                  <div class="media">
+                    <div class="media-left">
+                      <a href="#">
+                        <img class="media-object" src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/2898933862/O1CN01ExuNHp1eOq9TKoRh6_!!2898933862.jpg_580x580Q90.jpg_.webp" alt="...">
+                      </a>
+                    </div>
+                    <div class="media-body">
+                      <h4 class="media-heading">商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述</h4>
+                      <p>
+                        <i class="glyphicon glyphicon-yen"></i>
+                        <span>1234.56</span>
+                      </p>
+                      <div class="btn-group pull-right" role="group" aria-label="...">
+                        <button type="button" class="btn btn-default">-</button>
+                        <button type="button" class="btn btn-default" disabled>1</button>
+                        <button type="button" class="btn btn-default">+</button>
+                      </div>
+                      <button class="del btn btn-danger">我不要了</button>
+
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="cart-item">
+                  <div class="left">
+                    <input type="checkbox">
+                  </div>
+                  <div class="right">
+                    <div class="media">
+                      <div class="media-left">
+                        <a href="#">
+                          <img class="media-object" src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i3/2898933862/O1CN01ExuNHp1eOq9TKoRh6_!!2898933862.jpg_580x580Q90.jpg_.webp" alt="...">
+                        </a>
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading">商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述商品描述</h4>
+                        <p>
+                          <i class="glyphicon glyphicon-yen"></i>
+                          <span>1234.56</span>
+                        </p>
+                        <div class="btn-group pull-right" role="group" aria-label="...">
+                          <button type="button" class="btn btn-default">-</button>
+                          <button type="button" class="btn btn-default" disabled>1</button>
+                          <button type="button" class="btn btn-default">+</button>
+                        </div>
+                        <button class="del btn btn-danger">我不要了</button>
+
+                      </div>
+                    </div>
+                  </div>
+                </li>
+          
+
+
+-->

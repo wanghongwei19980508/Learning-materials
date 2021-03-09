@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            github远程仓库的创建
+                1 , 创建项目文件夹
+                
+                2 , git init 初始化项目文件夹
+
+                3 , 生成历史版本
+
+                4 , 设定 远程仓库 地址
+                    git remote add origin https://github.com/zhangzll-1012/BK-2003-test1.git
+
+                    执行命令之后,在 .git > config 配置文件中 就会有 新增上传地址 配置项
+
+                        [remote "origin"]
+                        url = https://github.com/zhangzll-1012/BK-2003-test1.git
+                        fetch = +refs/heads/*:refs/remotes/origin/*
+
+                    之后如果要修改 仓库地址 可以 直接修改配置文件中的设定
+
+                5 , 初次上传 历史版本
+                    git push -u origin master
+                        我们一次上传时, 默认的 分支 是 master 分支 
+                        执行的命令 是  master 
+                    
+                    初次上传时,需要你输入自己的github 的账号密码
+
+                6 , 再次上传 历史版本
+                    git push
+                        同一个项目,向远程仓库再次上传内容执行的命令
+                        也就是 只要有 远程仓库的配置项,就可以使用 git push
+
+                7 , 删除远程仓库
+                    在 远程仓库 中 选择 设置 --- 最后是 删除 选项
+                    删除是 要输入 完整的 远程仓库名称 
+
+                8 , 下载/克隆 远程仓库
+                    git clone 远程仓库地址
+
+                    在 项目文件夹中 会 创建 一个 远程仓库名称的 文件夹
+                    在这个 文件夹中 有 历史版本 可以 回滚历史版本
+        
+        */
+    </script>
+</body>
+</html>

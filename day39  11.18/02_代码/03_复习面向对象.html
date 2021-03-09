@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div>我是div标签</div>
+
+    <script>
+        /*
+            面向对象
+                this指向   ES6
+
+            所谓的面向对象:
+                所谓的面向对象,实际是 对 一类内容的 抽象的描述
+                    这一类内容,具有相同的属性,只是属性值不同
+                        四个腿 有个面
+                            桌子  椅子 床 ....
+                        有皮儿,味儿甜,多汁儿
+                            橘子 桃 苹果 西瓜...
+
+                    计算机程序中,面向对象的编程就是对,一类,具有相同属性的对象,进行编程操作
+                        对象都有相同的属性和方法
+                        只是属性值不同
+
+                ES5的面向对象语法        
+                
+                属性和属性值会直接定义在 标签对象 上 
+                f1函数方法,定义在 构造函数的 prototype 公共空间中
+                任何一个 这个构造函数 生成的 实例化对象 都可以访问
+
+                function Fun(name,age){
+                    this.name = name;
+                    this.age = age;
+                }
+                Fun.prototype.f1 = ()=>{}
+
+                ES6语法
+                必须在 专门的构造器 constructor 中定义 属性属性值
+                应该是定义在 prototype 中的 函数方法
+                现在只要直接定义, ES6语法, 会自动将 f1 函数方法写在 prototype
+
+                class Fun{
+                    constructor(name,age){
+                        this.name = name;
+                        this.age = age;
+                    }
+
+                    f1(){} 
+                }
+
+
+            所有的面向对象编程,this指向都必须是 实例化对象
+            因为 属性和属性值是 直接定义在 实例化对象中的
+            我们要调用的也是 实例化对象中 的属性
+
+            在 构造函数 中, 也有生成对象,返回对象的操作
+            new 关键词 会 在执行这个函数时 创建一个对象并且返回这个对象
+
+            this 必须是 指向的 实例化对象 才能获取 实例化对象中 属性存储的属性值
+            如果在 构造函数中 this指向不是 实例化对象
+            不能通过this指向实例化对象，不能获取实例化对象的属性和属性值
+
+            在 构造函数中 this指向，如果不是实例化对象
+                解决方法1： 将 function(){} 改为 箭头函数 ()=>{}
+                           因为 JavaScript 规定 箭头函数的this指向是父级程序的this指向
+                           大部分情况下可以使用
+                
+                解决方法2:  可以通过 .bind()  .call()  .apply() 改变this指向
+                           绑定的是一个函数名称
+                
+                解决方法3:  提前使用便利存储 原始this指向
+                            立即执行函数中有 function(){} 不能改成箭头函数
+                            在一个函数中,要同时使用多个 this 指向
+                                事件处理函数
+
+
+
+        */
+
+
+        class Fun {
+
+            // new 给我们创建了一个对象
+            // 构造器定义的属性和属性值都是写在这个对象上的
+            // 最终 new 再 return 返回这个对象
+
+            // new 创建的这个对象,没有具体的对象名称,就是使用 this 指向表示
+            // 使用 new 构造函数 创建 实例化对象时 生成的 那个对象 就是 this指向的内容
+
+            constructor(n, a) {
+                // 给 new 关键词 创建的对象 新增一个属性 属性名称是 name
+                // 属性值 是 n形参 存储的数据的实参数据
+                this.name = n;
+                this.age = a;
+            }
+
+            f1() {
+                // 这里是 f1() 函数方法,this指向是 实例化对象
+                // 可以使用变量先存储
+                let oldThis = this;
+
+                const arr = [1, 2, 3, 4, 5];
+
+                // forEach的父级程序是 f1() 
+                // f1() 函数方法,是 构造函数的函数方法,this指向默认就是实例化对象
+                // forEach程序的this指向,也就是父级程序,f1()的this指向,是实例化对象
+                arr.forEach( function(v, k){
+                    console.log(oldThis);
+
+                    console.log(oldThis.name);
+                    console.log(oldThis.age);                    
+                })
+
+            }
+
+
+            // 最终 new 关键词,会 return 返回 创建的这个对象也就是 this
+        }
+
+        // abc 是 通过 构造函数 Fun() 创建的 对象
+        // 就成为 实例化对象
+        // 在当前调用 Fun() 时 this 指向的是 abc 这个实例化对象
+        // this.name 和 this.age 获取的就是 jack 和 20
+        const abc = new Fun('jack', 20);
+
+
+        // 当前 调用 Fun() 时 this 指向的是 def 这个实例化对象
+        // this.name 和 this.age 获取的就是 lily 和 30
+        const def = new Fun('lily', 30);
+
+        class F{
+            constructor(ele,name){
+                this.ele = ele;
+                this.name = name;
+            }
+
+            f1(){
+                // 提前存储原始this，也就是指向实例化对象的this
+                const _this = this;
+
+                this.ele.addEventListener('click',function(){
+                    // 两个this，希望指向不同的 对象
+
+                    // 这个this，希望指向 标签对象 div
+                    console.log(this.innerHTML);
+                    // 这个this，希望指向 实例化对象
+                    console.log(_this.name);
+                })
+            }
+        }
+
+        const oDiv = document.querySelector('div');
+
+        const oD = new F(oDiv,'zhagnasn');
+        oD.f1();
+    </script>
+</body>
+
+</html>

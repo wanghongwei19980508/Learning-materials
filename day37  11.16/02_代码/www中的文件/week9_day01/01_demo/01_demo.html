@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 第一个异步请求
+        const xhr1 = new XMLHttpRequest();
+        xhr1.open( 'get' , `./demo1.php?a1=100&b1=200`);
+        xhr1.send();
+        xhr1.onload = ()=>{
+            console.log(  JSON.parse(xhr1.response) );
+
+            result1 = JSON.parse(xhr1.response);
+
+            // 第二个异步请求
+            const xhr2 = new XMLHttpRequest();
+            // 将上一次请求的结果,作为下一次请求的数据,发送出去
+            xhr2.open( 'get' , `./demo2.php?a2=${result1.res1}&b2=${result1.res2}`);
+            xhr2.send();
+            xhr2.onload = ()=>{
+                console.log(  JSON.parse(xhr2.response) );
+            }
+        }
+
+    </script>
+</body>
+</html>

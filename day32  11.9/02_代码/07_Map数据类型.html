@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            map数据类型:
+                类似于对象的数据类型,以键值对的形式,来存储数据
+
+            声明语法1:  使用构造函数来声明Map类型
+                const map = new Map();
+
+            声明语法2:  在声明map数据类型的同时,定义数值
+                在()中以 二维数组的形式,定义存储的数据
+                每一个二维数值的单元,就是Map类型存储的一个单元
+                二维数组的第一个单元是Map单元的键名,二维数组的第二个单元是Map单元的键值
+
+                const map = new Map([ [ '键名' , '键值' ] , ['键名' , '键值'] , ['键名' , '键值'] , ['键名' , '键值']....  ] );
+        
+            新增单元   
+                map类型.set(参数1,参数2)
+                    参数1:新增单元的键名
+                    参数2:新增单元的键值
+
+            调用使用  
+                map类型.get(键名)
+                    通过键名来调用键值
+                    不用管 0,1,2...的索引,直接拿键名调用数据
+
+            删除:  删除一个
+                map类型.delete('键名')
+                    通过键名来删除单元
+
+            清除:  删除所有
+                map类型.clear()
+
+            循环:  与普通的forEach() 循环 完全一样
+                map类型.forEach((键值,键名)=>{})
+
+            判断:  map中是否有这个键名
+                map类型.has('键名')  结果是布尔类型
+        */
+
+        // 声明的同时,来定义数据
+        const map = new Map([ ['name','张三'] , ['age',18] , ['sex','男'] , ['arr' , [1,2,3,4,5]] , ['obj' , {phone:123,addr:'北京'}] ]);
+
+        // 新增单元
+        map.set('fun' , ()=>{console.log(123)});
+
+        // 调用  不用管 0,1,2...的索引,直接拿键名调用数据
+        console.log( map.get('name') );
+
+        console.log( map.get('obj') );
+
+        console.log( map.get('obj').addr );
+
+        // 删除单元
+        // map.delete('name');
+
+        // 清除所有单元
+        // map.clear();
+
+        // 循环遍历 与 普通的forEach 完全相同
+        // map.forEach( (v,k)=>{
+        //     console.log(v,k);
+        // } )
+        
+        // 判断是否是map中的成员
+        console.log( map.has('name') );
+
+        // console.log(map);
+    </script>
+</body>
+</html>

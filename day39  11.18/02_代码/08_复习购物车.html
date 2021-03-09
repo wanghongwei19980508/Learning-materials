@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            业务逻辑:
+                localStrong 中 没有 cart
+                    给 当前的 数据对象 新增属性 buy  num
+                    创建一个数组 , 当前数据对象是 数组的第一个单元
+                    将数组写入到 localStrong 的 cart 属性中
+
+                localStrong 中   有 cart
+                    循环遍历 cart 中 储存的 数据数组
+                        如果 数据 goods_id 与 当前商品的 goods_id 相同
+                            证明 这个商品已经存在于购物车中
+                            当前商品 num 属性值 +1
+                        
+                        如果 数据 goods_id 没有与 当前商品的 goods_id 相同
+                            证明 这个商品不存在于购物车中
+                            给 当前的 数据对象 新增属性 buy  num
+                            将 当前商品数据对象 储存在 cart 数组中
+                            将数组写入到 localStrong 的 cart 属性中
+                            
+        */
+
+        // 当前商品加入购物车的程序
+        // 商品信息对象 叫 msg
+
+        // 判断 cart 是不是存在 如果是 null 就是不存在
+        if( localStorage.getItem('cart') === null ){
+            // 给商品信息对象,新增属性
+            msg.buy = true;
+            msg.num = 1;
+            // 创建数组
+            const arr = [];
+            // 将 商品信息对象,储存在数组中
+            arr.push(msg);
+            // 将数组写入到 localStorage cart属性中
+            localStorage.setItem('cart' , JSON.stringify(arr) );
+        }else{
+            // 购物车cart 已经存在了
+
+            // 获取 cart 中 储存的商品信息数组
+            const arr = JSON.parse( localStorage.getItem('cart') );
+            // 定义一个变量
+            let bool = true;
+            // 循环数组
+            arr.forEach( (v,k)=>{
+                // 如果储存的商品v  和 当前商品 msg goods_id 相同
+                if(v.goods_id === msg.goods_id){
+                    // 证明 v 商品已经存在,又新增了一次,购买数量+1
+                    v.num++;
+                    // 变量赋值false
+                    bool = false;
+                }
+            })
+            // 如果 没有 goods_id 相同 的情况 
+            // bool还是true ,证明商品不存在
+            if(bool){
+                // 给商品信息,新增属性
+                msg.buy = true;
+                msg.num = 1;
+                // 给数组中新增一个商品msg
+                arr.push(msg);
+            }
+            // 要么是 forEach循环时,改变了arr中v的num值
+            // 要么是 arr中新增一个msg对象
+            // 总之 arr 一定会改变
+            // 将新的 arr 写入到 cart 中 
+            localStorage.setItem('cart' , JSON.stringify(arr) );
+        }
+
+
+        let num = 9;
+        let bool = true;
+
+        for(let i = 2 ; i <= 8;i++){
+            if(num % i === 0){
+                bool = false;
+            }
+                
+        }
+
+    </script>
+</body>
+</html>
