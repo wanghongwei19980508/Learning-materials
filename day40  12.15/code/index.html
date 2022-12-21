@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <title>ToDoList — 千峰教育版权所有</title>
+        <link rel="stylesheet" href="./assets/css/style.css" />
+    </head>
+    <body>
+        <div id="app">
+            <!-- 顶部组件 -->
+            <todo_header @addtodo="add"></todo_header>
+            <section>
+                <!-- 正在进行组件 -->
+                <todo_tolist
+                    :list="list"
+                    @update="update_todo"
+                    @del="delete_todo"
+                ></todo_tolist>
+                <!-- 已经完成组件 -->
+                <todo_dolist
+                    :list="list"
+                    @update="update_todo"
+                    @del="delete_todo"
+                ></todo_dolist>
+            </section>
+            <!-- 底部版权组件 -->
+            <todo_jiojio></todo_jiojio>
+        </div>
+
+        <script src="./assets/js/vue.js"></script>
+        <script>
+            // 定义需要的组件
+            var todo_header = {
+                data() {
+                    return {
+                        todo: "",
+                    };
+                },
+                template: `
+                    <header>
+                        <section>
+                            <label for="title">
+                                <img src="http://2url.cc/qkMYf1" />
+                            </label>
+                            <input
+                                type="text"
+                                id="title"
+                                name="title"
+                                placeholder="添加ToDo"
+                                required="required"
+                                autocomplete="off"
+                                v-model="todo"
+                                @keyup.enter="submit"
+                            />
+                        </section>
+                    </header>
+                `,
+                methods: {
+                    // 数据提交的
+                    submit() {
+                        // 提交给父组件
+                        this.$emit("addtodo", this.todo);
+                        // 提交完毕之后清空输入框的内容
+                        this.todo = "";
+                    },
+                },
+            };
+
+            // 正在进行的组件
+            var todo_tolist = {
+                props: ["list"],
+                template: `
+                    <div>
+                        <h2>正在进行 <span id="todocount">{{getCount}}</span></h2>
+                        <ol id="todolist" class="demo-box">
+                            <li v-for="item in list" :key="item.id" v-if="!item.done">
+                                <input type="checkbox" @change="changeStatus(item)" />
+                                <p>{{item.title}}</p>
+                                <a href="javascript:;" @click="del(item.id)">-</a>
+                            </li>
+                        </ol>
+                    </div>
+                `,
+                methods: {
+                    // 变更状态
+                    changeStatus(item) {
+                        // 当前不刷新的时候改变状态
+                        item.done = true;
+                        // 让刷新的时候也保存改变状态
+                        this.$emit("update", item.id, true);
+                    },
+                    // 删除条目
+                    del(id) {
+                        // 让父删除数据
+                        this.$emit("del", id);
+                    },
+                },
+                computed: {
+                    // 计数
+                    getCount() {
+                        let num = 0;
+                        this.list.forEach((el) => {
+                            if (!el.done) {
+                                num++;
+                            }
+                        });
+                        return num;
+                    },
+                },
+            };
+
+            // 已经完成的组件
+            var todo_dolist = {
+                props: ["list"],
+                template: `
+                    <div>
+                        <h2>已经完成 <span id="donecount">{{getCount}}</span></h2>
+                        <ul id="donelist">
+                            <li v-for="item in list" :key="item.id" v-if="item.done">
+                                <input type="checkbox" checked="checked" @change="changeStatus(item)" />
+                                <p>{{item.title}}</p>
+                                <a href="javascript:;" @click="del(item.id)">-</a>
+                            </li>
+                        </ul>
+                    </div>
+                `,
+                methods: {
+                    // 变更状态
+                    changeStatus(item) {
+                        // 当前不刷新的时候改变状态
+                        item.done = false;
+                        // 让刷新的时候也保存改变状态
+                        this.$emit("update", item.id, false);
+                    },
+                    // 删除条目
+                    del(id) {
+                        // 让父删除数据
+                        this.$emit("del", id);
+                    },
+                },
+                computed: {
+                    // 计数
+                    getCount() {
+                        let num = 0;
+                        this.list.forEach((el) => {
+                            if (el.done) {
+                                num++;
+                            }
+                        });
+                        return num;
+                    },
+                },
+            };
+
+            // 底部版权信息组件
+            var todo_jiojio = {
+                data() {
+                    return {};
+                },
+                template: `
+                    <footer>
+                        <p>
+                            Copyright &copy; 2020 千峰教育 版权所有
+                            <a href="javascript:;">京ICP备15058198号</a>
+                        </p>
+                        <p>
+                            您当前的ip地址是：<strong id="ipv4">106.38.62.154</strong
+                            >，地理位置：<strong id="addr"
+                                >北京市 电信互联网数据交换中心</strong
+                            >
+                        </p>
+                    </footer>
+                `,
+            };
+
+            new Vue({
+                el: "#app",
+                data: {
+                    list: [],
+                },
+                created() {
+                    // 页面加载的时候从localStorage中获取数据
+                    // 初始组件的数据
+                    this.getItem();
+                },
+                components: {
+                    todo_header,
+                    todo_tolist,
+                    todo_dolist,
+                    todo_jiojio,
+                },
+                methods: {
+                    // 接收子输入框组件传递来的todo内容并处理的
+                    add(cnt) {
+                        // 先将数据写入到list列表中去
+                        this.list.push({
+                            id: this.getId(),
+                            title: cnt,
+                            done: false,
+                        });
+                        console.log(this.list);
+                        this.setItem();
+                    },
+                    // 保存数据到localStorage
+                    setItem() {
+                        localStorage.setItem("item", JSON.stringify(this.list));
+                    },
+                    // 获取localStorage的数据
+                    getItem() {
+                        // this.list = JSON.parse(localStorage.getItem('item')) || [];
+                        this.list = localStorage.getItem("item")
+                            ? JSON.parse(localStorage.getItem("item"))
+                            : [];
+                    },
+                    // 获取当前需要使用的id
+                    getId() {
+                        if (localStorage.getItem("id")) {
+                            let id = localStorage.getItem("id");
+                            localStorage.setItem("id", id - 0 + 1);
+                            return id - 0 + 1;
+                        } else {
+                            localStorage.setItem("id", 1);
+                            return 1;
+                        }
+                    },
+                    // 去依据条件改变条目的状态
+                    update_todo(id, status) {
+                        // 修改父数据的状态内容
+                        this.list.forEach((el, index) => {
+                            if (el.id == id) {
+                                el.done = status;
+                            }
+                        });
+                        // 更改localStorage中的状态
+                        this.setItem();
+                    },
+                    // 删除记录的方法
+                    delete_todo(id) {
+                        this.list.forEach((el, index) => {
+                            if (el.id == id) {
+                                this.list.splice(index, 1);
+                            }
+                        });
+                        this.setItem();
+                    },
+                },
+            });
+        </script>
+    </body>
+</html>
